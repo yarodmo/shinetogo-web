@@ -1,0 +1,136 @@
+name: 🚀 ShineToGo — Production Deploy
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:  # Trigger manual desde GitHub UI
+
+concurrency:
+  group: production-deploy
+  cancel-in-progress: false  # Nunca cancelar un deploy en progreso
+
+jobs:
+  deploy:
+    name: Deploy to VPS
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      # ── 1. CHECKOUT ──────────────────────────────────────────────
+      - name: 📥 Checkout código
+        uses: actions/checkout@v4
+
+      # ── 2. BUILD FRONTEND ────────────────────────────────────────
+      - name: ⚙️ Setup Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: 📦 Instalar dependencias frontend
+        run: npm ci
+
+      - name: 🏗️ Build React (Vite)
+        run: npm run build
+
+      # ── 3. CONFIGURAR SSH ────────────────────────────────────────
+      - name: 🔐 Configurar SSH Agent
+        uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.VPS_SSH_KEY }}
+
+      - name: ✅ Añadir VPS a known_hosts (puerto 6543)
+        run: |
+          ssh-keyscan -p ${{ secrets.VPS_PORT }} -H ${{ secrets.VPS_HOST }} >> ~/.ssh/known_hosts
+
+      # ── 4. DEPLOY FRONTEND → public_html via rsync ───────────────
+      # rsync opera SOLO sobre el directorio dist/ del usuario detailshine
+      # Sin acceso root. Sin tocar otros usuarios ni vhosts del servidor.
+      # rsync SOLO archivos compilados (dist/) al web root
+      # El código fuente y la API viven en ~/app — nunca en public_html
+      - name: 📤 Deploy frontend (rsync dist/ → public_html)
+        run: |
+          rsync -az --delete \
+            -e "ssh -p ${{ secrets.VPS_PORT }}" \
+            ./dist/ \
+            ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }}:/home/${{ secrets.VPS_USER }}/public_html/
+
+      - name: 📤 Deploy API (rsync api/ → ~/app/api)
+        run: |
+          rsync -az --delete \
+            -e "ssh -p ${{ secrets.VPS_PORT }}" \
+            ./api/ \
+            ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }}:/home/${{ secrets.VPS_USER }}/app/api/
+
+      # ── 5. DEPLOY API + REINICIO PM2 via SSH ─────────────────────
+      # Todas las operaciones corren bajo el usuario detailshine
+      # Sin sudo, sin root, sin afectar a otros servicios del VPS
+      - name: 🚀 Deploy API y recargar PM2
+        run: |
+          ssh -p ${{ secrets.VPS_PORT }} ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} << 'ENDSSH'
+            set -euo pipefail
+            
+            PROJECT_DIR="/home/detailshine/public_html"
+            LOG_DIR="/home/detailshine/logs"
+            mkdir -p "$LOG_DIR"
+            
+            echo "[$(date '+%Y-%m-%d %H:%M:%S')] Deploy iniciado por GitHub Actions" >> "$LOG_DIR/deploy.log"
+            
+            APP_DIR="/home/detailshine/app"
+            
+            # Instalar dependencias API desde ~/app/api (fuera de public_html)
+            cd "$APP_DIR/api"
+            npm install --omit=dev --silent
+            
+            # Validar sintaxis antes de recargar
+            node --check server.js
+            
+            # Recargar PM2 — solo el proceso de este proyecto
+            cd "$APP_DIR"
+            if pm2 list | grep -q "shinetogo-api"; then
+              pm2 reload ecosystem.config.cjs --env production --update-env
+            else
+              pm2 start ecosystem.config.cjs --env production
+            fi
+            pm2 save --force
+            
+            echo "[$(date '+%Y-%m-%d %H:%M:%S')] PM2 recargado OK" >> "$LOG_DIR/deploy.log"
+          ENDSSH
+
+      # ── 6. INYECTAR SECRETS EN PM2 (aislado por proceso) ────────
+      - name: 🔐 Inyectar secrets en proceso PM2
+        run: |
+          ssh -p ${{ secrets.VPS_PORT }} ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} \
+            "SMTP_PASS='${{ secrets.SMTP_PASS }}' RECIPIENT='${{ secrets.RECIPIENT }}' \
+             pm2 restart shinetogo-api --update-env"
+
+      # ── 7. HEALTH CHECK ──────────────────────────────────────────
+      - name: 🏥 Health Check API
+        run: |
+          ssh -p ${{ secrets.VPS_PORT }} ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} << 'ENDSSH'
+            PASS=false
+            for i in 1 2 3 4 5; do
+              HTTP=$(curl -s -o /dev/null -w "%{http_code}" --max-time 10 http://localhost:6015/api/health 2>/dev/null || echo "000")
+              if [ "$HTTP" = "200" ]; then
+                echo "✅ Health Check PASS — HTTP $HTTP (intento $i)"
+                PASS=true
+                break
+              fi
+              echo "⏳ Intento $i/5 — HTTP $HTTP. Esperando 4s..."
+              sleep 4
+            done
+            if [ "$PASS" = false ]; then
+              echo "❌ Health Check FALLIDO"
+              exit 1
+            fi
+          ENDSSH
+
+      # ── 8. RESULTADO ─────────────────────────────────────────────
+      - name: 📣 Resultado del deploy
+        if: always()
+        run: |
+          if [ "${{ job.status }}" = "success" ]; then
+            echo "✅ ShineToGo deployed to production — $(date)"
+          else
+            echo "❌ Deploy FAILED — revisar logs en /home/detailshine/logs/"
+          fi
