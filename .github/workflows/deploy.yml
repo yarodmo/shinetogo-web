@@ -70,34 +70,30 @@ jobs:
           ssh -p ${{ secrets.VPS_PORT }} ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} << 'ENDSSH'
             set -euo pipefail
             
-            PROJECT_DIR="/home/detailshine/public_html"
+            APP_DIR="/home/detailshine/app/api"
             LOG_DIR="/home/detailshine/logs"
             mkdir -p "$LOG_DIR"
             
             echo "[$(date '+%Y-%m-%d %H:%M:%S')] Deploy iniciado por GitHub Actions" >> "$LOG_DIR/deploy.log"
             
-            APP_DIR="/home/detailshine/app"
-            
             # Instalar dependencias API desde ~/app/api (fuera de public_html)
-            cd "$APP_DIR/api"
+            cd "$APP_DIR"
             npm install --omit=dev --silent
             
             # Validar sintaxis antes de recargar
             node --check server.js
             
-            # Recargar PM2 — solo el proceso de este proyecto
-            cd "$APP_DIR"
+            # Recargar PM2 — ecosystem.config.cjs viaja dentro de api/ via rsync
             if pm2 list | grep -q "shinetogo-api"; then
-              pm2 reload ecosystem.config.cjs --env production --update-env
+              pm2 reload "$APP_DIR/ecosystem.config.cjs" --env production --update-env
             else
-              pm2 start ecosystem.config.cjs --env production
+              pm2 start "$APP_DIR/ecosystem.config.cjs" --env production
             fi
             pm2 save --force
             
             echo "[$(date '+%Y-%m-%d %H:%M:%S')] PM2 recargado OK" >> "$LOG_DIR/deploy.log"
           ENDSSH
 
-      # ── 6. INYECTAR SECRETS EN PM2 (aislado por proceso) ────────
       - name: 🔐 Inyectar secrets en proceso PM2
         run: |
           ssh -p ${{ secrets.VPS_PORT }} ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} \
