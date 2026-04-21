@@ -3,7 +3,7 @@ module.exports = {
     {
       name: 'shinetogo-api',
       script: './server.js',
-      cwd: './api',
+      cwd: '/home/detailshine/app/api',
       instances: 1,
       exec_mode: 'fork',
       autorestart: true,
@@ -24,6 +24,10 @@ module.exports = {
         // SMTP_PASS  → GitHub Secret: SMTP_PASS
         // RECIPIENT  → GitHub Secret: RECIPIENT
       },
+      env: {
+        NODE_ENV: 'production',
+        PORT: '6015'
+      },
       log_date_format: 'YYYY-MM-DD HH:mm Z',
       error_file:      '/home/detailshine/logs/api-error.log',
       out_file:        '/home/detailshine/logs/api-out.log',
@@ -31,5 +35,3 @@ module.exports = {
     }
   ]
 };
-
-
