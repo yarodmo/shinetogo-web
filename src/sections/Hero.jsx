@@ -17,7 +17,7 @@ export default function Hero() {
   const { t } = useI18n()
   const [current, setCurrent] = useState(0)
 
-  const waUrl = `https://wa.me/19419528758?text=${encodeURIComponent(t('whatsappText'))}`
+  const waUrl = `https://wa.me/19414224405?text=${encodeURIComponent(t('whatsappText'))}`
 
   // Auto-advance every 4 seconds
   const next = useCallback(() => {

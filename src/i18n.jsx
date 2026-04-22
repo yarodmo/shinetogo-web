@@ -10,7 +10,7 @@ const translations = {
     navAbout: 'About',
     navContact: 'Contact',
     navBook: 'Book Now',
-    navCall: '(941) 952-8758',
+    navCall: '(941) 422-4405',
 
     // Hero
     heroTag: 'MOBILE DETAILING • CERAMIC COATING • MARINE SPECIALIST',
@@ -155,7 +155,7 @@ const translations = {
     navAbout: 'Nosotros',
     navContact: 'Contacto',
     navBook: 'Reservar',
-    navCall: '(941) 952-8758',
+    navCall: '(941) 422-4405',
 
     // Hero
     heroTag: 'DETAILING MÓVIL • REVESTIMIENTO CERÁMICO • ESPECIALISTA MARINO',

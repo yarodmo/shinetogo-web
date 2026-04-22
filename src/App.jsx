@@ -147,8 +147,8 @@ export default function App() {
           <div>
             <h4 style={{ fontSize: '14px', fontWeight: 800, color: '#fff', marginBottom: '16px', textTransform: 'uppercase', letterSpacing: '0.1em' }}>Contact</h4>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-              <a href="tel:+19419528758" style={{ fontSize: '14px', color: 'var(--text-muted)' }}>📞 (941) 952-8758</a>
-              <a href="https://wa.me/19419528758" target="_blank" rel="noopener noreferrer" style={{ fontSize: '14px', color: 'var(--brand-green)' }}>💬 WhatsApp</a>
+              <a href="tel:+19414224405" style={{ fontSize: '14px', color: 'var(--text-muted)' }}>📞 (941) 422-4405</a>
+              <a href="https://wa.me/19414224405" target="_blank" rel="noopener noreferrer" style={{ fontSize: '14px', color: 'var(--brand-green)' }}>💬 WhatsApp</a>
               <span style={{ fontSize: '14px', color: 'var(--text-muted)' }}>Available 24/7</span>
             </div>
           </div>

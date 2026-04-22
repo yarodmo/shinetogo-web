@@ -65,7 +65,7 @@ export default function Process() {
             <a href="#contact" className="btn btn-primary" style={{ padding: '16px 36px' }}>
               {t('heroCta1')}
             </a>
-            <a href="https://wa.me/19419528758" target="_blank" rel="noopener noreferrer"
+            <a href="https://wa.me/19414224405" target="_blank" rel="noopener noreferrer"
               className="btn btn-green" style={{ padding: '16px 36px' }}>
               💬 WhatsApp
             </a>

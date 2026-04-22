@@ -62,10 +62,10 @@ jobs:
             ./api/ \
             ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }}:/home/${{ secrets.VPS_USER }}/app/api/
 
-      # ── 5. DEPLOY API + REINICIO PM2 via SSH ─────────────────────
-      # Todas las operaciones corren bajo el usuario detailshine
-      # Sin sudo, sin root, sin afectar a otros servicios del VPS
-      - name: 🚀 Deploy API y recargar PM2
+      # ── 5. DEPLOY API + LIMPIEZA PM2 + .ENV PERSISTENTE ────────────
+      # Reemplaza la inyección en línea por un archivo .env físico y 
+      # elimina el estado corrupto de PM2 para garantizar el arranque.
+      - name: 🚀 Configurar Entorno, Limpiar PM2 y Desplegar API
         run: |
           ssh -p ${{ secrets.VPS_PORT }} ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} << 'ENDSSH'
             set -euo pipefail
@@ -76,29 +76,32 @@ jobs:
             
             echo "[$(date '+%Y-%m-%d %H:%M:%S')] Deploy iniciado por GitHub Actions" >> "$LOG_DIR/deploy.log"
             
-            # Instalar dependencias API desde ~/app/api (fuera de public_html)
+            # 1. Instalar dependencias
             cd "$APP_DIR"
             npm install --omit=dev --silent
-            
-            # Validar sintaxis antes de recargar
             node --check server.js
             
-            # Recargar PM2 — ecosystem.config.cjs viaja dentro de api/ via rsync
-            if pm2 list | grep -q "shinetogo-api"; then
-              pm2 reload "$APP_DIR/ecosystem.config.cjs" --env production --update-env
-            else
-              pm2 start "$APP_DIR/ecosystem.config.cjs" --env production
-            fi
+            # 2. Escribir .env persistente
+            echo "NODE_ENV=production" > .env
+            echo "PORT=6015" >> .env
+            echo "SMTP_HOST=mail.detailshine2go.com" >> .env
+            echo "SMTP_PORT=465" >> .env
+            echo "SMTP_USER=contact@detailshine2go.com" >> .env
+            echo "ALLOWED_ORIGINS=https://detailshine2go.com,https://www.detailshine2go.com" >> .env
+            echo "SMTP_PASS=${{ secrets.SMTP_PASS }}" >> .env
+            echo "RECIPIENT=${{ secrets.RECIPIENT }}" >> .env
+            
+            # 3. Limpiar estado corrupto de PM2 y residuales
+            pm2 delete shinetogo-api || true
+            rm -f ~/.pm2/dump.pm2
+            rm -f ~/app/ecosystem.config.cjs ~/app/package.json ~/app/package-lock.json || true
+            
+            # 4. Arrancar en limpio
+            pm2 start "$APP_DIR/ecosystem.config.cjs" --env production
             pm2 save --force
             
-            echo "[$(date '+%Y-%m-%d %H:%M:%S')] PM2 recargado OK" >> "$LOG_DIR/deploy.log"
+            echo "[$(date '+%Y-%m-%d %H:%M:%S')] PM2 desplegado OK desde .env persistente" >> "$LOG_DIR/deploy.log"
           ENDSSH
-
-      - name: 🔐 Inyectar secrets en proceso PM2
-        run: |
-          ssh -p ${{ secrets.VPS_PORT }} ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} \
-            "SMTP_PASS='${{ secrets.SMTP_PASS }}' RECIPIENT='${{ secrets.RECIPIENT }}' \
-             pm2 restart shinetogo-api --update-env"
 
       # ── 7. HEALTH CHECK ──────────────────────────────────────────
       - name: 🏥 Health Check API

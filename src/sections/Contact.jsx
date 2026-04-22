@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useI18n } from '../i18n'
 
-const WA = '19419528758'
+const WA = '19414224405'
 
 const FAQ_KEYS = ['faq1', 'faq2', 'faq3', 'faq4', 'faq5']
 
@@ -217,7 +217,7 @@ export default function Contact() {
                 <p style={{ fontSize: '13px', color: 'var(--text-body)', marginBottom: '16px' }}>
                   {t('formCallSub')}
                 </p>
-                <a href="tel:+19419528758" className="btn btn-outline" style={{
+                <a href="tel:+19414224405" className="btn btn-outline" style={{
                   width: '100%', color: 'var(--text-dark)', borderColor: 'var(--border-light)'
                 }}>
                   (941) 952-8758
