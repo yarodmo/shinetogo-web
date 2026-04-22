@@ -6,7 +6,7 @@ const REVIEWS = [
   { name: 'Maria L.', initials: 'ML', vehicle: 'Range Rover', en: 'Best experience in Florida. They came to my house, professional, and spotless results. Customer for life!', es: 'La mejor experiencia en Florida. Vinieron a mi casa, profesionales, y resultados impecables. ¡Cliente de por vida!' },
   { name: 'James R.', initials: 'JR', vehicle: 'G-Wagon', en: 'They handled my G-Wagon with extreme care. Engine bay looks brand new. Can\'t beat their full detail.', es: 'Trataron mi G-Wagon con un cuidado extremo. Todo luce nuevo. Una calidad fenomenal.' },
   { name: 'Sofia P.', initials: 'SP', vehicle: 'Tesla Model S', en: 'The ceramic sealant is incredible. After 4 months, water still beads off perfectly. Worth every dollar.', es: 'El sellador cerámico es increíble. Después de 4 meses, el agua sigue resbalando perfecto.' },
-  { name: 'David K.', initials: 'DK', vehicle: 'Porsche 911', en: 'I\'ve used 5 detailers in Miami. These guys are on another level. My 911 has never looked this good.', es: 'He usado 5 detailers en Miami. Estos están en otro nivel. Mi 911 nunca se ha visto así.' },
+  { name: 'David K.', initials: 'DK', vehicle: 'Porsche 911', en: 'I\'ve used 5 detailers in Sarasota. These guys are on another level. My 911 has never looked this good.', es: 'He usado 5 detailers en Sarasota. Estos están en otro nivel. Mi 911 nunca se ha visto así.' },
 ]
 
 export default function SocialProof() {
