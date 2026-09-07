@@ -1,4 +1,11 @@
-name: 🚀 ShineToGo — Production Deploy
+name: 🚀 ShineToGo Mobile Detailing — Production Deploy
+
+# Secrets del repo (Settings → Secrets and variables → Actions → Secrets):
+#   VPS_HOST, VPS_PORT, VPS_USER, VPS_SSH_KEY, SMTP_PASS, RECIPIENT
+# Variables del repo (misma pantalla, pestaña Variables):
+#   API_PORT, SMTP_HOST, SMTP_PORT, SMTP_USER, ALLOWED_ORIGINS,
+#   VITE_SITE_URL, VITE_API_URL
+# Ver .env.example para el significado de las VITE_*.
 
 on:
   push:
@@ -31,6 +38,9 @@ jobs:
         run: npm ci
 
       - name: 🏗️ Build React (Vite)
+        env:
+          VITE_SITE_URL: ${{ vars.VITE_SITE_URL }}
+          VITE_API_URL: ${{ vars.VITE_API_URL }}
         run: npm run build
 
       # ── 3. CONFIGURAR SSH ────────────────────────────────────────
@@ -39,12 +49,12 @@ jobs:
         with:
           ssh-private-key: ${{ secrets.VPS_SSH_KEY }}
 
-      - name: ✅ Añadir VPS a known_hosts (puerto 6543)
+      - name: ✅ Añadir VPS a known_hosts
         run: |
           ssh-keyscan -p ${{ secrets.VPS_PORT }} -H ${{ secrets.VPS_HOST }} >> ~/.ssh/known_hosts
 
       # ── 4. DEPLOY FRONTEND → public_html via rsync ───────────────
-      # rsync opera SOLO sobre el directorio dist/ del usuario detailshine
+      # rsync opera SOLO sobre el directorio dist/ del usuario shinetogo.
       # Sin acceso root. Sin tocar otros usuarios ni vhosts del servidor.
       # rsync SOLO archivos compilados (dist/) al web root
       # El código fuente y la API viven en ~/app — nunca en public_html
@@ -63,53 +73,54 @@ jobs:
             ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }}:/home/${{ secrets.VPS_USER }}/app/api/
 
       # ── 5. DEPLOY API + LIMPIEZA PM2 + .ENV PERSISTENTE ────────────
-      # Reemplaza la inyección en línea por un archivo .env físico y 
-      # elimina el estado corrupto de PM2 para garantizar el arranque.
+      # .env físico — única fuente de verdad para lo que depende del
+      # dominio/cuenta (puerto, SMTP, CORS). Nada de esto va hardcodeado
+      # en ecosystem.config.cjs (ver comentario ahí).
       - name: 🚀 Configurar Entorno, Limpiar PM2 y Desplegar API
         run: |
           ssh -p ${{ secrets.VPS_PORT }} ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} << 'ENDSSH'
             set -euo pipefail
-            
-            APP_DIR="/home/detailshine/app/api"
-            LOG_DIR="/home/detailshine/logs"
+
+            APP_DIR="/home/${{ secrets.VPS_USER }}/app/api"
+            LOG_DIR="/home/${{ secrets.VPS_USER }}/logs"
             mkdir -p "$LOG_DIR"
-            
+
             echo "[$(date '+%Y-%m-%d %H:%M:%S')] Deploy iniciado por GitHub Actions" >> "$LOG_DIR/deploy.log"
-            
+
             # 1. Instalar dependencias
             cd "$APP_DIR"
             npm install --omit=dev --silent
             node --check server.js
-            
+
             # 2. Escribir .env persistente
             echo "NODE_ENV=production" > .env
-            echo "PORT=6015" >> .env
-            echo "SMTP_HOST=mail.detailshine2go.com" >> .env
-            echo "SMTP_PORT=465" >> .env
-            echo "SMTP_USER=contact@detailshine2go.com" >> .env
-            echo "ALLOWED_ORIGINS=https://detailshine2go.com,https://www.detailshine2go.com" >> .env
+            echo "PORT=${{ vars.API_PORT }}" >> .env
+            echo "SMTP_HOST=${{ vars.SMTP_HOST }}" >> .env
+            echo "SMTP_PORT=${{ vars.SMTP_PORT }}" >> .env
+            echo "SMTP_USER=${{ vars.SMTP_USER }}" >> .env
+            echo "ALLOWED_ORIGINS=${{ vars.ALLOWED_ORIGINS }}" >> .env
             echo "SMTP_PASS=${{ secrets.SMTP_PASS }}" >> .env
             echo "RECIPIENT=${{ secrets.RECIPIENT }}" >> .env
-            
+
             # 3. Limpiar estado corrupto de PM2 y residuales
             pm2 delete shinetogo-api || true
             rm -f ~/.pm2/dump.pm2
             rm -f ~/app/ecosystem.config.cjs ~/app/package.json ~/app/package-lock.json || true
-            
+
             # 4. Arrancar en limpio
             pm2 start "$APP_DIR/ecosystem.config.cjs" --env production
             pm2 save --force
-            
+
             echo "[$(date '+%Y-%m-%d %H:%M:%S')] PM2 desplegado OK desde .env persistente" >> "$LOG_DIR/deploy.log"
           ENDSSH
 
-      # ── 7. HEALTH CHECK ──────────────────────────────────────────
+      # ── 6. HEALTH CHECK ──────────────────────────────────────────
       - name: 🏥 Health Check API
         run: |
           ssh -p ${{ secrets.VPS_PORT }} ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} << 'ENDSSH'
             PASS=false
             for i in 1 2 3 4 5; do
-              HTTP=$(curl -s -o /dev/null -w "%{http_code}" --max-time 10 http://localhost:6015/api/health 2>/dev/null || echo "000")
+              HTTP=$(curl -s -o /dev/null -w "%{http_code}" --max-time 10 "http://localhost:${{ vars.API_PORT }}/api/health" 2>/dev/null || echo "000")
               if [ "$HTTP" = "200" ]; then
                 echo "✅ Health Check PASS — HTTP $HTTP (intento $i)"
                 PASS=true
@@ -124,12 +135,12 @@ jobs:
             fi
           ENDSSH
 
-      # ── 8. RESULTADO ─────────────────────────────────────────────
+      # ── 7. RESULTADO ─────────────────────────────────────────────
       - name: 📣 Resultado del deploy
         if: always()
         run: |
           if [ "${{ job.status }}" = "success" ]; then
-            echo "✅ ShineToGo deployed to production — $(date)"
+            echo "✅ ShineToGo Mobile Detailing deployed to production — $(date)"
           else
-            echo "❌ Deploy FAILED — revisar logs en /home/detailshine/logs/"
+            echo "❌ Deploy FAILED — revisar logs en /home/${{ secrets.VPS_USER }}/logs/"
           fi
