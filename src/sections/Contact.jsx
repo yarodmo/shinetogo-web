@@ -45,9 +45,9 @@ export default function Contact() {
 
     // Send data to APEX Backend (Silently, without blocking UX window.open)
     try {
-      const endpoint = import.meta.env.DEV 
-        ? 'http://localhost:6015/api/book' 
-        : 'https://api.detailshine2go.com/api/book';
+      const endpoint = import.meta.env.DEV
+        ? 'http://localhost:6015/api/book'
+        : (import.meta.env.VITE_API_URL || 'https://api.detailshine2go.com/api/book');
         
       fetch(endpoint, {
         method: 'POST',

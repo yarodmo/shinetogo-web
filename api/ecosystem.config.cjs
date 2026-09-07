@@ -1,36 +1,39 @@
+const path = require('path')
+
 module.exports = {
   apps: [
     {
       name: 'shinetogo-api',
       script: './server.js',
-      cwd: '/home/detailshine/app/api',
+      // __dirname resuelve a /home/<VPS_USER>/app/api en cualquier cuenta
+      // donde el pipeline haga rsync — nada hardcodeado al usuario.
+      cwd: __dirname,
       instances: 1,
       exec_mode: 'fork',
       autorestart: true,
       watch: false,
       max_memory_restart: '200M',
       // ──────────────────────────────────────────────────────
-      // Configuración NO sensible (va a Git).
-      // SMTP_PASS y RECIPIENT son inyectados por GitHub Actions
-      // vía Secrets — nunca aparecen aquí ni en .env.
+      // Solo NODE_ENV aquí. PORT también es por-dominio (dos cuentas en
+      // el mismo VPS no pueden compartir puerto TCP) → igual que
+      // SMTP_HOST/SMTP_USER/ALLOWED_ORIGINS, vive ÚNICAMENTE en el .env
+      // físico que escribe el pipeline por cuenta (ver deploy.yml). Si se
+      // duplicara aquí, PM2 lo inyecta ANTES de que dotenv cargue el
+      // .env, y dotenv no sobreescribe vars ya seteadas — el .env
+      // quedaría ignorado para esa clave.
       // ──────────────────────────────────────────────────────
       env_production: {
-        NODE_ENV:        'production',
-        PORT:            '6015',
-        SMTP_HOST:       'mail.detailshine2go.com',
-        SMTP_PORT:       '465',
-        SMTP_USER:       'contact@detailshine2go.com',
-        ALLOWED_ORIGINS: 'https://detailshine2go.com,https://www.detailshine2go.com',
-        // SMTP_PASS  → GitHub Secret: SMTP_PASS
-        // RECIPIENT  → GitHub Secret: RECIPIENT
+        NODE_ENV: 'production',
+        // PORT / SMTP_HOST / SMTP_PORT / SMTP_USER / ALLOWED_ORIGINS / SMTP_PASS / RECIPIENT
+        // → escritos por GitHub Actions en api/.env por cuenta/dominio
       },
       env: {
         NODE_ENV: 'production',
         PORT: '6015'
       },
       log_date_format: 'YYYY-MM-DD HH:mm Z',
-      error_file:      '/home/detailshine/logs/api-error.log',
-      out_file:        '/home/detailshine/logs/api-out.log',
+      error_file:      path.join(__dirname, '../../logs/api-error.log'),
+      out_file:        path.join(__dirname, '../../logs/api-out.log'),
       merge_logs:      true,
     }
   ]
