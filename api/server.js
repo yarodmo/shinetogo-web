@@ -27,6 +27,11 @@ const RECIPIENT = process.env.RECIPIENT || 'info@detailshine2go.com'
 const ALLOWED_ORIGINS = (process.env.ALLOWED_ORIGINS || 'http://localhost:5173,https://detailshine2go.com,https://www.detailshine2go.com').split(',')
 
 // ── MIDDLEWARE ───────────────────────────────────────
+// Runs behind the panel's same-host reverse-proxy (.htaccess -> 127.0.0.1:PORT),
+// so every request arrives from the loopback hop, not the real visitor —
+// trust only loopback so express-rate-limit keys on the real visitor IP.
+app.set('trust proxy', 'loopback')
+
 app.use(express.json({ limit: '10kb' }))
 
 app.use(cors({
