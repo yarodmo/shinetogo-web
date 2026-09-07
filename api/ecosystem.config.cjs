@@ -29,7 +29,9 @@ module.exports = {
       },
       env: {
         NODE_ENV: 'production',
-        PORT: '6015'
+        // PORT NOT here either — same reason as env_production above.
+        // This block only matters for a bare `pm2 start` without --env,
+        // which the pipeline never does.
       },
       log_date_format: 'YYYY-MM-DD HH:mm Z',
       error_file:      path.join(__dirname, '../../logs/api-error.log'),
