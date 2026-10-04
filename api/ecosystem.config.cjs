@@ -13,6 +13,7 @@ module.exports = {
       autorestart: true,
       watch: false,
       max_memory_restart: '200M',
+      kill_timeout: 10000, // tiempo para cerrar solicitudes en curso antes de matar el proceso
       // ──────────────────────────────────────────────────────
       // Solo NODE_ENV aquí. PORT también es por-dominio (dos cuentas en
       // el mismo VPS no pueden compartir puerto TCP) → igual que
