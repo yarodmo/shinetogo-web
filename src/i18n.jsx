@@ -1,45 +1,44 @@
-import { createContext, useContext, useState, useCallback } from 'react'
-
-const translations = {
+import { createContext, useContext, useState, useCallback, useEffect } from 'react'
+import { protection } from './content/protection'
+const base = {
   en: {
     // Navbar
-    navHome: 'Home',
     navServices: 'Services',
     navPricing: 'Pricing',
     navGallery: 'Projects',
     navAbout: 'About',
     navContact: 'Contact',
     navBook: 'Book Now',
-    navCall: '(941) 422-4405',
+
 
     // Hero
-    heroTag: 'MOBILE DETAILING • CERAMIC COATING • MARINE SPECIALIST',
+    heroTag: 'MOBILE DETAILING • CERAMIC COATING • WINDOW TINT • MARINE SPECIALIST',
     heroTitle: 'Premium car wash & boat detailing service that comes to you',
     heroCta1: 'Book Your Service',
     heroCta2: 'Chat on WhatsApp',
-    heroBadge1: 'Licensed',
-    heroBadge1b: '& Insured',
-    heroBadge2: 'Same Day',
-    heroBadge2b: 'Available',
-    heroBadge3: '1000+',
-    heroBadge3b: 'Happy Clients',
-    heroScroll: 'Scroll to explore',
+    heroBadge1: 'Professional',
+    heroBadge1b: '& Careful',
+    heroBadge2: 'We Come',
+    heroBadge2b: 'To You',
+    heroBadge3: 'Quotes',
+    heroBadge3b: 'By Photo',
+
 
     // About
-    aboutText: 'We\'re a professional team specializing in mobile detailing for cars and boats. Showroom-level standards delivered at your location — insured, eco-friendly, and obsessively precise.',
+    aboutText: 'We\'re a professional team specializing in mobile detailing for cars and boats. Showroom-level standards delivered at your location — careful and obsessively precise.',
     aboutCard1: 'Professional Detailing',
-    aboutCard1d: 'Showroom-quality finish with professional techniques and IDA-certified products.',
+    aboutCard1d: 'Showroom-quality finish with professional techniques and professional-grade products.',
     aboutCard2: '100% Mobile',
-    aboutCard2d: 'We come to your home, office, or marina. On-time, every time.',
-    aboutCard3: 'Insured & Reliable',
-    aboutCard3d: 'Fully licensed team with $2M comprehensive insurance coverage.',
-    aboutCard4: 'Eco-Friendly',
-    aboutCard4d: 'Biodegradable products and responsible water management practices.',
+    aboutCard2d: 'We come to your home, office, or marina and confirm the time with you.',
+    aboutCard3: 'Reliable & Transparent',
+    aboutCard3d: 'We tell you what the job includes and confirm the details before we start.',
+    aboutCard4: 'Careful Products',
+    aboutCard4d: 'Professional-grade products chosen for your vehicle’s paint and surfaces.',
 
     // Services
     svcHeadline: 'Asset Preservation for Land and Sea. Executed at Your Coordinates.',
     svc1Title: 'Auto Detailing',
-    svc1Desc: 'Exterior/interior wash, clay bar, polish, wax and ceramic protection. Showroom finish every time.',
+    svc1Desc: 'Exterior/interior wash, clay bar, polish, wax and ceramic protection. A showroom-level finish.',
     svc1F1: 'Complete exterior wash', svc1F2: 'Deep interior cleaning', svc1F3: 'Clay bar and polish', svc1F4: 'Ceramic coating available',
     svc1Btn: 'View Packages →',
     svc1Badge: 'Most Popular',
@@ -48,26 +47,30 @@ const translations = {
     svc2F1: 'Wash and desalination', svc2F2: 'Gelcoat polish and restoration', svc2F3: 'UV protection sealant', svc2F4: 'Vinyl and upholstery care',
     svc2Btn: 'Marine Services →',
     svc2Badge: 'Marine Specialty',
-    svc3Title: 'Fleet Wash',
-    svc3Desc: 'Monthly corporate plans for fleets. Cars, vans, light trucks with flexible schedules and invoicing.',
-    svc3F1: 'Monthly corporate plans', svc3F2: 'Commercial invoicing', svc3F3: 'Off-peak scheduling', svc3F4: 'Service level agreements',
-    svc3Btn: 'Get Quote →',
-    svc3Badge: 'Corporate',
+
+
+
+    svc4Title: 'Window Tint & Ceramic Coating',
+    svc4Desc: 'Ceramic and carbon window film, plus ceramic coating for your paint. Free quote by photo.',
+    svc4F1: 'Ceramic and carbon window film', svc4F2: 'Florida tint limits explained per window', svc4F3: 'Ceramic coating for paint', svc4F4: 'Quote by photo',
+    svc4Btn: 'See Options →',
+    svc4Badge: 'New',
 
     // Pricing
     pricingHeadline: 'Auto Detailing Packages',
     pricingBadgeText: 'MOST REQUESTED',
-    pricingSub: 'Choose the perfect package for your vehicle. Exact pricing based on vehicle evaluation.',
+    pricingSub: 'Choose the package that fits your vehicle. Exact pricing is based on your vehicle’s evaluation.',
     pkg1Title: 'Express', pkg1Time: '45–60 min', pkg1F1: 'Exterior wash', pkg1F2: 'Wheels and glass', pkg1F3: 'Basic vacuum',
     pkg2Title: 'Full Detail', pkg2Time: '90–120 min', pkg2F1: 'Everything in Express', pkg2F2: 'Deep interior cleaning', pkg2F3: 'Conditioning & protection',
     pkg3Title: 'Premium', pkg3Time: '3–4 hours', pkg3F1: 'Everything in Full', pkg3F2: 'Clay bar treatment', pkg3F3: '1-step polish and wax',
-    pkg4Title: 'Ceramic', pkg4Time: 'By appointment', pkg4F1: 'Complete paint prep', pkg4F2: 'Professional ceramic coating', pkg4F3: '1–5 year protection',
+    pkg4Title: 'Ceramic', pkg4Time: 'By appointment', pkg4F1: 'Complete paint prep', pkg4F2: 'Professional ceramic coating', pkg4F3: 'Protection time depends on product and care',
     pkgSelect: 'Select',
+    pkgSeeOptions: 'See options',
     pkgHelp: 'Not sure which service you need?',
     pkgHelpCta: 'Contact us for personalized consultation',
 
     // Process
-    processHeadline: 'A simple 4-step process to get the best mobile detailing service',
+    processHeadline: 'A simple 4-step process for mobile detailing',
     proc1Title: 'Book Service', proc1Desc: 'Call us, WhatsApp or use our form to schedule your appointment',
     proc2Title: 'We Arrive', proc2Desc: 'Our team arrives on time with all necessary equipment',
     proc3Title: 'Detailing', proc3Desc: 'We perform the complete service with professional products',
@@ -76,45 +79,38 @@ const translations = {
     processCtaSub: 'Schedule your service today and experience the difference',
 
     // Boats
-    boatHeadline: 'Expert Boat & Marine Detailing',
-    boatSub: 'Professional washing, desalination, gelcoat polish and UV protection. We coordinate marina access and provide everything needed.',
-    boatF1: 'Hull and Deck Washing', boatF1d: 'Complete salt removal',
-    boatF2: 'Gelcoat Polish', boatF2d: 'Restores and protects finish',
-    boatF3: 'UV Protection', boatF3d: 'Marine-grade sealers',
-    boatF4: 'Vinyl & Upholstery', boatF4d: 'Deep cleaning and conditioning',
-    boatNote: 'Marina Access: We coordinate with marina management and provide all water and power equipment. We service boats up to 40 feet.',
+
+
+
+
+
+
 
     // Gallery
     galleryTitle: 'Our Projects',
-    gallerySub: 'Real results from real clients across Florida',
+    gallerySub: 'Our work in Florida',
 
     // Reviews
-    reviewsTitle: 'What Our Clients Say',
-    reviewsSub: 'Real reviews from satisfied customers across South Florida',
-    reviewsStat1: '98%', reviewsStat1d: 'Satisfaction Rate',
-    reviewsStat2: '1000+', reviewsStat2d: 'Happy Clients',
-    reviewsStat3: '5.0', reviewsStat3d: 'Average Rating',
 
     // CTA Banner
-    ctaTitle: 'Ready for a Showroom Shine?',
-    ctaSub: 'Book your mobile detailing service today. Same-day appointments available.',
+
 
     // FAQ
     faqTitle: 'Everything you need to know about our mobile detailing service',
     faq1Q: 'Do I need to provide water or electricity?',
     faq1A: 'No! We are completely self-sufficient. We bring our own water tanks and power generators.',
     faq2Q: 'How long does each service take?',
-    faq2A: 'Service times range from 45 minutes for Express to 4 hours for Premium Detail or ceramic coating.',
+    faq2A: 'Service times range from 45 minutes for Express to 4 hours for Premium Detail. Ceramic coating and window tint are quoted individually.',
     faq3Q: 'Do you service marinas and condos?',
     faq3A: 'Yes! We coordinate access with marina and condo management. Just provide the location details.',
     faq4Q: 'What payment methods do you accept?',
     faq4A: 'We accept all major credit/debit cards, Zelle and cash. Payment is due upon service completion.',
     faq5Q: 'Are your products safe for my vehicle?',
-    faq5A: 'Absolutely! We use only professional-grade, pH-neutral products safe for all paint types and finishes.',
+    faq5A: 'We use professional-grade products chosen for your paint and surface. Tell us about your car and we’ll confirm.',
 
     // Contact
     contactTitle: 'Request Quote',
-    contactSub: 'We\'ll contact you within the next 2 hours. Available 24/7.',
+    contactSub: 'Tell us what you need and we’ll get back to you with a quote. Photos on WhatsApp make it faster.',
     formName: 'Full Name',
     formPhone: 'Phone / WhatsApp',
     formEmail: 'Email',
@@ -124,7 +120,6 @@ const translations = {
     timeAfternoon: 'Afternoon',
     formVehicle: 'Vehicle Type...',
     formService: 'Service of Interest...',
-    formPlate: 'License Plate (for smart assessment)',
     formMsg: 'Additional Details (optional)',
     formSubmit: 'Send Request',
     formWhatsapp: 'Direct WhatsApp',
@@ -132,60 +127,59 @@ const translations = {
     formWhatsappCta: 'Chat Now',
     formCallTitle: 'Direct Call',
     formCallSub: 'Speak directly with our team.',
-    formPrivacy: '🛡️ Your data is protected. We never share your information.',
+    formPrivacy: 'We use your details only to answer your request.',
 
     // Footer
     footerAbout: 'Professional mobile car and boat detailing services. We bring premium care to your location.',
     footerServices: 'Services',
     footerAreas: 'Service Areas',
     footerContact: 'Contact Us',
-    footerHours: 'Available 24/7',
-    footerRights: '© 2026 ShineToGo Mobile Car Wash. Designed by Bliss Systems LLC.',
+
 
     // Sticky
-    stickyCta: 'Book Now',
+    stickyCall: 'Call',
+    stickyWhatsapp: 'WhatsApp',
     whatsappText: 'Hello, I\'m interested in your mobile detailing service.'
   },
   es: {
     // Navbar
-    navHome: 'Inicio',
     navServices: 'Servicios',
     navPricing: 'Paquetes',
     navGallery: 'Proyectos',
     navAbout: 'Nosotros',
     navContact: 'Contacto',
     navBook: 'Reservar',
-    navCall: '(941) 422-4405',
+
 
     // Hero
-    heroTag: 'DETAILING MÓVIL • REVESTIMIENTO CERÁMICO • ESPECIALISTA MARINO',
+    heroTag: 'DETAILING MÓVIL • RECUBRIMIENTO CERÁMICO • POLARIZADO • ESPECIALISTA MARINO',
     heroTitle: 'Servicio premium de lavado de autos y detallado de botes que va a ti',
     heroCta1: 'Reserva Tu Servicio',
     heroCta2: 'Chat por WhatsApp',
-    heroBadge1: 'Licenciados',
-    heroBadge1b: '& Asegurados',
-    heroBadge2: 'Mismo Día',
-    heroBadge2b: 'Disponible',
-    heroBadge3: '1000+',
-    heroBadge3b: 'Clientes Felices',
-    heroScroll: 'Explora más',
+    heroBadge1: 'Profesionales',
+    heroBadge1b: '& Cuidadosos',
+    heroBadge2: 'Vamos',
+    heroBadge2b: 'A Ti',
+    heroBadge3: 'Cotiza',
+    heroBadge3b: 'Por Foto',
+
 
     // About
-    aboutText: 'Somos un equipo profesional especializado en detallado móvil para autos y botes. Estándares de nivel showroom entregados en tu ubicación — asegurados, eco-friendly y obsesivamente precisos.',
+    aboutText: 'Somos un equipo profesional especializado en detallado móvil para autos y botes. Estándares de nivel showroom entregados en tu ubicación — cuidadosos y obsesivamente precisos.',
     aboutCard1: 'Detallado Profesional',
-    aboutCard1d: 'Acabado de showroom con técnicas profesionales y productos certificados IDA.',
+    aboutCard1d: 'Acabado de showroom con técnicas profesionales y productos de grado profesional.',
     aboutCard2: '100% Móvil',
-    aboutCard2d: 'Vamos a tu casa, oficina o marina. A tiempo, siempre.',
-    aboutCard3: 'Asegurados & Confiables',
-    aboutCard3d: 'Equipo con licencia y seguro de responsabilidad integral de $2M.',
-    aboutCard4: 'Eco-Friendly',
-    aboutCard4d: 'Productos biodegradables y prácticas responsables de agua.',
+    aboutCard2d: 'Vamos a tu casa, oficina o marina. Y confirmamos la hora contigo.',
+    aboutCard3: 'Confiables & Transparentes',
+    aboutCard3d: 'Te decimos qué incluye el trabajo y confirmamos los detalles antes de empezar.',
+    aboutCard4: 'Productos Cuidadosos',
+    aboutCard4d: 'Productos de grado profesional elegidos para la pintura y las superficies de tu vehículo.',
 
     // Services
     svcHeadline: 'Preservación Patrimonial por Tierra y Mar. Ejecutado en tus Coordenadas.',
     svc1Title: 'Auto Detailing',
-    svc1Desc: 'Lavado exterior/interior, clay bar, pulido, cera y protección cerámica. Acabado de showroom.',
-    svc1F1: 'Lavado exterior completo', svc1F2: 'Limpieza profunda interior', svc1F3: 'Clay bar y pulido', svc1F4: 'Revestimiento cerámico disponible',
+    svc1Desc: 'Lavado exterior/interior, clay bar, pulido, cera y protección cerámica. Un acabado de nivel showroom.',
+    svc1F1: 'Lavado exterior completo', svc1F2: 'Limpieza profunda interior', svc1F3: 'Clay bar y pulido', svc1F4: 'Recubrimiento cerámico disponible',
     svc1Btn: 'Ver Paquetes →',
     svc1Badge: 'Más Popular',
     svc2Title: 'Detallado de Botes',
@@ -193,26 +187,30 @@ const translations = {
     svc2F1: 'Lavado y desalinización', svc2F2: 'Pulido de gelcoat', svc2F3: 'Sellador de protección UV', svc2F4: 'Cuidado de vinil e interiores',
     svc2Btn: 'Servicios Marinos →',
     svc2Badge: 'Especialidad Marina',
-    svc3Title: 'Lavado de Flotas',
-    svc3Desc: 'Planes corporativos mensuales para flotas con horarios flexibles y facturación.',
-    svc3F1: 'Planes corporativos mensuales', svc3F2: 'Facturación comercial', svc3F3: 'Horarios flexibles', svc3F4: 'Acuerdos de nivel de servicio',
-    svc3Btn: 'Cotizar →',
-    svc3Badge: 'Corporativo',
+
+
+
+    svc4Title: 'Polarizado y Cerámico',
+    svc4Desc: 'Película cerámica y de carbono para los vidrios, más recubrimiento cerámico para la pintura. Cotización gratis por foto.',
+    svc4F1: 'Película cerámica y de carbono', svc4F2: 'Límites de Florida explicados por ventana', svc4F3: 'Cerámico para la pintura', svc4F4: 'Cotización por foto',
+    svc4Btn: 'Ver Opciones →',
+    svc4Badge: 'Nuevo',
 
     // Pricing
     pricingHeadline: 'Paquetes de Auto Detailing',
     pricingBadgeText: 'MÁS SOLICITADO',
-    pricingSub: 'Elige el paquete perfecto para tu vehículo. Precio exacto basado en evaluación.',
+    pricingSub: 'Elige el paquete que va con tu vehículo. El precio exacto se basa en la evaluación.',
     pkg1Title: 'Express', pkg1Time: '45–60 min', pkg1F1: 'Lavado exterior', pkg1F2: 'Rines y vidrios', pkg1F3: 'Aspirado básico',
     pkg2Title: 'Full Detail', pkg2Time: '90–120 min', pkg2F1: 'Todo en Express', pkg2F2: 'Limpieza interior profunda', pkg2F3: 'Acondicionamiento y protección',
     pkg3Title: 'Premium', pkg3Time: '3–4 horas', pkg3F1: 'Todo en Full', pkg3F2: 'Tratamiento de arcilla', pkg3F3: 'Pulido a máquina',
-    pkg4Title: 'Cerámico', pkg4Time: 'Con cita', pkg4F1: 'Preparación de pintura total', pkg4F2: 'Revestimiento cerámico profesional', pkg4F3: 'Protección 1–5 años',
+    pkg4Title: 'Cerámico', pkg4Time: 'Con cita', pkg4F1: 'Preparación de pintura total', pkg4F2: 'Recubrimiento cerámico profesional', pkg4F3: 'La duración depende del producto y el cuidado',
     pkgSelect: 'Seleccionar',
+    pkgSeeOptions: 'Ver opciones',
     pkgHelp: '¿No sabes qué servicio necesitas?',
     pkgHelpCta: 'Contáctanos para una consulta personalizada',
 
     // Process
-    processHeadline: 'Un simple proceso de 4 pasos para obtener el mejor servicio de detallado móvil',
+    processHeadline: 'Un proceso simple de 4 pasos para tu detallado móvil',
     proc1Title: 'Reserva', proc1Desc: 'Llámanos, WhatsApp o usa nuestro formulario para agendar',
     proc2Title: 'Llegamos', proc2Desc: 'Nuestro equipo llega a tiempo con todo el equipo necesario',
     proc3Title: 'Detallado', proc3Desc: 'Realizamos el servicio completo con productos profesionales',
@@ -221,45 +219,38 @@ const translations = {
     processCtaSub: 'Agenda tu servicio hoy y experimenta la diferencia',
 
     // Boats
-    boatHeadline: 'Detallado Experto de Botes y Marinos',
-    boatSub: 'Lavado profesional, desalinización, pulido de gelcoat y protección UV. Coordinamos acceso a marina.',
-    boatF1: 'Lavado de Casco y Cubierta', boatF1d: 'Remoción completa de sal',
-    boatF2: 'Pulido de Gelcoat', boatF2d: 'Restaura y protege el acabado',
-    boatF3: 'Protección UV', boatF3d: 'Selladores de grado marino',
-    boatF4: 'Vinil e Interiores', boatF4d: 'Limpieza profunda y acondicionamiento',
-    boatNote: 'Acceso a Marina: Coordinamos con la administración de la marina. Servimos botes hasta 40 pies.',
+
+
+
+
+
+
 
     // Gallery
     galleryTitle: 'Nuestros Proyectos',
-    gallerySub: 'Resultados reales de clientes reales en Florida',
+    gallerySub: 'Nuestro trabajo en Florida',
 
     // Reviews
-    reviewsTitle: 'Lo Que Dicen Nuestros Clientes',
-    reviewsSub: 'Reseñas reales de clientes satisfechos en Florida',
-    reviewsStat1: '98%', reviewsStat1d: 'Tasa de Satisfacción',
-    reviewsStat2: '1000+', reviewsStat2d: 'Clientes Felices',
-    reviewsStat3: '5.0', reviewsStat3d: 'Calificación Promedio',
 
     // CTA Banner
-    ctaTitle: '¿Listo Para un Brillo de Exhibición?',
-    ctaSub: 'Reserva tu servicio de detallado móvil hoy. Citas para el mismo día disponibles.',
+
 
     // FAQ
     faqTitle: 'Todo lo que necesitas saber sobre nuestro servicio de detallado móvil',
     faq1Q: '¿Necesito proveer agua o electricidad?',
     faq1A: '¡No! Somos completamente autosuficientes. Traemos nuestros propios tanques de agua y generadores.',
     faq2Q: '¿Cuánto toma cada servicio?',
-    faq2A: 'Los tiempos van desde 45 min para Express hasta 4 horas para Premium Detail o cerámico.',
+    faq2A: 'Los tiempos van desde 45 min para Express hasta 4 horas para Premium Detail. El cerámico y el polarizado se cotizan de forma individual.',
     faq3Q: '¿Atienden marinas y condominios?',
     faq3A: '¡Sí! Coordinamos acceso con la administración de marina y condominio.',
     faq4Q: '¿Qué métodos de pago aceptan?',
     faq4A: 'Aceptamos todas las tarjetas principales, Zelle y efectivo. Pago al completar el servicio.',
     faq5Q: '¿Sus productos son seguros para mi vehículo?',
-    faq5A: '¡Absolutamente! Usamos solo productos profesionales pH-neutral seguros para todo tipo de pintura.',
+    faq5A: 'Usamos productos de grado profesional elegidos para tu pintura y tus superficies. Cuéntanos de tu auto y lo confirmamos.',
 
     // Contact
     contactTitle: 'Solicitar Cotización',
-    contactSub: 'Te contactamos en las próximas 2 horas. Disponible 24/7.',
+    contactSub: 'Cuéntanos qué necesitas y te respondemos con una cotización. Las fotos por WhatsApp lo hacen más rápido.',
     formName: 'Nombre Completo',
     formPhone: 'Teléfono / WhatsApp',
     formEmail: 'Email',
@@ -269,7 +260,6 @@ const translations = {
     timeAfternoon: 'Tarde',
     formVehicle: 'Tipo de Vehículo...',
     formService: 'Servicio de Interés...',
-    formPlate: 'Matrícula (para evaluación inteligente)',
     formMsg: 'Detalles adicionales (opcional)',
     formSubmit: 'Enviar Solicitud',
     formWhatsapp: 'WhatsApp Directo',
@@ -277,35 +267,57 @@ const translations = {
     formWhatsappCta: 'Chatear Ahora',
     formCallTitle: 'Llamada Directa',
     formCallSub: 'Habla directamente con nuestro equipo.',
-    formPrivacy: '🛡️ Tus datos están protegidos. Nunca compartimos tu información.',
+    formPrivacy: 'Usamos tus datos solo para responder tu solicitud.',
 
     // Footer
     footerAbout: 'Servicios profesionales de detallado móvil de autos y botes. Llevamos cuidado premium a tu ubicación.',
     footerServices: 'Servicios',
     footerAreas: 'Áreas de Servicio',
     footerContact: 'Contáctanos',
-    footerHours: 'Disponible 24/7',
-    footerRights: '© 2026 ShineToGo Mobile Car Wash. Designed by Bliss Systems LLC.',
+
 
     // Sticky
-    stickyCta: 'Reservar',
+    stickyCall: 'Llamar',
+    stickyWhatsapp: 'WhatsApp',
     whatsappText: 'Hola, estoy interesado en su servicio de detallado móvil.'
   }
 }
-
+const translations = {
+  en: { ...base.en, ...protection.en },
+  es: { ...base.es, ...protection.es },
+}
 const I18nContext = createContext()
 
+// El idioma lo define la URL (/es/ o ?lang=es), no solo un estado interno,
+// para que español e inglés tengan direcciones propias que se puedan indexar.
+function initialLang() {
+  if (typeof window === 'undefined') return 'en'
+  if (window.__LANG__ === 'es' || window.__LANG__ === 'en') return window.__LANG__
+  const q = new URLSearchParams(window.location.search).get('lang')
+  if (q === 'es' || q === 'en') return q
+  return window.location.pathname.startsWith('/es') ? 'es' : 'en'
+}
 export function I18nProvider({ children }) {
-  const [lang, setLang] = useState('en')
+  const [lang, setLang] = useState(initialLang)
   const t = useCallback((key) => translations[lang]?.[key] || translations.en[key] || key, [lang])
-  const toggle = useCallback(() => setLang(l => l === 'en' ? 'es' : 'en'), [])
+  // Cambiar de idioma lleva a la página equivalente (/ <-> /es/): así el título, la descripción y el
+  // hreflang que ven buscadores y compartidos son los del idioma elegido, y se conservan utm y ancla.
+  const toggle = useCallback(() => {
+    const next = lang === 'en' ? 'es' : 'en'
+    const params = new URLSearchParams(window.location.search)
+    params.delete('lang')
+    const query = params.toString()
+    window.location.assign((next === 'es' ? '/es/' : '/') + (query ? `?${query}` : '') + window.location.hash)
+  }, [lang])
+  useEffect(() => {
+    document.documentElement.lang = lang
+  }, [lang])
   return (
     <I18nContext.Provider value={{ lang, t, toggle }}>
       {children}
     </I18nContext.Provider>
   )
 }
-
 export function useI18n() {
   return useContext(I18nContext)
 }

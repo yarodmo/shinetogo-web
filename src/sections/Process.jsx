@@ -1,4 +1,5 @@
 import { useI18n } from '../i18n'
+import { waLink } from '../lib/site'
 
 const STEPS = [
   { key: 'proc1', icon: '📋', num: '01' },
@@ -33,10 +34,7 @@ export default function Process() {
               border: '1px solid var(--border-dark)',
               position: 'relative'
             }}>
-              <span style={{
-                position: 'absolute', top: '12px', left: '20px',
-                fontSize: '48px', fontWeight: 900, color: '#fff', opacity: 0.04
-              }}>{s.num}</span>
+              <span className="step-num" data-num={s.num} aria-hidden="true" />
               <div style={{ fontSize: '40px', marginBottom: '20px' }}>{s.icon}</div>
               <h3 style={{ fontSize: '18px', fontWeight: 800, color: '#fff', marginBottom: '12px' }}>
                 {t(`${s.key}Title`)}
@@ -62,11 +60,13 @@ export default function Process() {
             {t('processCtaSub')}
           </p>
           <div style={{ display: 'flex', gap: '16px', justifyContent: 'center', flexWrap: 'wrap' }}>
-            <a href="#contact" className="btn btn-primary" style={{ padding: '16px 36px' }}>
+            <a href="#contact" className="btn btn-primary" style={{ padding: '16px 36px' }}
+              data-track="cta_click" data-location="process">
               {t('heroCta1')}
             </a>
-            <a href="https://wa.me/19414224405" target="_blank" rel="noopener noreferrer"
-              className="btn btn-green" style={{ padding: '16px 36px' }}>
+            <a href={waLink(t('whatsappText'))} target="_blank" rel="noopener noreferrer"
+              className="btn btn-green" style={{ padding: '16px 36px' }}
+              data-track="whatsapp_click" data-location="process">
               💬 WhatsApp
             </a>
           </div>

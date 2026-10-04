@@ -1,8 +1,9 @@
 import { useI18n } from '../i18n'
 
 const SERVICES = [
-  { key: 'svc1', img: '/hero-auto.jpg', color: 'var(--brand-gold)' },
-  { key: 'svc2', img: '/gallery/boat-detailing-gelcoat-polishing.jpeg', color: 'var(--brand-blue)' },
+  { key: 'svc1', img: '/img/services/auto-800.webp', color: 'var(--brand-gold)', href: '#contact' },
+  { key: 'svc2', img: '/img/services/boat-800.webp', color: 'var(--brand-blue)', href: '#contact' },
+  { key: 'svc4', img: '/img/hero/polish-1024.webp', color: 'var(--brand-green)', href: '#protection' },
 ]
 
 export default function Services() {
@@ -35,7 +36,7 @@ export default function Services() {
               }}>
                 <div className="badge" style={{
                   position: 'absolute', top: '16px', right: '16px',
-                  background: svc.color, color: '#fff',
+                  background: svc.color, color: 'var(--ink)',
                   boxShadow: '0 4px 12px rgba(0,0,0,0.2)'
                 }}>
                   {t(`${svc.key}Badge`)}
@@ -61,7 +62,7 @@ export default function Services() {
                     </li>
                   ))}
                 </ul>
-                <a href="#contact" className="btn btn-primary" style={{ width: '100%', borderRadius: '99px', padding: '16px' }}>
+                <a href={svc.href} className="btn btn-primary" style={{ width: '100%', borderRadius: '99px', padding: '16px' }}>
                   {t(`${svc.key}Btn`)}
                 </a>
               </div>

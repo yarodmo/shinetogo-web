@@ -1,10 +1,11 @@
 import { useI18n } from '../i18n'
+import { prefill } from '../lib/prefill'
 
 const PKGS = [
-  { key: 'pkg1', accent: 'var(--titanium)' },
-  { key: 'pkg2', accent: 'var(--apex-amber)', popular: true },
-  { key: 'pkg3', accent: 'var(--titanium)' },
-  { key: 'pkg4', accent: 'var(--text-light)' },
+  { key: 'pkg1', service: 'express', accent: 'var(--titanium)' },
+  { key: 'pkg2', service: 'full', accent: 'var(--apex-amber)', popular: true },
+  { key: 'pkg3', service: 'premium', accent: 'var(--titanium)' },
+  { key: 'pkg4', service: 'ceramic', accent: 'var(--text-light)', href: '#protection', cta: 'pkgSeeOptions' },
 ]
 
 export default function Pricing() {
@@ -12,9 +13,6 @@ export default function Pricing() {
 
   return (
     <section id="pricing" className="section section-dark" style={{ position: 'relative', overflow: 'hidden' }}>
-      {/* Removed heavy neon glows for Stealth Wealth aesthetic */}
-
-
       <div className="container" style={{ position: 'relative', zIndex: 1 }}>
         <div style={{ textAlign: 'center', marginBottom: '64px' }}>
           <h2 className="animated-fade-in" style={{ fontSize: 'clamp(28px, 4vw, 44px)', color: '#fff' }}>
@@ -65,10 +63,11 @@ export default function Pricing() {
                 ))}
               </ul>
 
-              <a href="#contact" className="btn btn-outline" style={{
+              <a href={pkg.href || '#contact'} className="btn btn-outline" data-track="package_select" data-location="pricing" data-service={pkg.service}
+                onClick={() => prefill.set({ service: pkg.service })} style={{
                 width: '100%', borderColor: pkg.accent, color: pkg.accent
               }}>
-                {t('pkgSelect')}
+                {t(pkg.cta || 'pkgSelect')}
               </a>
             </div>
           ))}

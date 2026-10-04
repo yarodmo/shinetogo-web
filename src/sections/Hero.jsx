@@ -1,10 +1,12 @@
 import { useState, useEffect, useCallback } from 'react'
 import { useI18n } from '../i18n'
+import { waLink } from '../lib/site'
 
+// Versiones 640/1080 (4:3) generadas por scripts/optimize-assets.cjs.
 const SLIDES = [
-  { src: '/hero-finish.jpg', label: 'Showroom Finish' },
-  { src: '/hero-polish.png', label: 'Precision Polish' },
-  { src: '/hero-foam.jpg', label: 'Snow Foam Wash' },
+  { base: '/img/hero/finish', wide: 1080, label: { en: 'Showroom Finish', es: 'Acabado Showroom' } },
+  { base: '/img/hero/polish', wide: 1024, label: { en: 'Precision Polish', es: 'Pulido de Precisión' } },
+  { base: '/img/hero/foam', wide: 1080, label: { en: 'Snow Foam Wash', es: 'Lavado con Espuma' } },
 ]
 
 const BADGES = [
@@ -14,10 +16,10 @@ const BADGES = [
 ]
 
 export default function Hero() {
-  const { t } = useI18n()
+  const { t, lang } = useI18n()
   const [current, setCurrent] = useState(0)
 
-  const waUrl = `https://wa.me/19414224405?text=${encodeURIComponent(t('whatsappText'))}`
+  const waUrl = waLink(t('whatsappText'))
 
   // Auto-advance every 4 seconds
   const next = useCallback(() => {
@@ -44,7 +46,7 @@ export default function Hero() {
         {/* LEFT — Content */}
         <div className="hero-content">
           <div className="animated-fade-in" style={{
-            fontSize: '11px', fontWeight: 700, color: 'var(--brand-blue)',
+            fontSize: '11px', fontWeight: 700, color: 'var(--brand-blue-text)',
             letterSpacing: '0.18em', marginBottom: '20px'
           }}>
             {t('heroTag')}
@@ -61,11 +63,13 @@ export default function Hero() {
           <div className="animated-fade-in hero-ctas" style={{
             display: 'flex', gap: '14px', flexWrap: 'wrap', marginBottom: '32px'
           }}>
-            <a href="#contact" className="btn btn-primary" style={{ padding: '16px 32px', fontSize: '14px' }}>
+            <a href="#contact" className="btn btn-primary" style={{ padding: '16px 32px', fontSize: '14px' }}
+              data-track="cta_click" data-location="hero">
               {t('heroCta1')}
             </a>
             <a href={waUrl} target="_blank" rel="noopener noreferrer"
-              className="btn btn-green" style={{ padding: '16px 32px', fontSize: '14px' }}>
+              className="btn btn-green" style={{ padding: '16px 32px', fontSize: '14px' }}
+              data-track="whatsapp_click" data-location="hero">
               💬 {t('heroCta2')}
             </a>
           </div>
@@ -79,9 +83,15 @@ export default function Hero() {
         }}>
           {SLIDES.map((slide, i) => (
             <img
-              key={i}
-              src={slide.src}
-              alt={slide.label}
+              key={slide.base}
+              src={`${slide.base}-640.webp`}
+              srcSet={`${slide.base}-640.webp 640w, ${slide.base}-${slide.wide}.webp ${slide.wide}w`}
+              sizes="(max-width: 900px) 100vw, 560px"
+              width="1080" height="810"
+              alt={slide.label[lang]}
+              fetchPriority={i === 0 ? 'high' : 'low'}
+              loading={i === 0 ? 'eager' : 'lazy'}
+              decoding="async"
               style={{
                 position: 'absolute', top: 0, left: 0,
                 width: '100%', height: '100%', objectFit: 'cover',
@@ -104,14 +114,17 @@ export default function Hero() {
               background: 'rgba(14,165,233,0.9)', padding: '6px 14px',
               borderRadius: '8px'
             }}>
-              {SLIDES[current].label}
+              {SLIDES[current].label[lang]}
             </span>
 
             {/* Dots */}
             <div style={{ display: 'flex', gap: '8px' }}>
               {SLIDES.map((_, i) => (
-                <button key={i} onClick={() => setCurrent(i)} style={{
-                  width: current === i ? '24px' : '8px', height: '8px',
+                <button key={i} type="button" onClick={() => setCurrent(i)} aria-label={SLIDES[i].label[lang]}
+                  aria-current={current === i} style={{
+                  // Punto de 8 px dentro de un área táctil de 24 px (WCAG 2.5.8)
+                  width: current === i ? '40px' : '24px', height: '24px', padding: '8px',
+                  backgroundClip: 'content-box',
                   borderRadius: '99px', border: 'none', cursor: 'pointer',
                   background: current === i ? '#fff' : 'rgba(255,255,255,0.4)',
                   transition: 'all 0.3s ease'
@@ -122,16 +135,15 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* TRUST BADGES — ALWAYS HORIZONTAL */}
+      {/* TRUST BADGES */}
       <div className="animated-fade-in" style={{
         width: '100%', padding: '24px 0',
         borderTop: '1px solid #f1f5f9',
         background: '#fafbfc'
       }}>
         <div className="container" style={{
-          display: 'flex', justifyContent: 'center', gap: '48px',
-          flexWrap: 'nowrap', /* NEVER WRAP — always horizontal */
-          overflowX: 'auto'
+          display: 'flex', justifyContent: 'center', gap: '16px 40px',
+          flexWrap: 'wrap' /* en pantallas angostas baja a dos filas en vez de recortar la primera insignia */
         }}>
           {BADGES.map((b, i) => (
             <div key={i} style={{

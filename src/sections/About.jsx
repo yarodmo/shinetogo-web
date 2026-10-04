@@ -4,7 +4,7 @@ const CARDS = [
   { key: 'aboutCard1', icon: '🎯' },
   { key: 'aboutCard2', icon: '🚚' },
   { key: 'aboutCard3', icon: '🛡️' },
-  { key: 'aboutCard4', icon: '🌿' },
+  { key: 'aboutCard4', icon: '🧴' },
 ]
 
 export default function About() {
@@ -14,6 +14,7 @@ export default function About() {
     <section id="about" className="section section-dark" style={{ position: 'relative', overflow: 'hidden' }}>
       <div className="glow-blue" style={{ top: '20%', right: '-10%' }} />
       <div className="container" style={{ position: 'relative', zIndex: 1 }}>
+        <h2 className="sr-only">{t('navAbout')}</h2>
         <p className="animated-fade-in" style={{
           fontSize: 'clamp(18px, 2.5vw, 22px)', color: 'var(--text-light)',
           fontWeight: 500, lineHeight: 1.7, maxWidth: '800px',
