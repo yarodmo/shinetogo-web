@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="{{lang}}">
+<head>
+<meta charset="utf-8">
+<title>C3 · Detail it. Then protect it. · {{lang}} · {{fmt}}</title>
+<!-- Real photo used as AMBIENT imagery only (a detailed car, not a tint/ceramic result, no before/after).
+     Template: render.mjs fills the double-brace placeholders from copy.mjs. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ROOT}}/templates/base.css">
+<style>
+  .c3 .stage { background: var(--bg-dark); }
+  .c3 .photo { position: absolute; background: url('{{ROOT}}/assets/hero-finish.jpg') center / cover no-repeat; }
+  /* Brand gradient: navy rising from the bottom + a faint brand-blue wash from the top-left. */
+  .c3 .grad { position: absolute; }
+  .c3 h1 { position: absolute; color: var(--text-white); }
+  .c3 h1 span { display: block; }
+  .c3 h1 .l2 { color: var(--brand-gold); }
+  .c3 .sub { position: absolute; font-family: var(--font-heading); font-weight: 600; color: var(--text-white); }
+  .c3 .url { position: absolute; color: var(--text-light); white-space: nowrap; }
+  .c3 .fine { position: absolute; color: var(--text-muted); font-weight: 500; white-space: nowrap; }
+  .c3 .area { position: absolute; font-weight: 600; text-transform: uppercase; letter-spacing: 0.12em; color: var(--text-muted); white-space: nowrap; }
+
+  /* ---------- FEED 1080x1350 ---------- */
+  .fmt-feed .photo { left: 0; top: 0; width: 1080px; height: 1080px; }
+  .fmt-feed .grad {
+    left: 0; top: 0; width: 1080px; height: 1081px;
+    background:
+      linear-gradient(180deg, rgba(10,14,26,0.30) 0%, rgba(10,14,26,0) 20%, rgba(10,14,26,0) 52%, rgba(10,14,26,0.80) 76%, #0a0e1a 100%),
+      linear-gradient(135deg, rgba(14,165,233,0.20) 0%, rgba(14,165,233,0) 45%);
+  }
+  .fmt-feed .badge { --bw: 210px; left: 56px; top: 52px; }
+  .fmt-feed h1 { left: 72px; top: 824px; width: 936px; font-size: 104px; }
+  .fmt-feed.lang-es h1 { font-size: 96px; }
+  .fmt-feed .sub { left: 72px; top: 1052px; font-size: 34px; white-space: nowrap; }
+  .fmt-feed .cta { left: 72px; top: 1114px; height: 92px; padding: 0 46px; border-radius: 46px; font-size: 38px; }
+  .fmt-feed .url { left: 72px; top: 1234px; font-size: 28px; }
+  .fmt-feed .fine { left: 72px; top: 1278px; font-size: 24px; }
+  .fmt-feed .area { display: none; }
+
+  /* ---------- STORY 1080x1920 (safe zone: y 250 .. 1670) ---------- */
+  .fmt-story .photo { left: 0; top: 0; width: 1080px; height: 1080px; }
+  .fmt-story .grad {
+    left: 0; top: 0; width: 1080px; height: 1081px;
+    background:
+      linear-gradient(180deg, rgba(10,14,26,0.35) 0%, rgba(10,14,26,0) 22%, rgba(10,14,26,0) 62%, rgba(10,14,26,0.85) 90%, #0a0e1a 100%),
+      linear-gradient(135deg, rgba(14,165,233,0.20) 0%, rgba(14,165,233,0) 45%);
+  }
+  .fmt-story .badge { --bw: 250px; left: 64px; top: 280px; }
+  .fmt-story h1 { left: 72px; top: 1030px; width: 936px; font-size: 118px; }
+  .fmt-story.lang-es h1 { font-size: 108px; }
+  .fmt-story .sub { left: 72px; top: 1296px; font-size: 38px; white-space: nowrap; }
+  .fmt-story.lang-es .sub { font-size: 36px; }
+  .fmt-story .cta { left: 72px; top: 1368px; height: 104px; padding: 0 52px; border-radius: 52px; font-size: 42px; }
+  .fmt-story .url { left: 72px; top: 1512px; font-size: 28px; }
+  .fmt-story .fine { left: 72px; top: 1556px; font-size: 24px; }
+  .fmt-story .area { left: 72px; top: 1612px; font-size: 24px; }
+
+  /* ---------- LINK 1200x628 ---------- */
+  .fmt-link .photo { left: 572px; top: 0; width: 628px; height: 628px; }
+  .fmt-link .grad {
+    left: 572px; top: 0; width: 628px; height: 628px;
+    background:
+      linear-gradient(90deg, #0a0e1a 0%, rgba(10,14,26,0.55) 22%, rgba(10,14,26,0) 46%),
+      linear-gradient(135deg, rgba(14,165,233,0.18) 0%, rgba(14,165,233,0) 45%);
+  }
+  .fmt-link .badge { --bw: 140px; left: 52px; top: 40px; }
+  .fmt-link h1 { left: 52px; top: 196px; width: 520px; font-size: 62px; }
+  .fmt-link.lang-es h1 { font-size: 58px; }
+  .fmt-link .sub { left: 52px; top: 340px; width: 480px; font-size: 26px; line-height: 1.2; }
+  .fmt-link .cta { left: 52px; top: 428px; height: 64px; padding: 0 34px; border-radius: 32px; font-size: 26px; }
+  .fmt-link .url { left: 52px; top: 524px; font-size: 22px; }
+  .fmt-link .fine { left: 52px; top: 564px; font-size: 21px; }
+  .fmt-link .area { display: none; }
+</style>
+</head>
+<body class="c3 fmt-{{fmt}} lang-{{lang}}">
+<div class="stage">
+  <div class="photo"></div>
+  <div class="grad"></div>
+
+  <div class="badge"><img src="{{ROOT}}/assets/logo.jpg" alt=""></div>
+
+  <h1><span class="l1">{{h1a}}</span><span class="l2">{{h1b}}</span></h1>
+  <div class="sub">{{sub}}</div>
+  <div class="cta">{{cta}}</div>
+  <div class="url mono-url">{{domain}} · {{phone}}</div>
+  <div class="fine">{{free}}</div>
+  <div class="area">{{area}}</div>
+</div>
+</body>
+</html>

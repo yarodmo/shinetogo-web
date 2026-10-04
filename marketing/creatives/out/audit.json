@@ -1,0 +1,338 @@
+[
+  {
+    "id": "c1-florida-sun_feed-1080x1350_en",
+    "kind": "ad",
+    "textAreaPct": 16.3,
+    "minContrast": 6.47,
+    "minContrastText": "Free quote · Appointments subject to availability",
+    "minFontPx": 24,
+    "fonts": {
+      "outfit": true,
+      "inter": true
+    },
+    "failures": [],
+    "warnings": []
+  },
+  {
+    "id": "c1-florida-sun_feed-1080x1350_es",
+    "kind": "ad",
+    "textAreaPct": 16.7,
+    "minContrast": 6.47,
+    "minContrastText": "Cotización gratis · Citas sujetas a disponibilidad",
+    "minFontPx": 24,
+    "fonts": {
+      "outfit": true,
+      "inter": true
+    },
+    "failures": [],
+    "warnings": []
+  },
+  {
+    "id": "c1-florida-sun_story-1080x1920_en",
+    "kind": "ad",
+    "textAreaPct": 13.9,
+    "minContrast": 6.65,
+    "minContrastText": "Sarasota · Bradenton · Tampa",
+    "minFontPx": 24,
+    "fonts": {
+      "outfit": true,
+      "inter": true
+    },
+    "failures": [],
+    "warnings": []
+  },
+  {
+    "id": "c1-florida-sun_story-1080x1920_es",
+    "kind": "ad",
+    "textAreaPct": 14.1,
+    "minContrast": 6.65,
+    "minContrastText": "Sarasota · Bradenton · Tampa",
+    "minFontPx": 24,
+    "fonts": {
+      "outfit": true,
+      "inter": true
+    },
+    "failures": [],
+    "warnings": []
+  },
+  {
+    "id": "c1-florida-sun_link-1200x628_en",
+    "kind": "ad",
+    "textAreaPct": 16.9,
+    "minContrast": 6.53,
+    "minContrastText": "Free quote · Appointments subject to availability",
+    "minFontPx": 21,
+    "fonts": {
+      "outfit": true,
+      "inter": true
+    },
+    "failures": [],
+    "warnings": []
+  },
+  {
+    "id": "c1-florida-sun_link-1200x628_es",
+    "kind": "ad",
+    "textAreaPct": 17.1,
+    "minContrast": 6.53,
+    "minContrastText": "Cotización gratis · Citas sujetas a disponibilidad",
+    "minFontPx": 21,
+    "fonts": {
+      "outfit": true,
+      "inter": true
+    },
+    "failures": [],
+    "warnings": []
+  },
+  {
+    "id": "c2-legal-tint_feed-1080x1350_en",
+    "kind": "ad",
+    "textAreaPct": 17.8,
+    "minContrast": 5.55,
+    "minContrastText": "is legal in Florida?",
+    "minFontPx": 24,
+    "fonts": {
+      "outfit": true,
+      "inter": true
+    },
+    "failures": [],
+    "warnings": []
+  },
+  {
+    "id": "c2-legal-tint_feed-1080x1350_es",
+    "kind": "ad",
+    "textAreaPct": 17.6,
+    "minContrast": 5.54,
+    "minContrastText": "legal en Florida?",
+    "minFontPx": 24,
+    "fonts": {
+      "outfit": true,
+      "inter": true
+    },
+    "failures": [],
+    "warnings": []
+  },
+  {
+    "id": "c2-legal-tint_story-1080x1920_en",
+    "kind": "ad",
+    "textAreaPct": 14.7,
+    "minContrast": 5.61,
+    "minContrastText": "is legal in Florida?",
+    "minFontPx": 24,
+    "fonts": {
+      "outfit": true,
+      "inter": true
+    },
+    "failures": [],
+    "warnings": []
+  },
+  {
+    "id": "c2-legal-tint_story-1080x1920_es",
+    "kind": "ad",
+    "textAreaPct": 14.1,
+    "minContrast": 5.61,
+    "minContrastText": "legal en Florida?",
+    "minFontPx": 24,
+    "fonts": {
+      "outfit": true,
+      "inter": true
+    },
+    "failures": [],
+    "warnings": []
+  },
+  {
+    "id": "c2-legal-tint_link-1200x628_en",
+    "kind": "ad",
+    "textAreaPct": 17.6,
+    "minContrast": 5.66,
+    "minContrastText": "is legal in Florida?",
+    "minFontPx": 21,
+    "fonts": {
+      "outfit": true,
+      "inter": true
+    },
+    "failures": [],
+    "warnings": []
+  },
+  {
+    "id": "c2-legal-tint_link-1200x628_es",
+    "kind": "ad",
+    "textAreaPct": 17.5,
+    "minContrast": 5.66,
+    "minContrastText": "legal en Florida?",
+    "minFontPx": 21,
+    "fonts": {
+      "outfit": true,
+      "inter": true
+    },
+    "failures": [],
+    "warnings": []
+  },
+  {
+    "id": "c3-detail-protect_feed-1080x1350_en",
+    "kind": "ad",
+    "textAreaPct": 14.8,
+    "minContrast": 7.51,
+    "minContrastText": "Free quote · Appointments subject to availability",
+    "minFontPx": 24,
+    "fonts": {
+      "outfit": true,
+      "inter": true
+    },
+    "failures": [],
+    "warnings": []
+  },
+  {
+    "id": "c3-detail-protect_feed-1080x1350_es",
+    "kind": "ad",
+    "textAreaPct": 14.9,
+    "minContrast": 7.51,
+    "minContrastText": "Cotización gratis · Citas sujetas a disponibilidad",
+    "minFontPx": 24,
+    "fonts": {
+      "outfit": true,
+      "inter": true
+    },
+    "failures": [],
+    "warnings": []
+  },
+  {
+    "id": "c3-detail-protect_story-1080x1920_en",
+    "kind": "ad",
+    "textAreaPct": 13.4,
+    "minContrast": 7.51,
+    "minContrastText": "Free quote · Appointments subject to availability",
+    "minFontPx": 24,
+    "fonts": {
+      "outfit": true,
+      "inter": true
+    },
+    "failures": [],
+    "warnings": []
+  },
+  {
+    "id": "c3-detail-protect_story-1080x1920_es",
+    "kind": "ad",
+    "textAreaPct": 13.2,
+    "minContrast": 7.51,
+    "minContrastText": "Cotización gratis · Citas sujetas a disponibilidad",
+    "minFontPx": 24,
+    "fonts": {
+      "outfit": true,
+      "inter": true
+    },
+    "failures": [],
+    "warnings": []
+  },
+  {
+    "id": "c3-detail-protect_link-1200x628_en",
+    "kind": "ad",
+    "textAreaPct": 12.9,
+    "minContrast": 7.51,
+    "minContrastText": "Free quote · Appointments subject to availability",
+    "minFontPx": 21,
+    "fonts": {
+      "outfit": true,
+      "inter": true
+    },
+    "failures": [],
+    "warnings": []
+  },
+  {
+    "id": "c3-detail-protect_link-1200x628_es",
+    "kind": "ad",
+    "textAreaPct": 13.4,
+    "minContrast": 7.51,
+    "minContrastText": "Cotización gratis · Citas sujetas a disponibilidad",
+    "minFontPx": 21,
+    "fonts": {
+      "outfit": true,
+      "inter": true
+    },
+    "failures": [],
+    "warnings": []
+  },
+  {
+    "id": "og-default_en",
+    "kind": "og",
+    "textAreaPct": 11.4,
+    "minContrast": 8.61,
+    "minContrastText": "shinetogomobiledetailing.com",
+    "minFontPx": 27,
+    "fonts": {
+      "outfit": true,
+      "inter": true
+    },
+    "failures": [],
+    "warnings": []
+  },
+  {
+    "id": "og-default_es",
+    "kind": "og",
+    "textAreaPct": 11.5,
+    "minContrast": 8.61,
+    "minContrastText": "shinetogomobiledetailing.com",
+    "minFontPx": 27,
+    "fonts": {
+      "outfit": true,
+      "inter": true
+    },
+    "failures": [],
+    "warnings": []
+  },
+  {
+    "id": "og-window-tint_en",
+    "kind": "og",
+    "textAreaPct": 12.9,
+    "minContrast": 7.9,
+    "minContrastText": "shinetogomobiledetailing.com",
+    "minFontPx": 27,
+    "fonts": {
+      "outfit": true,
+      "inter": true
+    },
+    "failures": [],
+    "warnings": []
+  },
+  {
+    "id": "og-window-tint_es",
+    "kind": "og",
+    "textAreaPct": 12.5,
+    "minContrast": 7.9,
+    "minContrastText": "shinetogomobiledetailing.com",
+    "minFontPx": 27,
+    "fonts": {
+      "outfit": true,
+      "inter": true
+    },
+    "failures": [],
+    "warnings": []
+  },
+  {
+    "id": "og-ceramic-coating_en",
+    "kind": "og",
+    "textAreaPct": 15.2,
+    "minContrast": 8.61,
+    "minContrastText": "shinetogomobiledetailing.com",
+    "minFontPx": 27,
+    "fonts": {
+      "outfit": true,
+      "inter": true
+    },
+    "failures": [],
+    "warnings": []
+  },
+  {
+    "id": "og-ceramic-coating_es",
+    "kind": "og",
+    "textAreaPct": 16.7,
+    "minContrast": 8.61,
+    "minContrastText": "shinetogomobiledetailing.com",
+    "minFontPx": 27,
+    "fonts": {
+      "outfit": true,
+      "inter": true
+    },
+    "failures": [],
+    "warnings": []
+  }
+]

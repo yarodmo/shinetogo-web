@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="{{lang}}">
+<head>
+<meta charset="utf-8">
+<title>C2 · Which window tint is legal in Florida? · {{lang}} · {{fmt}}</title>
+<!-- REQUIRES LEGAL REVIEW BEFORE PUBLISHING. Template: render.mjs fills the double-brace placeholders from copy.mjs.
+     No percentages on purpose; the map is schematic and carries the statute note. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ROOT}}/templates/base.css">
+<style>
+  /* Light concept: --bg-light with navy text. Blue text uses a darker shade of the brand deep blue for AA. */
+  .c2 { --ink-blue: #0062c4; --line: #cbd5e1; }
+  .c2 .stage { background: linear-gradient(180deg, #e8f3fb 0%, var(--bg-light) 36%, var(--bg-light) 100%); }
+  .c2 h1 { position: absolute; color: var(--text-dark); }
+  .c2 h1 span { display: block; }
+  .c2 h1 .l2 { color: var(--ink-blue); }
+  .c2 .band { position: absolute; left: 0; right: 0; bottom: 0; background: var(--bg-dark); }
+  .c2 .band::before { content: ''; position: absolute; left: 0; right: 0; top: 0; height: 4px; background: linear-gradient(90deg, var(--brand-blue), var(--brand-gold)); }
+  .c2 .url { position: absolute; color: var(--text-white); white-space: nowrap; }
+  .c2 .note { position: absolute; color: var(--text-light); font-weight: 500; white-space: nowrap; }
+  .c2 .fine { position: absolute; color: var(--text-muted); font-weight: 500; white-space: nowrap; }
+  .c2 .badge { box-shadow: 0 8px 26px rgba(15, 23, 42, 0.14), 0 0 0 1.5px #d6dee8; }
+  .c2 .map { position: absolute; }
+  .c2 .map svg { position: absolute; left: 0; top: 0; width: 100%; height: 100%; overflow: visible; }
+  .c2 .chip {
+    position: absolute; background: #ffffff; border: 2px solid var(--line); border-radius: 16px;
+    padding: 10px 18px; font-weight: 600; color: var(--text-dark); line-height: 1.15; white-space: nowrap;
+    box-shadow: 0 4px 14px rgba(15, 23, 42, 0.07);
+  }
+  .c2 .chip.ws { white-space: normal; width: 330px; }
+  .c2 .chip b { display: block; font-family: var(--font-heading); font-weight: 700; }
+  .c2 .map-h, .c2 .card { display: none; }
+
+  /* ---------- FEED 1080x1350 ---------- */
+  .fmt-feed .badge { --bw: 190px; left: 72px; top: 56px; }
+  .fmt-feed h1 { left: 72px; top: 268px; width: 936px; font-size: 86px; }
+  .fmt-feed.lang-es h1 { font-size: 84px; }
+  .fmt-feed .map { left: 72px; top: 462px; width: 936px; height: 540px; }
+  .fmt-feed .chip { font-size: 28px; }
+  .fmt-feed .band { height: 330px; }
+  .fmt-feed .cta { left: 72px; top: 1040px; height: 96px; padding: 0 40px; border-radius: 48px; font-size: 34px; }
+  .fmt-feed .url { left: 72px; top: 1166px; font-size: 28px; }
+  .fmt-feed .note { left: 72px; top: 1212px; font-size: 24px; }
+  .fmt-feed .fine { left: 72px; top: 1256px; font-size: 24px; }
+
+  /* ---------- STORY 1080x1920 (safe zone: y 250 .. 1670) ---------- */
+  .fmt-story .badge { --bw: 230px; left: 72px; top: 284px; }
+  .fmt-story h1 { left: 72px; top: 560px; width: 936px; font-size: 98px; }
+  .fmt-story.lang-es h1 { font-size: 94px; }
+  .fmt-story .map { left: 72px; top: 810px; width: 936px; height: 540px; }
+  .fmt-story .chip { font-size: 30px; }
+  .fmt-story .band { height: 566px; }
+  .fmt-story .cta { left: 72px; top: 1402px; height: 104px; padding: 0 44px; border-radius: 52px; font-size: 35px; }
+  .fmt-story .url { left: 72px; top: 1538px; font-size: 28px; }
+  .fmt-story .note { left: 72px; top: 1582px; font-size: 24px; }
+  .fmt-story .fine { left: 72px; top: 1624px; font-size: 24px; }
+
+  /* ---------- LINK 1200x628 ---------- */
+  .fmt-link .badge { --bw: 150px; left: 56px; top: 44px; }
+  .fmt-link h1 { left: 56px; top: 206px; width: 570px; font-size: 56px; }
+  .fmt-link.lang-es h1 { font-size: 54px; }
+  .fmt-link .map-v { display: none; }
+  .fmt-link .band { display: none; }
+  .fmt-link .cta { left: 56px; top: 372px; height: 64px; padding: 0 24px; border-radius: 32px; font-size: 22px; }
+  .fmt-link .url { left: 56px; top: 456px; font-size: 22px; color: var(--text-dark); }
+  .fmt-link .note { left: 56px; top: 496px; width: 540px; white-space: normal; line-height: 1.3; font-size: 21px; color: var(--text-body); }
+  .fmt-link .fine { left: 56px; top: 566px; font-size: 21px; color: var(--text-body); }
+  .fmt-link .card { display: block; position: absolute; left: 640px; top: 36px; width: 524px; height: 556px; border-radius: 30px; background: #ffffff; border: 2px solid #dbe4ee; box-shadow: 0 14px 40px rgba(15, 23, 42, 0.08); }
+  .fmt-link .map-h { display: block; left: 640px; top: 36px; width: 524px; height: 556px; }
+  .fmt-link .chip { font-size: 22px; padding: 8px 14px; white-space: normal; text-align: center; line-height: 1.12; }
+</style>
+</head>
+<body class="c2 fmt-{{fmt}} lang-{{lang}}">
+<div class="stage">
+  <div class="band"></div>
+  <div class="card"></div>
+
+  <div class="badge"><img src="{{ROOT}}/assets/logo.jpg" alt=""></div>
+
+  <h1><span class="l1">{{h1a}}</span><span class="l2">{{h1b}}</span></h1>
+
+  <!-- Portrait map (feed / story): schematic top view, no numbers -->
+  <div class="map map-v">
+    <svg viewBox="0 0 936 540" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <g transform="translate(468 270) scale(1.5) translate(-200 -296)">
+        <rect x="138" y="126" width="124" height="340" rx="54" fill="#ffffff" stroke="#94a3b8" stroke-width="2.4"/>
+        <g fill="#94a3b8" fill-opacity="0.75">
+          <rect x="130" y="180" width="10" height="44" rx="4"/><rect x="130" y="396" width="10" height="44" rx="4"/>
+          <rect x="260" y="180" width="10" height="44" rx="4"/><rect x="260" y="396" width="10" height="44" rx="4"/>
+          <ellipse cx="136" cy="242" rx="6" ry="4"/><ellipse cx="264" cy="242" rx="6" ry="4"/>
+        </g>
+        <rect x="150" y="140" width="22" height="7" rx="3.5" fill="#f59e0b"/><rect x="228" y="140" width="22" height="7" rx="3.5" fill="#f59e0b"/>
+        <rect x="150" y="446" width="22" height="6" rx="3" fill="#94a3b8"/><rect x="228" y="446" width="22" height="6" rx="3" fill="#94a3b8"/>
+        <rect x="170" y="236" width="60" height="120" rx="8" fill="#e2e8f0"/>
+        <polygon points="160,186 240,186 232,230 168,230" fill="#0ea5e9" fill-opacity="0.28" stroke="#0062c4" stroke-width="1.6" stroke-linejoin="round"/>
+        <polygon points="165.8,218 234.2,218 232,230 168,230" fill="#0062c4" fill-opacity="0.9"/>
+        <line x1="165.8" y1="218" x2="234.2" y2="218" stroke="#f59e0b" stroke-width="2" stroke-dasharray="5 3"/>
+        <g fill="#0ea5e9" fill-opacity="0.55" stroke="#0062c4" stroke-width="1.6">
+          <rect x="150" y="236" width="18" height="60" rx="4"/><rect x="150" y="302" width="18" height="54" rx="4"/>
+          <rect x="232" y="236" width="18" height="60" rx="4"/><rect x="232" y="302" width="18" height="54" rx="4"/>
+          <polygon points="168,362 232,362 240,406 160,406" stroke-linejoin="round"/>
+        </g>
+      </g>
+      <!-- leaders -->
+      <g stroke="#64748b" stroke-width="2.5" stroke-linecap="round">
+        <line x1="358" y1="200" x2="393" y2="225"/><line x1="358" y1="338" x2="393" y2="319"/>
+        <line x1="566" y1="162" x2="519" y2="162"/><line x1="566" y1="402" x2="524" y2="402"/>
+      </g>
+      <g fill="#f59e0b" stroke="#ffffff" stroke-width="2.5">
+        <circle cx="393" cy="225" r="7"/><circle cx="393" cy="319" r="7"/><circle cx="519" cy="162" r="7"/><circle cx="524" cy="402" r="7"/>
+      </g>
+    </svg>
+    <div class="chip" style="right: 578px; top: 174px;">{{chipFront}}</div>
+    <div class="chip" style="right: 578px; top: 312px;">{{chipRear}}</div>
+    <div class="chip ws" style="left: 566px; top: 104px;"><b>{{chipWs1}}</b>{{chipWs2}}</div>
+    <div class="chip" style="left: 566px; top: 376px;">{{chipRw}}</div>
+  </div>
+
+  <!-- Landscape map (link): same car rotated, chips above/below -->
+  <div class="map map-h">
+    <svg viewBox="0 0 524 556" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <g transform="translate(262 290) rotate(90) scale(1.2) translate(-200 -296)">
+        <rect x="138" y="126" width="124" height="340" rx="54" fill="#ffffff" stroke="#94a3b8" stroke-width="2.6"/>
+        <g fill="#94a3b8" fill-opacity="0.75">
+          <rect x="130" y="180" width="10" height="44" rx="4"/><rect x="130" y="396" width="10" height="44" rx="4"/>
+          <rect x="260" y="180" width="10" height="44" rx="4"/><rect x="260" y="396" width="10" height="44" rx="4"/>
+        </g>
+        <rect x="150" y="140" width="22" height="7" rx="3.5" fill="#f59e0b"/><rect x="228" y="140" width="22" height="7" rx="3.5" fill="#f59e0b"/>
+        <rect x="150" y="446" width="22" height="6" rx="3" fill="#94a3b8"/><rect x="228" y="446" width="22" height="6" rx="3" fill="#94a3b8"/>
+        <rect x="170" y="236" width="60" height="120" rx="8" fill="#e2e8f0"/>
+        <polygon points="160,186 240,186 232,230 168,230" fill="#0ea5e9" fill-opacity="0.28" stroke="#0062c4" stroke-width="1.8" stroke-linejoin="round"/>
+        <polygon points="165.8,218 234.2,218 232,230 168,230" fill="#0062c4" fill-opacity="0.9"/>
+        <line x1="165.8" y1="218" x2="234.2" y2="218" stroke="#f59e0b" stroke-width="2.2" stroke-dasharray="5 3"/>
+        <g fill="#0ea5e9" fill-opacity="0.55" stroke="#0062c4" stroke-width="1.8">
+          <rect x="150" y="236" width="18" height="60" rx="4"/><rect x="150" y="302" width="18" height="54" rx="4"/>
+          <rect x="232" y="236" width="18" height="60" rx="4"/><rect x="232" y="302" width="18" height="54" rx="4"/>
+          <polygon points="168,362 232,362 240,406 160,406" stroke-linejoin="round"/>
+        </g>
+      </g>
+      <g stroke="#64748b" stroke-width="2.5" stroke-linecap="round">
+        <line x1="298" y1="184" x2="298" y2="230"/>   <!-- front side windows (top) -->
+        <line x1="154" y1="184" x2="154" y2="248"/>   <!-- rear window (top) -->
+        <line x1="222" y1="372" x2="222" y2="348"/>   <!-- rear side windows (bottom) -->
+        <line x1="392" y1="372" x2="392" y2="338"/>   <!-- windshield strip (bottom) -->
+      </g>
+      <g fill="#f59e0b" stroke="#ffffff" stroke-width="2.5">
+        <circle cx="298" cy="230" r="6"/><circle cx="154" cy="248" r="6"/><circle cx="222" cy="348" r="6"/><circle cx="392" cy="338" r="6"/>
+      </g>
+    </svg>
+    <div class="chip" style="left: 233px; top: 118px; width: 130px;">{{chipFront}}</div>
+    <div class="chip" style="left: 89px; top: 118px; width: 130px;">{{chipRw}}</div>
+    <div class="chip" style="left: 157px; top: 374px; width: 130px;">{{chipRear}}</div>
+    <div class="chip ws" style="left: 317px; top: 374px; width: 150px;"><b>{{chipWs1}}</b>{{chipWs2}}</div>
+  </div>
+
+  <div class="cta">{{cta}}</div>
+  <div class="url mono-url">{{domain}} · {{phone}}</div>
+  <div class="note">{{legalNote}}</div>
+  <div class="fine">{{free}}</div>
+</div>
+</body>
+</html>
