@@ -65,10 +65,11 @@ El lead sigue a salvo en el archivo y se vuelve a mandar con:
 
 ```bash
 cd api
-node tools/forward-leads.js --since 2026-10-01 --dry-run   # lista lo que mandaría
-node tools/forward-leads.js --since 2026-10-01             # manda (idempotente por lead_id)
-node tools/forward-leads.js --lead ab12cd34                # uno solo
+node tools/forward-leads.js --since 2026-10-01          # SIMULACRO (por defecto): lista lo que mandaría
+node tools/forward-leads.js --since 2026-10-01 --yes    # manda de verdad (idempotente por lead_id)
+node tools/forward-leads.js --lead ab12cd34 --yes       # uno solo
 ```
+Manda datos personales a un tercero: sin `--yes` no manda nada, y se confirma con quien manda en el negocio antes de repetir con `--yes`.
 
 Qué recibe el webhook (`POST`, JSON):
 

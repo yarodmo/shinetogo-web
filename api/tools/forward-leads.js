@@ -4,9 +4,12 @@
  * Vuelve a mandar al webhook (n8n/GHL) los leads que no llegaron: el servidor estaba reiniciándose, el receptor
  * estaba caído, o aparece LEAD NOT FORWARDED en el log. Es seguro repetirlo: cada envío lleva X-Idempotency-Key = lead_id.
  *
- *   node tools/forward-leads.js --since 2026-10-01 --dry-run     # solo lista
- *   node tools/forward-leads.js --since 2026-10-01               # manda
- *   node tools/forward-leads.js --lead ab12cd34                  # uno solo (8 primeros caracteres)
+ *   node tools/forward-leads.js --since 2026-10-01               # SIMULACRO: solo lista lo que mandaría (por defecto)
+ *   node tools/forward-leads.js --since 2026-10-01 --yes         # manda de verdad
+ *   node tools/forward-leads.js --lead ab12cd34 --yes            # uno solo (8 primeros caracteres)
+ *
+ * Esto manda datos personales de los leads a un tercero (tu webhook). Sin --yes no manda nada: primero mira la lista,
+ * confirma con quien manda en el negocio y recién entonces repite con --yes.
  *
  * Usa LEAD_WEBHOOK_URL y LEAD_WEBHOOK_SECRET del .env de la API. Los días se cuentan en hora de Florida.
  */
@@ -23,7 +26,7 @@ const dayOf = (iso) => new Intl.DateTimeFormat('en-CA', { timeZone: BUSINESS_TZ,
 async function main() {
   const { flags } = parseArgs(process.argv.slice(2))
   if (flags.help || (!flags.since && !flags.lead)) {
-    console.error('Uso: node tools/forward-leads.js (--since AAAA-MM-DD | --lead <8 caracteres>) [--dry-run] [--leads archivo]')
+    console.error('Uso: node tools/forward-leads.js (--since AAAA-MM-DD | --lead <8 caracteres>) [--yes] [--leads archivo]   (sin --yes es un simulacro)')
     return flags.help ? 0 : 2
   }
   const leadsFile = typeof flags.leads === 'string' ? flags.leads : process.env.LEADS_FILE || path.join(os.homedir(), 'data', 'leads.ndjson')
@@ -38,19 +41,21 @@ async function main() {
     if (typeof flags.since !== 'string' || !/^\d{4}-\d{2}-\d{2}$/.test(flags.since)) throw new Error('--since must be a date like YYYY-MM-DD')
     leads = leads.filter((l) => dayOf(l.created_at) >= flags.since)
   }
-  console.log(`${leads.length} lead(s) para reenviar${flags['dry-run'] ? ' (simulacro: no se manda nada)' : ''}`)
-  if (flags['dry-run']) {
+  const send = flags.yes === true
+  console.log(`${leads.length} lead(s) para reenviar${send ? '' : ' (SIMULACRO: no se manda nada)'}`)
+  if (!send) {
     for (const l of leads) console.log(`  [${l.lead_id.slice(0, 8)}] ${l.created_at} · ${l.service}`)
+    console.log('Para mandarlos de verdad, repite el mismo comando con --yes.')
     return 0
   }
 
   const cfg = webhookConfig(process.env)
   if (!cfg) throw new Error('LEAD_WEBHOOK_URL is not set')
-  const send = createSender(cfg)
+  const sender = createSender(cfg)
   let failed = 0
   for (const l of leads) {
     try {
-      await send(l)
+      await sender(l)
       console.log(`  ok   [${l.lead_id.slice(0, 8)}]`)
     } catch (e) {
       failed += 1
