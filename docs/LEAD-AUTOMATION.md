@@ -1,6 +1,6 @@
 # Automatización de leads: qué hay, cómo se usa y qué NO hace
 
-Código en `api/`. Tres piezas, todas probadas (73 pruebas en `api/test/`) y auditadas de forma adversarial; los hallazgos de la auditoría están corregidos con pruebas que antes fallaban. Nada está desplegado: un merge a `main`
+Código en `api/`. Tres piezas, todas probadas (78 pruebas en `api/test/`) y auditadas de forma adversarial; los hallazgos de la auditoría están corregidos con pruebas que antes fallaban. Nada está desplegado: un merge a `main`
 despliega al VPS compartido (regla D-018), así que estas piezas esperan una ventana controlada.
 
 ## 1. Aviso al dueño con respuesta de un toque
@@ -18,9 +18,19 @@ Cada lead sigue llegando por correo, pero ahora el correo está hecho para respo
 El número sin `+` se acepta solo si es norteamericano válido (10 dígitos, o 11 con un 1). Con `+` se acepta uno internacional. Un teléfono con extensión o con
 formato dudoso **no genera botones**: el correo dice `Verify the number` en vez de llamar o escribir a un número equivocado.
 
-## 2. Resultados de cada lead y reporte
+## 2. Alta manual, resultados de cada lead y reporte
 
-El archivo de leads dice quién llegó y de dónde; no dice qué pasó después. Sin eso no se sabe qué fuente ni qué servicio traen clientes.
+El archivo de leads dice quién llegó y de dónde; no dice qué pasó después. Sin eso no se sabe qué fuente ni qué servicio traen clientes. Y hay un hueco más grande:
+**el canal principal del negocio (fotos por WhatsApp y llamadas) no pasa por el formulario**, así que no entraba a ningún archivo. `lead:add` lo da de alta a mano:
+
+```bash
+cd api
+npm run lead:add -- --channel whatsapp --service tint --lang es --source google      # imprime el id de 8 caracteres
+npm run lead:add -- --channel call --service ceramic --source gbp --at "2026-10-05 14:03" --note "pidió precio"
+```
+
+Canales: `whatsapp`, `call`, `walkin`, `referral`, `other`. Nombre y teléfono son opcionales (no se piden datos personales para medir). **Un alta manual nunca declara consentimiento de mensajes**: ese consentimiento solo existe cuando la persona marca la casilla del formulario.
+El reporte separa los canales y mide la calidad del formulario (casilla, ZIP, correo, fecha) solo sobre los leads del formulario.
 
 ```bash
 cd api

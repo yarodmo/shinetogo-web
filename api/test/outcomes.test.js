@@ -201,3 +201,10 @@ test('una línea "null" o un arreglo en el archivo de leads se salta como dañad
   assert.doesNotThrow(() => resolveLeadId(r.items, '00000001'))
   fs.rmSync(dir, { recursive: true, force: true })
 })
+
+test('sin leads con edad suficiente la velocidad dice "sin dato" (null), no un 0% engañoso', () => {
+  const { dir, leadsFile } = setup([mk(1)])
+  const rep = buildReport({ leadsFile, now: new Date(T0 + 60000) })
+  fs.rmSync(dir, { recursive: true, force: true })
+  assert.equal(rep.response.within_5_min_pct, null)
+})

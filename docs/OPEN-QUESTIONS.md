@@ -41,6 +41,17 @@ Cada punto indica qué se publica hoy en su lugar y qué cambia cuando responda.
 32. Tarjetas que aceptas (el texto dice ahora «tarjetas de crédito y débito» sin «todas las principales»).
 33. Orden de agua del SWFWMD: ¿lees la orden completa o llamas al Distrito para saber cómo le aplica a tu servicio móvil comercial? Hasta entonces el sitio no dice «exentos» ni «cumplimos».
 
+## Hallazgos del estudio de mercado (5-oct-2026): perfil de Google, teléfono y reseñas
+34. **Dos teléfonos distintos.** El perfil de Google Maps «Shine to Go Mobile Car Wash» (5.0 con 3 reseñas, posición 19 de 20 en «mobile car detailing Sarasota FL») muestra el (941) 952-8758 y el sitio `detailshine2go.com`; la web nueva usa el (941) 422-4405. ¿Cuál es el correcto? Mientras no coincidan, Google y los clientes ven dos negocios.
+35. ¿Ese perfil es tuyo? Si sí: cambiar su sitio web al dominio nuevo y su nombre/categoría con cuidado (cambiar el nombre en un perfil con reseñas puede disparar una revisión). **No crear un perfil duplicado.** Y `detailshine2go.com` debe redirigir (301) a la web nueva para no perder lo que Google ya conoce.
+36. Hoy la producción sigue sirviendo la versión anterior (título «DetailShine … Sarasota, Tampa, Bradenton»). Cuando se despliegue la nueva cambian títulos y descripciones: planificarlo con la ventana de despliegue (D-018).
+37. **Reseñas:** los 17 negocios con 200 o más reseñas tienen todos sitio web, y la calificación no distingue (82 % tiene 4.9 o más). ¿Cuántas reseñas reales tienes y en qué plataformas? ¿Quieres un código QR del perfil de Google para entregar en persona después de cada trabajo?
+38. **Tiempo de respuesta:** ¿qué estándar interno puedes cumplir en horario (por ejemplo, 15 minutos)? No se promete públicamente hasta que se mida. ¿Quién contesta fuera de horario?
+39. **Planes de mantenimiento:** los fabricantes de cerámica (Ceramic Pro, XPEL) piden una inspección anual con instalador certificado o la garantía se acorta o se anula. ¿Qué marca y qué garantía usarás? ¿Aceptarías un piloto de lavado de mantenimiento mensual para 10–20 clientes con cerámica antes de ofrecerlo a todos?
+40. ¿Cuántas cotizaciones por mes esperas? (Con pocos leads solo se puede medir y comparar por periodos; una prueba A/B de cierre pide unas 350 cotizaciones por variante.)
+41. ¿Aceptas que se registren a mano los leads de WhatsApp y de llamadas (`npm run lead:add`) durante 8–12 semanas? Sin eso el reporte solo ve el formulario y el canal principal queda sin medir.
+42. ¿Algún proveedor de SMS o CRM ya contratado (GoHighLevel, Twilio, Housecall Pro...)? Cambia qué se puede automatizar y qué debe decir la política de privacidad.
+
 ## Prueba y fotos
 21. **Reseñas con permiso** (con enlace al origen) y **fotos propias** de tint y cerámico (lista en `docs/BRAND.md` §8). Sin matrículas visibles. Hoy las páginas no llevan fotos de trabajos de estos servicios porque no hay.
 22. La imagen principal de la home (`hero-finish`) tiene rasgos de imagen sintética y una placa legible: ¿es una foto real de un trabajo real, con permiso de la persona y del dueño del carro?

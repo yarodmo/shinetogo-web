@@ -214,6 +214,7 @@ function buildReport({ leadsFile, outcomesFile = outcomesPathFor(leadsFile), fro
   // Denominador: leads con al menos esa edad. Uno que nunca se atendió cuenta en contra.
   const within = (limitMin) => {
     const eligible = rows.filter((r) => r.ageMs >= limitMin * 60000)
+    if (!eligible.length) return null // todavía no hay leads con esa edad: no hay nada que medir
     return pct(eligible.filter((r) => r.ms !== null && r.ms <= limitMin * 60000).length, eligible.length)
   }
   const lostReasons = {}
@@ -229,13 +230,18 @@ function buildReport({ leadsFile, outcomesFile = outcomesPathFor(leadsFile), fro
 
   return {
     range: { from: from || null, to: to || null },
-    totals: {
-      leads: rows.length,
-      consent_pct: pct(rows.filter((r) => r.lead.consent && r.lead.consent.sms).length, rows.length),
-      with_zip_pct: pct(rows.filter((r) => r.lead.zip).length, rows.length),
-      with_email_pct: pct(rows.filter((r) => r.lead.email).length, rows.length),
-      with_date_pct: pct(rows.filter((r) => r.lead.date).length, rows.length),
-    },
+    // La calidad del formulario (casilla, ZIP, correo, fecha) se mide solo sobre leads que vinieron del formulario.
+    totals: (() => {
+      const form = rows.filter((r) => !r.lead.manual)
+      return {
+        leads: rows.length,
+        manual_leads: rows.length - form.length,
+        consent_pct: pct(form.filter((r) => r.lead.consent && r.lead.consent.sms).length, form.length),
+        with_zip_pct: pct(form.filter((r) => r.lead.zip).length, form.length),
+        with_email_pct: pct(form.filter((r) => r.lead.email).length, form.length),
+        with_date_pct: pct(form.filter((r) => r.lead.date).length, form.length),
+      }
+    })(),
     funnel,
     revenue_usd: rows.reduce((n, r) => n + r.value, 0),
     response: {
@@ -249,6 +255,7 @@ function buildReport({ leadsFile, outcomesFile = outcomesPathFor(leadsFile), fro
     by_source: group(sourceOf),
     by_service: group((l) => l.service),
     by_lang: group((l) => l.lang),
+    by_channel: group((l) => l.channel || 'form'),
     by_landing: group((l) => l.attribution && l.attribution.landing),
     lost_reasons: lostReasons,
     unworked: unworked.map((r) => ({ lead_id: r.lead.lead_id, created_at: r.lead.created_at, service: r.lead.service, source: sourceOf(r.lead) })),

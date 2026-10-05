@@ -46,12 +46,14 @@ const table = (title, rows) => {
 const f = report.funnel
 console.log(`LEADS ${report.range.from || 'desde el inicio'} → ${report.range.to || 'hoy'}`)
 console.log(`  leads ${f.leads} · atendidos ${f.contacted} · cotizados ${f.quoted} · agendados ${f.booked} · ganados ${f.won} · perdidos ${f.lost} · ingreso ${money(report.revenue_usd)}`)
-console.log(`  casilla de mensajes marcada ${report.totals.consent_pct}% · con ZIP ${report.totals.with_zip_pct}% · con correo ${report.totals.with_email_pct}% · con fecha ${report.totals.with_date_pct}%`)
+console.log(`  del formulario: casilla de mensajes marcada ${report.totals.consent_pct}% · con ZIP ${report.totals.with_zip_pct}% · con correo ${report.totals.with_email_pct}% · con fecha ${report.totals.with_date_pct}%  (${report.totals.manual_leads} lead(s) dados de alta a mano no cuentan aquí)`)
 const r = report.response
 console.log(`\nVELOCIDAD DE RESPUESTA (primer contacto anotado)`)
-console.log(`  mediana ${r.median_minutes === null ? '—' : `${r.median_minutes} min`} · dentro de 5 min ${r.within_5_min_pct}% · 15 min ${r.within_15_min_pct}% · 60 min ${r.within_60_min_pct}% · nunca atendidos ${r.never_contacted}`)
+const p = (v) => (v === null ? '—' : `${v}%`)
+console.log(`  mediana ${r.median_minutes === null ? '—' : `${r.median_minutes} min`} · dentro de 5 min ${p(r.within_5_min_pct)} · 15 min ${p(r.within_15_min_pct)} · 60 min ${p(r.within_60_min_pct)} · nunca atendidos ${r.never_contacted}`)
 table('POR FUENTE', report.by_source)
 table('POR SERVICIO', report.by_service)
+table('POR CANAL (formulario, WhatsApp, llamada...)', report.by_channel)
 table('POR IDIOMA', report.by_lang)
 table('POR PÁGINA DE ENTRADA', report.by_landing)
 if (Object.keys(report.lost_reasons).length) console.log(`\nPOR QUÉ SE PIERDEN\n  ${Object.entries(report.lost_reasons).map(([k, v]) => `${k}: ${v}`).join(' · ')}`)
