@@ -3,21 +3,42 @@
 Fuente de verdad para quien escriba copy, diseñe creativos, configure Google Business Profile o pague anuncios.
 Si algo aquí cambia, cambia en el código en un solo lugar (se indica dónde).
 
-## 1. Nombre comercial (decisión pendiente del cliente)
+## 1. Nombre comercial (decidido por el dueño, 5 oct 2026)
 
-| Evidencia a favor de **ShineToGo** | Evidencia a favor de **DetailShine** |
-|---|---|
-| Dominio `shinetogomobiledetailing.com`, logotipo, Instagram `@shinetogomobilecarwash`, repositorio, API | Copy original clonado de DetailShine (título y descripción del sitio antes de este cambio) |
+**ShineToGo Mobile Detailing** (dominio `shinetogomobiledetailing.com`). Es el nombre en el sitio, el correo, el JSON-LD, el consentimiento, la política de privacidad, Google Business Profile, Google Ads y la Página de Meta. En los títulos de página se usa la forma corta **ShineToGo** solo porque el nombre completo no cabe en ~60 caracteres.
 
-**Estado:** el sitio usa **ShineToGo** por defecto. Un solo nombre en TODO lugar (sitio, correo, JSON-LD, Google Business Profile, anuncios); mezclarlos es motivo de rechazo en Google Ads por tergiversación y rompe la señal de entidad para buscadores y asistentes de IA.
-**Cómo cambiarlo:** variables del repositorio `VITE_BRAND_NAME` (sitio) y `BRAND_NAME` (API); luego un deploy. El logotipo es una imagen y hay que reemplazarlo aparte si cambia el nombre.
+- Mezclar variantes (ShineToGo / ShineToGo Mobile Car Wash / DetailShine) es motivo de rechazo en Google Ads por tergiversación y rompe la señal de entidad para buscadores y asistentes de IA.
+- **El logotipo dice «Mobile Car Wash»** y el Instagram es `@shinetogomobilecarwash`. El negocio hace detallado, polarizado y cerámico, no solo lavado: conviene un logotipo con «Mobile Detailing». Mientras tanto el nombre legal/comercial registrado (nombre ficticio, F.S. 865.09) debe coincidir con el que se usa en Google Business Profile.
+- **Cómo cambiarlo:** `BRAND_FULL` y `BRAND_SHORT` en `src/content/business.js`, o las variables `VITE_BRAND_NAME` (sitio) y `BRAND_NAME` (API) del repositorio.
 
-## 2. NAP (nombre, dirección, teléfono)
+## 2. NAP (nombre, dirección, teléfono) y zonas
 
 - **Teléfono y WhatsApp:** (941) 422-4405 · `+19414224405` → `src/content/business.js`
-- **Dirección:** negocio de servicio a domicilio, **sin dirección pública**. No inventar calle ni código postal. En Google Business Profile marcar "Área de servicio" y ocultar la dirección.
-- **Áreas de servicio publicadas hoy** (`src/content/business.js`): Sarasota, Bradenton, Tampa, Venice, St. Petersburg, Manatee County. **Pendiente confirmar con el cliente** cuáles atiende de verdad; la lista debe ser idéntica en sitio, GBP y anuncios.
-- Sin horario publicado. El texto "24/7" y "respuesta en 2 horas" se retiraron por no estar respaldados.
+- **Dirección:** negocio de servicio a domicilio, **sin dirección pública**. No inventar calle ni código postal. En Google Business Profile marcar «Área de servicio» y ocultar la dirección.
+- **Zonas donde opera de verdad** (dichas por el dueño): Sarasota, Bradenton, Manatee County, Venice, St. Petersburg, Brandon, Lido Key (Lido Beach), Longboat Key, Siesta Key «y alrededores». **Tampa no está en la lista y no debe aparecer** (el verificador `check-dist` falla si vuelve a salir).
+  - Una sola lista en `PLACES` de `src/content/business.js`. De ahí salen el pie, el JSON-LD (`areaServed` con City/Place y su condado) y `llms.txt`. La frase que ve el público («Trabajamos en Sarasota y Bradenton…») es `AREA_COPY` en el mismo archivo.
+  - «Alrededores» no se puede expresar en datos estructurados sin un límite; queda solo en el texto. Palmetto, Osprey, Nokomis, Anna Maria, etc. entran en «alrededores» solo si el dueño lo confirma (ver `docs/OPEN-QUESTIONS.md`).
+  - **No se hace una página por zona** (36 páginas casi iguales serían «doorway pages» para Google). El vehículo para zonas es Google Business Profile (hasta 20 áreas de servicio). Más adelante, una página por zona solo con trabajos reales, logística propia, demanda comprobada en Search Console y ≥300 palabras únicas.
+- Sin horario publicado. El texto «24/7» y «respuesta en 2 horas» se retiraron por no estar respaldados.
+
+## 2b. Dos servicios distintos (decisión del dueño, 5 oct 2026)
+
+**Window Tint y Ceramic Coating NO son una sola línea «Protection».** Cada uno tiene su identidad: menú, tarjeta de la home, landing, formulario, preguntas y esquema. Ninguno se vende como complemento del otro, no hay opción «Tint + Cerámico» ni pregunta «¿ambos juntos?». Quien quiere los dos hace dos cotizaciones (o lo escribe en el mensaje).
+
+| | Window Tint / Polarizado de vidrios | Ceramic Coating / Recubrimiento cerámico |
+|---|---|---|
+| Qué es | Película de carbono o cerámica en **todos los vidrios** del carro: laterales, trasero, franja del parabrisas, sunroof | **Todos los tratamientos cerámicos**: pintura, vidrios, rines y calipers, molduras y plásticos de afuera, interior |
+| Contenido | `src/content/tint.js` | `src/content/ceramic.js` |
+| Formulario pide | vidrios (chips), película, «tengo polarizado que quitar» | superficies a cubrir (chips) |
+| Voz | práctica, de conductor a conductor; la ley de Florida ventana por ventana | de oficio, superficie por superficie; la preparación primero |
+| Vocabulario ES | polarizado, película de carbono / **película cerámica**, vidrios (títulos) y ventanas (límites), sunroof (quemacocos) | recubrimiento cerámico (corto: «cerámico»), rines (aros), molduras |
+
+- «Cerámico» a secas no se usa para la película: choca con el otro servicio. Siempre «película cerámica» en tint.
+- **Cerámico: lista de superficies.** La página cubre las cinco que cubren los detallistas de la zona (pintura, vidrios, rines y calipers, molduras y plásticos de afuera, interior). **El dueño debe confirmar cuáles hace de verdad** (y si hace faros, capotas, escapes); lo que no haga se quita de la página, la tabla, los chips y el esquema.
+- Competencia local de referencia (Sarasota): Ceramic Pro, Detail M.D., DRK Customs, Sharkey's Detailing & Tint, My Detail Guy, Alset Custom, 941 Mobile Detailing. Varias prometen «9H», «de por vida» o garantías de 10 años; este sitio no, y esa franqueza es parte de su voz.
+
+### Vocabulario en español de Florida (criterio, no volumen de búsqueda)
+**carro** (no «coche»; «auto» solo en una mención por bloque o en la meta), **polarizado** («tint» entre paréntesis una vez; «tinte» en una pregunta), **vidrios / ventanas**, **cotización**, **rines (aros)**, **sunroof (quemacocos)**, **ZIP code**, sentence case (no «Reserva Tu Servicio»), «y» en vez de «&», sin calcos («cabina», «rechazo de calor», «jamba», «excremento de aves», «golpes de piedra»). Hay hispanos en Manatee (19,2 %) y Sarasota (11,5 %) según QuickFacts (verificar antes de citar); predomina el origen mexicano, centroamericano y puertorriqueño, así que se eligen palabras que crucen. No hay datos de volumen de búsqueda: la consulta a Google Trends no devolvió resultados; validar con Keyword Planner o Search Console.
 
 ## 3. Identidad visual
 
@@ -62,6 +83,25 @@ Premium, directa, concreta y bilingüe (EN y ES con la misma información). Fras
 
 **"Legal" en polarizado (veto de cumplimiento):** la legalidad la determina la **ventana terminada** (vidrio + película, medida en ese vehículo), no la película. Prohibido: «películas legales», «tono legal», «solo instalamos dentro de la ley», «legal en Florida» como promesa. Permitido: «te explicamos los límites de Florida por ventana», «el mínimo legal de cada ventana es…». Decir que se *mide* cada ventana solo si el negocio de verdad usa un medidor y deja constancia.
 
+### Contexto local que sí se usa (con fuente y fecha)
+| Dato | Fuente | Dónde |
+|---|---|---|
+| Lovebugs: unas cuatro semanas en abril–mayo y otra vez en agosto–septiembre; los restos son ligeramente ácidos y, si se dejan varios días, la acidez aumenta y graba la pintura. **No decir «un día»: la fuente dice varios días** (corregido el 5-oct-2026 tras la revisión de cumplimiento) | UF/IFAS IN204 (ask.ifas.ufl.edu/publication/IN204) | Cerámico, módulo «Lovebugs» y FAQ |
+| Temporada de lluvias: 15-may a 15-oct en el suroeste de Florida (25-may a 10-oct en el resto del centro-oeste); el texto dice «de mediados o finales de mayo a mediados de octubre» | National Weather Service Tampa Bay (weather.gov/tbw/rainyseason) | Cerámico, módulo de vidrios |
+| Orden de escasez de agua del SWFWMD (comunicado del 22-sep-2026, hasta el 31-mar-2027): lavar un carro **en casa (sin fines comerciales)** solo en tu día de riego y con boquilla de cierre; cubre 11 condados completos y partes de otros (entre ellos Manatee, Sarasota, Hillsborough y Pinellas). **Las fuentes no dicen nada de servicios comerciales o móviles: prohibido escribir «exentos» o «cumplimos la orden» hasta que el dueño lea la orden completa o llame al Distrito (OPEN-QUESTIONS #6).** | swfwmd.state.fl.us (verificado el 5-oct-2026) | Cerámico; el generador la omite sola solo si se hace un build después de esa fecha (el sitio es estático) |
+### Cerámico: evidencia por superficie antes de decir «ayuda»
+Hoy **no hay ninguna ficha técnica en carpeta** (OPEN-QUESTIONS #13 y #14), así que solo sale el texto neutro de abajo. «Ayuda» baja el tamaño de la promesa pero no quita la obligación de tener el respaldo (FTC, sustentación de publicidad; FDUTPA 501.204). Conservar la ficha mientras el texto esté publicado y tres años después. No decir «certified applicator» sin certificado del fabricante.
+
+| Superficie | Texto publicado hoy (neutro) | Se puede decir «ayuda a…» cuando la ficha lo respalde | Nunca (sin datos) |
+|---|---|---|---|
+| Pintura | «ayuda a que la tierra, lo que dejan los pájaros y las manchas de agua se quiten más fácil al lavar» | TDS con hidrofobia / limpieza fácil (ángulo de contacto o prueba equivalente) | sol, sal, UV, anticorrosión, dureza, resistencia a rayones, duración |
+| Vidrios | «ayuda a que el agua de lluvia forme gotas y corra. No sustituye los limpiaparabrisas» | TDS para vidrio automotriz; compatible con limpiaparabrisas, sensor de lluvia y cámaras. No usar un producto de pintura en el parabrisas | mejor visibilidad o seguridad al manejar con lluvia |
+| Rines y calipers | «hecho para rines y calipers, aplicado después de limpiar y descontaminar» + «ayuda a que el polvo de los frenos se pegue menos» | TDS de rines/calipers con rango térmico; acabados compatibles; procedimiento que excluya discos y pastillas | sal, arena, salpicadura |
+| Molduras y plásticos | «todavía están oscuros; un recubrimiento no devuelve el color perdido» | (no recomendado) ensayo de envejecimiento acelerado del fabricante | evita o frena el descoloramiento |
+| Interior | «confirmamos el producto para cada material antes de empezar» | Ficha por material (tela, cuero, vinil, plástico), SDS (COV, olor, piel), instrucción sobre airbags laterales y asientos con calefacción; confirmar que es realmente cerámico (SiO2 o SiC) | derrames repelidos, bloqueador solar. Si no hay producto, quitar «Interior» de todo el sitio |
+
+Se descartaron por no verificables o decorativos: arena de Siesta Key «99 % cuarzo», cifras de UV, «tormentas todas las tardes», marea roja, reglas de HOA para lavar en la entrada.
+
 ## 6. Texto legal que no se toca sin abogado
 
 - **Polarizado en Florida** (F.S. 316.2951–316.2957 y 316.29545). Verificado contra el texto de los estatutos (revisión de cumplimiento, 4-oct-2026):
@@ -73,9 +113,11 @@ Premium, directa, concreta y bilingüe (EN y ES con la misma información). Fras
   | Multipropósito (chasis de camión o rasgos off-road, ≤ 10 personas), atrás | ≥ 6 % | 316.2951, 316.2954(1)(a) |
   | Parabrisas | solo franja **transparente** arriba, sin invadir AS-1 | 316.2952(2)(b) |
   | Medición | sobre el vidrio **ya terminado** (vidrio + película) | 316.2953, 316.2954 |
-  | Etiqueta | jamba izquierda, con nombre comercial de la película y del instalador | 316.2955(1) |
-  | Exención médica | certificado por vehículo (VIN), intransferible | 316.29545 (no 316.2957, que es de fabricantes) |
-  | Sanciones | infracción no moviente para el conductor; delito menor para quien instala o vende fuera de la norma | 316.2956 (cotejar texto literal) |
+  | Etiqueta | marco interior de la puerta izquierda; afirma que la película cumple, con nombre comercial de la película y del instalador | 316.2955(1) |
+  | Tolerancia | ±3 % en toda medición (no está en el copy) | 316.2955(2) |
+  | Definición de «window» | excluye los dispositivos de visión montados en el techo: **los porcentajes no aplican al sunroof**; no ponerle límite ni decir que está «dentro de la ley» | 316.2951(6) |
+  | Exención médica | la emite el FLHSMV por vehículo (VIN), intransferible; **no fija un porcentaje**, así que no escribir «instalamos según el certificado» | 316.29545 (no 316.2957, que es de fabricantes) |
+  | Sanciones | infracción no moviente para el conductor; delito menor de segundo grado para quien instala o vende fuera de la norma (el copy solo habla del conductor y **no dice que haya que quitar la película**: el estatuto no lo establece) | 316.2956(1) y (3), cotejado con el texto literal |
 
   Las pickups se tratan con el criterio más estricto (15 %) hasta confirmar su clasificación; no se encontró una clasificación oficial de FLHSMV (su página dio 404). **Revisión por un abogado de Florida antes de gastar en anuncios.**
 - **Mensajes (TCPA / FTSA, F.S. 501.059):** casilla de consentimiento separada y SIN marcar; el texto nombra al negocio y dice "sistema automatizado". Versión por idioma (`v2-en`, `v2-es`) archivada en `docs/CONSENT-TEXT.md`; cada lead guarda versión, fecha, IP y navegador. La FTSA da acción privada de US$500 por mensaje: **no enviar mensajes automatizados hasta que el abogado confirme el texto**, o limitarse a contacto manual y a responder dentro de conversaciones iniciadas por la persona.

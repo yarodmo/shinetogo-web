@@ -1,6 +1,6 @@
 # Especificación de búsqueda y experiencia (SEO · GEO · AEO · AIO · SXO)
 
-Qué se construyó, por qué, y cómo comprobar que sigue funcionando. Aplica a Window Tint y Ceramic Coating **para autos** (los botes no entran en esta fase).
+Qué se construyó, por qué, y cómo comprobar que sigue funcionando. Aplica a **Window Tint** y a **Ceramic Coating**, dos servicios distintos y solo para carros (los botes no entran en esta fase). Negocio: ShineToGo Mobile Detailing; zonas en `docs/BRAND.md` §2.
 
 ## 1. Qué significa cada sigla aquí
 
@@ -21,24 +21,26 @@ Qué se construyó, por qué, y cómo comprobar que sigue funcionando. Aplica a 
 | Recubrimiento cerámico | `/ceramic-coating/` | `/es/recubrimiento-ceramico/` |
 | Privacidad | `/privacy/` | `/es/privacidad/` |
 
-- Todo se genera con `node scripts/build-landings.mjs` (lo ejecuta `npm run build`). Los textos de las secciones salen de `src/content/protection.js`, los mismos de la home. Los datos del negocio, de `src/content/business.js`.
+- Todo se genera con `node scripts/build-landings.mjs` (lo ejecuta `npm run build`). Cada servicio tiene su contenido y su plantilla: `src/content/tint.js` y `src/content/ceramic.js`. Lo único compartido es el negocio (`src/content/business.js`: nombre, teléfono, zonas) y las opciones del formulario (`forms.js`). La home ya no tiene una sección «Protection»: muestra una tarjeta por servicio que abre su página.
 - `hreflang` (en, es, x-default) recíproco en cada página; `canonical` apunta a la propia URL; host canónico `https://shinetogomobiledetailing.com` (sin www, https) forzado en `public/.htaccess`.
 - `sitemap.xml` lista las 6 páginas comerciales con sus alternativas de idioma. `robots.txt` permite a todos (incluidos GPTBot, OAI-SearchBot, ChatGPT-User, ClaudeBot, Claude-SearchBot, PerplexityBot, Google-Extended, Applebot-Extended).
 - La home sigue siendo una aplicación React; para que los rastreadores que no ejecutan JavaScript vean algo, el HTML trae un cascarón con H1, descripción, enlaces y teléfono que React reemplaza al cargar.
 
 ## 3. Entidad y datos estructurados
 
-- **Un negocio, un `@id`:** `https://…/#business` (`LocalBusiness` + `AutomotiveBusiness`) con nombre, teléfono, logo, `areaServed` (ciudades y condado), idiomas. **Sin calle ni código postal** (negocio de servicio a domicilio) y **sin `aggregateRating`** (no hay reseñas verificadas). Eliminado el domicilio falso "Mobile Service" y el horario 24 h que había.
-- Cada landing: `Service` (proveedor = el negocio), `BreadcrumbList` y `FAQPage` con las mismas preguntas que se ven en la página (el script de verificación compara cuántas hay). Google dejó de mostrar el resultado enriquecido de FAQ desde el 7 de mayo de 2026 (documentación oficial); el marcado sigue siendo válido y lo leen otros consumidores. La «Prueba de resultados enriquecidos» ya no valida FAQ: usar validator.schema.org.
+- **Un negocio, un `@id`:** `https://…/#business` (`AutomotiveBusiness`, subtipo de `LocalBusiness`) con el nombre completo, teléfono, logo, `sameAs` (Instagram) e idiomas. `areaServed` lista las zonas reales como `City` (Sarasota, Bradenton, Venice, St. Petersburg, Longboat Key) o `Place` (Siesta Key, Lido Key, Brandon) con su condado en `containedInPlace`, más Manatee County. «Alrededores» no se expresa (no hay forma sin un límite). **Sin calle ni código postal** (negocio de servicio a domicilio) y **sin `aggregateRating`** (no hay reseñas verificadas). Eliminado el domicilio falso "Mobile Service" y el horario 24 h que había. Si el dueño autoriza una ciudad base, se agrega `addressLocality`.
+- Cada landing: `Service` propio (proveedor = el negocio; `hasOfferCatalog` con los vidrios del tint o las superficies del cerámico, sin precios), `BreadcrumbList` y `FAQPage` con las mismas preguntas que se ven en la página (el script de verificación compara cuántas hay). Google dejó de mostrar el resultado enriquecido de FAQ desde el 7 de mayo de 2026 (documentación oficial); el marcado sigue siendo válido y lo leen otros consumidores. La «Prueba de resultados enriquecidos» ya no valida FAQ: usar validator.schema.org.
 - Regla: todo lo que está en el JSON-LD debe estar visible en la página.
 
 ## 4. Contenido que los motores quieren citar
 
-1. **Bloque de respuesta** debajo del H1 (40–60 palabras, el generador avisa si se sale del rango). Contiene la regla de Florida o la definición del recubrimiento en la primera frase.
-2. **Tabla carbono vs cerámica** con comparaciones cualitativas (sin cifras sin ficha técnica).
-3. **Sección legal** con los porcentajes de Florida y la advertencia de que no es asesoría legal.
-4. **Preguntas y respuestas** visibles (6 por página). Respuestas que no prometen plazos, garantías ni duración.
-5. **Enlace cruzado** entre las dos landings y a la versión en el otro idioma.
+Cada servicio con su propia estructura (no una plantilla clonada):
+- **Window Tint:** respuesta de 40–60 palabras → qué vidrios (laterales, trasero, franja del parabrisas, sunroof) → por qué lo hace la gente aquí → película de carbono o cerámica (tabla corta) → **límites de Florida ventana por ventana** (las cifras viven solo en la tabla y en el mapa) → cómo funciona la cotización → preguntas (6, solo de tint).
+- **Ceramic Coating:** respuesta de 40–60 palabras → «¿qué quieres cubrir?» (tabla por superficie) → un módulo por superficie (con ancla) → la preparación primero y lo que un recubrimiento NO hace (una sola vez) → contexto local con fuente y fecha (lovebugs, lavar en casa con la orden de agua) → cotización → preguntas (6, solo de cerámico).
+- **Una página por servicio, no una por superficie ni por zona** (Google trata variantes casi iguales como «doorway pages»). Criterio para separar después: ficha del producto, ≥3 fotos propias, ≥300 palabras únicas e impresiones en Search Console durante 4–8 semanas.
+- **Enlace entre servicios:** solo el menú, el pie y una línea «Otros servicios» al final. No se venden uno como complemento del otro.
+
+**Voz:** escrita para una persona de Siesta Key o Brandon con el celular, no para un buscador. Se mide: «We confirm»/«Ask for» pasó de 9 y 7 repeticiones por página a 0 y 1; la cifra 28 % de 8 a 1 en el texto (más 3 en el mapa); cada hecho se dice una vez. `check-dist` ya no deja pasar «Tampa», plantillas sin resolver ni la palabra «Protection».
 
 Pendiente de contenido real (no inventar): marca/modelo de película, garantía por escrito, lugar de instalación (¿móvil o taller?), tiempos, precios o rangos, fotos reales y reseñas.
 
@@ -71,7 +73,7 @@ Los eventos pasan por `window.dataLayer` **solo después de Aceptar** (antes de 
 | `form_start` | primer foco en el formulario | `location`, `page` |
 | `lead_submit` | el servidor confirmó el lead (200) | `lead_id`, `service`, `vehicle_type`, `language` |
 | `form_error` | falló el envío | `kind` |
-| `whatsapp_click`, `call_click`, `cta_click`, `package_select`, `tint_film_select` | clic en elementos con `data-track` | `location`, `service`, `film` |
+| `whatsapp_click`, `call_click`, `cta_click`, `package_select`, `service_card_click` | clic en elementos con `data-track` | `location`, `service` |
 | `faq_open`, `scroll_75`, `consent_choice` | interacción / consentimiento | — |
 
 Atribución: se guarda primer toque (90 días) y último toque (sesión) con `utm_*`, `gclid`, `gbraid`, `wbraid`, `fbclid` y página de entrada, y viaja con cada lead. Marcar `lead_submit` como conversión en GA4 y como evento "Lead" en Meta (ya envía `eventID` para deduplicar con la API de conversiones).
