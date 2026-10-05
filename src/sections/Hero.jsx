@@ -12,7 +12,7 @@ const SLIDES = [
 const BADGES = [
   { key: 'heroBadge1', sub: 'heroBadge1b', icon: '🛡️' },
   { key: 'heroBadge2', sub: 'heroBadge2b', icon: '⚡' },
-  { key: 'heroBadge3', sub: 'heroBadge3b', icon: '⭐' },
+  { key: 'heroBadge3', sub: 'heroBadge3b', icon: '📷' },
 ]
 
 export default function Hero() {

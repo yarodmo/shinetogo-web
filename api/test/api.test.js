@@ -301,3 +301,26 @@ test('tint y cerámica no se aceptan para un bote (solo autos)', async () => {
   assert.equal((await post({ ...GOOD, vehicle_type: 'boat', service: 'boat' })).status, 200)
   assert.equal((await post({ ...GOOD, vehicle_type: 'suv', service: 'tint' })).status, 200)
 })
+
+/* ───────── Dos servicios distintos: tint por ventanas, cerámico por tipo de tratamiento ───────── */
+test('cerámico: guarda las zonas pedidas (solo valores conocidos) y las muestra en el correo', async () => {
+  const r = await post({ ...GOOD, service: 'ceramic', ceramic_areas: ['paint', 'wheels', 'glass', 'hacker', '<b>x</b>'] })
+  assert.equal(r.status, 200)
+  const [saved] = readLeads()
+  assert.deepEqual(saved.ceramic_areas, ['paint', 'wheels', 'glass'])
+  assert.match(sent[0].text, /Ceramic areas: paint, wheels, glass/)
+})
+
+test('tint: las ventanas se guardan en coverage y el tint no arrastra zonas de cerámico', async () => {
+  const r = await post({ ...GOOD, service: 'tint', coverage: ['front_sides', 'rear_sides', 'back_window', 'sunroof', 'bogus'], ceramic_areas: ['paint'] })
+  assert.equal(r.status, 200)
+  const [saved] = readLeads()
+  assert.deepEqual(saved.coverage, ['front_sides', 'rear_sides', 'back_window', 'sunroof'])
+  assert.deepEqual(saved.ceramic_areas, [], 'un lead de tint no lleva zonas de cerámico')
+})
+
+test('clientes con el servicio combinado anterior (tint_ceramic) siguen funcionando', async () => {
+  const r = await post({ ...GOOD, service: 'tint_ceramic' })
+  assert.equal(r.status, 200)
+  assert.equal(readLeads()[0].service, 'tint_ceramic')
+})

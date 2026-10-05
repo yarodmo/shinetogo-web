@@ -24,7 +24,7 @@ function createApp({
   leadsFile,
   recipient,
   smtpUser,
-  brandName = 'ShineToGo',
+  brandName = 'ShineToGo Mobile Detailing',
   allowedOrigins = [],
   rateLimitMax = 10,
   globalLimitMax = 60,

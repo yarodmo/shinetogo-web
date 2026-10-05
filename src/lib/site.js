@@ -1,10 +1,10 @@
 // Datos del negocio en un solo lugar. Cambiar aquí cambia el sitio entero.
+import { BRAND_FULL, WA_NUMBER } from '../content/business.js'
+export { PHONE_DISPLAY, PHONE_TEL, WA_NUMBER, AREAS, AREA_COPY, BRAND_SHORT } from '../content/business.js'
+
 const env = import.meta.env
 
-export const BRAND_NAME = env.VITE_BRAND_NAME || 'ShineToGo'
-
-export { PHONE_DISPLAY, PHONE_TEL, WA_NUMBER, AREAS } from '../content/business.js'
-import { WA_NUMBER } from '../content/business.js'
+export const BRAND_NAME = env.VITE_BRAND_NAME || BRAND_FULL
 
 export const API_URL = env.DEV
   ? (env.VITE_API_URL || 'http://localhost:6544/api/book')

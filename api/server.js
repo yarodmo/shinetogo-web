@@ -19,7 +19,7 @@ const SMTP_PORT = parseInt(process.env.SMTP_PORT || '465')
 const SMTP_USER = process.env.SMTP_USER || ''
 const SMTP_PASS = process.env.SMTP_PASS || ''
 const RECIPIENT = process.env.RECIPIENT || SMTP_USER
-const BRAND_NAME = process.env.BRAND_NAME || 'ShineToGo'
+const BRAND_NAME = process.env.BRAND_NAME || 'ShineToGo Mobile Detailing'
 // Fuera de ~/app/api: el deploy sincroniza esa carpeta con rsync --delete.
 const LEADS_FILE = process.env.LEADS_FILE || path.join(os.homedir(), 'data', 'leads.ndjson')
 const ALLOWED_ORIGINS = (process.env.ALLOWED_ORIGINS || 'http://localhost:5173,http://localhost:3000')

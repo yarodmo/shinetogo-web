@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, useCallback, useEffect } from 'react'
-import { protection } from './content/protection'
+import { services } from './content/services'
 const base = {
   en: {
     // Navbar
@@ -8,13 +8,13 @@ const base = {
     navGallery: 'Projects',
     navAbout: 'About',
     navContact: 'Contact',
-    navBook: 'Book Now',
+    navBook: 'Get a quote',
 
 
     // Hero
-    heroTag: 'MOBILE DETAILING • CERAMIC COATING • WINDOW TINT • MARINE SPECIALIST',
-    heroTitle: 'Premium car wash & boat detailing service that comes to you',
-    heroCta1: 'Book Your Service',
+    heroTag: 'MOBILE DETAILING • WINDOW TINT • CERAMIC COATING • BOATS',
+    heroTitle: 'Car wash and boat detailing that comes to you',
+    heroCta1: 'Request a quote',
     heroCta2: 'Chat on WhatsApp',
     heroBadge1: 'Professional',
     heroBadge1b: '& Careful',
@@ -25,58 +25,56 @@ const base = {
 
 
     // About
-    aboutText: 'We\'re a professional team specializing in mobile detailing for cars and boats. Showroom-level standards delivered at your location — careful and obsessively precise.',
-    aboutCard1: 'Professional Detailing',
-    aboutCard1d: 'Showroom-quality finish with professional techniques and professional-grade products.',
-    aboutCard2: '100% Mobile',
-    aboutCard2d: 'We come to your home, office, or marina and confirm the time with you.',
-    aboutCard3: 'Reliable & Transparent',
-    aboutCard3d: 'We tell you what the job includes and confirm the details before we start.',
-    aboutCard4: 'Careful Products',
-    aboutCard4d: 'Professional-grade products chosen for your vehicle’s paint and surfaces.',
+    aboutText: 'We detail cars and boats at your home, office or marina. We tell you what the job includes before we start.',
+    aboutCard1: 'Cars and boats',
+    aboutCard1d: 'Wash, polish and interior work for cars, and hull, deck and gelcoat care for boats.',
+    aboutCard2: 'We come to you',
+    aboutCard2d: 'For car and boat detailing, we come to your home, office or marina and confirm the time with you.',
+    aboutCard3: 'Clear from the start',
+    aboutCard3d: 'We tell you what the job includes before we start. If the final price falls outside the range, we tell you before we begin and you decide.',
+    aboutCard4: 'Products picked for your vehicle',
+    aboutCard4d: 'Products chosen for your vehicle’s paint and surfaces.',
 
     // Services
-    svcHeadline: 'Asset Preservation for Land and Sea. Executed at Your Coordinates.',
+    svcHeadline: 'What we do',
     svc1Title: 'Auto Detailing',
-    svc1Desc: 'Exterior/interior wash, clay bar, polish, wax and ceramic protection. A showroom-level finish.',
-    svc1F1: 'Complete exterior wash', svc1F2: 'Deep interior cleaning', svc1F3: 'Clay bar and polish', svc1F4: 'Ceramic coating available',
-    svc1Btn: 'View Packages →',
-    svc1Badge: 'Most Popular',
+    svc1Desc: 'Exterior and interior wash, clay bar, polish and wax.',
+    svc1F1: 'Complete exterior wash', svc1F2: 'Deep interior cleaning', svc1F3: 'Clay bar and polish', svc1F4: 'Wax and finish',
+    svc1Btn: 'See packages',
+    svc1Badge: 'Cars',
     svc2Title: 'Boat Detailing',
-    svc2Desc: 'Hull and deck washing, desalination, gelcoat polish, UV protection and vinyl care for marine vessels.',
-    svc2F1: 'Wash and desalination', svc2F2: 'Gelcoat polish and restoration', svc2F3: 'UV protection sealant', svc2F4: 'Vinyl and upholstery care',
-    svc2Btn: 'Marine Services →',
-    svc2Badge: 'Marine Specialty',
+    svc2Desc: 'Hull and deck washing, desalination, gelcoat polish and vinyl care for boats.',
+    svc2F1: 'Wash and desalination', svc2F2: 'Gelcoat polish', svc2F3: 'Marine sealant', svc2F4: 'Vinyl and upholstery care',
+    svc2Btn: 'Quote my boat',
+    svc2Badge: 'Boats',
 
 
 
-    svc4Title: 'Window Tint & Ceramic Coating',
-    svc4Desc: 'Ceramic and carbon window film, plus ceramic coating for your paint. Free quote by photo.',
-    svc4F1: 'Ceramic and carbon window film', svc4F2: 'Florida tint limits explained per window', svc4F3: 'Ceramic coating for paint', svc4F4: 'Quote by photo',
-    svc4Btn: 'See Options →',
-    svc4Badge: 'New',
+
+
+
+
+
 
     // Pricing
     pricingHeadline: 'Auto Detailing Packages',
-    pricingBadgeText: 'MOST REQUESTED',
+    pricingBadgeText: 'INSIDE AND OUT',
     pricingSub: 'Choose the package that fits your vehicle. Exact pricing is based on your vehicle’s evaluation.',
     pkg1Title: 'Express', pkg1Time: '45–60 min', pkg1F1: 'Exterior wash', pkg1F2: 'Wheels and glass', pkg1F3: 'Basic vacuum',
     pkg2Title: 'Full Detail', pkg2Time: '90–120 min', pkg2F1: 'Everything in Express', pkg2F2: 'Deep interior cleaning', pkg2F3: 'Conditioning & protection',
     pkg3Title: 'Premium', pkg3Time: '3–4 hours', pkg3F1: 'Everything in Full', pkg3F2: 'Clay bar treatment', pkg3F3: '1-step polish and wax',
-    pkg4Title: 'Ceramic', pkg4Time: 'By appointment', pkg4F1: 'Complete paint prep', pkg4F2: 'Professional ceramic coating', pkg4F3: 'Protection time depends on product and care',
     pkgSelect: 'Select',
-    pkgSeeOptions: 'See options',
     pkgHelp: 'Not sure which service you need?',
     pkgHelpCta: 'Contact us for personalized consultation',
 
     // Process
-    processHeadline: 'A simple 4-step process for mobile detailing',
-    proc1Title: 'Book Service', proc1Desc: 'Call us, WhatsApp or use our form to schedule your appointment',
-    proc2Title: 'We Arrive', proc2Desc: 'Our team arrives on time with all necessary equipment',
+    processHeadline: 'How it works',
+    proc1Title: 'Request a quote', proc1Desc: 'Call, message us on WhatsApp or fill in the form.',
+    proc2Title: 'We Arrive', proc2Desc: 'We arrive with the equipment and products for the job.',
     proc3Title: 'Detailing', proc3Desc: 'We perform the complete service with professional products',
-    proc4Title: 'Inspection & Payment', proc4Desc: 'We review together and process payment. Ready to shine!',
-    processCta: 'Ready for That Showroom Shine?',
-    processCtaSub: 'Schedule your service today and experience the difference',
+    proc4Title: 'Inspection and payment', proc4Desc: 'We go over the result together and you pay.',
+    processCta: 'Want a quote?',
+    processCtaSub: 'Send a photo on WhatsApp.',
 
     // Boats
 
@@ -96,20 +94,20 @@ const base = {
 
 
     // FAQ
-    faqTitle: 'Everything you need to know about our mobile detailing service',
+    faqTitle: 'Quick answers',
     faq1Q: 'Do I need to provide water or electricity?',
-    faq1A: 'No! We are completely self-sufficient. We bring our own water tanks and power generators.',
-    faq2Q: 'How long does each service take?',
-    faq2A: 'Service times range from 45 minutes for Express to 4 hours for Premium Detail. Ceramic coating and window tint are quoted individually.',
+    faq1A: 'No. We bring our own water tanks and generators.',
+    faq2Q: 'How long do the detailing packages take?',
+    faq2A: 'Package times range from 45 minutes for Express to 4 hours for Premium Detail.',
     faq3Q: 'Do you service marinas and condos?',
     faq3A: 'Yes! We coordinate access with marina and condo management. Just provide the location details.',
     faq4Q: 'What payment methods do you accept?',
-    faq4A: 'We accept all major credit/debit cards, Zelle and cash. Payment is due upon service completion.',
+    faq4A: 'We accept credit and debit cards, Zelle and cash. Payment is due upon service completion.',
     faq5Q: 'Are your products safe for my vehicle?',
     faq5A: 'We use professional-grade products chosen for your paint and surface. Tell us about your car and we’ll confirm.',
 
     // Contact
-    contactTitle: 'Request Quote',
+    contactTitle: 'Request a quote',
     contactSub: 'Tell us what you need and we’ll get back to you with a quote. Photos on WhatsApp make it faster.',
     formName: 'Full Name',
     formPhone: 'Phone / WhatsApp',
@@ -118,19 +116,19 @@ const base = {
     formTime: 'Preferred Time...',
     timeMorning: 'Morning',
     timeAfternoon: 'Afternoon',
-    formVehicle: 'Vehicle Type...',
-    formService: 'Service of Interest...',
+    formVehicle: 'Vehicle type',
+    formService: 'Service you need',
     formMsg: 'Additional Details (optional)',
-    formSubmit: 'Send Request',
+    formSubmit: 'Send request',
     formWhatsapp: 'Direct WhatsApp',
-    formWhatsappSub: 'Send photos and get an instant quote.',
+    formWhatsappSub: 'Send photos and we reply with a quote.',
     formWhatsappCta: 'Chat Now',
-    formCallTitle: 'Direct Call',
-    formCallSub: 'Speak directly with our team.',
+    formCallTitle: 'Direct call',
+    formCallSub: 'Talk to us directly.',
     formPrivacy: 'We use your details only to answer your request.',
 
     // Footer
-    footerAbout: 'Professional mobile car and boat detailing services. We bring premium care to your location.',
+    footerAbout: 'Professional mobile car and boat detailing. We come to you.',
     footerServices: 'Services',
     footerAreas: 'Service Areas',
     footerContact: 'Contact Us',
@@ -148,16 +146,16 @@ const base = {
     navGallery: 'Proyectos',
     navAbout: 'Nosotros',
     navContact: 'Contacto',
-    navBook: 'Reservar',
+    navBook: 'Cotizar',
 
 
     // Hero
-    heroTag: 'DETAILING MÓVIL • RECUBRIMIENTO CERÁMICO • POLARIZADO • ESPECIALISTA MARINO',
-    heroTitle: 'Servicio premium de lavado de autos y detallado de botes que va a ti',
-    heroCta1: 'Reserva Tu Servicio',
-    heroCta2: 'Chat por WhatsApp',
+    heroTag: 'DETALLADO MÓVIL • POLARIZADO • RECUBRIMIENTO CERÁMICO • BOTES',
+    heroTitle: 'Lavado de carros y detallado de botes a domicilio',
+    heroCta1: 'Pedir cotización',
+    heroCta2: 'Escríbenos por WhatsApp',
     heroBadge1: 'Profesionales',
-    heroBadge1b: '& Cuidadosos',
+    heroBadge1b: 'y cuidadosos',
     heroBadge2: 'Vamos',
     heroBadge2b: 'A Ti',
     heroBadge3: 'Cotiza',
@@ -165,58 +163,56 @@ const base = {
 
 
     // About
-    aboutText: 'Somos un equipo profesional especializado en detallado móvil para autos y botes. Estándares de nivel showroom entregados en tu ubicación — cuidadosos y obsesivamente precisos.',
-    aboutCard1: 'Detallado Profesional',
-    aboutCard1d: 'Acabado de showroom con técnicas profesionales y productos de grado profesional.',
-    aboutCard2: '100% Móvil',
-    aboutCard2d: 'Vamos a tu casa, oficina o marina. Y confirmamos la hora contigo.',
-    aboutCard3: 'Confiables & Transparentes',
-    aboutCard3d: 'Te decimos qué incluye el trabajo y confirmamos los detalles antes de empezar.',
-    aboutCard4: 'Productos Cuidadosos',
-    aboutCard4d: 'Productos de grado profesional elegidos para la pintura y las superficies de tu vehículo.',
+    aboutText: 'Lavamos y detallamos carros y botes en tu casa, tu oficina o tu marina. Antes de empezar te decimos qué incluye el trabajo.',
+    aboutCard1: 'Carros y botes',
+    aboutCard1d: 'Lavado, pulido e interior para carros, y cuidado de casco, cubierta y gelcoat para botes.',
+    aboutCard2: 'Vamos a ti',
+    aboutCard2d: 'El detallado de carros y botes lo hacemos en tu casa, oficina o marina, y confirmamos la hora contigo.',
+    aboutCard3: 'Claro desde el inicio',
+    aboutCard3d: 'Te decimos qué incluye el trabajo antes de empezar. Si el precio final queda fuera del rango, te lo decimos antes de empezar y tú decides.',
+    aboutCard4: 'Productos para tu vehículo',
+    aboutCard4d: 'Productos elegidos para la pintura y las superficies de tu vehículo.',
 
     // Services
-    svcHeadline: 'Preservación Patrimonial por Tierra y Mar. Ejecutado en tus Coordenadas.',
+    svcHeadline: 'Lo que hacemos',
     svc1Title: 'Auto Detailing',
-    svc1Desc: 'Lavado exterior/interior, clay bar, pulido, cera y protección cerámica. Un acabado de nivel showroom.',
-    svc1F1: 'Lavado exterior completo', svc1F2: 'Limpieza profunda interior', svc1F3: 'Clay bar y pulido', svc1F4: 'Recubrimiento cerámico disponible',
-    svc1Btn: 'Ver Paquetes →',
-    svc1Badge: 'Más Popular',
+    svc1Desc: 'Lavado exterior e interior, clay bar, pulido y cera.',
+    svc1F1: 'Lavado exterior completo', svc1F2: 'Limpieza profunda interior', svc1F3: 'Clay bar y pulido', svc1F4: 'Cera y acabado',
+    svc1Btn: 'Ver paquetes',
+    svc1Badge: 'Carros',
     svc2Title: 'Detallado de Botes',
-    svc2Desc: 'Lavado de casco y cubierta, desalinización, pulido de gelcoat, protección UV y cuidado de vinil.',
-    svc2F1: 'Lavado y desalinización', svc2F2: 'Pulido de gelcoat', svc2F3: 'Sellador de protección UV', svc2F4: 'Cuidado de vinil e interiores',
-    svc2Btn: 'Servicios Marinos →',
-    svc2Badge: 'Especialidad Marina',
+    svc2Desc: 'Lavado de casco y cubierta, desalinización, pulido de gelcoat y cuidado de vinil para botes.',
+    svc2F1: 'Lavado y quitar la sal', svc2F2: 'Pulido de gelcoat', svc2F3: 'Sellador marino', svc2F4: 'Cuidado de vinil e interiores',
+    svc2Btn: 'Cotizar mi bote',
+    svc2Badge: 'Botes',
 
 
 
-    svc4Title: 'Polarizado y Cerámico',
-    svc4Desc: 'Película cerámica y de carbono para los vidrios, más recubrimiento cerámico para la pintura. Cotización gratis por foto.',
-    svc4F1: 'Película cerámica y de carbono', svc4F2: 'Límites de Florida explicados por ventana', svc4F3: 'Cerámico para la pintura', svc4F4: 'Cotización por foto',
-    svc4Btn: 'Ver Opciones →',
-    svc4Badge: 'Nuevo',
+
+
+
+
+
 
     // Pricing
     pricingHeadline: 'Paquetes de Auto Detailing',
-    pricingBadgeText: 'MÁS SOLICITADO',
+    pricingBadgeText: 'POR DENTRO Y POR FUERA',
     pricingSub: 'Elige el paquete que va con tu vehículo. El precio exacto se basa en la evaluación.',
     pkg1Title: 'Express', pkg1Time: '45–60 min', pkg1F1: 'Lavado exterior', pkg1F2: 'Rines y vidrios', pkg1F3: 'Aspirado básico',
     pkg2Title: 'Full Detail', pkg2Time: '90–120 min', pkg2F1: 'Todo en Express', pkg2F2: 'Limpieza interior profunda', pkg2F3: 'Acondicionamiento y protección',
-    pkg3Title: 'Premium', pkg3Time: '3–4 horas', pkg3F1: 'Todo en Full', pkg3F2: 'Tratamiento de arcilla', pkg3F3: 'Pulido a máquina',
-    pkg4Title: 'Cerámico', pkg4Time: 'Con cita', pkg4F1: 'Preparación de pintura total', pkg4F2: 'Recubrimiento cerámico profesional', pkg4F3: 'La duración depende del producto y el cuidado',
+    pkg3Title: 'Premium', pkg3Time: '3–4 horas', pkg3F1: 'Todo en Full', pkg3F2: 'Tratamiento de arcilla', pkg3F3: 'Pulido de un paso y cera',
     pkgSelect: 'Seleccionar',
-    pkgSeeOptions: 'Ver opciones',
     pkgHelp: '¿No sabes qué servicio necesitas?',
     pkgHelpCta: 'Contáctanos para una consulta personalizada',
 
     // Process
-    processHeadline: 'Un proceso simple de 4 pasos para tu detallado móvil',
-    proc1Title: 'Reserva', proc1Desc: 'Llámanos, WhatsApp o usa nuestro formulario para agendar',
-    proc2Title: 'Llegamos', proc2Desc: 'Nuestro equipo llega a tiempo con todo el equipo necesario',
+    processHeadline: 'Cómo funciona',
+    proc1Title: 'Pide tu cotización', proc1Desc: 'Llámanos, escríbenos por WhatsApp o llena el formulario.',
+    proc2Title: 'Llegamos', proc2Desc: 'Llegamos con el equipo y los productos para el trabajo.',
     proc3Title: 'Detallado', proc3Desc: 'Realizamos el servicio completo con productos profesionales',
-    proc4Title: 'Inspección y Pago', proc4Desc: 'Revisamos juntos y procesamos el pago. ¡Listo para brillar!',
-    processCta: '¿Listo Para Ese Brillo de Exhibición?',
-    processCtaSub: 'Agenda tu servicio hoy y experimenta la diferencia',
+    proc4Title: 'Inspección y pago', proc4Desc: 'Revisamos el resultado juntos y cobramos.',
+    processCta: '¿Quieres una cotización?',
+    processCtaSub: 'Mándanos una foto por WhatsApp.',
 
     // Boats
 
@@ -227,7 +223,7 @@ const base = {
 
 
     // Gallery
-    galleryTitle: 'Nuestros Proyectos',
+    galleryTitle: 'Nuestros trabajos',
     gallerySub: 'Nuestro trabajo en Florida',
 
     // Reviews
@@ -236,41 +232,41 @@ const base = {
 
 
     // FAQ
-    faqTitle: 'Todo lo que necesitas saber sobre nuestro servicio de detallado móvil',
+    faqTitle: 'Preguntas frecuentes',
     faq1Q: '¿Necesito proveer agua o electricidad?',
-    faq1A: '¡No! Somos completamente autosuficientes. Traemos nuestros propios tanques de agua y generadores.',
-    faq2Q: '¿Cuánto toma cada servicio?',
-    faq2A: 'Los tiempos van desde 45 min para Express hasta 4 horas para Premium Detail. El cerámico y el polarizado se cotizan de forma individual.',
+    faq1A: 'No. Traemos nuestros propios tanques de agua y generadores.',
+    faq2Q: '¿Cuánto toman los paquetes de detallado?',
+    faq2A: 'Los tiempos van de 45 minutos para el Express a 4 horas para el Premium Detail.',
     faq3Q: '¿Atienden marinas y condominios?',
     faq3A: '¡Sí! Coordinamos acceso con la administración de marina y condominio.',
     faq4Q: '¿Qué métodos de pago aceptan?',
-    faq4A: 'Aceptamos todas las tarjetas principales, Zelle y efectivo. Pago al completar el servicio.',
+    faq4A: 'Aceptamos tarjetas de crédito y débito, Zelle y efectivo. Pago al completar el servicio.',
     faq5Q: '¿Sus productos son seguros para mi vehículo?',
     faq5A: 'Usamos productos de grado profesional elegidos para tu pintura y tus superficies. Cuéntanos de tu auto y lo confirmamos.',
 
     // Contact
-    contactTitle: 'Solicitar Cotización',
+    contactTitle: 'Pide tu cotización',
     contactSub: 'Cuéntanos qué necesitas y te respondemos con una cotización. Las fotos por WhatsApp lo hacen más rápido.',
-    formName: 'Nombre Completo',
+    formName: 'Nombre completo',
     formPhone: 'Teléfono / WhatsApp',
     formEmail: 'Email',
     formDate: 'Fecha Deseada',
     formTime: 'Horario Preferido...',
     timeMorning: 'Mañana',
     timeAfternoon: 'Tarde',
-    formVehicle: 'Tipo de Vehículo...',
-    formService: 'Servicio de Interés...',
+    formVehicle: 'Tipo de vehículo',
+    formService: 'Servicio que necesitas',
     formMsg: 'Detalles adicionales (opcional)',
-    formSubmit: 'Enviar Solicitud',
+    formSubmit: 'Enviar solicitud',
     formWhatsapp: 'WhatsApp Directo',
-    formWhatsappSub: 'Envía fotos y obtén una cotización al instante.',
+    formWhatsappSub: 'Manda fotos y te respondemos con una cotización.',
     formWhatsappCta: 'Chatear Ahora',
-    formCallTitle: 'Llamada Directa',
-    formCallSub: 'Habla directamente con nuestro equipo.',
+    formCallTitle: 'Llamada directa',
+    formCallSub: 'Habla directamente con nosotros.',
     formPrivacy: 'Usamos tus datos solo para responder tu solicitud.',
 
     // Footer
-    footerAbout: 'Servicios profesionales de detallado móvil de autos y botes. Llevamos cuidado premium a tu ubicación.',
+    footerAbout: 'Detallado móvil profesional de carros y botes. Vamos a ti.',
     footerServices: 'Servicios',
     footerAreas: 'Áreas de Servicio',
     footerContact: 'Contáctanos',
@@ -283,8 +279,8 @@ const base = {
   }
 }
 const translations = {
-  en: { ...base.en, ...protection.en },
-  es: { ...base.es, ...protection.es },
+  en: { ...base.en, ...services.en },
+  es: { ...base.es, ...services.es },
 }
 const I18nContext = createContext()
 

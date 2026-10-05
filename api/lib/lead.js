@@ -12,7 +12,12 @@ const SERVICES = {
   other: 'Other',
 }
 const FILMS = ['carbon', 'ceramic', 'unsure']
-const COVERAGE = ['sides', 'rear', 'windshield_strip', 'sunroof', 'full_car']
+// Ventanas del tint. `sides` y `rear` son los valores del formulario anterior (siguen aceptados).
+const COVERAGE = ['front_sides', 'rear_sides', 'back_window', 'windshield_strip', 'sunroof', 'full_car', 'sides', 'rear']
+// Tratamientos cerámicos que se pueden pedir (el cerámico es una línea de servicio aparte del tint).
+const CERAMIC_AREAS = ['paint', 'wheels', 'glass', 'trim', 'interior', 'other']
+const TINT_SERVICES = ['tint', 'tint_ceramic']
+const CERAMIC_SERVICES = ['ceramic', 'tint_ceramic']
 const ATTRIBUTION_KEYS = [
   'utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term',
   'gclid', 'gbraid', 'wbraid', 'fbclid', 'referrer', 'landing', 'page',
@@ -82,8 +87,11 @@ function normalizeLead(body, { now = new Date(), ip = '', userAgent = '' } = {})
     if (v) attribution[k] = v
   }
 
-  const coverage = Array.isArray(b.coverage) ? b.coverage.map((c) => clean(c, 30)).filter((c) => COVERAGE.includes(c)) : []
-  const film = clean(b.film, 20)
+  // Cada servicio guarda solo sus propios detalles: ventanas y película para tint, zonas para cerámico.
+  const pick = (list, allowed) => (Array.isArray(list) ? [...new Set(list.map((c) => clean(c, 30)).filter((c) => allowed.includes(c)))] : [])
+  const coverage = TINT_SERVICES.includes(service) ? pick(b.coverage, COVERAGE) : []
+  const ceramicAreas = CERAMIC_SERVICES.includes(service) ? pick(b.ceramic_areas, CERAMIC_AREAS) : []
+  const film = TINT_SERVICES.includes(service) ? clean(b.film, 20) : ''
   const leadId = UUID.test(String(b.lead_id || '')) ? String(b.lead_id).toLowerCase() : crypto.randomUUID()
 
   const lead = {
@@ -97,6 +105,7 @@ function normalizeLead(body, { now = new Date(), ip = '', userAgent = '' } = {})
     vehicle_type: clean(b.vehicle_type, 20),
     vehicle: clean(b.vehicle, 80),
     coverage,
+    ceramic_areas: ceramicAreas,
     film: FILMS.includes(film) ? film : '',
     has_old_tint: truthy(b.has_old_tint),
     zip: clean(b.zip, 12),
@@ -128,9 +137,15 @@ function rows(lead, brand) {
       ['Email', lead.email || '—'],
       ['Service', SERVICES[lead.service] + (lead.service_raw ? ` (${lead.service_raw})` : '')],
       ['Vehicle', [lead.vehicle_type, lead.vehicle].filter(Boolean).join(' · ') || '—'],
-      ['Windows', lead.coverage.length ? lead.coverage.map(label).join(', ') : '—'],
-      ['Film', lead.film || '—'],
-      ['Old tint to remove', lead.has_old_tint ? 'Yes' : 'No'],
+      // Solo las filas del servicio pedido: el tint habla de ventanas y película, el cerámico de zonas.
+      ...(TINT_SERVICES.includes(lead.service) ? [
+        ['Windows', lead.coverage.length ? lead.coverage.map(label).join(', ') : '—'],
+        ['Film', lead.film || '—'],
+        ['Old tint to remove', lead.has_old_tint ? 'Yes' : 'No'],
+      ] : []),
+      ...(CERAMIC_SERVICES.includes(lead.service) ? [
+        ['Ceramic areas', lead.ceramic_areas.length ? lead.ceramic_areas.map(label).join(', ') : '—'],
+      ] : []),
       ['ZIP / city', lead.zip || '—'],
       ['Preferred date', lead.date || '—'],
       ['Preferred time', lead.time || '—'],

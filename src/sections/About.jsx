@@ -3,7 +3,7 @@ import { useI18n } from '../i18n'
 const CARDS = [
   { key: 'aboutCard1', icon: '🎯' },
   { key: 'aboutCard2', icon: '🚚' },
-  { key: 'aboutCard3', icon: '🛡️' },
+  { key: 'aboutCard3', icon: '📋' },
   { key: 'aboutCard4', icon: '🧴' },
 ]
 

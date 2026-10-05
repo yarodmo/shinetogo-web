@@ -5,7 +5,6 @@ const PKGS = [
   { key: 'pkg1', service: 'express', accent: 'var(--titanium)' },
   { key: 'pkg2', service: 'full', accent: 'var(--apex-amber)', popular: true },
   { key: 'pkg3', service: 'premium', accent: 'var(--titanium)' },
-  { key: 'pkg4', service: 'ceramic', accent: 'var(--text-light)', href: '#protection', cta: 'pkgSeeOptions' },
 ]
 
 export default function Pricing() {
@@ -63,11 +62,11 @@ export default function Pricing() {
                 ))}
               </ul>
 
-              <a href={pkg.href || '#contact'} className="btn btn-outline" data-track="package_select" data-location="pricing" data-service={pkg.service}
+              <a href="#contact" className="btn btn-outline" data-track="package_select" data-location="pricing" data-service={pkg.service}
                 onClick={() => prefill.set({ service: pkg.service })} style={{
                 width: '100%', borderColor: pkg.accent, color: pkg.accent
               }}>
-                {t(pkg.cta || 'pkgSelect')}
+                {t('pkgSelect')}
               </a>
             </div>
           ))}

@@ -3,7 +3,6 @@ import { useI18n } from './i18n'
 import Hero from './sections/Hero'
 import About from './sections/About'
 import Services from './sections/Services'
-import Protection from './sections/Protection'
 import Pricing from './sections/Pricing'
 import Process from './sections/Process'
 import Gallery from './sections/Gallery'
@@ -40,18 +39,25 @@ function Navbar() {
       </a>
 
       <div className="nav-links">
-        {[['#protection', 'navProtection'], ['#about', 'navAbout'], ['#services', 'navServices'], ['#pricing', 'navPricing'], ['#gallery', 'navGallery'], ['#contact', 'navContact']].map(([href, key]) => (
+        {[
+          ['#services', 'navServices'],
+          [lang === 'es' ? '/es/polarizado-de-vidrios/' : '/window-tint/', 'navTint'],
+          [lang === 'es' ? '/es/recubrimiento-ceramico/' : '/ceramic-coating/', 'navCeramic'],
+          ['#pricing', 'navPricing'],
+          ['#gallery', 'navGallery'],
+          ['#contact', 'navContact'],
+        ].map(([href, key]) => (
           <a key={key} href={href} style={{ color: linkColor }}>{t(key)}</a>
         ))}
       </div>
 
       <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
-        <button onClick={toggle} style={{
+        <button onClick={toggle} aria-label={lang === 'en' ? 'Ver en español' : 'View in English'} lang={lang === 'en' ? 'es' : 'en'} style={{
           fontWeight: 700, fontSize: '12px', background: 'none',
           color: linkColor, border: `1.5px solid ${borderColor}`,
           padding: '6px 14px', borderRadius: '8px', cursor: 'pointer'
         }}>
-          {lang === 'en' ? '🇪🇸 ES' : '🇺🇸 EN'}
+          {lang === 'en' ? 'ES' : 'EN'}
         </button>
         <a href="#contact" className="btn btn-primary" style={{
           padding: '10px 24px', fontSize: '13px'
@@ -108,7 +114,6 @@ export default function App() {
         <Hero />
         <About />
         <Services />
-        <Protection />
         <Pricing />
         <Process />
         <Gallery />
@@ -149,8 +154,8 @@ export default function App() {
             <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
               <a href="#services" style={{ fontSize: '14px', color: 'var(--text-muted)' }}>{t('svc1Title')}</a>
               <a href="#services" style={{ fontSize: '14px', color: 'var(--text-muted)' }}>{t('svc2Title')}</a>
-              <a href={es ? '/es/polarizado-de-vidrios/' : '/window-tint/'} style={{ fontSize: '14px', color: 'var(--text-muted)' }}>{t('protTabTint')}</a>
-              <a href={es ? '/es/recubrimiento-ceramico/' : '/ceramic-coating/'} style={{ fontSize: '14px', color: 'var(--text-muted)' }}>{t('protTabCeramic')}</a>
+              <a href={es ? '/es/polarizado-de-vidrios/' : '/window-tint/'} style={{ fontSize: '14px', color: 'var(--text-muted)' }}>{t('navTint')}</a>
+              <a href={es ? '/es/recubrimiento-ceramico/' : '/ceramic-coating/'} style={{ fontSize: '14px', color: 'var(--text-muted)' }}>{t('navCeramic')}</a>
             </div>
           </div>
           <div>

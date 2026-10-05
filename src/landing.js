@@ -63,14 +63,9 @@ if (form) {
   let started = false
   let sending = false
 
-  const service = form.elements.service
-  const film = form.querySelector('fieldset.film')
-  const syncFilm = () => {
-    const wantsTint = service.value === 'tint' || service.value === 'tint_ceramic'
-    film.hidden = !wantsTint
-  }
-  service.addEventListener('change', syncFilm)
-  syncFilm()
+  // Cada página es un solo servicio (tint o ceramic): el servicio viene fijo en el formulario.
+  const service = form.dataset.service
+  const checked = (name) => [...form.querySelectorAll(`input[name="${name}"]:checked`)].map((el) => el.value)
 
   form.addEventListener('focusin', () => {
     if (started) return
@@ -164,18 +159,21 @@ if (form) {
     status.replaceChildren()
 
     const f = form.elements
-    const wantsTint = f.service.value === 'tint' || f.service.value === 'tint_ceramic'
+    const isTint = service === 'tint'
     try {
       const data = await submitLead({
         lead_id: leadId,
         name: f.name.value, phone: f.phone.value, email: f.email.value,
-        service: f.service.value, vehicle_type: f.vehicle_type.value, vehicle: f.vehicle.value,
-        film: wantsTint ? (form.querySelector('input[name="film"]:checked')?.value || '') : '',
+        service, vehicle_type: f.vehicle_type.value, vehicle: f.vehicle.value,
+        coverage: isTint ? checked('coverage') : [],
+        film: isTint ? (checked('film')[0] || '') : '',
+        has_old_tint: isTint ? Boolean(form.querySelector('input[name="has_old_tint"]')?.checked) : false,
+        ceramic_areas: isTint ? [] : checked('ceramic_areas'),
         zip: f.zip.value,
         lang: L.lang, consent_sms: f.consent_sms.checked, consent_text_version: CONSENT_VERSION,
         company_url: f.company_url.value,
       })
-      track('lead_submit', { lead_id: data.lead_id, service: f.service.value, vehicle_type: f.vehicle_type.value, language: L.lang, location: 'landing', page: L.page })
+      track('lead_submit', { lead_id: data.lead_id, service, vehicle_type: f.vehicle_type.value, language: L.lang, location: 'landing', page: L.page })
       showSuccess(data)
     } catch (err) {
       track('form_error', { kind: err.kind || 'server', location: 'landing', page: L.page })

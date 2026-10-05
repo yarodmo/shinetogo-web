@@ -3,12 +3,13 @@ import { useI18n } from '../i18n'
 import { prefill } from '../lib/prefill'
 import { submitLead, newLeadId } from '../lib/leads'
 import { track } from '../lib/track'
+import { FORM } from '../content/forms'
 import { BRAND_NAME, PHONE_DISPLAY, PHONE_TEL, waLink } from '../lib/site'
 
-const FAQ_KEYS = ['faq1', 'faq2', 'faq3', 'faq4', 'faq5', 'faqTintLegal', 'faqFilm', 'faqTime', 'faqWarranty', 'faqScratch', 'faqQuote']
+const FAQ_KEYS = ['faq1', 'faq2', 'faq3', 'faq4', 'faq5']
 
 const VEHICLES = [
-  { id: 'car', en: 'Car / Sedan', es: 'Auto / Sedán' },
+  { id: 'car', en: 'Car / Sedan', es: 'Carro / Sedán' },
   { id: 'suv', en: 'SUV / Truck', es: 'SUV / Camioneta' },
   { id: 'exotic', en: 'Exotic / Luxury', es: 'Exótico / Lujo' },
   { id: 'rv', en: 'RV / Camper', es: 'RV / Camper' },
@@ -19,15 +20,12 @@ const SERVICE_LABELS = {
   express: { en: 'Express Wash', es: 'Lavado Express' },
   full: { en: 'Full Detail', es: 'Full Detail' },
   premium: { en: 'Premium Detail', es: 'Premium Detail' },
-  ceramic: { en: 'Ceramic Coating', es: 'Recubrimiento Cerámico' },
-  tint: { en: 'Window Tint', es: 'Polarizado' },
-  tint_ceramic: { en: 'Window Tint + Ceramic Coating', es: 'Polarizado + Cerámico' },
+  tint: { en: 'Window Tint', es: 'Polarizado de vidrios' },
+  ceramic: { en: 'Ceramic Coating', es: 'Recubrimiento cerámico' },
   boat: { en: 'Boat Detailing', es: 'Detallado de Botes' },
 }
-// Ceramic y tint son solo para autos; los botes tienen su propio servicio.
-const AUTO_SERVICES = ['express', 'full', 'premium', 'ceramic', 'tint', 'tint_ceramic']
-const COVERAGE = [['sides', 'covSides'], ['rear', 'covRear'], ['windshield_strip', 'covStrip'], ['sunroof', 'covSunroof'], ['full_car', 'covFull']]
-const FILMS = [['carbon', 'filmCarbon'], ['ceramic', 'filmCeramic'], ['unsure', 'filmUnsure']]
+// Tint y cerámico son dos servicios distintos y solo para autos; los botes tienen su propio servicio.
+const AUTO_SERVICES = ['express', 'full', 'premium', 'tint', 'ceramic']
 // v2: texto reescrito tras la revisión de cumplimiento; una versión por idioma (docs/CONSENT-TEXT.md).
 const consentVersion = (lang) => `v2-${lang}`
 // La fecha mínima es la de hoy en la zona del visitante (toISOString usa UTC y a la noche ya marca mañana).
@@ -35,11 +33,11 @@ const todayLocal = () => {
   const d = new Date()
   return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`
 }
-const PROTECTION_SERVICES = ['ceramic', 'tint', 'tint_ceramic']
+const PROTECTION_SERVICES = ['tint', 'ceramic']
 
 const EMPTY = {
   name: '', phone: '', email: '', vehicle_type: '', vehicle: '', service: '', date: '', time: '',
-  message: '', zip: '', coverage: [], film: '', has_old_tint: false, consent_sms: false, company_url: '',
+  message: '', zip: '', coverage: [], ceramic_areas: [], film: '', has_old_tint: false, consent_sms: false, company_url: '',
 }
 
 export default function Contact() {
@@ -56,12 +54,14 @@ export default function Contact() {
   const isBoat = form.vehicle_type === 'boat'
   // Tint y cerámico son solo para autos de pasajeros: ni botes ni RV.
   const serviceOptions = isBoat ? ['boat'] : form.vehicle_type === 'rv' ? AUTO_SERVICES.filter((id) => !PROTECTION_SERVICES.includes(id)) : AUTO_SERVICES
-  const wantsTint = form.service === 'tint' || form.service === 'tint_ceramic'
+  const wantsTint = form.service === 'tint'
+  const wantsCeramic = form.service === 'ceramic'
+  const options = FORM[lang]
   const label = (id) => SERVICE_LABELS[id]?.[lang] || id
   const vehicleLabel = (id) => VEHICLES.find((v) => v.id === id)?.[lang] || ''
   const privacyHref = lang === 'es' ? '/es/privacidad/' : '/privacy/'
 
-  // Las secciones (Protection, Pricing) pre-seleccionan servicio y película.
+  // Los paquetes de Pricing pre-seleccionan el servicio.
   useEffect(() => {
     const apply = (p) => {
       if (!p.service && !p.film) return
@@ -77,8 +77,8 @@ export default function Contact() {
   }, [])
 
   const set = (patch) => setForm((f) => ({ ...f, ...patch }))
-  const toggleCoverage = (id) =>
-    set({ coverage: form.coverage.includes(id) ? form.coverage.filter((c) => c !== id) : [...form.coverage, id] })
+  const toggleIn = (field, id) =>
+    set({ [field]: form[field].includes(id) ? form[field].filter((c) => c !== id) : [...form[field], id] })
 
   const msgs = {
     phone: lang === 'en' ? 'Enter a valid 10-digit number' : 'Ingresa un teléfono válido de 10 dígitos',
@@ -114,7 +114,7 @@ export default function Contact() {
         lead_id: leadId.current,
         name: form.name, phone: form.phone, email: form.email,
         service: form.service, vehicle_type: form.vehicle_type, vehicle: form.vehicle,
-        coverage: wantsTint ? form.coverage : [], film: wantsTint ? form.film : '',
+        coverage: wantsTint ? form.coverage : [], ceramic_areas: wantsCeramic ? form.ceramic_areas : [], film: wantsTint ? form.film : '',
         has_old_tint: wantsTint ? form.has_old_tint : false,
         zip: form.zip, date: form.date, time: form.time, message: form.message,
         lang, consent_sms: form.consent_sms, consent_text_version: consentVersion(lang),
@@ -216,28 +216,46 @@ export default function Contact() {
                     <summary>{t('formDetails')}</summary>
                     <div className="form-details-body">
                       <div>
-                        <span className="form-group-label">{t('formCoverage')}</span>
+                        <span className="form-group-label">{options.windowsLabel}</span>
                         <div className="chip-row">
-                          {COVERAGE.map(([id, key]) => (
+                          {options.windows.map(([id, text]) => (
                             <label key={id} className="chip-opt">
-                              <input type="checkbox" checked={form.coverage.includes(id)} onChange={() => toggleCoverage(id)} />{t(key)}
+                              <input type="checkbox" checked={form.coverage.includes(id)} onChange={() => toggleIn('coverage', id)} />{text}
                             </label>
                           ))}
                         </div>
                       </div>
                       <div>
-                        <span className="form-group-label">{t('formFilm')}</span>
+                        <span className="form-group-label">{options.filmLabel}</span>
                         <div className="chip-row">
-                          {FILMS.map(([id, key]) => (
+                          {options.films.map(([id, text]) => (
                             <label key={id} className="chip-opt">
-                              <input type="radio" name="film" checked={form.film === id} onChange={() => set({ film: id })} />{t(key)}
+                              <input type="radio" name="film" checked={form.film === id} onChange={() => set({ film: id })} />{text}
                             </label>
                           ))}
                         </div>
                       </div>
                       <label className="chip-opt" style={{ alignSelf: 'start' }}>
-                        <input type="checkbox" checked={form.has_old_tint} onChange={(e) => set({ has_old_tint: e.target.checked })} />{t('formOldTint')}
+                        <input type="checkbox" checked={form.has_old_tint} onChange={(e) => set({ has_old_tint: e.target.checked })} />{options.oldTint}
                       </label>
+                    </div>
+                  </details>
+                )}
+
+                {wantsCeramic && (
+                  <details className="form-details" open>
+                    <summary>{t('formDetails')}</summary>
+                    <div className="form-details-body">
+                      <div>
+                        <span className="form-group-label">{options.areasLabel}</span>
+                        <div className="chip-row">
+                          {options.areas.map(([id, text]) => (
+                            <label key={id} className="chip-opt">
+                              <input type="checkbox" checked={form.ceramic_areas.includes(id)} onChange={() => toggleIn('ceramic_areas', id)} />{text}
+                            </label>
+                          ))}
+                        </div>
+                      </div>
                     </div>
                   </details>
                 )}

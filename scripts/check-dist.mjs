@@ -5,6 +5,7 @@
  *   - JSON-LD válido; sin placeholders %VITE_ ni localhost
  *   - todo href/src interno existe en dist; toda <img> tiene alt
  *   - peso total de dist dentro del presupuesto
+ *   - frases que cumplimiento vetó (ver CLAIMS)
  * Uso: node scripts/check-dist.mjs [carpeta=dist]
  */
 import fs from 'node:fs'
@@ -64,6 +65,12 @@ for (const pg of pages) {
     try { JSON.parse(m[1]) } catch (e) { fail(url, `JSON-LD inválido: ${e.message}`) }
   }
   if (/%VITE_/.test(html)) fail(url, 'quedó un placeholder %VITE_')
+  // Texto que no debe llegar al público: zonas que no se atienden, plantillas sin resolver, pendientes del dueño.
+  const visible = html.replace(/<script[\s\S]*?<\/script>/g, '')
+  if (/\bTampa\b/.test(visible)) fail(url, 'aparece «Tampa» (no es zona de servicio)')
+  if (/\{brand\}|\[CONFIRMAR|\{\{|undefined|\[object Object\]/.test(visible)) fail(url, 'quedó un placeholder o un valor sin resolver')
+  if (/\bProtection\b|tint_ceramic/.test(visible)) fail(url, 'menciona una «Protection» o el servicio combinado que ya no existe')
+  if (/\bDetailShine\b/.test(html)) fail(url, 'aparece el nombre «DetailShine»')
   // Páginas en español no deben enlazar a rutas en inglés (ni al revés a las de /es/ salvo el cambio de idioma).
   if (url.startsWith('/es/')) {
     for (const a of html.match(/<a [^>]*>/g) || []) {
@@ -104,6 +111,34 @@ const htaccess = fs.existsSync(path.join(DIST, '.htaccess')) ? fs.readFileSync(p
 if (htaccess && !htaccess.includes(`${SITE}%{REQUEST_URI}`)) fail('.htaccess', `no redirige a ${SITE}`)
 const sitemap = fs.existsSync(path.join(DIST, 'sitemap.xml')) ? fs.readFileSync(path.join(DIST, 'sitemap.xml'), 'utf8') : ''
 for (const m of sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)) if (!byUrl.has(m[1])) fail('sitemap.xml', `URL sin página: ${m[1]}`)
+
+// Frases que cumplimiento vetó (revisión del 5-oct-2026): se buscan en las páginas generadas y en el texto de la home
+// (src/i18n.jsx y src/content/*.js, sin comentarios), porque la home se pinta en el navegador y no está en el HTML.
+const CLAIMS = [
+  [/\bevery window\b|\ball the glass\b|todos los (vidrios|cristales)/i, 'dice «todos los vidrios»: el parabrisas completo no se puede (F.S. 316.2952)'],
+  [/no surprises|sin sorpresas/i, 'promete «sin sorpresas» junto a un rango de precio (publicidad de cebo)'],
+  [/most popular|most requested|más popular|más solicitado/i, 'insignia de popularidad sin dato que la respalde'],
+  [/self-sufficient|autosuficientes?|showroom/i, 'absoluto o promesa de resultado sin respaldo'],
+  [/\bexempt\b|\bexentos?\b/i, 'dice «exento»: no está confirmado cómo le aplica la orden de agua al servicio móvil'],
+  [/within (about )?a day|en (más o menos )?un día|dentro de un día/i, 'lovebugs «en un día»: la fuente (UF/IFAS IN204) dice varios días'],
+  [/\bclear strip\b/i, 'la ley dice «transparent strip», no «clear»'],
+  [/UV protection|protección UV|100% mobile|100 % móvil/i, 'claim de producto o de servicio móvil sin confirmar'],
+  [/\bluneta\b/i, 'en el sitio se dice «vidrio trasero»'],
+  [/certified (applicator|installer)|aplicador certificado/i, 'sin certificado del fabricante no se dice'],
+]
+const stripComments = (t) => t.replace(/\/\*[\s\S]*?\*\//g, '').replace(/^\s*\/\/.*$/gm, '').replace(/\s\/\/ .*$/gm, '')
+const sources = ['src/i18n.jsx', ...fs.readdirSync('src/content').filter((f) => f.endsWith('.js')).map((f) => `src/content/${f}`)]
+const copyBlobs = [
+  ...pages.map((p) => [p.url, p.html.replace(/<script[\s\S]*?<\/script>/g, '')]),
+  ['/llms.txt', fs.existsSync(path.join(DIST, 'llms.txt')) ? fs.readFileSync(path.join(DIST, 'llms.txt'), 'utf8') : ''],
+  ...sources.filter((f) => fs.existsSync(f)).map((f) => [f, stripComments(fs.readFileSync(f, 'utf8'))]),
+]
+for (const [where, text] of copyBlobs) {
+  for (const [re, why] of CLAIMS) {
+    const m = text.match(re)
+    if (m) fail(where, `«${m[0]}»: ${why}`)
+  }
+}
 
 const totalMb = files.reduce((n, f) => n + fs.statSync(f).size, 0) / 1024 / 1024
 if (totalMb > BUDGET_MB) fail('dist', `pesa ${totalMb.toFixed(1)} MB (presupuesto ${BUDGET_MB} MB)`)
