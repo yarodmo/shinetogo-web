@@ -31,41 +31,42 @@
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
-<header class="site-header">
-  <div class="wrap bar">
+<header class="site-header" id="site-header">
+  <div class="bar">
     <a class="brand" href="/" aria-label="ShineToGo Mobile Detailing: Home">
-      <img src="/img/brand/logo-120.webp" width="40" height="40" alt="" />
-      <span>ShineToGo Mobile Detailing</span>
+      <img src="/img/brand/logo-120.webp" srcset="/img/brand/logo-120.webp 1x, /img/brand/logo-240.webp 2x" width="60" height="60" alt="" />
     </a>
-    <nav class="nav" aria-label="Primary">
+    <nav class="nav-links" aria-label="Primary">
       <a href="/#services">Services</a>
       <a href="/window-tint/">Window Tint</a>
-      <a href="/ceramic-coating/" aria-current="page">Ceramic Coating</a>
+      <a href="/ceramic-coating/" aria-current="page">Ceramic</a>
+      <a href="/#pricing">Pricing</a>
+      <a href="/#gallery">Projects</a>
       <a href="/#contact">Contact</a>
-      <a class="lang" href="/es/recubrimiento-ceramico/" hreflang="es" lang="es" title="Ver en español">Español</a>
     </nav>
-    <div class="bar-cta">
-      <a class="btn btn-ghost" href="tel:+19414224405" data-track="call_click" data-location="landing_header">Call</a>
+    <div class="nav-end">
+      <a class="lang-btn" href="/es/recubrimiento-ceramico/" hreflang="es" lang="es" title="Ver en español">ES</a>
+      <a class="btn btn-primary" href="/?service=ceramic#contact" data-track="cta_click" data-location="landing_header">Get a quote</a>
     </div>
   </div>
 </header>
 <main id="main">
-  <nav class="crumbs wrap" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true"> › </span><span aria-current="page">Ceramic Coating</span></nav>
-  <section class="hero">
+  <section class="hero tone-light">
     <div class="wrap">
+      <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true"> › </span><span aria-current="page">Ceramic Coating</span></nav>
       <p class="eyebrow">CERAMIC COATING</p>
       <h1>Ceramic coating for paint, glass, wheels, trim and interior</h1>
       <p class="answer">A ceramic coating is a hard, slick layer that bonds to the surface under it, so dirt and water let go more easily. We do paint, glass, wheels and calipers, exterior trim and the interior. It isn’t scratch-proof, and the prep underneath is part of the job. Send photos on WhatsApp for a quote.</p>
       <div class="cta-row">
+        <a class="btn btn-primary" href="/?service=ceramic#contact" data-track="cta_click" data-location="landing_hero" data-service="ceramic">Request a quote</a>
         <a class="btn btn-green" href="https://wa.me/19414224405?text=Hi!%20I%E2%80%99d%20like%20a%20ceramic%20coating%20quote.%20Car%20(year%2C%20make%2C%20model)%3A%20" target="_blank" rel="noopener" data-track="whatsapp_click" data-location="landing_hero" data-service="ceramic"><span aria-hidden="true">💬</span> Quote my coating on WhatsApp</a>
-        <a class="btn btn-ghost" href="tel:+19414224405" data-track="call_click" data-location="landing_hero" data-service="ceramic">Call (941) 422-4405</a>
       </div>
-      <p class="cta-text"><a class="textlink" href="#quote" data-track="cta_click" data-location="landing_hero" data-service="ceramic">Or request a quote with the form</a></p>
+      <p class="cta-text">Or call <a class="textlink" href="tel:+19414224405" data-track="call_click" data-location="landing_hero" data-service="ceramic">(941) 422-4405</a></p>
       <ul class="pills"><li>Paint, glass, wheels, trim, interior</li><li>Quote by photo</li></ul>
     </div>
   </section>
   
-  <section class="band" id="surfaces" aria-labelledby="ch-h">
+  <section class="band tone-dark" id="surfaces" aria-labelledby="ch-h">
     <div class="wrap two">
       <div>
         <h2 id="ch-h">What do you want covered?</h2>
@@ -84,12 +85,12 @@
 </figure></div>
     </div>
   </section>
-  <section class="band alt" aria-label="What do you want covered?">
+  <section class="band tone-light" aria-label="What do you want covered?">
     <div class="wrap">
       <div class="modules"><article class="module" id="paint"><h3>Paint</h3><p>The coating goes on the clear coat after a wash, decontamination and a polish to whatever level the paint needs. It helps dirt, bird droppings and water spots come off more easily when you wash.</p></article><article class="module" id="glass"><h3>Glass</h3><p>A coating for the windshield and windows that helps rain bead up and run off. It doesn’t replace your wipers. Rainy season here runs from about mid-to-late May to mid-October. <a class="textlink" href="https://www.weather.gov/tbw/rainyseason" rel="noopener">National Weather Service</a></p></article><article class="module" id="wheels"><h3>Wheels and calipers</h3><p>Wheels take the brake dust and the road grime. A coating made for wheels and calipers helps brake dust stick less and makes it easier to wash off. Tell us if the wheels are painted, polished or chrome.</p></article><article class="module" id="trim"><h3>Exterior trim and plastics</h3><p>The sun turns black plastic and rubber gray. This coating goes on trim that is still dark; it can’t bring back color that has already faded. If yours has faded, send a photo and we tell you what to expect before we start.</p></article><article class="module" id="interior"><h3>Interior</h3><p>Sand and sunscreen get into everything. Tell us what you want covered (seats, leather, fabric, plastics) and send a photo; we tell you which product fits each one.</p></article></div>
     </div>
   </section>
-  <section class="band" aria-labelledby="prep-h">
+  <section class="band tone-dark" aria-labelledby="prep-h">
     <div class="wrap two">
       <div>
         <h2 id="prep-h">The prep comes first</h2>
@@ -101,13 +102,13 @@
       </div>
     </div>
   </section>
-  <section class="band alt" aria-labelledby="loc-h">
+  <section class="band tone-light" aria-labelledby="loc-h">
     <div class="wrap narrow">
       <h2 id="loc-h">Two things about washing your car here</h2>
       <ul class="plain"><li><strong>Lovebugs.</strong> They fly for about four weeks in April–May and again in August–September. Their remains are slightly acidic, and if they stay on the paint for several days they can etch it, so wash them off as soon as you can. A coating gives them a slicker surface, which helps that wash; it does not stop them. <a class="textlink" href="https://ask.ifas.ufl.edu/publication/IN204" rel="noopener">UF/IFAS</a></li><li><strong>If you wash it yourself at home.</strong> Under the Southwest Florida Water Management District’s water-shortage order (news release of September 22, 2026), washing a car at home (non-commercial) is allowed only on your lawn watering day and with a hose that has a shutoff nozzle. The order runs through March 31, 2027, and covers Manatee, Sarasota, Hillsborough and Pinellas counties, among others. Rules can change; check the District’s page for the current ones. <a class="textlink" href="https://www.swfwmd.state.fl.us/the-newsroom/2026/district-extends-modified-phase-iii-water-shortage-0" rel="noopener">SWFWMD</a></li></ul>
     </div>
   </section>
-  <section class="band" aria-labelledby="how-h">
+  <section class="band tone-dark" aria-labelledby="how-h">
     <div class="wrap two">
       <div>
         <h2 id="how-h">How the quote works</h2>
@@ -115,30 +116,20 @@
         <h3>Where we work</h3>
         <p>We work around Sarasota and Bradenton and across Manatee County, down to Venice, out on Lido Key, Siesta Key and Longboat Key, and farther north in St. Petersburg and Brandon. If you’re not sure we reach you, send your ZIP code and we’ll tell you.</p>
       </div>
-      <div id="quote">
-        <form id="quote-form" class="lead-form" novalidate hidden data-service="ceramic">
-  <h2 id="quote-h">Get your ceramic coating quote</h2>
-  <p class="lead">Tell us about your car and what you want covered.</p>
-  <div class="grid2">
-    <label>Full name<input name="name" autocomplete="name" required maxlength="80" /></label>
-    <label>Phone / WhatsApp<input name="phone" type="tel" inputmode="tel" autocomplete="tel" required maxlength="30" /></label>
-    <label>Email (optional)<input name="email" type="email" autocomplete="email" maxlength="120" /></label>
-    <label>Vehicle type<select name="vehicle_type" required><option value="">Choose…</option><option value="car">Car / Sedan</option><option value="suv">SUV / Truck</option><option value="exotic">Exotic / Luxury</option></select></label>
-    <label>Year, make, model<input name="vehicle" maxlength="80" /></label>
-    <label>ZIP code (optional)<input name="zip" inputmode="numeric" autocomplete="postal-code" maxlength="10" /></label>
+      <div>
+        <div id="quote" class="quote-card">
+  <h2>Get your ceramic coating quote</h2>
+  <p class="lead">Quotes are requested in the form on our main page, with Ceramic Coating already selected. You can also send photos on WhatsApp.</p>
+  <div class="cta-row">
+    <a class="btn btn-primary" href="/?service=ceramic#contact" data-track="cta_click" data-location="landing_quote" data-service="ceramic">Request a quote</a>
+    <a class="btn btn-green" href="https://wa.me/19414224405?text=Hi!%20I%E2%80%99d%20like%20a%20ceramic%20coating%20quote.%20Car%20(year%2C%20make%2C%20model)%3A%20" target="_blank" rel="noopener" data-track="whatsapp_click" data-location="landing_quote" data-service="ceramic"><span aria-hidden="true">💬</span> Quote my coating on WhatsApp</a>
   </div>
-  <fieldset class="opts"><legend>What to cover</legend><div class="chips"><label class="chip"><input type="checkbox" name="ceramic_areas" value="paint" /><span>Paint</span></label><label class="chip"><input type="checkbox" name="ceramic_areas" value="glass" /><span>Glass</span></label><label class="chip"><input type="checkbox" name="ceramic_areas" value="wheels" /><span>Wheels and calipers</span></label><label class="chip"><input type="checkbox" name="ceramic_areas" value="trim" /><span>Exterior trim and plastics</span></label><label class="chip"><input type="checkbox" name="ceramic_areas" value="interior" /><span>Interior</span></label><label class="chip"><input type="checkbox" name="ceramic_areas" value="other" /><span>Something else</span></label></div></fieldset>
-  <div class="hp" aria-hidden="true"><label>Company URL<input name="company_url" tabindex="-1" autocomplete="off" /></label></div>
-  <label class="consent"><input type="checkbox" name="consent_sms" /><span>I agree that ShineToGo Mobile Detailing may text me, message me on WhatsApp and call me at the number above about my quote and appointment, including with an automated system. I understand I do not have to agree to this to get a quote or to buy anything. Message frequency varies. Message and data rates may apply. Reply STOP to opt out or HELP for help. <a href="/privacy/">Privacy policy</a> · <a href="/privacy/#messaging">Messaging terms</a></span></label>
-  <button type="submit" class="btn btn-primary">Send request</button>
-  <p class="note">We’ll reply to let you know if we have room for the day you want.</p>
-  <div id="form-status" role="status" aria-live="polite"></div>
-</form>
-        <p class="alt-contact">Prefer WhatsApp or a call? <a href="https://wa.me/19414224405?text=Hi!%20I%E2%80%99d%20like%20a%20ceramic%20coating%20quote.%20Car%20(year%2C%20make%2C%20model)%3A%20" target="_blank" rel="noopener" data-track="whatsapp_click" data-location="landing_form" data-service="ceramic">WhatsApp</a> · <a href="tel:+19414224405" data-track="call_click" data-location="landing_form" data-service="ceramic">(941) 422-4405</a></p>
+  <p class="alt-contact">Or call <a href="tel:+19414224405" data-track="call_click" data-location="landing_quote" data-service="ceramic">(941) 422-4405</a></p>
+</div>
       </div>
     </div>
   </section>
-  <section class="band alt" aria-labelledby="faq-h">
+  <section class="band tone-light" aria-labelledby="faq-h">
     <div class="wrap narrow">
       <h2 id="faq-h">Questions</h2>
       <details class="faq"><summary>Is a ceramic coating scratch-proof?</summary><p>No. It’s a hard, slick layer on top of the clear coat. Scratches, swirls and rock chips can still happen. What changes is how easily dirt, bird droppings and water spots come off.</p></details>
@@ -152,28 +143,48 @@
   </section>
 </main>
 <div class="sticky-cta">
-  <a class="btn btn-ghost" href="tel:+19414224405" data-track="call_click" data-location="landing_sticky" data-service="ceramic">Call</a>
+  <a class="btn btn-ghost" href="tel:+19414224405" data-track="call_click" data-location="landing_sticky" data-service="ceramic"><span aria-hidden="true">📞</span> Call</a>
   <a class="btn btn-green" href="https://wa.me/19414224405?text=Hi!%20I%E2%80%99d%20like%20a%20ceramic%20coating%20quote.%20Car%20(year%2C%20make%2C%20model)%3A%20" target="_blank" rel="noopener" data-track="whatsapp_click" data-location="landing_sticky" data-service="ceramic"><span aria-hidden="true">💬</span> WhatsApp</a>
 </div>
 <footer class="site-footer">
-  <div class="wrap foot">
+  <div class="wrap footer-grid">
     <div>
-      <strong>ShineToGo Mobile Detailing</strong>
-      <p>Mobile car and boat detailing, plus window tint and ceramic coating for cars.</p>
-      <p><a href="tel:+19414224405" data-track="call_click" data-location="landing_footer">(941) 422-4405</a> · <a href="https://wa.me/19414224405?text=" rel="noopener" target="_blank" data-track="whatsapp_click" data-location="landing_footer">WhatsApp</a></p>
-      <p class="muted">Sarasota · Bradenton · Venice · St. Petersburg · Longboat Key · Siesta Key · Lido Key · Brandon · Manatee County</p>
+      <img class="footer-logo" src="/img/brand/logo-120.webp" srcset="/img/brand/logo-120.webp 1x, /img/brand/logo-240.webp 2x" width="44" height="44" loading="lazy" alt="ShineToGo Mobile Detailing" />
+      <p>Professional mobile car and boat detailing. We come to you.</p>
+      <div class="ig">
+        <a href="https://www.instagram.com/shinetogomobilecarwash" target="_blank" rel="noopener noreferrer"><img src="/img/brand/ig-qr-192.webp" width="64" height="64" loading="lazy" alt="Instagram QR" /></a>
+        <a href="https://www.instagram.com/shinetogomobilecarwash" target="_blank" rel="noopener noreferrer"><strong>@shinetogomobilecarwash</strong><span>Follow us for daily work</span></a>
+      </div>
     </div>
-    <ul>
-      <li><a href="/">Home</a></li>
-      <li><a href="/window-tint/">Window Tint</a></li>
-      <li><a href="/ceramic-coating/">Ceramic Coating</a></li>
-      <li><a href="/privacy/">Privacy policy</a></li>
-      <li><a href="/es/recubrimiento-ceramico/" hreflang="es" lang="es">Español</a></li>
-    </ul>
+    <div class="col">
+      <h3>Services</h3>
+      <a href="/#services">Auto Detailing</a>
+      <a href="/#services">Boat Detailing</a>
+      <a href="/window-tint/">Window Tint</a>
+      <a href="/ceramic-coating/">Ceramic</a>
+    </div>
+    <div class="col">
+      <h3>Service Areas</h3>
+      <span>Sarasota</span>
+      <span>Bradenton</span>
+      <span>Venice</span>
+      <span>St. Petersburg</span>
+      <span>Longboat Key</span>
+      <span>Siesta Key</span>
+      <span>Lido Key</span>
+      <span>Brandon</span>
+      <span>Manatee County</span>
+    </div>
+    <div class="col">
+      <h3>Contact Us</h3>
+      <a href="tel:+19414224405" data-track="call_click" data-location="landing_footer">📞 (941) 422-4405</a>
+      <a class="wa" href="https://wa.me/19414224405?text=" rel="noopener noreferrer" target="_blank" data-track="whatsapp_click" data-location="landing_footer">💬 WhatsApp</a>
+      <a href="/privacy/">Privacy</a>
+    </div>
   </div>
-  <p class="wrap legal">© 2026 ShineToGo Mobile Detailing. All rights reserved.</p>
+  <p class="wrap legal">© 2026 ShineToGo Mobile Detailing. Designed by Bliss Systems LLC.</p>
 </footer>
-<script type="application/json" id="l10n">{"lang":"en","page":"ceramic","required":"This field is required.","phoneBad":"Enter a phone number with at least 10 digits.","emailBad":"Enter a valid email or leave it blank.","send":"Send request","sending":"Sending…","errTitle":"We couldn’t send your request.","errBody":"Your details are still here. Try again, or message us on WhatsApp or call.","errFields":"Check the highlighted fields.","retry":"Try again","okTitle":"Got it, thanks.","okBody":"We’ll reply with a price range. For the fastest quote, send photos on WhatsApp.","okWa":"Send photos on WhatsApp","okRef":"Your reference","waPhotos":"Hi! Sending photos for my quote. Ref:","consentTitle":"Your privacy choices","consentBody":"With your permission we use cookies and pixels to measure visits and ads. Your quote request works the same either way.","consentAccept":"Accept","consentReject":"Reject","consentMore":"Privacy policy","privacy":"/privacy/","callLabel":"Call"}</script>
+<script type="application/json" id="l10n">{"lang":"en","page":"ceramic","consentTitle":"Your privacy choices","consentBody":"With your permission we use cookies and pixels to measure visits and ads. Your quote request works the same either way.","consentAccept":"Accept","consentReject":"Reject","consentMore":"Privacy policy","privacy":"/privacy/"}</script>
 <script type="module" src="/src/landing.js"></script>
 </body>
 </html>

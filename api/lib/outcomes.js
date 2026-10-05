@@ -257,6 +257,8 @@ function buildReport({ leadsFile, outcomesFile = outcomesPathFor(leadsFile), fro
     by_lang: group((l) => l.lang),
     by_channel: group((l) => l.channel || 'form'),
     by_landing: group((l) => l.attribution && l.attribution.landing),
+    // Página del sitio que vio antes de llegar al formulario (p. ej. /window-tint/); «(none)» = llegó directo a la home.
+    by_via: group((l) => l.attribution && l.attribution.via),
     lost_reasons: lostReasons,
     unworked: unworked.map((r) => ({ lead_id: r.lead.lead_id, created_at: r.lead.created_at, service: r.lead.service, source: sourceOf(r.lead) })),
     orphan_outcomes: orphans,

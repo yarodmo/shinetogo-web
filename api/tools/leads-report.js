@@ -56,6 +56,7 @@ table('POR SERVICIO', report.by_service)
 table('POR CANAL (formulario, WhatsApp, llamada...)', report.by_channel)
 table('POR IDIOMA', report.by_lang)
 table('POR PÁGINA DE ENTRADA', report.by_landing)
+table('POR PÁGINA QUE VIO ANTES DE COTIZAR (none = directo a la home)', report.by_via)
 if (Object.keys(report.lost_reasons).length) console.log(`\nPOR QUÉ SE PIERDEN\n  ${Object.entries(report.lost_reasons).map(([k, v]) => `${k}: ${v}`).join(' · ')}`)
 if (report.unworked.length) {
   console.log(`\nSIN RESULTADO ANOTADO (más de 48 h)`)

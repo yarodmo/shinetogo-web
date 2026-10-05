@@ -4,6 +4,7 @@ const CONSENT_KEY = 'stg_consent_v1'
 const FIRST_KEY = 'stg_first_touch_v1'
 const LAST_KEY = 'stg_last_touch_v1'
 const ATTR_KEYS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'gclid', 'gbraid', 'wbraid', 'fbclid']
+const VIA_KEY = 'stg_via_v1'
 const NINETY_DAYS = 90 * 24 * 60 * 60 * 1000
 
 const safe = (fn, fallback = null) => { try { return fn() } catch { return fallback } }
@@ -22,7 +23,19 @@ function readTouch() {
   return touch
 }
 
+// Página del propio sitio que el visitante vio justo antes (p. ej. /window-tint/ antes de pedir la cotización en la home).
+// Sirve para saber si las páginas informativas ayudan a cerrar, ahora que toda cotización se hace en la home.
+function captureVia() {
+  const ref = document.referrer
+  if (!ref || !ref.startsWith(window.location.origin)) return
+  try {
+    const path = new URL(ref).pathname
+    if (path !== window.location.pathname) safe(() => sessionStorage.setItem(VIA_KEY, path.slice(0, 120)))
+  } catch { /* referrer ilegible */ }
+}
+
 export function captureAttribution() {
+  captureVia()
   const now = Date.now()
   const touch = readTouch()
   const hasCampaign = ATTR_KEYS.some((k) => touch[k])
@@ -42,7 +55,8 @@ export function getAttribution() {
   // Una sola visita completa: la última si trajo campaña, si no la primera.
   // Nunca se mezclan campos (utm_source de hoy con utm_medium de hace meses falsearía la atribución).
   const source = ATTR_KEYS.some((k) => last[k]) ? last : first
-  return { ...source, page: window.location.pathname + window.location.hash }
+  const via = safe(() => sessionStorage.getItem(VIA_KEY))
+  return { ...source, ...(via && { via }), page: window.location.pathname + window.location.hash }
 }
 
 /* ───────── consentimiento ───────── */

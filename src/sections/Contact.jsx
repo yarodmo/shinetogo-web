@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { useI18n } from '../i18n'
-import { prefill } from '../lib/prefill'
+import { prefill, prefillFromUrl } from '../lib/prefill'
 import { submitLead, newLeadId } from '../lib/leads'
 import { track } from '../lib/track'
 import { FORM } from '../content/forms'
@@ -72,6 +72,7 @@ export default function Contact() {
         vehicle_type: f.vehicle_type === 'boat' && p.service !== 'boat' ? '' : f.vehicle_type,
       }))
     }
+    prefillFromUrl()
     apply(prefill.get())
     return prefill.subscribe(apply)
   }, [])

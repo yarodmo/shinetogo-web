@@ -65,6 +65,8 @@ for (const pg of pages) {
     try { JSON.parse(m[1]) } catch (e) { fail(url, `JSON-LD inválido: ${e.message}`) }
   }
   if (/%VITE_/.test(html)) fail(url, 'quedó un placeholder %VITE_')
+  // Un solo formulario en todo el sitio: el de la home (React). Las páginas estáticas mandan allí con el servicio elegido.
+  if (/<form[\s>]/.test(html)) fail(url, 'tiene un <form>: toda cotización se hace en el formulario de la home')
   // Texto que no debe llegar al público: zonas que no se atienden, plantillas sin resolver, pendientes del dueño.
   const visible = html.replace(/<script[\s\S]*?<\/script>/g, '')
   if (/\bTampa\b/.test(visible)) fail(url, 'aparece «Tampa» (no es zona de servicio)')
@@ -81,7 +83,7 @@ for (const pg of pages) {
   const faqVisible = (html.match(/<details class="faq">/g) || []).length
   const faqLd = [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)].flatMap((m) => { try { return JSON.parse(m[1])['@graph'] || [] } catch { return [] } }).find((n) => n['@type'] === 'FAQPage')
   if (faqLd && faqLd.mainEntity.length !== faqVisible) fail(url, `FAQPage tiene ${faqLd.mainEntity.length} preguntas y la página muestra ${faqVisible}`)
-  // Cada landing habla solo de su servicio: la de cerámica no menciona polarizado fuera del enlace cruzado y del formulario.
+  // Cada landing habla solo de su servicio: la de cerámica no menciona polarizado fuera del enlace cruzado.
   if (/^\/(es\/)?(ceramic-coating|recubrimiento-ceramico)\//.test(url)) {
     const body = html.replace(/<form[\s\S]*?<\/form>/, '').replace(/<details class="faq"><summary>[^<]*(together|juntos)[^<]*<\/summary>[\s\S]*?<\/details>/gi, '').replace(/<a [^>]*href="\/(es\/)?(window-tint|polarizado-de-vidrios)\/"[^>]*>[\s\S]*?<\/a>/g, '').replace(/<script[\s\S]*?<\/script>/g, '')
     if (/\btint(ed|ing)?\b|polarizad/i.test(body.replace(/<(head|nav|footer)[\s\S]*?<\/\1>/g, ''))) fail(url, 'la landing de cerámica menciona el polarizado')

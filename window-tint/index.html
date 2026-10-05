@@ -31,47 +31,48 @@
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
-<header class="site-header">
-  <div class="wrap bar">
+<header class="site-header" id="site-header">
+  <div class="bar">
     <a class="brand" href="/" aria-label="ShineToGo Mobile Detailing: Home">
-      <img src="/img/brand/logo-120.webp" width="40" height="40" alt="" />
-      <span>ShineToGo Mobile Detailing</span>
+      <img src="/img/brand/logo-120.webp" srcset="/img/brand/logo-120.webp 1x, /img/brand/logo-240.webp 2x" width="60" height="60" alt="" />
     </a>
-    <nav class="nav" aria-label="Primary">
+    <nav class="nav-links" aria-label="Primary">
       <a href="/#services">Services</a>
       <a href="/window-tint/" aria-current="page">Window Tint</a>
-      <a href="/ceramic-coating/">Ceramic Coating</a>
+      <a href="/ceramic-coating/">Ceramic</a>
+      <a href="/#pricing">Pricing</a>
+      <a href="/#gallery">Projects</a>
       <a href="/#contact">Contact</a>
-      <a class="lang" href="/es/polarizado-de-vidrios/" hreflang="es" lang="es" title="Ver en español">Español</a>
     </nav>
-    <div class="bar-cta">
-      <a class="btn btn-ghost" href="tel:+19414224405" data-track="call_click" data-location="landing_header">Call</a>
+    <div class="nav-end">
+      <a class="lang-btn" href="/es/polarizado-de-vidrios/" hreflang="es" lang="es" title="Ver en español">ES</a>
+      <a class="btn btn-primary" href="/?service=tint#contact" data-track="cta_click" data-location="landing_header">Get a quote</a>
     </div>
   </div>
 </header>
 <main id="main">
-  <nav class="crumbs wrap" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true"> › </span><span aria-current="page">Window Tint</span></nav>
-  <section class="hero">
+  <section class="hero tone-light">
     <div class="wrap">
+      <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true"> › </span><span aria-current="page">Window Tint</span></nav>
       <p class="eyebrow">WINDOW TINT · CARBON AND CERAMIC FILM</p>
       <h1>Window tint for your car’s side windows, back window, windshield strip and sunroof</h1>
       <p class="answer">We tint the front and rear side windows, the back window, the transparent strip on top of the windshield and the sunroof (send a photo and we’ll tell you if film fits). Carbon or ceramic film, your pick. Florida sets a different minimum for each window, and we go over each one with you before we cut. Send photos on WhatsApp for a quote.</p>
       <div class="cta-row">
+        <a class="btn btn-primary" href="/?service=tint#contact" data-track="cta_click" data-location="landing_hero" data-service="tint">Request a quote</a>
         <a class="btn btn-green" href="https://wa.me/19414224405?text=Hi!%20I%E2%80%99d%20like%20a%20window%20tint%20quote.%20Car%20(year%2C%20make%2C%20model)%3A%20" target="_blank" rel="noopener" data-track="whatsapp_click" data-location="landing_hero" data-service="tint"><span aria-hidden="true">💬</span> Quote my tint on WhatsApp</a>
-        <a class="btn btn-ghost" href="tel:+19414224405" data-track="call_click" data-location="landing_hero" data-service="tint">Call (941) 422-4405</a>
       </div>
-      <p class="cta-text"><a class="textlink" href="#quote" data-track="cta_click" data-location="landing_hero" data-service="tint">Or request a quote with the form</a></p>
+      <p class="cta-text">Or call <a class="textlink" href="tel:+19414224405" data-track="call_click" data-location="landing_hero" data-service="tint">(941) 422-4405</a></p>
       <ul class="pills"><li>Carbon and ceramic film</li><li>Quote by photo</li></ul>
     </div>
   </section>
   
-  <section class="band" aria-labelledby="win-h">
+  <section class="band tone-dark" aria-labelledby="win-h">
     <div class="wrap">
       <h2 id="win-h">Which windows</h2>
       <div class="tiles"><article class="tile"><h3>Side windows</h3><p>Front and rear. The ones up front can’t go as dark as the ones behind the driver.</p></article><article class="tile"><h3>Back window</h3><p>Same film as the sides, cut for the rear glass. If your car already has dark factory glass back there, there may be little room to add film; we tell you before we start.</p></article><article class="tile"><h3>Windshield top strip</h3><p>Florida only allows the transparent strip above the AS-1 line printed on the glass. The rest of the windshield stays bare.</p></article><article class="tile"><h3>Sunroof</h3><p>Send a photo of it with the rest of the car and we’ll tell you if film fits it.</p></article></div>
     </div>
   </section>
-  <section class="band alt" aria-labelledby="why-h">
+  <section class="band tone-light" aria-labelledby="why-h">
     <div class="wrap two">
       <div>
         <h2 id="why-h">Why people do it here</h2>
@@ -86,7 +87,7 @@
 </figure></div>
     </div>
   </section>
-  <section class="band" aria-labelledby="film-h">
+  <section class="band tone-dark" aria-labelledby="film-h">
     <div class="wrap two">
       <div>
         <h2 id="film-h">Carbon or ceramic film?</h2>
@@ -107,7 +108,7 @@
 </figure></div>
     </div>
   </section>
-  <section class="band alt" id="limits" aria-labelledby="lim-h">
+  <section class="band tone-light" id="limits" aria-labelledby="lim-h">
     <div class="wrap two">
       <div>
         <h2 id="lim-h">Florida tint limits, window by window</h2>
@@ -131,7 +132,7 @@
 </figure></div>
     </div>
   </section>
-  <section class="band" aria-labelledby="how-h">
+  <section class="band tone-dark" aria-labelledby="how-h">
     <div class="wrap two">
       <div>
         <h2 id="how-h">How the quote works</h2>
@@ -139,32 +140,20 @@
         <h3>Where we work</h3>
         <p>We work around Sarasota and Bradenton and across Manatee County, down to Venice, out on Lido Key, Siesta Key and Longboat Key, and farther north in St. Petersburg and Brandon. If you’re not sure we reach you, send your ZIP code and we’ll tell you.</p>
       </div>
-      <div id="quote">
-        <form id="quote-form" class="lead-form" novalidate hidden data-service="tint">
-  <h2 id="quote-h">Get your tint quote</h2>
-  <p class="lead">Tell us about your car and which windows. We’ll reply with a price range.</p>
-  <div class="grid2">
-    <label>Full name<input name="name" autocomplete="name" required maxlength="80" /></label>
-    <label>Phone / WhatsApp<input name="phone" type="tel" inputmode="tel" autocomplete="tel" required maxlength="30" /></label>
-    <label>Email (optional)<input name="email" type="email" autocomplete="email" maxlength="120" /></label>
-    <label>Vehicle type<select name="vehicle_type" required><option value="">Choose…</option><option value="car">Car / Sedan</option><option value="suv">SUV / Truck</option><option value="exotic">Exotic / Luxury</option></select></label>
-    <label>Year, make, model<input name="vehicle" maxlength="80" /></label>
-    <label>ZIP code (optional)<input name="zip" inputmode="numeric" autocomplete="postal-code" maxlength="10" /></label>
+      <div>
+        <div id="quote" class="quote-card">
+  <h2>Get your tint quote</h2>
+  <p class="lead">Quotes are requested in the form on our main page, with Window Tint already selected. You can also send photos on WhatsApp.</p>
+  <div class="cta-row">
+    <a class="btn btn-primary" href="/?service=tint#contact" data-track="cta_click" data-location="landing_quote" data-service="tint">Request a quote</a>
+    <a class="btn btn-green" href="https://wa.me/19414224405?text=Hi!%20I%E2%80%99d%20like%20a%20window%20tint%20quote.%20Car%20(year%2C%20make%2C%20model)%3A%20" target="_blank" rel="noopener" data-track="whatsapp_click" data-location="landing_quote" data-service="tint"><span aria-hidden="true">💬</span> Quote my tint on WhatsApp</a>
   </div>
-  <fieldset class="opts"><legend>Windows</legend><div class="chips"><label class="chip"><input type="checkbox" name="coverage" value="front_sides" /><span>Front side windows</span></label><label class="chip"><input type="checkbox" name="coverage" value="rear_sides" /><span>Rear side windows</span></label><label class="chip"><input type="checkbox" name="coverage" value="back_window" /><span>Back window</span></label><label class="chip"><input type="checkbox" name="coverage" value="windshield_strip" /><span>Windshield strip</span></label><label class="chip"><input type="checkbox" name="coverage" value="sunroof" /><span>Sunroof</span></label><label class="chip"><input type="checkbox" name="coverage" value="full_car" /><span>All the windows (not the windshield)</span></label></div></fieldset>
-  <fieldset class="opts"><legend>Film</legend><div class="chips"><label class="chip"><input type="radio" name="film" value="carbon" /><span>Carbon film</span></label><label class="chip"><input type="radio" name="film" value="ceramic" /><span>Ceramic film</span></label><label class="chip"><input type="radio" name="film" value="unsure" checked /><span>Not sure, recommend one</span></label></div></fieldset>
-  <label class="check"><input type="checkbox" name="has_old_tint" /><span>I have tint to take off</span></label>
-  <div class="hp" aria-hidden="true"><label>Company URL<input name="company_url" tabindex="-1" autocomplete="off" /></label></div>
-  <label class="consent"><input type="checkbox" name="consent_sms" /><span>I agree that ShineToGo Mobile Detailing may text me, message me on WhatsApp and call me at the number above about my quote and appointment, including with an automated system. I understand I do not have to agree to this to get a quote or to buy anything. Message frequency varies. Message and data rates may apply. Reply STOP to opt out or HELP for help. <a href="/privacy/">Privacy policy</a> · <a href="/privacy/#messaging">Messaging terms</a></span></label>
-  <button type="submit" class="btn btn-primary">Send request</button>
-  <p class="note">We’ll reply to let you know if we have room for the day you want.</p>
-  <div id="form-status" role="status" aria-live="polite"></div>
-</form>
-        <p class="alt-contact">Prefer WhatsApp or a call? <a href="https://wa.me/19414224405?text=Hi!%20I%E2%80%99d%20like%20a%20window%20tint%20quote.%20Car%20(year%2C%20make%2C%20model)%3A%20" target="_blank" rel="noopener" data-track="whatsapp_click" data-location="landing_form" data-service="tint">WhatsApp</a> · <a href="tel:+19414224405" data-track="call_click" data-location="landing_form" data-service="tint">(941) 422-4405</a></p>
+  <p class="alt-contact">Or call <a href="tel:+19414224405" data-track="call_click" data-location="landing_quote" data-service="tint">(941) 422-4405</a></p>
+</div>
       </div>
     </div>
   </section>
-  <section class="band alt" aria-labelledby="faq-h">
+  <section class="band tone-light" aria-labelledby="faq-h">
     <div class="wrap narrow">
       <h2 id="faq-h">Questions</h2>
       <details class="faq"><summary>Carbon or ceramic: which one should I get?</summary><p>Carbon is the everyday choice and looks a little matte. Ceramic usually turns away more heat and is clearer to look through, which matters most on a car that sits in the sun. Send photos and tell us how you use the car, and we’ll point you to one.</p></details>
@@ -178,28 +167,48 @@
   </section>
 </main>
 <div class="sticky-cta">
-  <a class="btn btn-ghost" href="tel:+19414224405" data-track="call_click" data-location="landing_sticky" data-service="tint">Call</a>
+  <a class="btn btn-ghost" href="tel:+19414224405" data-track="call_click" data-location="landing_sticky" data-service="tint"><span aria-hidden="true">📞</span> Call</a>
   <a class="btn btn-green" href="https://wa.me/19414224405?text=Hi!%20I%E2%80%99d%20like%20a%20window%20tint%20quote.%20Car%20(year%2C%20make%2C%20model)%3A%20" target="_blank" rel="noopener" data-track="whatsapp_click" data-location="landing_sticky" data-service="tint"><span aria-hidden="true">💬</span> WhatsApp</a>
 </div>
 <footer class="site-footer">
-  <div class="wrap foot">
+  <div class="wrap footer-grid">
     <div>
-      <strong>ShineToGo Mobile Detailing</strong>
-      <p>Mobile car and boat detailing, plus window tint and ceramic coating for cars.</p>
-      <p><a href="tel:+19414224405" data-track="call_click" data-location="landing_footer">(941) 422-4405</a> · <a href="https://wa.me/19414224405?text=" rel="noopener" target="_blank" data-track="whatsapp_click" data-location="landing_footer">WhatsApp</a></p>
-      <p class="muted">Sarasota · Bradenton · Venice · St. Petersburg · Longboat Key · Siesta Key · Lido Key · Brandon · Manatee County</p>
+      <img class="footer-logo" src="/img/brand/logo-120.webp" srcset="/img/brand/logo-120.webp 1x, /img/brand/logo-240.webp 2x" width="44" height="44" loading="lazy" alt="ShineToGo Mobile Detailing" />
+      <p>Professional mobile car and boat detailing. We come to you.</p>
+      <div class="ig">
+        <a href="https://www.instagram.com/shinetogomobilecarwash" target="_blank" rel="noopener noreferrer"><img src="/img/brand/ig-qr-192.webp" width="64" height="64" loading="lazy" alt="Instagram QR" /></a>
+        <a href="https://www.instagram.com/shinetogomobilecarwash" target="_blank" rel="noopener noreferrer"><strong>@shinetogomobilecarwash</strong><span>Follow us for daily work</span></a>
+      </div>
     </div>
-    <ul>
-      <li><a href="/">Home</a></li>
-      <li><a href="/window-tint/">Window Tint</a></li>
-      <li><a href="/ceramic-coating/">Ceramic Coating</a></li>
-      <li><a href="/privacy/">Privacy policy</a></li>
-      <li><a href="/es/polarizado-de-vidrios/" hreflang="es" lang="es">Español</a></li>
-    </ul>
+    <div class="col">
+      <h3>Services</h3>
+      <a href="/#services">Auto Detailing</a>
+      <a href="/#services">Boat Detailing</a>
+      <a href="/window-tint/">Window Tint</a>
+      <a href="/ceramic-coating/">Ceramic</a>
+    </div>
+    <div class="col">
+      <h3>Service Areas</h3>
+      <span>Sarasota</span>
+      <span>Bradenton</span>
+      <span>Venice</span>
+      <span>St. Petersburg</span>
+      <span>Longboat Key</span>
+      <span>Siesta Key</span>
+      <span>Lido Key</span>
+      <span>Brandon</span>
+      <span>Manatee County</span>
+    </div>
+    <div class="col">
+      <h3>Contact Us</h3>
+      <a href="tel:+19414224405" data-track="call_click" data-location="landing_footer">📞 (941) 422-4405</a>
+      <a class="wa" href="https://wa.me/19414224405?text=" rel="noopener noreferrer" target="_blank" data-track="whatsapp_click" data-location="landing_footer">💬 WhatsApp</a>
+      <a href="/privacy/">Privacy</a>
+    </div>
   </div>
-  <p class="wrap legal">© 2026 ShineToGo Mobile Detailing. All rights reserved.</p>
+  <p class="wrap legal">© 2026 ShineToGo Mobile Detailing. Designed by Bliss Systems LLC.</p>
 </footer>
-<script type="application/json" id="l10n">{"lang":"en","page":"tint","required":"This field is required.","phoneBad":"Enter a phone number with at least 10 digits.","emailBad":"Enter a valid email or leave it blank.","send":"Send request","sending":"Sending…","errTitle":"We couldn’t send your request.","errBody":"Your details are still here. Try again, or message us on WhatsApp or call.","errFields":"Check the highlighted fields.","retry":"Try again","okTitle":"Got it, thanks.","okBody":"We’ll reply with a price range. For the fastest quote, send photos on WhatsApp.","okWa":"Send photos on WhatsApp","okRef":"Your reference","waPhotos":"Hi! Sending photos for my quote. Ref:","consentTitle":"Your privacy choices","consentBody":"With your permission we use cookies and pixels to measure visits and ads. Your quote request works the same either way.","consentAccept":"Accept","consentReject":"Reject","consentMore":"Privacy policy","privacy":"/privacy/","callLabel":"Call"}</script>
+<script type="application/json" id="l10n">{"lang":"en","page":"tint","consentTitle":"Your privacy choices","consentBody":"With your permission we use cookies and pixels to measure visits and ads. Your quote request works the same either way.","consentAccept":"Accept","consentReject":"Reject","consentMore":"Privacy policy","privacy":"/privacy/"}</script>
 <script type="module" src="/src/landing.js"></script>
 </body>
 </html>

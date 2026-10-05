@@ -31,25 +31,27 @@
 <body>
 <!-- BORRADOR: revisión de un abogado de Florida pendiente antes de campañas pagadas (TCPA/FTSA, cookies). -->
 <a class="skip" href="#main">Saltar al contenido</a>
-<header class="site-header">
-  <div class="wrap bar">
+<header class="site-header" id="site-header">
+  <div class="bar">
     <a class="brand" href="/es/" aria-label="ShineToGo Mobile Detailing: Inicio">
-      <img src="/img/brand/logo-120.webp" width="40" height="40" alt="" />
-      <span>ShineToGo Mobile Detailing</span>
+      <img src="/img/brand/logo-120.webp" srcset="/img/brand/logo-120.webp 1x, /img/brand/logo-240.webp 2x" width="60" height="60" alt="" />
     </a>
-    <nav class="nav" aria-label="Primary">
+    <nav class="nav-links" aria-label="Primary">
       <a href="/es/#services">Servicios</a>
-      <a href="/es/polarizado-de-vidrios/">Polarizado de vidrios</a>
-      <a href="/es/recubrimiento-ceramico/">Recubrimiento cerámico</a>
+      <a href="/es/polarizado-de-vidrios/">Polarizado</a>
+      <a href="/es/recubrimiento-ceramico/">Cerámico</a>
+      <a href="/es/#pricing">Paquetes</a>
+      <a href="/es/#gallery">Proyectos</a>
       <a href="/es/#contact">Contacto</a>
-      <a class="lang" href="/privacy/" hreflang="en" lang="en" title="View in English">English</a>
     </nav>
-    <div class="bar-cta">
-      <a class="btn btn-ghost" href="tel:+19414224405" data-track="call_click" data-location="landing_header">Llamar</a>
+    <div class="nav-end">
+      <a class="lang-btn" href="/privacy/" hreflang="en" lang="en" title="View in English">EN</a>
+      <a class="btn btn-primary" href="/es/#contact" data-track="cta_click" data-location="landing_header">Cotizar</a>
     </div>
   </div>
 </header>
-<main id="main" class="wrap narrow doc">
+<main id="main" class="tone-light doc">
+  <div class="wrap narrow">
   <h1>Política de privacidad</h1>
   <p class="muted">Última actualización: 2026-10-05</p>
   <h2>Quiénes somos</h2>
@@ -75,26 +77,47 @@
   <p>Este sitio es para adultos. No recopilamos información de menores a sabiendas.</p>
   <h2>Cambios</h2>
   <p>Si cambiamos esta política, actualizamos la fecha al inicio de esta página.</p>
+  </div>
 </main>
 <footer class="site-footer">
-  <div class="wrap foot">
+  <div class="wrap footer-grid">
     <div>
-      <strong>ShineToGo Mobile Detailing</strong>
-      <p>Lavado y detallado móvil de carros y botes, más polarizado y recubrimiento cerámico para carros.</p>
-      <p><a href="tel:+19414224405" data-track="call_click" data-location="landing_footer">(941) 422-4405</a> · <a href="https://wa.me/19414224405?text=" rel="noopener" target="_blank" data-track="whatsapp_click" data-location="landing_footer">WhatsApp</a></p>
-      <p class="muted">Sarasota · Bradenton · Venice · St. Petersburg · Longboat Key · Siesta Key · Lido Key · Brandon · Manatee County</p>
+      <img class="footer-logo" src="/img/brand/logo-120.webp" srcset="/img/brand/logo-120.webp 1x, /img/brand/logo-240.webp 2x" width="44" height="44" loading="lazy" alt="ShineToGo Mobile Detailing" />
+      <p>Detallado móvil profesional de carros y botes. Vamos a ti.</p>
+      <div class="ig">
+        <a href="https://www.instagram.com/shinetogomobilecarwash" target="_blank" rel="noopener noreferrer"><img src="/img/brand/ig-qr-192.webp" width="64" height="64" loading="lazy" alt="Instagram QR" /></a>
+        <a href="https://www.instagram.com/shinetogomobilecarwash" target="_blank" rel="noopener noreferrer"><strong>@shinetogomobilecarwash</strong><span>Síguenos para trabajos diarios</span></a>
+      </div>
     </div>
-    <ul>
-      <li><a href="/es/">Inicio</a></li>
-      <li><a href="/es/polarizado-de-vidrios/">Polarizado de vidrios</a></li>
-      <li><a href="/es/recubrimiento-ceramico/">Recubrimiento cerámico</a></li>
-      <li><a href="/es/privacidad/">Política de privacidad</a></li>
-      <li><a href="/privacy/" hreflang="en" lang="en">English</a></li>
-    </ul>
+    <div class="col">
+      <h3>Servicios</h3>
+      <a href="/es/#services">Auto Detailing</a>
+      <a href="/es/#services">Detallado de Botes</a>
+      <a href="/es/polarizado-de-vidrios/">Polarizado</a>
+      <a href="/es/recubrimiento-ceramico/">Cerámico</a>
+    </div>
+    <div class="col">
+      <h3>Áreas de Servicio</h3>
+      <span>Sarasota</span>
+      <span>Bradenton</span>
+      <span>Venice</span>
+      <span>St. Petersburg</span>
+      <span>Longboat Key</span>
+      <span>Siesta Key</span>
+      <span>Lido Key</span>
+      <span>Brandon</span>
+      <span>Manatee County</span>
+    </div>
+    <div class="col">
+      <h3>Contáctanos</h3>
+      <a href="tel:+19414224405" data-track="call_click" data-location="landing_footer">📞 (941) 422-4405</a>
+      <a class="wa" href="https://wa.me/19414224405?text=" rel="noopener noreferrer" target="_blank" data-track="whatsapp_click" data-location="landing_footer">💬 WhatsApp</a>
+      <a href="/es/privacidad/">Privacidad</a>
+    </div>
   </div>
-  <p class="wrap legal">© 2026 ShineToGo Mobile Detailing. Todos los derechos reservados.</p>
+  <p class="wrap legal">© 2026 ShineToGo Mobile Detailing. Designed by Bliss Systems LLC.</p>
 </footer>
-<script type="application/json" id="l10n">{"lang":"es","page":"privacy","required":"Este campo es obligatorio.","phoneBad":"Escribe un teléfono con al menos 10 dígitos.","emailBad":"Escribe un email válido o déjalo vacío.","send":"Enviar solicitud","sending":"Enviando…","errTitle":"No pudimos enviar tu solicitud.","errBody":"Tus datos siguen aquí. Inténtalo de nuevo, o escríbenos por WhatsApp o llámanos.","errFields":"Revisa los campos marcados.","retry":"Intentar de nuevo","okTitle":"Recibido, gracias.","okBody":"Te respondemos con un rango de precio. Para cotizar más rápido, manda fotos por WhatsApp.","okWa":"Mandar fotos por WhatsApp","okRef":"Tu referencia","waPhotos":"¡Hola! Envío fotos para mi cotización. Ref:","consentTitle":"Tus opciones de privacidad","consentBody":"Con tu permiso usamos cookies y píxeles para medir visitas y anuncios. Tu solicitud de cotización funciona igual en ambos casos.","consentAccept":"Aceptar","consentReject":"Rechazar","consentMore":"Política de privacidad","privacy":"/es/privacidad/","callLabel":"Llamar"}</script>
+<script type="application/json" id="l10n">{"lang":"es","page":"privacy","consentTitle":"Tus opciones de privacidad","consentBody":"Con tu permiso usamos cookies y píxeles para medir visitas y anuncios. Tu solicitud de cotización funciona igual en ambos casos.","consentAccept":"Aceptar","consentReject":"Rechazar","consentMore":"Política de privacidad","privacy":"/es/privacidad/"}</script>
 <script type="module" src="/src/landing.js"></script>
 </body>
 </html>

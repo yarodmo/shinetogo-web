@@ -16,7 +16,6 @@ import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { tint } from '../src/content/tint.js'
 import { ceramic } from '../src/content/ceramic.js'
-import { FORM } from '../src/content/forms.js'
 import { services } from '../src/content/services.js'
 import {
   BRAND_FULL, BRAND_SHORT, PHONE_DISPLAY, PHONE_TEL, WA_NUMBER as WA, INSTAGRAM_URL, PLACES, COUNTIES, AREAS, AREA_COPY,
@@ -74,26 +73,18 @@ const other = { tint: 'ceramic', ceramic: 'tint' }
 /* ───────────────────────── textos de la interfaz de las páginas estáticas ───────────────────────── */
 const UI = {
   en: {
-    skip: 'Skip to content', home: 'Home', services: 'Services', gallery: 'Gallery', contact: 'Contact',
-    altContact: 'Prefer WhatsApp or a call?', call: 'Call', orCall: 'Or call', quoteCta: 'Or request a quote with the form',
+    skip: 'Skip to content', home: 'Home', services: 'Services',
+    call: 'Call', orCall: 'Or call',
+    quoteCardLead: 'Quotes are requested in the form on our main page, with {service} already selected. You can also send photos on WhatsApp.',
     areasTitle: 'Where we work', faqTitle: 'Questions', otherServices: 'Other services',
-    name: 'Full name', phone: 'Phone / WhatsApp', email: 'Email (optional)', vehicleType: 'Vehicle type', vehicleTypeChoose: 'Choose…',
-    car: 'Car / Sedan', suv: 'SUV / Truck', exotic: 'Exotic / Luxury',
-    zip: 'ZIP code (optional)', send: 'Send request', required: 'This field is required.', phoneBad: 'Enter a phone number with at least 10 digits.', emailBad: 'Enter a valid email or leave it blank.',
-    privacy: 'Privacy policy', lang: 'Español', langLabel: 'Ver en español',
-    footerLine: 'Mobile car and boat detailing, plus window tint and ceramic coating for cars.', rights: 'All rights reserved.',
-    breadcrumbHome: 'Home', waPhotos: 'Hi! Sending photos for my quote. Ref:', sticky: 'Request a quote',
+    privacy: 'Privacy policy', lang: 'Español', langLabel: 'Ver en español', breadcrumbHome: 'Home',
   },
   es: {
-    skip: 'Saltar al contenido', home: 'Inicio', services: 'Servicios', gallery: 'Galería', contact: 'Contacto',
-    altContact: '¿Prefieres WhatsApp o una llamada?', call: 'Llamar', orCall: 'O llama al', quoteCta: 'O pide la cotización con el formulario',
+    skip: 'Saltar al contenido', home: 'Inicio', services: 'Servicios',
+    call: 'Llamar', orCall: 'O llama al',
+    quoteCardLead: 'La cotización se pide en el formulario de nuestra página principal, con {service} ya seleccionado. También puedes mandar fotos por WhatsApp.',
     areasTitle: 'Dónde trabajamos', faqTitle: 'Preguntas', otherServices: 'Otros servicios',
-    name: 'Nombre completo', phone: 'Teléfono / WhatsApp', email: 'Email (opcional)', vehicleType: 'Tipo de vehículo', vehicleTypeChoose: 'Elige…',
-    car: 'Carro / Sedán', suv: 'SUV / Camioneta', exotic: 'Exótico / Lujo',
-    zip: 'ZIP code (opcional)', send: 'Enviar solicitud', required: 'Este campo es obligatorio.', phoneBad: 'Escribe un teléfono con al menos 10 dígitos.', emailBad: 'Escribe un email válido o déjalo vacío.',
-    privacy: 'Política de privacidad', lang: 'English', langLabel: 'View in English',
-    footerLine: 'Lavado y detallado móvil de carros y botes, más polarizado y recubrimiento cerámico para carros.', rights: 'Todos los derechos reservados.',
-    breadcrumbHome: 'Inicio', waPhotos: '¡Hola! Envío fotos para mi cotización. Ref:', sticky: 'Pedir cotización',
+    privacy: 'Política de privacidad', lang: 'English', langLabel: 'View in English', breadcrumbHome: 'Inicio',
   },
 }
 
@@ -178,6 +169,9 @@ function businessNode(lang) {
   }
 }
 
+// La cotización vive en la home: /?service=tint#contact (y /es/?service=ceramic#contact). Cualquier otra página cae en #contact.
+const quoteHref = (lang, key) => (key === 'tint' || key === 'ceramic' ? `${URLS.home[lang]}?service=${key}#contact` : `${URLS.home[lang]}#contact`)
+
 // Cabecera y pie: MISMO contenido, textos y estilo que la home (src/App.jsx y src/index.css). Los textos salen de src/i18n.jsx.
 const IG_HANDLE = `@${new URL(INSTAGRAM_URL).pathname.replace(/\//g, '')}`
 const LOGO_SRCSET = '/img/brand/logo-120.webp 1x, /img/brand/logo-240.webp 2x'
@@ -187,7 +181,7 @@ function header(lang, key) {
   const alt = lang === 'es' ? 'en' : 'es'
   const home = URLS.home[lang]
   const t = (k) => i18nText(lang, k)
-  const quoteHref = key === 'tint' || key === 'ceramic' ? '#quote' : `${home}#contact`
+  const quote = quoteHref(lang, key)
   return `<a class="skip" href="#main">${u.skip}</a>
 <header class="site-header" id="site-header">
   <div class="bar">
@@ -200,11 +194,11 @@ function header(lang, key) {
       <a href="${URLS.ceramic[lang]}"${key === 'ceramic' ? ' aria-current="page"' : ''}>${esc(t('navCeramic'))}</a>
       <a href="${home}#pricing">${esc(t('navPricing'))}</a>
       <a href="${home}#gallery">${esc(t('navGallery'))}</a>
-      <a href="${quoteHref}">${esc(t('navContact'))}</a>
+      <a href="${home}#contact">${esc(t('navContact'))}</a>
     </nav>
     <div class="nav-end">
       <a class="lang-btn" href="${URLS[key][alt]}" hreflang="${alt}" lang="${alt}" title="${esc(u.langLabel)}">${alt.toUpperCase()}</a>
-      <a class="btn btn-primary" href="${quoteHref}" data-track="cta_click" data-location="landing_header">${esc(t('navBook'))}</a>
+      <a class="btn btn-primary" href="${quote}" data-track="cta_click" data-location="landing_header">${esc(t('navBook'))}</a>
     </div>
   </div>
 </header>`
@@ -252,54 +246,28 @@ function figure(name, lang, label) {
   return markup ? `<figure class="diagram" role="group" aria-label="${esc(label)}">${markup}</figure>` : ''
 }
 
-const chips = (type, name, items, checkedFirst = false) => items
-  .map(([value, label], i) => `<label class="chip"><input type="${type}" name="${name}" value="${value}"${checkedFirst && i === items.length - 1 ? ' checked' : ''} /><span>${esc(label)}</span></label>`)
-  .join('')
-
-// Cada servicio pide sus propios detalles. El servicio va fijo (la página ya lo dice): no hay selector.
-function leadForm(lang, id) {
+// Toda cotización se hace en el formulario de la home. Estas páginas son informativas: la tarjeta lleva ahí con el servicio ya elegido.
+function quoteCard(lang, id) {
   const u = UI[lang]
-  const s = services[lang]
-  const f = FORM[lang]
-  const page = PAGES[id][lang]
-  const veh = ['car', 'suv', 'exotic'].map((v) => `<option value="${v}">${u[v]}</option>`).join('')
-  const details = id === 'tint'
-    ? `<fieldset class="opts"><legend>${esc(f.windowsLabel)}</legend><div class="chips">${chips('checkbox', 'coverage', f.windows)}</div></fieldset>
-  <fieldset class="opts"><legend>${esc(f.filmLabel)}</legend><div class="chips">${chips('radio', 'film', f.films, true)}</div></fieldset>
-  <label class="check"><input type="checkbox" name="has_old_tint" /><span>${esc(f.oldTint)}</span></label>`
-    : `<fieldset class="opts"><legend>${esc(f.areasLabel)}</legend><div class="chips">${chips('checkbox', 'ceramic_areas', f.areas)}</div></fieldset>`
-  // Oculto hasta que cargue el JS: sin JS el navegador lo enviaría por GET y pondría los datos en la URL.
-  return `<form id="quote-form" class="lead-form" novalidate hidden data-service="${id}">
-  <h2 id="quote-h">${esc(page.form.title)}</h2>
-  <p class="lead">${esc(page.form.lead)}</p>
-  <div class="grid2">
-    <label>${u.name}<input name="name" autocomplete="name" required maxlength="80" /></label>
-    <label>${u.phone}<input name="phone" type="tel" inputmode="tel" autocomplete="tel" required maxlength="30" /></label>
-    <label>${u.email}<input name="email" type="email" autocomplete="email" maxlength="120" /></label>
-    <label>${u.vehicleType}<select name="vehicle_type" required><option value="">${u.vehicleTypeChoose}</option>${veh}</select></label>
-    <label>${esc(s.formVehicleText)}<input name="vehicle" maxlength="80" /></label>
-    <label>${u.zip}<input name="zip" inputmode="numeric" autocomplete="postal-code" maxlength="10" /></label>
+  const c = PAGES[id][lang]
+  const href = quoteHref(lang, id)
+  return `<div id="quote" class="quote-card">
+  <h2>${esc(c.form.title)}</h2>
+  <p class="lead">${esc(u.quoteCardLead.replace('{service}', c.service))}</p>
+  <div class="cta-row">
+    <a class="btn btn-primary" href="${href}" data-track="cta_click" data-location="landing_quote" data-service="${id}">${esc(i18nText(lang, 'heroCta1'))}</a>
+    <a class="btn btn-green" href="${waLink(c.wa)}" target="_blank" rel="noopener" data-track="whatsapp_click" data-location="landing_quote" data-service="${id}"><span aria-hidden="true">💬</span> ${esc(c.cta.whatsapp)}</a>
   </div>
-  ${details}
-  <div class="hp" aria-hidden="true"><label>Company URL<input name="company_url" tabindex="-1" autocomplete="off" /></label></div>
-  <label class="consent"><input type="checkbox" name="consent_sms" /><span>${esc(s.formConsent.replace('{brand}', BRAND))} <a href="${URLS.privacy[lang]}">${esc(s.formPrivacyLink)}</a> · <a href="${URLS.privacy[lang]}#messaging">${esc(s.formMessagingLink)}</a></span></label>
-  <button type="submit" class="btn btn-primary">${u.send}</button>
-  <p class="note">${esc(s.formAvailability)}</p>
-  <div id="form-status" role="status" aria-live="polite"></div>
-</form>`
+  <p class="alt-contact">${u.orCall} <a href="tel:${PHONE_TEL}" data-track="call_click" data-location="landing_quote" data-service="${id}">${PHONE_DISPLAY}</a></p>
+</div>`
 }
 
 function l10nBlob(lang, id) {
-  const s = services[lang]
-  const u = UI[lang]
+  const sv = services[lang]
   return `<script type="application/json" id="l10n">${JSON.stringify({
     lang, page: id,
-    required: u.required, phoneBad: u.phoneBad, emailBad: u.emailBad, send: u.send,
-    sending: s.formSending, errTitle: s.formErrTitle, errBody: s.formErrBody, errFields: s.formErrFields, retry: s.formRetry,
-    okTitle: s.successTitle, okBody: s.successBody, okWa: s.successWhatsapp, okRef: s.successRef, waPhotos: u.waPhotos,
-    consentTitle: s.consentTitle, consentBody: s.consentBody, consentAccept: s.consentAccept, consentReject: s.consentReject,
-    consentMore: s.consentMore, privacy: URLS.privacy[lang],
-    callLabel: u.call,
+    consentTitle: sv.consentTitle, consentBody: sv.consentBody, consentAccept: sv.consentAccept, consentReject: sv.consentReject,
+    consentMore: sv.consentMore, privacy: URLS.privacy[lang],
   })}</script>`
 }
 
@@ -461,7 +429,7 @@ function landing(id, lang) {
       <h1>${esc(c.h1)}</h1>
       <p class="answer">${esc(c.answer)}</p>
       <div class="cta-row">
-        <a class="btn btn-primary" href="#quote" data-track="cta_click" data-location="landing_hero" data-service="${id}">${esc(i18nText(lang, 'heroCta1'))}</a>
+        <a class="btn btn-primary" href="${quoteHref(lang, id)}" data-track="cta_click" data-location="landing_hero" data-service="${id}">${esc(i18nText(lang, 'heroCta1'))}</a>
         <a class="btn btn-green" href="${wa}" target="_blank" rel="noopener" data-track="whatsapp_click" data-location="landing_hero" data-service="${id}"><span aria-hidden="true">💬</span> ${esc(c.cta.whatsapp)}</a>
       </div>
       <p class="cta-text">${u.orCall} <a class="textlink" href="tel:${PHONE_TEL}" data-track="call_click" data-location="landing_hero" data-service="${id}">${PHONE_DISPLAY}</a></p>
@@ -477,9 +445,8 @@ function landing(id, lang) {
         <h3>${u.areasTitle}</h3>
         <p>${esc(AREA_COPY[lang])}</p>
       </div>
-      <div id="quote">
-        ${leadForm(lang, id)}
-        <p class="alt-contact">${u.altContact} <a href="${wa}" target="_blank" rel="noopener" data-track="whatsapp_click" data-location="landing_form" data-service="${id}">WhatsApp</a> · <a href="tel:${PHONE_TEL}" data-track="call_click" data-location="landing_form" data-service="${id}">${PHONE_DISPLAY}</a></p>
+      <div>
+        ${quoteCard(lang, id)}
       </div>
     </div>
   </section>

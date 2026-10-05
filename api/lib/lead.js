@@ -20,7 +20,7 @@ const TINT_SERVICES = ['tint', 'tint_ceramic']
 const CERAMIC_SERVICES = ['ceramic', 'tint_ceramic']
 const ATTRIBUTION_KEYS = [
   'utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term',
-  'gclid', 'gbraid', 'wbraid', 'fbclid', 'referrer', 'landing', 'page',
+  'gclid', 'gbraid', 'wbraid', 'fbclid', 'referrer', 'landing', 'page', 'via',
 ]
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i
 

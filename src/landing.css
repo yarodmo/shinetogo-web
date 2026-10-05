@@ -134,33 +134,12 @@ p + p { margin-top: 12px; }
 .faq[open] summary::after { content: '–'; }
 .faq p { padding: 0 20px 18px; color: var(--muted); }
 
-/* ─── Formulario ─── */
-.lead-form { background: var(--surface); border: 1px solid var(--line); border-radius: 20px; padding: 28px; box-shadow: var(--shadow-soft); }
-.lead-form h2 { font-size: 24px; }
-.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px; }
-.lead-form label { display: grid; gap: 6px; font-size: 13px; font-weight: 600; color: var(--muted); }
-.lead-form input:not([type='checkbox']):not([type='radio']), .lead-form select { width: 100%; min-height: 46px; border-radius: 10px; border: 1px solid var(--field-line); background: var(--field); color: var(--fg-strong); padding: 10px 12px; font: 400 16px var(--font-main); }
-.lead-form .input-error { border-color: var(--danger); }
-.err { color: var(--danger); font-size: 12.5px; font-weight: 600; }
-.film { border: 0; margin-bottom: 14px; }
-.film legend { font-size: 13px; font-weight: 600; color: var(--muted); margin-bottom: 6px; }
-.chips { display: flex; gap: 8px; flex-wrap: wrap; }
-.chip { position: relative; display: inline-flex !important; grid-template-columns: none; }
-.chip input { position: absolute; opacity: 0; }
-.chip span { border: 1.5px solid var(--field-line); border-radius: 99px; padding: 8px 16px; font-size: 14px; color: var(--fg); cursor: pointer; }
-.chip input:checked + span { border-color: var(--brand-blue); background: var(--chip-on); color: var(--fg-strong); }
-.chip input:focus-visible + span { outline: 3px solid var(--brand-gold); outline-offset: 2px; }
-.hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
-.consent { grid-template-columns: auto 1fr !important; align-items: start; gap: 10px !important; font-weight: 400 !important; font-size: 13px !important; line-height: 1.5; margin: 6px 0 16px; }
-.consent input { width: 20px; height: 20px; margin-top: 2px; }
-.consent a { color: var(--link); }
-.lead-form .btn { width: 100%; }
+/* ─── Tarjeta de cotización: lleva al formulario de la home ─── */
+.quote-card { background: var(--surface); border: 1px solid var(--line); border-radius: 20px; padding: 28px; box-shadow: var(--shadow-soft); }
+.quote-card h2 { font-size: 24px; }
+.quote-card .cta-row { margin-top: 18px; }
 .alt-contact { margin-top: 14px; font-size: 14px; color: var(--muted); }
 .alt-contact a { color: var(--link); font-weight: 700; }
-.note { font-size: 12.5px; color: var(--muted); margin-top: 10px; }
-.form-alert { margin-top: 14px; border: 1px solid var(--danger); border-radius: 12px; padding: 14px 16px; background: var(--danger-bg); }
-.form-alert p { margin: 6px 0; color: var(--fg); }
-.form-ok { background: var(--surface); border: 1px solid var(--brand-green); border-radius: 20px; padding: 28px; display: grid; gap: 12px; justify-items: start; }
 
 /* ─── Privacidad ─── */
 .doc { padding-block: 56px 80px; }
@@ -211,10 +190,6 @@ p + p { margin-top: 12px; }
 .steps li::before { content: counter(step); position: absolute; left: 0; top: 0; width: 30px; height: 30px; border-radius: 50%; background: var(--brand-blue); color: var(--ink); font: 800 15px var(--font-heading); display: grid; place-items: center; }
 .steps strong { color: var(--fg-strong); }
 .steps span { color: var(--muted); }
-.opts { border: 0; margin: 0 0 14px; }
-.opts legend { font-size: 13px; font-weight: 600; color: var(--muted); margin-bottom: 8px; }
-.check { display: flex !important; grid-template-columns: none; align-items: center; gap: 10px !important; font-weight: 500 !important; color: var(--fg) !important; font-size: 15px !important; margin-bottom: 14px; }
-.check input { width: 20px; height: 20px; }
 .other { margin-top: 28px; font-size: 14px; color: var(--muted); }
 
 /* ─── Adaptación a pantallas pequeñas ─── */
@@ -231,7 +206,6 @@ p + p { margin-top: 12px; }
   .site-footer { padding-bottom: 104px; }
   body:has(.sticky-cta) .consent-banner { bottom: 84px; }
   .two { grid-template-columns: 1fr; gap: 32px; }
-  .grid2 { grid-template-columns: 1fr; }
   .band { padding-block: 56px; }
   .hero { padding-block: 16px 56px; }
   .cta-row .btn { flex: 1 1 100%; }

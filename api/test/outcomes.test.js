@@ -208,3 +208,16 @@ test('sin leads con edad suficiente la velocidad dice "sin dato" (null), no un 0
   fs.rmSync(dir, { recursive: true, force: true })
   assert.equal(rep.response.within_5_min_pct, null)
 })
+
+test('por página previa: cuenta de qué página informativa venía el visitante antes de cotizar en la home', () => {
+  const leads = [
+    mk(1, { attribution: { via: '/window-tint/' } }),
+    mk(2, { attribution: { via: '/window-tint/' } }),
+    mk(3, { attribution: { via: '/es/recubrimiento-ceramico/' } }),
+    mk(4),
+  ]
+  const { dir, leadsFile } = setup(leads)
+  const rep = buildReport({ leadsFile, now: new Date(T0 + 3600000) })
+  fs.rmSync(dir, { recursive: true, force: true })
+  assert.deepEqual(rep.by_via.map((r) => [r.key, r.leads]), [['/window-tint/', 2], ['(none)', 1], ['/es/recubrimiento-ceramico/', 1]].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0])))
+})

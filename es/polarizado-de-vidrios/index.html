@@ -31,47 +31,48 @@
 </head>
 <body>
 <a class="skip" href="#main">Saltar al contenido</a>
-<header class="site-header">
-  <div class="wrap bar">
+<header class="site-header" id="site-header">
+  <div class="bar">
     <a class="brand" href="/es/" aria-label="ShineToGo Mobile Detailing: Inicio">
-      <img src="/img/brand/logo-120.webp" width="40" height="40" alt="" />
-      <span>ShineToGo Mobile Detailing</span>
+      <img src="/img/brand/logo-120.webp" srcset="/img/brand/logo-120.webp 1x, /img/brand/logo-240.webp 2x" width="60" height="60" alt="" />
     </a>
-    <nav class="nav" aria-label="Primary">
+    <nav class="nav-links" aria-label="Primary">
       <a href="/es/#services">Servicios</a>
-      <a href="/es/polarizado-de-vidrios/" aria-current="page">Polarizado de vidrios</a>
-      <a href="/es/recubrimiento-ceramico/">Recubrimiento cerámico</a>
+      <a href="/es/polarizado-de-vidrios/" aria-current="page">Polarizado</a>
+      <a href="/es/recubrimiento-ceramico/">Cerámico</a>
+      <a href="/es/#pricing">Paquetes</a>
+      <a href="/es/#gallery">Proyectos</a>
       <a href="/es/#contact">Contacto</a>
-      <a class="lang" href="/window-tint/" hreflang="en" lang="en" title="View in English">English</a>
     </nav>
-    <div class="bar-cta">
-      <a class="btn btn-ghost" href="tel:+19414224405" data-track="call_click" data-location="landing_header">Llamar</a>
+    <div class="nav-end">
+      <a class="lang-btn" href="/window-tint/" hreflang="en" lang="en" title="View in English">EN</a>
+      <a class="btn btn-primary" href="/es/?service=tint#contact" data-track="cta_click" data-location="landing_header">Cotizar</a>
     </div>
   </div>
 </header>
 <main id="main">
-  <nav class="crumbs wrap" aria-label="Breadcrumb"><a href="/es/">Inicio</a><span aria-hidden="true"> › </span><span aria-current="page">Polarizado de vidrios</span></nav>
-  <section class="hero">
+  <section class="hero tone-light">
     <div class="wrap">
+      <nav class="crumbs" aria-label="Breadcrumb"><a href="/es/">Inicio</a><span aria-hidden="true"> › </span><span aria-current="page">Polarizado de vidrios</span></nav>
       <p class="eyebrow">POLARIZADO (TINT) · PELÍCULA DE CARBONO Y CERÁMICA</p>
       <h1>Polarizado para las ventanas, el vidrio trasero, la franja del parabrisas y el sunroof de tu carro</h1>
       <p class="answer">Polarizamos las ventanas de adelante y de atrás, el vidrio trasero, la franja transparente de arriba del parabrisas y el sunroof (quemacocos; mándanos una foto y te decimos si la película le va). Película de carbono o cerámica, tú escoges. Florida pone un mínimo distinto para cada ventana y lo repasamos contigo antes de cortar. Manda fotos por WhatsApp y te cotizamos.</p>
       <div class="cta-row">
+        <a class="btn btn-primary" href="/es/?service=tint#contact" data-track="cta_click" data-location="landing_hero" data-service="tint">Pedir cotización</a>
         <a class="btn btn-green" href="https://wa.me/19414224405?text=%C2%A1Hola!%20Quiero%20cotizar%20el%20polarizado%20de%20mi%20carro.%20Es%20un%20(a%C3%B1o%2C%20marca%20y%20modelo)%3A%20" target="_blank" rel="noopener" data-track="whatsapp_click" data-location="landing_hero" data-service="tint"><span aria-hidden="true">💬</span> Cotiza tu polarizado por WhatsApp</a>
-        <a class="btn btn-ghost" href="tel:+19414224405" data-track="call_click" data-location="landing_hero" data-service="tint">Llamar (941) 422-4405</a>
       </div>
-      <p class="cta-text"><a class="textlink" href="#quote" data-track="cta_click" data-location="landing_hero" data-service="tint">O pide la cotización con el formulario</a></p>
+      <p class="cta-text">O llama al <a class="textlink" href="tel:+19414224405" data-track="call_click" data-location="landing_hero" data-service="tint">(941) 422-4405</a></p>
       <ul class="pills"><li>Película de carbono y cerámica</li><li>Cotización por foto</li></ul>
     </div>
   </section>
   
-  <section class="band" aria-labelledby="win-h">
+  <section class="band tone-dark" aria-labelledby="win-h">
     <div class="wrap">
       <h2 id="win-h">Qué vidrios</h2>
       <div class="tiles"><article class="tile"><h3>Ventanas de los lados</h3><p>Las de adelante y las de atrás. Las de adelante no pueden ir tan oscuras como las de atrás.</p></article><article class="tile"><h3>Vidrio trasero</h3><p>La misma película que los lados, cortada para el vidrio de atrás. Si tu carro ya trae ese vidrio oscuro de fábrica, puede haber poco margen para agregar película; te lo decimos antes de empezar.</p></article><article class="tile"><h3>Franja del parabrisas</h3><p>En Florida solo se permite la franja transparente sobre la línea AS-1 que trae el vidrio. El resto del parabrisas queda sin película.</p></article><article class="tile"><h3>Sunroof (quemacocos)</h3><p>Mándanos una foto junto con las del resto del carro y te decimos si la película le va.</p></article></div>
     </div>
   </section>
-  <section class="band alt" aria-labelledby="why-h">
+  <section class="band tone-light" aria-labelledby="why-h">
     <div class="wrap two">
       <div>
         <h2 id="why-h">Por qué lo hace la gente aquí</h2>
@@ -86,7 +87,7 @@
 </figure></div>
     </div>
   </section>
-  <section class="band" aria-labelledby="film-h">
+  <section class="band tone-dark" aria-labelledby="film-h">
     <div class="wrap two">
       <div>
         <h2 id="film-h">¿Película de carbono o cerámica?</h2>
@@ -107,7 +108,7 @@
 </figure></div>
     </div>
   </section>
-  <section class="band alt" id="limits" aria-labelledby="lim-h">
+  <section class="band tone-light" id="limits" aria-labelledby="lim-h">
     <div class="wrap two">
       <div>
         <h2 id="lim-h">Los límites de Florida, ventana por ventana</h2>
@@ -131,7 +132,7 @@
 </figure></div>
     </div>
   </section>
-  <section class="band" aria-labelledby="how-h">
+  <section class="band tone-dark" aria-labelledby="how-h">
     <div class="wrap two">
       <div>
         <h2 id="how-h">Cómo funciona la cotización</h2>
@@ -139,32 +140,20 @@
         <h3>Dónde trabajamos</h3>
         <p>Trabajamos en Sarasota y Bradenton y por todo Manatee County, hasta Venice por el sur, en Lido Key, Siesta Key y Longboat Key, y más al norte en St. Petersburg y Brandon. Si no sabes si llegamos a tu zona, mándanos tu ZIP code y te decimos.</p>
       </div>
-      <div id="quote">
-        <form id="quote-form" class="lead-form" novalidate hidden data-service="tint">
-  <h2 id="quote-h">Pide tu cotización de polarizado</h2>
-  <p class="lead">Cuéntanos de tu carro y qué vidrios. Te respondemos con un rango de precio.</p>
-  <div class="grid2">
-    <label>Nombre completo<input name="name" autocomplete="name" required maxlength="80" /></label>
-    <label>Teléfono / WhatsApp<input name="phone" type="tel" inputmode="tel" autocomplete="tel" required maxlength="30" /></label>
-    <label>Email (opcional)<input name="email" type="email" autocomplete="email" maxlength="120" /></label>
-    <label>Tipo de vehículo<select name="vehicle_type" required><option value="">Elige…</option><option value="car">Carro / Sedán</option><option value="suv">SUV / Camioneta</option><option value="exotic">Exótico / Lujo</option></select></label>
-    <label>Año, marca, modelo<input name="vehicle" maxlength="80" /></label>
-    <label>ZIP code (opcional)<input name="zip" inputmode="numeric" autocomplete="postal-code" maxlength="10" /></label>
+      <div>
+        <div id="quote" class="quote-card">
+  <h2>Pide tu cotización de polarizado</h2>
+  <p class="lead">La cotización se pide en el formulario de nuestra página principal, con Polarizado de vidrios ya seleccionado. También puedes mandar fotos por WhatsApp.</p>
+  <div class="cta-row">
+    <a class="btn btn-primary" href="/es/?service=tint#contact" data-track="cta_click" data-location="landing_quote" data-service="tint">Pedir cotización</a>
+    <a class="btn btn-green" href="https://wa.me/19414224405?text=%C2%A1Hola!%20Quiero%20cotizar%20el%20polarizado%20de%20mi%20carro.%20Es%20un%20(a%C3%B1o%2C%20marca%20y%20modelo)%3A%20" target="_blank" rel="noopener" data-track="whatsapp_click" data-location="landing_quote" data-service="tint"><span aria-hidden="true">💬</span> Cotiza tu polarizado por WhatsApp</a>
   </div>
-  <fieldset class="opts"><legend>Vidrios</legend><div class="chips"><label class="chip"><input type="checkbox" name="coverage" value="front_sides" /><span>Ventanas de adelante</span></label><label class="chip"><input type="checkbox" name="coverage" value="rear_sides" /><span>Ventanas de atrás</span></label><label class="chip"><input type="checkbox" name="coverage" value="back_window" /><span>Vidrio trasero</span></label><label class="chip"><input type="checkbox" name="coverage" value="windshield_strip" /><span>Franja del parabrisas</span></label><label class="chip"><input type="checkbox" name="coverage" value="sunroof" /><span>Sunroof</span></label><label class="chip"><input type="checkbox" name="coverage" value="full_car" /><span>Todas las ventanas (menos el parabrisas)</span></label></div></fieldset>
-  <fieldset class="opts"><legend>Película</legend><div class="chips"><label class="chip"><input type="radio" name="film" value="carbon" /><span>Película de carbono</span></label><label class="chip"><input type="radio" name="film" value="ceramic" /><span>Película cerámica</span></label><label class="chip"><input type="radio" name="film" value="unsure" checked /><span>No sé, recomiéndame una</span></label></div></fieldset>
-  <label class="check"><input type="checkbox" name="has_old_tint" /><span>Tengo polarizado que quitar</span></label>
-  <div class="hp" aria-hidden="true"><label>Company URL<input name="company_url" tabindex="-1" autocomplete="off" /></label></div>
-  <label class="consent"><input type="checkbox" name="consent_sms" /><span>Acepto que ShineToGo Mobile Detailing me envíe mensajes de texto, me escriba por WhatsApp y me llame al número indicado sobre mi cotización y mi cita, incluso con un sistema automatizado. Entiendo que no tengo que aceptar esto para recibir una cotización ni para comprar nada. La frecuencia de los mensajes varía. Pueden aplicar tarifas de mensajes y datos. Responde STOP para dejar de recibirlos o HELP para ayuda. <a href="/es/privacidad/">Política de privacidad</a> · <a href="/es/privacidad/#messaging">Términos de mensajería</a></span></label>
-  <button type="submit" class="btn btn-primary">Enviar solicitud</button>
-  <p class="note">Te respondemos si tenemos espacio para el día que pides.</p>
-  <div id="form-status" role="status" aria-live="polite"></div>
-</form>
-        <p class="alt-contact">¿Prefieres WhatsApp o una llamada? <a href="https://wa.me/19414224405?text=%C2%A1Hola!%20Quiero%20cotizar%20el%20polarizado%20de%20mi%20carro.%20Es%20un%20(a%C3%B1o%2C%20marca%20y%20modelo)%3A%20" target="_blank" rel="noopener" data-track="whatsapp_click" data-location="landing_form" data-service="tint">WhatsApp</a> · <a href="tel:+19414224405" data-track="call_click" data-location="landing_form" data-service="tint">(941) 422-4405</a></p>
+  <p class="alt-contact">O llama al <a href="tel:+19414224405" data-track="call_click" data-location="landing_quote" data-service="tint">(941) 422-4405</a></p>
+</div>
       </div>
     </div>
   </section>
-  <section class="band alt" aria-labelledby="faq-h">
+  <section class="band tone-light" aria-labelledby="faq-h">
     <div class="wrap narrow">
       <h2 id="faq-h">Preguntas</h2>
       <details class="faq"><summary>Polarizado, tinte, tint: ¿es lo mismo?</summary><p>Sí. Polarizado, tinte o tint, todos hablan de la película que se pega en los vidrios del carro. Lo de «polarizado» no es técnicamente exacto, pero así lo conoce todo el mundo.</p></details>
@@ -178,28 +167,48 @@
   </section>
 </main>
 <div class="sticky-cta">
-  <a class="btn btn-ghost" href="tel:+19414224405" data-track="call_click" data-location="landing_sticky" data-service="tint">Llamar</a>
+  <a class="btn btn-ghost" href="tel:+19414224405" data-track="call_click" data-location="landing_sticky" data-service="tint"><span aria-hidden="true">📞</span> Llamar</a>
   <a class="btn btn-green" href="https://wa.me/19414224405?text=%C2%A1Hola!%20Quiero%20cotizar%20el%20polarizado%20de%20mi%20carro.%20Es%20un%20(a%C3%B1o%2C%20marca%20y%20modelo)%3A%20" target="_blank" rel="noopener" data-track="whatsapp_click" data-location="landing_sticky" data-service="tint"><span aria-hidden="true">💬</span> WhatsApp</a>
 </div>
 <footer class="site-footer">
-  <div class="wrap foot">
+  <div class="wrap footer-grid">
     <div>
-      <strong>ShineToGo Mobile Detailing</strong>
-      <p>Lavado y detallado móvil de carros y botes, más polarizado y recubrimiento cerámico para carros.</p>
-      <p><a href="tel:+19414224405" data-track="call_click" data-location="landing_footer">(941) 422-4405</a> · <a href="https://wa.me/19414224405?text=" rel="noopener" target="_blank" data-track="whatsapp_click" data-location="landing_footer">WhatsApp</a></p>
-      <p class="muted">Sarasota · Bradenton · Venice · St. Petersburg · Longboat Key · Siesta Key · Lido Key · Brandon · Manatee County</p>
+      <img class="footer-logo" src="/img/brand/logo-120.webp" srcset="/img/brand/logo-120.webp 1x, /img/brand/logo-240.webp 2x" width="44" height="44" loading="lazy" alt="ShineToGo Mobile Detailing" />
+      <p>Detallado móvil profesional de carros y botes. Vamos a ti.</p>
+      <div class="ig">
+        <a href="https://www.instagram.com/shinetogomobilecarwash" target="_blank" rel="noopener noreferrer"><img src="/img/brand/ig-qr-192.webp" width="64" height="64" loading="lazy" alt="Instagram QR" /></a>
+        <a href="https://www.instagram.com/shinetogomobilecarwash" target="_blank" rel="noopener noreferrer"><strong>@shinetogomobilecarwash</strong><span>Síguenos para trabajos diarios</span></a>
+      </div>
     </div>
-    <ul>
-      <li><a href="/es/">Inicio</a></li>
-      <li><a href="/es/polarizado-de-vidrios/">Polarizado de vidrios</a></li>
-      <li><a href="/es/recubrimiento-ceramico/">Recubrimiento cerámico</a></li>
-      <li><a href="/es/privacidad/">Política de privacidad</a></li>
-      <li><a href="/window-tint/" hreflang="en" lang="en">English</a></li>
-    </ul>
+    <div class="col">
+      <h3>Servicios</h3>
+      <a href="/es/#services">Auto Detailing</a>
+      <a href="/es/#services">Detallado de Botes</a>
+      <a href="/es/polarizado-de-vidrios/">Polarizado</a>
+      <a href="/es/recubrimiento-ceramico/">Cerámico</a>
+    </div>
+    <div class="col">
+      <h3>Áreas de Servicio</h3>
+      <span>Sarasota</span>
+      <span>Bradenton</span>
+      <span>Venice</span>
+      <span>St. Petersburg</span>
+      <span>Longboat Key</span>
+      <span>Siesta Key</span>
+      <span>Lido Key</span>
+      <span>Brandon</span>
+      <span>Manatee County</span>
+    </div>
+    <div class="col">
+      <h3>Contáctanos</h3>
+      <a href="tel:+19414224405" data-track="call_click" data-location="landing_footer">📞 (941) 422-4405</a>
+      <a class="wa" href="https://wa.me/19414224405?text=" rel="noopener noreferrer" target="_blank" data-track="whatsapp_click" data-location="landing_footer">💬 WhatsApp</a>
+      <a href="/es/privacidad/">Privacidad</a>
+    </div>
   </div>
-  <p class="wrap legal">© 2026 ShineToGo Mobile Detailing. Todos los derechos reservados.</p>
+  <p class="wrap legal">© 2026 ShineToGo Mobile Detailing. Designed by Bliss Systems LLC.</p>
 </footer>
-<script type="application/json" id="l10n">{"lang":"es","page":"tint","required":"Este campo es obligatorio.","phoneBad":"Escribe un teléfono con al menos 10 dígitos.","emailBad":"Escribe un email válido o déjalo vacío.","send":"Enviar solicitud","sending":"Enviando…","errTitle":"No pudimos enviar tu solicitud.","errBody":"Tus datos siguen aquí. Inténtalo de nuevo, o escríbenos por WhatsApp o llámanos.","errFields":"Revisa los campos marcados.","retry":"Intentar de nuevo","okTitle":"Recibido, gracias.","okBody":"Te respondemos con un rango de precio. Para cotizar más rápido, manda fotos por WhatsApp.","okWa":"Mandar fotos por WhatsApp","okRef":"Tu referencia","waPhotos":"¡Hola! Envío fotos para mi cotización. Ref:","consentTitle":"Tus opciones de privacidad","consentBody":"Con tu permiso usamos cookies y píxeles para medir visitas y anuncios. Tu solicitud de cotización funciona igual en ambos casos.","consentAccept":"Aceptar","consentReject":"Rechazar","consentMore":"Política de privacidad","privacy":"/es/privacidad/","callLabel":"Llamar"}</script>
+<script type="application/json" id="l10n">{"lang":"es","page":"tint","consentTitle":"Tus opciones de privacidad","consentBody":"Con tu permiso usamos cookies y píxeles para medir visitas y anuncios. Tu solicitud de cotización funciona igual en ambos casos.","consentAccept":"Aceptar","consentReject":"Rechazar","consentMore":"Política de privacidad","privacy":"/es/privacidad/"}</script>
 <script type="module" src="/src/landing.js"></script>
 </body>
 </html>

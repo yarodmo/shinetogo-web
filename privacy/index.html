@@ -31,25 +31,27 @@
 <body>
 <!-- BORRADOR: revisión de un abogado de Florida pendiente antes de campañas pagadas (TCPA/FTSA, cookies). -->
 <a class="skip" href="#main">Skip to content</a>
-<header class="site-header">
-  <div class="wrap bar">
+<header class="site-header" id="site-header">
+  <div class="bar">
     <a class="brand" href="/" aria-label="ShineToGo Mobile Detailing: Home">
-      <img src="/img/brand/logo-120.webp" width="40" height="40" alt="" />
-      <span>ShineToGo Mobile Detailing</span>
+      <img src="/img/brand/logo-120.webp" srcset="/img/brand/logo-120.webp 1x, /img/brand/logo-240.webp 2x" width="60" height="60" alt="" />
     </a>
-    <nav class="nav" aria-label="Primary">
+    <nav class="nav-links" aria-label="Primary">
       <a href="/#services">Services</a>
       <a href="/window-tint/">Window Tint</a>
-      <a href="/ceramic-coating/">Ceramic Coating</a>
+      <a href="/ceramic-coating/">Ceramic</a>
+      <a href="/#pricing">Pricing</a>
+      <a href="/#gallery">Projects</a>
       <a href="/#contact">Contact</a>
-      <a class="lang" href="/es/privacidad/" hreflang="es" lang="es" title="Ver en español">Español</a>
     </nav>
-    <div class="bar-cta">
-      <a class="btn btn-ghost" href="tel:+19414224405" data-track="call_click" data-location="landing_header">Call</a>
+    <div class="nav-end">
+      <a class="lang-btn" href="/es/privacidad/" hreflang="es" lang="es" title="Ver en español">ES</a>
+      <a class="btn btn-primary" href="/#contact" data-track="cta_click" data-location="landing_header">Get a quote</a>
     </div>
   </div>
 </header>
-<main id="main" class="wrap narrow doc">
+<main id="main" class="tone-light doc">
+  <div class="wrap narrow">
   <h1>Privacy Policy</h1>
   <p class="muted">Last updated: 2026-10-05</p>
   <h2>Who we are</h2>
@@ -75,26 +77,47 @@
   <p>This site is for adults. We do not knowingly collect information from children.</p>
   <h2>Changes</h2>
   <p>If we change this policy we update the date at the top of this page.</p>
+  </div>
 </main>
 <footer class="site-footer">
-  <div class="wrap foot">
+  <div class="wrap footer-grid">
     <div>
-      <strong>ShineToGo Mobile Detailing</strong>
-      <p>Mobile car and boat detailing, plus window tint and ceramic coating for cars.</p>
-      <p><a href="tel:+19414224405" data-track="call_click" data-location="landing_footer">(941) 422-4405</a> · <a href="https://wa.me/19414224405?text=" rel="noopener" target="_blank" data-track="whatsapp_click" data-location="landing_footer">WhatsApp</a></p>
-      <p class="muted">Sarasota · Bradenton · Venice · St. Petersburg · Longboat Key · Siesta Key · Lido Key · Brandon · Manatee County</p>
+      <img class="footer-logo" src="/img/brand/logo-120.webp" srcset="/img/brand/logo-120.webp 1x, /img/brand/logo-240.webp 2x" width="44" height="44" loading="lazy" alt="ShineToGo Mobile Detailing" />
+      <p>Professional mobile car and boat detailing. We come to you.</p>
+      <div class="ig">
+        <a href="https://www.instagram.com/shinetogomobilecarwash" target="_blank" rel="noopener noreferrer"><img src="/img/brand/ig-qr-192.webp" width="64" height="64" loading="lazy" alt="Instagram QR" /></a>
+        <a href="https://www.instagram.com/shinetogomobilecarwash" target="_blank" rel="noopener noreferrer"><strong>@shinetogomobilecarwash</strong><span>Follow us for daily work</span></a>
+      </div>
     </div>
-    <ul>
-      <li><a href="/">Home</a></li>
-      <li><a href="/window-tint/">Window Tint</a></li>
-      <li><a href="/ceramic-coating/">Ceramic Coating</a></li>
-      <li><a href="/privacy/">Privacy policy</a></li>
-      <li><a href="/es/privacidad/" hreflang="es" lang="es">Español</a></li>
-    </ul>
+    <div class="col">
+      <h3>Services</h3>
+      <a href="/#services">Auto Detailing</a>
+      <a href="/#services">Boat Detailing</a>
+      <a href="/window-tint/">Window Tint</a>
+      <a href="/ceramic-coating/">Ceramic</a>
+    </div>
+    <div class="col">
+      <h3>Service Areas</h3>
+      <span>Sarasota</span>
+      <span>Bradenton</span>
+      <span>Venice</span>
+      <span>St. Petersburg</span>
+      <span>Longboat Key</span>
+      <span>Siesta Key</span>
+      <span>Lido Key</span>
+      <span>Brandon</span>
+      <span>Manatee County</span>
+    </div>
+    <div class="col">
+      <h3>Contact Us</h3>
+      <a href="tel:+19414224405" data-track="call_click" data-location="landing_footer">📞 (941) 422-4405</a>
+      <a class="wa" href="https://wa.me/19414224405?text=" rel="noopener noreferrer" target="_blank" data-track="whatsapp_click" data-location="landing_footer">💬 WhatsApp</a>
+      <a href="/privacy/">Privacy</a>
+    </div>
   </div>
-  <p class="wrap legal">© 2026 ShineToGo Mobile Detailing. All rights reserved.</p>
+  <p class="wrap legal">© 2026 ShineToGo Mobile Detailing. Designed by Bliss Systems LLC.</p>
 </footer>
-<script type="application/json" id="l10n">{"lang":"en","page":"privacy","required":"This field is required.","phoneBad":"Enter a phone number with at least 10 digits.","emailBad":"Enter a valid email or leave it blank.","send":"Send request","sending":"Sending…","errTitle":"We couldn’t send your request.","errBody":"Your details are still here. Try again, or message us on WhatsApp or call.","errFields":"Check the highlighted fields.","retry":"Try again","okTitle":"Got it, thanks.","okBody":"We’ll reply with a price range. For the fastest quote, send photos on WhatsApp.","okWa":"Send photos on WhatsApp","okRef":"Your reference","waPhotos":"Hi! Sending photos for my quote. Ref:","consentTitle":"Your privacy choices","consentBody":"With your permission we use cookies and pixels to measure visits and ads. Your quote request works the same either way.","consentAccept":"Accept","consentReject":"Reject","consentMore":"Privacy policy","privacy":"/privacy/","callLabel":"Call"}</script>
+<script type="application/json" id="l10n">{"lang":"en","page":"privacy","consentTitle":"Your privacy choices","consentBody":"With your permission we use cookies and pixels to measure visits and ads. Your quote request works the same either way.","consentAccept":"Accept","consentReject":"Reject","consentMore":"Privacy policy","privacy":"/privacy/"}</script>
 <script type="module" src="/src/landing.js"></script>
 </body>
 </html>

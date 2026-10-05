@@ -50,6 +50,7 @@ npm run report -- --json
 - **La velocidad de respuesta sale de la hora de `contacted`**, y esa hora es la de anotarlo. Anótalo cuando ocurre o usa `--at`; no puede ser anterior al lead ni futura. Cotizar o ganar días
   después no se cuenta como "primer contacto", y el reporte avisa de los leads que llegaron a cotizado o ganado sin un `contacted` anotado.
 - Los días del reporte (`--from`, `--to`, formato `AAAA-MM-DD`, estricto) se cuentan en hora de Florida, no en UTC.
+- Como toda cotización se hace en el formulario de la home, el reporte también cuenta **qué página informativa vio el visitante antes de cotizar** (`via`, p. ej. `/window-tint/`; `(none)` = llegó directo a la home).
 - El reporte da: embudo (leads → atendidos → cotizados → agendados → ganados), ingreso, **velocidad de primera respuesta** (mediana y % dentro de 5, 15 y 60 minutos;
   el denominador son los leads con al menos esa edad y uno que nunca se atendió cuenta en contra), y por fuente, servicio, idioma y página de entrada.
 - **Con menos de 30 leads avisa que no hay conclusiones, y marca "n bajo" cualquier fila de menos de 20.** No tomes decisiones de presupuesto con n bajo.

@@ -23,7 +23,7 @@ Si algo aquí cambia, cambia en el código en un solo lugar (se indica dónde).
 
 ## 2b. Dos servicios distintos (decisión del dueño, 5 oct 2026)
 
-**Window Tint y Ceramic Coating NO son una sola línea «Protection».** Cada uno tiene su identidad: menú, tarjeta de la home, landing, formulario, preguntas y esquema. Ninguno se vende como complemento del otro, no hay opción «Tint + Cerámico» ni pregunta «¿ambos juntos?». Quien quiere los dos hace dos cotizaciones (o lo escribe en el mensaje).
+**Window Tint y Ceramic Coating NO son una sola línea «Protection».** Cada uno tiene su contenido: menú, tarjeta de la home, página informativa, preguntas y esquema. **El formulario es uno solo, el de la home** (decisión del 5-oct-2026: es la misma empresa, los mismos formularios y los mismos estilos; el objetivo es retener el lead en la página principal). Las páginas de polarizado y cerámico son informativas (resultados, proceso, límites legales) y mandan a la cotización de la home con el servicio ya elegido: `/?service=tint#contact`. Ninguno se vende como complemento del otro, no hay opción «Tint + Cerámico» ni pregunta «¿ambos juntos?». Quien quiere los dos hace dos cotizaciones (o lo escribe en el mensaje).
 
 | | Window Tint / Polarizado de vidrios | Ceramic Coating / Recubrimiento cerámico |
 |---|---|---|
@@ -67,6 +67,7 @@ La home (React, `src/index.css`) es la referencia porque es la identidad que el 
 | Diagramas | Siempre en su propio panel oscuro (`.diagram`), sea cual sea el tono de la sección |
 | Contenedor | 1200 px con 24 px de margen |
 | Pie | Fondo `#0a0e1a`, cuatro columnas (marca + Instagram · Servicios · Zonas · Contacto), línea de derechos igual |
+| Formulario | Uno solo, el de la home. Las páginas estáticas no tienen `<form>`: su botón lleva a `/?service=tint#contact` (o `ceramic`). `check-dist` falla si aparece un formulario fuera de la home |
 | Cuatro tarjetas | 4 columnas en pantalla ancha, 2×2 en media, 1 en móvil. Nunca una sola en la segunda fila |
 | Ilustraciones | Dibujos propios del mismo trazo, no fotos de stock presentadas como trabajos |
 

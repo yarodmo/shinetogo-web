@@ -107,3 +107,9 @@ test('correo: el HTML escapa el nombre dentro del href y del texto', () => {
   assert.doesNotMatch(html, /<img src=x/)
   assert.doesNotMatch(html, /href="[^"]*"[^>]*onerror/)
 })
+
+test('la página previa (via) se guarda con la atribución y sale en el correo', () => {
+  const l = lead({ attribution: { via: '/window-tint/', landing: '/' } })
+  assert.equal(l.attribution.via, '/window-tint/')
+  assert.match(renderEmail(l, { brand: 'B' }).text, /via: \/window-tint\//)
+})
