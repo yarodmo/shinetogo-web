@@ -52,6 +52,8 @@ Cada punto indica qué se publica hoy en su lugar y qué cambia cuando responda.
 41. ¿Aceptas que se registren a mano los leads de WhatsApp y de llamadas (`npm run lead:add`) durante 8–12 semanas? Sin eso el reporte solo ve el formulario y el canal principal queda sin medir.
 42. ¿Algún proveedor de SMS o CRM ya contratado (GoHighLevel, Twilio, Housecall Pro...)? Cambia qué se puede automatizar y qué debe decir la política de privacidad.
 
+43. **Origen de las fotos de la home.** La foto del pulido (carrusel «Precision Polish» y tarjeta de cerámico) muestra un taller blanco, un Mercedes con **matrícula de formato británico legible** y una camisa con «SHINETOGO» que parece añadida: no parece un trabajo hecho en Florida. La foto principal (el hombre con el carro negro y la camioneta) también tiene aspecto muy pulido. ¿Son trabajos reales de ustedes, con permiso de la persona y del dueño del carro? Si no lo son, no deben presentarse como trabajos propios: reemplazar por fotos reales (lista en `docs/BRAND.md` §8) o, mientras tanto, usar un esquema como el de la tarjeta de polarizado. Ver también la pregunta 22.
+
 ## Prueba y fotos
 21. **Reseñas con permiso** (con enlace al origen) y **fotos propias** de tint y cerámico (lista en `docs/BRAND.md` §8). Sin matrículas visibles. Hoy las páginas no llevan fotos de trabajos de estos servicios porque no hay.
 22. La imagen principal de la home (`hero-finish`) tiene rasgos de imagen sintética y una placa legible: ¿es una foto real de un trabajo real, con permiso de la persona y del dueño del carro?

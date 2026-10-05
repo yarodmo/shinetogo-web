@@ -29,11 +29,7 @@ export default function Services() {
           {t('svcHeadline')}
         </h2>
 
-        <div className="services-grid" style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
-          gap: '24px'
-        }}>
+        <div className="services-grid cards-4">
           {SERVICES.map((svc) => {
             const href = typeof svc.href === 'string' ? svc.href : svc.href[lang]
             const diagram = svc.diagram ? heatDiagrams[`../assets/protection/heat-path.${lang}.svg`] : null

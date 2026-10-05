@@ -127,7 +127,8 @@ const CLAIMS = [
   [/certified (applicator|installer)|aplicador certificado/i, 'sin certificado del fabricante no se dice'],
 ]
 const stripComments = (t) => t.replace(/\/\*[\s\S]*?\*\//g, '').replace(/^\s*\/\/.*$/gm, '').replace(/\s\/\/ .*$/gm, '')
-const sources = ['src/i18n.jsx', ...fs.readdirSync('src/content').filter((f) => f.endsWith('.js')).map((f) => `src/content/${f}`)]
+const dirFiles = (dir, ext) => fs.readdirSync(dir).filter((f) => f.endsWith(ext)).map((f) => `${dir}/${f}`)
+const sources = ['src/i18n.jsx', 'src/App.jsx', ...dirFiles('src/content', '.js'), ...dirFiles('src/sections', '.jsx'), ...dirFiles('src/components', '.jsx')]
 const copyBlobs = [
   ...pages.map((p) => [p.url, p.html.replace(/<script[\s\S]*?<\/script>/g, '')]),
   ['/llms.txt', fs.existsSync(path.join(DIST, 'llms.txt')) ? fs.readFileSync(path.join(DIST, 'llms.txt'), 'utf8') : ''],

@@ -23,11 +23,7 @@ export default function About() {
           {t('aboutText')}
         </p>
 
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
-          gap: '20px'
-        }}>
+        <div className="cards-4">
           {CARDS.map((c, i) => (
             <div key={i} className="glass-card animated-fade-in" style={{
               padding: '40px 32px', textAlign: 'center'

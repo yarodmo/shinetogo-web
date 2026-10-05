@@ -69,10 +69,10 @@ const base = {
 
     // Process
     processHeadline: 'How it works',
-    proc1Title: 'Request a quote', proc1Desc: 'Call, message us on WhatsApp or fill in the form.',
-    proc2Title: 'We Arrive', proc2Desc: 'We arrive with the equipment and products for the job.',
-    proc3Title: 'Detailing', proc3Desc: 'We perform the complete service with professional products',
-    proc4Title: 'Inspection and payment', proc4Desc: 'We go over the result together and you pay.',
+    proc1Title: 'Request a quote', proc1Desc: 'Photos on WhatsApp, a call or the form.',
+    proc2Title: 'We arrive', proc2Desc: 'At the place and time we agreed.',
+    proc3Title: 'The work', proc3Desc: 'We do the job you quoted.',
+    proc4Title: 'Check and pay', proc4Desc: 'We go over it together, then you pay.',
     processCta: 'Want a quote?',
     processCtaSub: 'Send a photo on WhatsApp.',
 
@@ -207,10 +207,10 @@ const base = {
 
     // Process
     processHeadline: 'Cómo funciona',
-    proc1Title: 'Pide tu cotización', proc1Desc: 'Llámanos, escríbenos por WhatsApp o llena el formulario.',
-    proc2Title: 'Llegamos', proc2Desc: 'Llegamos con el equipo y los productos para el trabajo.',
-    proc3Title: 'Detallado', proc3Desc: 'Realizamos el servicio completo con productos profesionales',
-    proc4Title: 'Inspección y pago', proc4Desc: 'Revisamos el resultado juntos y cobramos.',
+    proc1Title: 'Pide tu cotización', proc1Desc: 'Fotos por WhatsApp, una llamada o el formulario.',
+    proc2Title: 'Llegamos', proc2Desc: 'Al lugar y la hora que acordamos.',
+    proc3Title: 'El trabajo', proc3Desc: 'Hacemos el trabajo cotizado.',
+    proc4Title: 'Revisión y pago', proc4Desc: 'Lo revisamos juntos y luego pagas.',
     processCta: '¿Quieres una cotización?',
     processCtaSub: 'Mándanos una foto por WhatsApp.',
 

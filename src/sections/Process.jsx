@@ -1,11 +1,12 @@
 import { useI18n } from '../i18n'
 import { waLink } from '../lib/site'
+import StepArt from '../components/StepArt'
 
 const STEPS = [
-  { key: 'proc1', icon: '📋', num: '01' },
-  { key: 'proc2', icon: '🚚', num: '02' },
-  { key: 'proc3', icon: '✨', num: '03' },
-  { key: 'proc4', icon: '✅', num: '04' },
+  { key: 'proc1', n: 1, num: '01' },
+  { key: 'proc2', n: 2, num: '02' },
+  { key: 'proc3', n: 3, num: '03' },
+  { key: 'proc4', n: 4, num: '04' },
 ]
 
 export default function Process() {
@@ -22,21 +23,17 @@ export default function Process() {
           {t('processHeadline')}
         </h2>
 
-        <div className="process-grid" style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
-          gap: '24px'
-        }}>
+        <div className="process-grid cards-4">
           {STEPS.map((s, i) => (
             <div key={i} className="animated-fade-in" style={{
-              textAlign: 'center', padding: '40px 24px',
+              textAlign: 'center', padding: '32px 22px 36px',
               background: 'rgba(255,255,255,0.03)', borderRadius: '20px',
               border: '1px solid var(--border-dark)',
               position: 'relative'
             }}>
               <span className="step-num" data-num={s.num} aria-hidden="true" />
-              <div style={{ fontSize: '40px', marginBottom: '20px' }}>{s.icon}</div>
-              <h3 style={{ fontSize: '18px', fontWeight: 800, color: '#fff', marginBottom: '12px' }}>
+              <StepArt n={s.n} />
+              <h3 style={{ fontSize: '18px', fontWeight: 800, color: '#fff', marginBottom: '8px' }}>
                 {t(`${s.key}Title`)}
               </h3>
               <p style={{ fontSize: '14px', color: 'var(--text-muted)', lineHeight: 1.6 }}>

@@ -4,7 +4,7 @@ import { waLink } from '../lib/site'
 
 // Versiones 640/1080 (4:3) generadas por scripts/optimize-assets.cjs.
 const SLIDES = [
-  { base: '/img/hero/finish', wide: 1080, label: { en: 'Showroom Finish', es: 'Acabado Showroom' } },
+  { base: '/img/hero/finish', wide: 1080, label: { en: 'Exterior detail', es: 'Detallado exterior' } },
   { base: '/img/hero/polish', wide: 1024, label: { en: 'Precision Polish', es: 'Pulido de Precisión' } },
   { base: '/img/hero/foam', wide: 1080, label: { en: 'Snow Foam Wash', es: 'Lavado con Espuma' } },
 ]
