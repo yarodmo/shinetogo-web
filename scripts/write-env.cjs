@@ -7,7 +7,7 @@
 const { formatEnv } = require('../api/lib/envfile')
 
 const REQUIRED = ['PORT', 'SMTP_HOST', 'SMTP_PORT', 'SMTP_USER', 'SMTP_PASS', 'RECIPIENT', 'ALLOWED_ORIGINS']
-const OPTIONAL = ['BRAND_NAME', 'LEADS_FILE']
+const OPTIONAL = ['BRAND_NAME', 'LEADS_FILE', 'LEAD_WEBHOOK_URL', 'LEAD_WEBHOOK_SECRET']
 
 const missing = REQUIRED.filter((k) => !process.env[k])
 if (missing.length) {
@@ -17,6 +17,12 @@ if (missing.length) {
 const origins = process.env.ALLOWED_ORIGINS.split(',').map((s) => s.trim())
 if (origins.some((o) => !/^https?:\/\/[^/\s]+$/.test(o))) {
   console.error('ALLOWED_ORIGINS debe ser una lista de orígenes https://dominio separados por coma, sin barra final ni ruta')
+  process.exit(1)
+}
+
+// Reenvío opcional del lead a n8n/GHL: una URL sin secreto (o con http) se rechaza aquí, antes de desplegar.
+try { require('../api/lib/forward').webhookConfig(process.env) } catch (e) {
+  console.error(e.message)
   process.exit(1)
 }
 

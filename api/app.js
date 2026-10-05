@@ -31,6 +31,7 @@ function createApp({
   maxLeadsFileBytes = DEFAULT_MAX_BYTES,
   retryDelayMs = 60000,
   mailTimeoutMs = 5000,
+  forward = null, // (lead) => void; reenvío opcional a un webhook propio (ver lib/forward.js). Nunca bloquea.
   log = defaultLog,
 }) {
   const app = express()
@@ -136,6 +137,10 @@ function createApp({
 
     if (!stored && !notified) return { status: 500, body: { success: false, error: 'Could not save your request. Please try again or call us.' } }
     log('info', 'lead captured', { lead_id: lead.lead_id, service: lead.service, notified })
+    // Tercer canal, después de que el lead ya quedó aceptado: si falla, no cambia lo que ve el visitante.
+    if (forward) {
+      try { forward(lead) } catch (err) { log('error', 'lead forward threw', { lead_id: lead.lead_id, error: err.message }) }
+    }
     return { status: 200, body: { success: true, lead_id: lead.lead_id, notified } }
   }
 

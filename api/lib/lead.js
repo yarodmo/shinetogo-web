@@ -128,6 +128,52 @@ function normalizeLead(body, { now = new Date(), ip = '', userAgent = '' } = {})
 
 const label = (k) => k.replace(/_/g, ' ')
 
+// Nombres de servicio para el mensaje que el dueño le manda al cliente en español.
+const SERVICES_ES = {
+  express: 'lavado Express',
+  full: 'detallado Full',
+  premium: 'detallado Premium',
+  ceramic: 'recubrimiento cerámico',
+  tint: 'polarizado de vidrios',
+  tint_ceramic: 'polarizado y recubrimiento cerámico',
+  boat: 'detallado de bote',
+  other: 'servicio',
+}
+
+/**
+ * Teléfono → solo dígitos con código de país, como piden wa.me y tel:, o null si no se puede asegurar a quién llamaría.
+ * El negocio opera en Florida: sin "+", solo se acepta un número norteamericano válido (10 dígitos, o 11 con un 1 delante;
+ * código de área y central empiezan en 2-9). Con "+" se acepta un número internacional de 8 a 15 dígitos (y si es +1, también
+ * debe ser norteamericano válido). Una extensión ("ext 5") o un formato dudoso da null en vez de un número equivocado.
+ */
+const NANP = /^1?([2-9]\d{2}[2-9]\d{6})$/
+function toE164(phone) {
+  const raw = String(phone).trim()
+  const digits = raw.replace(/\D/g, '')
+  if (raw.startsWith('+')) {
+    if (digits.length < 8 || digits.length > 15) return null
+    return digits.startsWith('1') ? (NANP.test(digits) && digits.length === 11 ? digits : null) : digits
+  }
+  const m = digits.match(NANP)
+  return m ? `1${m[1]}` : null
+}
+
+/**
+ * Enlaces de respuesta con un toque para el dueño: llamar y WhatsApp con el primer mensaje ya escrito en el idioma
+ * del cliente. El texto no promete precio, plazo ni descuento; el dueño lo puede editar antes de enviar.
+ */
+function replyLinks(lead, { brand = 'ShineToGo' } = {}) {
+  const number = toE164(lead.phone)
+  if (!number) return { tel: null, wa: null }
+  const first = (String(lead.name).match(/^[\p{L}\p{M}'’-]+/u) || [''])[0]
+  const ref = lead.lead_id.slice(0, 8)
+  const es = lead.lang === 'es'
+  const text = es
+    ? `Hola ${first}, te escribe ${brand}. Gracias por tu solicitud de ${SERVICES_ES[lead.service]} (ref ${ref}). ¿Nos mandas unas fotos del vehículo por aquí para darte un rango de precio?`
+    : `Hi ${first}, this is ${brand}. Thanks for your ${SERVICES[lead.service]} request (ref ${ref}). Could you send a few photos of the vehicle here so we can give you a price range?`
+  return { tel: `tel:+${number}`, wa: `https://wa.me/${number}?text=${encodeURIComponent(text.replace(/\s+,/g, ','))}` }
+}
+
 function rows(lead, brand) {
   const attr = Object.entries(lead.attribution).map(([k, v]) => [label(k), v])
   return {
@@ -163,10 +209,23 @@ function renderEmail(lead, { brand = 'ShineToGo' } = {}) {
   const { main, attribution } = rows(lead, brand)
   const ref = lead.lead_id.slice(0, 8)
   const source = lead.attribution.utm_source || (lead.attribution.gclid ? 'google' : lead.attribution.fbclid ? 'meta' : 'direct')
-  const subject = `[${ref}] ${SERVICES[lead.service]}: ${lead.name} (${source})`
+  // El asunto alcanza para decidir desde la pantalla de bloqueo: servicio, idioma de respuesta, ZIP y de dónde vino.
+  const subject = `[${ref}] ${SERVICES[lead.service]} · ${lead.lang.toUpperCase()}${lead.zip ? ` · ${lead.zip}` : ''}: ${lead.name} (${source})`
+  const links = replyLinks(lead, { brand })
+  // El formulario no puede probar que quien marcó la casilla es el dueño del número: se dice tal cual.
+  const consentLine = lead.consent.sms
+    ? 'Text OK: box ticked, number not verified. Confirm it is theirs in your first message before sending anything automated.'
+    : 'Text OK: NO. Reply by call or one-to-one message to the person who wrote to us; no automated or bulk messages.'
+  const consentHtml = lead.consent.sms
+    ? 'Texting box ticked, number not verified. Confirm it is theirs in your first message before sending anything automated.'
+    : 'No texting consent. Reply by call or one-to-one message to the person who wrote to us; no automated or bulk messages.'
+  const verifyLine = 'Verify the number before replying: it does not look like a US number (or has an extension).'
 
   const text = [
     `NEW LEAD ${ref} · ${SERVICES[lead.service]}`,
+    '',
+    ...(links.tel ? [`Call: ${links.tel}`, `WhatsApp reply: ${links.wa}`] : [verifyLine]),
+    consentLine,
     '',
     ...main.map(([k, v]) => `${k}: ${v}`),
     '',
@@ -183,6 +242,12 @@ function renderEmail(lead, { brand = 'ShineToGo' } = {}) {
   const html =
     `<div style="font-family:'Segoe UI',Arial,sans-serif;max-width:640px;margin:0 auto;border:1px solid #e2e8f0;border-radius:12px;overflow:hidden">` +
     `<div style="background:#0a0e1a;color:#fff;padding:16px 20px"><strong>${esc(brand)}</strong> · New lead <code>${esc(ref)}</code> · ${esc(SERVICES[lead.service])}</div>` +
+    `<div style="padding:14px 20px;background:#f8fafc;border-bottom:1px solid #e2e8f0">` +
+    (links.tel
+      ? `<a href="${esc(links.tel)}" style="display:inline-block;margin:0 8px 8px 0;padding:10px 16px;border-radius:8px;background:#0f172a;color:#fff;text-decoration:none;font-weight:600">Call ${esc(lead.name.split(/\s+/)[0])}</a>` +
+        `<a href="${esc(links.wa)}" style="display:inline-block;margin:0 8px 8px 0;padding:10px 16px;border-radius:8px;background:#16a34a;color:#fff;text-decoration:none;font-weight:600">Reply on WhatsApp (${esc(lead.lang === 'es' ? 'Español' : 'English')})</a>`
+      : `<div style="font-size:13px;color:#b45309;font-weight:600;margin-bottom:6px">${esc(verifyLine)}</div>`) +
+    `<div style="font-size:13px;color:${lead.consent.sms ? '#166534' : '#b45309'}">${esc(consentHtml)}</div></div>` +
     `<table style="width:100%;border-collapse:collapse;font-size:14px">${main.map(tr).join('')}</table>` +
     `<div style="background:#f8fafc;padding:10px 20px;font-size:12px;color:#475569">Attribution</div>` +
     `<table style="width:100%;border-collapse:collapse;font-size:13px">${(attribution.length ? attribution : [['(none)', '']]).map(tr).join('')}</table>` +
@@ -191,4 +256,4 @@ function renderEmail(lead, { brand = 'ShineToGo' } = {}) {
   return { subject, text, html }
 }
 
-module.exports = { SERVICES, normalizeLead, renderEmail, esc, clean }
+module.exports = { SERVICES, normalizeLead, renderEmail, replyLinks, toE164, esc, clean }

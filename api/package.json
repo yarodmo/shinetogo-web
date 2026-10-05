@@ -6,7 +6,9 @@
   "scripts": {
     "start": "node server.js",
     "dev": "node --watch server.js",
-    "test": "node --test test/api.test.js test/envfile.test.js"
+    "test": "node --test test/api.test.js test/envfile.test.js test/followup.test.js test/outcomes.test.js test/forward.test.js",
+    "report": "node tools/leads-report.js",
+    "outcome": "node tools/lead-outcome.js"
   },
   "dependencies": {
     "cors": "^2.8.5",

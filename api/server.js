@@ -12,6 +12,7 @@ const os = require('node:os')
 const path = require('node:path')
 const nodemailer = require('nodemailer')
 const { createApp } = require('./app')
+const { webhookConfig, createForwarder } = require('./lib/forward')
 
 const PORT = process.env.PORT || 6544
 const SMTP_HOST = process.env.SMTP_HOST || ''
@@ -32,6 +33,11 @@ if (process.env.NODE_ENV === 'production' && !(process.env.ALLOWED_ORIGINS && SM
   process.exit(1)
 }
 
+// Reenvío opcional a n8n / GoHighLevel. Una configuración a medias se corrige al arrancar, no se descubre perdiendo leads.
+let webhook = null
+try { webhook = webhookConfig(process.env) } catch (e) { console.error(`FATAL: ${e.message}`); process.exit(1) }
+const forward = webhook ? createForwarder({ ...webhook, log: (level, msg, meta) => (level === 'error' ? console.error : console.log)(meta ? `${msg} ${JSON.stringify(meta)}` : msg) }) : null
+
 const transporter = nodemailer.createTransport({
   host: SMTP_HOST,
   port: SMTP_PORT,
@@ -50,6 +56,7 @@ const app = createApp({
   smtpUser: SMTP_USER,
   brandName: BRAND_NAME,
   allowedOrigins: ALLOWED_ORIGINS,
+  forward,
 })
 
 transporter.verify()
@@ -60,7 +67,8 @@ const server = app.listen(PORT, '0.0.0.0', () => {
   console.log(`\n🚀 Lead API running on port ${PORT}`)
   console.log(`   Health:  http://localhost:${PORT}/api/health`)
   console.log(`   Leads:   ${LEADS_FILE}`)
-  console.log(`   Notify:  ${RECIPIENT}\n`)
+  console.log(`   Notify:  ${RECIPIENT}`)
+  console.log(`   Webhook: ${webhook ? new URL(webhook.url).host : 'off'}\n`)
 })
 
 // Cierre ordenado: deja terminar las solicitudes en curso antes de que PM2 reinicie.

@@ -2,6 +2,8 @@ name: 🚀 ShineToGo Mobile Detailing — Production Deploy
 
 # Secrets del repo (Settings → Secrets and variables → Actions → Secrets):
 #   VPS_HOST, VPS_PORT, VPS_USER, VPS_SSH_KEY, SMTP_PASS, RECIPIENT
+#   (opcional) LEAD_WEBHOOK_URL y LEAD_WEBHOOK_SECRET: reenvío del lead a n8n/GHL. Los dos son SECRETOS: la URL de un
+#   webhook suele llevar un token en la ruta y las variables de Actions se imprimen en los logs
 # Variables del repo (misma pantalla, pestaña Variables):
 #   API_PORT, SMTP_HOST, SMTP_PORT, SMTP_USER, ALLOWED_ORIGINS,
 #   VITE_SITE_URL, VITE_API_URL
@@ -78,6 +80,8 @@ jobs:
           SMTP_USER: ${{ vars.SMTP_USER }}
           ALLOWED_ORIGINS: ${{ vars.ALLOWED_ORIGINS }}
           BRAND_NAME: ${{ vars.BRAND_NAME }}
+          LEAD_WEBHOOK_URL: ${{ secrets.LEAD_WEBHOOK_URL }}
+          LEAD_WEBHOOK_SECRET: ${{ secrets.LEAD_WEBHOOK_SECRET }}
           SMTP_PASS: ${{ secrets.SMTP_PASS }}
           RECIPIENT: ${{ secrets.RECIPIENT }}
         run: |
