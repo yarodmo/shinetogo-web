@@ -1,80 +1,66 @@
 [
   {
-    "id": "c1-florida-sun_feed-1080x1350_en",
-    "kind": "ad",
-    "textAreaPct": 16.3,
-    "minContrast": 6.47,
-    "minContrastText": "Free quote · Appointments subject to availability",
-    "minFontPx": 24,
-    "fonts": {
-      "outfit": true,
-      "inter": true
-    },
-    "failures": [],
-    "warnings": []
-  },
-  {
-    "id": "c1-florida-sun_feed-1080x1350_es",
-    "kind": "ad",
-    "textAreaPct": 16.7,
-    "minContrast": 6.47,
-    "minContrastText": "Cotización gratis · Citas sujetas a disponibilidad",
-    "minFontPx": 24,
-    "fonts": {
-      "outfit": true,
-      "inter": true
-    },
-    "failures": [],
-    "warnings": []
-  },
-  {
-    "id": "c1-florida-sun_story-1080x1920_en",
-    "kind": "ad",
-    "textAreaPct": 13.9,
-    "minContrast": 6.65,
-    "minContrastText": "Sarasota · Bradenton · Tampa",
-    "minFontPx": 24,
-    "fonts": {
-      "outfit": true,
-      "inter": true
-    },
-    "failures": [],
-    "warnings": []
-  },
-  {
-    "id": "c1-florida-sun_story-1080x1920_es",
-    "kind": "ad",
-    "textAreaPct": 14.1,
-    "minContrast": 6.65,
-    "minContrastText": "Sarasota · Bradenton · Tampa",
-    "minFontPx": 24,
-    "fonts": {
-      "outfit": true,
-      "inter": true
-    },
-    "failures": [],
-    "warnings": []
-  },
-  {
-    "id": "c1-florida-sun_link-1200x628_en",
-    "kind": "ad",
-    "textAreaPct": 16.9,
-    "minContrast": 6.53,
-    "minContrastText": "Free quote · Appointments subject to availability",
-    "minFontPx": 21,
-    "fonts": {
-      "outfit": true,
-      "inter": true
-    },
-    "failures": [],
-    "warnings": []
-  },
-  {
-    "id": "c1-florida-sun_link-1200x628_es",
+    "id": "c1-tint-windows_feed-1080x1350_en",
     "kind": "ad",
     "textAreaPct": 17.1,
-    "minContrast": 6.53,
-    "minContrastText": "Cotización gratis · Citas sujetas a disponibilidad",
+    "minContrast": 6.59,
+    "minContrastText": "Appointments subject to availability",
+    "minFontPx": 22,
+    "fonts": {
+      "outfit": true,
+      "inter": true
+    },
+    "failures": [],
+    "warnings": []
+  },
+  {
+    "id": "c1-tint-windows_feed-1080x1350_es",
+    "kind": "ad",
+    "textAreaPct": 16.3,
+    "minContrast": 6.59,
+    "minContrastText": "Citas sujetas a disponibilidad",
+    "minFontPx": 22,
+    "fonts": {
+      "outfit": true,
+      "inter": true
+    },
+    "failures": [],
+    "warnings": []
+  },
+  {
+    "id": "c1-tint-windows_story-1080x1920_en",
+    "kind": "ad",
+    "textAreaPct": 15.8,
+    "minContrast": 6.17,
+    "minContrastText": "Carbon or ceramic film.",
+    "minFontPx": 22,
+    "fonts": {
+      "outfit": true,
+      "inter": true
+    },
+    "failures": [],
+    "warnings": []
+  },
+  {
+    "id": "c1-tint-windows_story-1080x1920_es",
+    "kind": "ad",
+    "textAreaPct": 14.6,
+    "minContrast": 6.6,
+    "minContrastText": "Sarasota · Bradenton · Venice · St. Pete",
+    "minFontPx": 22,
+    "fonts": {
+      "outfit": true,
+      "inter": true
+    },
+    "failures": [],
+    "warnings": []
+  },
+  {
+    "id": "c1-tint-windows_link-1200x628_en",
+    "kind": "ad",
+    "textAreaPct": 16.6,
+    "minContrast": 6.67,
+    "minContrastText": "Appointments subject to availability",
     "minFontPx": 21,
     "fonts": {
       "outfit": true,
@@ -84,9 +70,23 @@
     "warnings": []
   },
   {
-    "id": "c2-legal-tint_feed-1080x1350_en",
+    "id": "c1-tint-windows_link-1200x628_es",
     "kind": "ad",
-    "textAreaPct": 17.8,
+    "textAreaPct": 15.5,
+    "minContrast": 6.67,
+    "minContrastText": "Citas sujetas a disponibilidad",
+    "minFontPx": 21,
+    "fonts": {
+      "outfit": true,
+      "inter": true
+    },
+    "failures": [],
+    "warnings": []
+  },
+  {
+    "id": "c2-tint-limits_feed-1080x1350_en",
+    "kind": "ad",
+    "textAreaPct": 17.5,
     "minContrast": 5.55,
     "minContrastText": "is legal in Florida?",
     "minFontPx": 24,
@@ -98,9 +98,9 @@
     "warnings": []
   },
   {
-    "id": "c2-legal-tint_feed-1080x1350_es",
+    "id": "c2-tint-limits_feed-1080x1350_es",
     "kind": "ad",
-    "textAreaPct": 17.6,
+    "textAreaPct": 17.5,
     "minContrast": 5.54,
     "minContrastText": "legal en Florida?",
     "minFontPx": 24,
@@ -112,9 +112,9 @@
     "warnings": []
   },
   {
-    "id": "c2-legal-tint_story-1080x1920_en",
+    "id": "c2-tint-limits_story-1080x1920_en",
     "kind": "ad",
-    "textAreaPct": 14.7,
+    "textAreaPct": 14.4,
     "minContrast": 5.61,
     "minContrastText": "is legal in Florida?",
     "minFontPx": 24,
@@ -126,9 +126,9 @@
     "warnings": []
   },
   {
-    "id": "c2-legal-tint_story-1080x1920_es",
+    "id": "c2-tint-limits_story-1080x1920_es",
     "kind": "ad",
-    "textAreaPct": 14.1,
+    "textAreaPct": 14,
     "minContrast": 5.61,
     "minContrastText": "legal en Florida?",
     "minFontPx": 24,
@@ -140,9 +140,9 @@
     "warnings": []
   },
   {
-    "id": "c2-legal-tint_link-1200x628_en",
+    "id": "c2-tint-limits_link-1200x628_en",
     "kind": "ad",
-    "textAreaPct": 17.6,
+    "textAreaPct": 17.2,
     "minContrast": 5.66,
     "minContrastText": "is legal in Florida?",
     "minFontPx": 21,
@@ -154,9 +154,9 @@
     "warnings": []
   },
   {
-    "id": "c2-legal-tint_link-1200x628_es",
+    "id": "c2-tint-limits_link-1200x628_es",
     "kind": "ad",
-    "textAreaPct": 17.5,
+    "textAreaPct": 17.1,
     "minContrast": 5.66,
     "minContrastText": "legal en Florida?",
     "minFontPx": 21,
@@ -168,12 +168,12 @@
     "warnings": []
   },
   {
-    "id": "c3-detail-protect_feed-1080x1350_en",
+    "id": "c3-ceramic-surfaces_feed-1080x1350_en",
     "kind": "ad",
-    "textAreaPct": 14.8,
-    "minContrast": 7.51,
-    "minContrastText": "Free quote · Appointments subject to availability",
-    "minFontPx": 24,
+    "textAreaPct": 16.3,
+    "minContrast": 5.98,
+    "minContrastText": "Sarasota · Bradenton · Venice · St. Pete",
+    "minFontPx": 22,
     "fonts": {
       "outfit": true,
       "inter": true
@@ -182,12 +182,12 @@
     "warnings": []
   },
   {
-    "id": "c3-detail-protect_feed-1080x1350_es",
+    "id": "c3-ceramic-surfaces_feed-1080x1350_es",
     "kind": "ad",
     "textAreaPct": 14.9,
-    "minContrast": 7.51,
-    "minContrastText": "Cotización gratis · Citas sujetas a disponibilidad",
-    "minFontPx": 24,
+    "minContrast": 5.98,
+    "minContrastText": "Sarasota · Bradenton · Venice · St. Pete",
+    "minFontPx": 22,
     "fonts": {
       "outfit": true,
       "inter": true
@@ -196,12 +196,12 @@
     "warnings": []
   },
   {
-    "id": "c3-detail-protect_story-1080x1920_en",
+    "id": "c3-ceramic-surfaces_story-1080x1920_en",
     "kind": "ad",
-    "textAreaPct": 13.4,
-    "minContrast": 7.51,
-    "minContrastText": "Free quote · Appointments subject to availability",
-    "minFontPx": 24,
+    "textAreaPct": 12.7,
+    "minContrast": 6.66,
+    "minContrastText": "Sarasota · Bradenton · Venice · St. Pete",
+    "minFontPx": 22,
     "fonts": {
       "outfit": true,
       "inter": true
@@ -210,12 +210,12 @@
     "warnings": []
   },
   {
-    "id": "c3-detail-protect_story-1080x1920_es",
+    "id": "c3-ceramic-surfaces_story-1080x1920_es",
     "kind": "ad",
-    "textAreaPct": 13.2,
-    "minContrast": 7.51,
-    "minContrastText": "Cotización gratis · Citas sujetas a disponibilidad",
-    "minFontPx": 24,
+    "textAreaPct": 11.8,
+    "minContrast": 6.66,
+    "minContrastText": "Sarasota · Bradenton · Venice · St. Pete",
+    "minFontPx": 22,
     "fonts": {
       "outfit": true,
       "inter": true
@@ -224,11 +224,11 @@
     "warnings": []
   },
   {
-    "id": "c3-detail-protect_link-1200x628_en",
+    "id": "c3-ceramic-surfaces_link-1200x628_en",
     "kind": "ad",
-    "textAreaPct": 12.9,
-    "minContrast": 7.51,
-    "minContrastText": "Free quote · Appointments subject to availability",
+    "textAreaPct": 18.4,
+    "minContrast": 6.88,
+    "minContrastText": "Sarasota · Bradenton · Venice · St. Pete",
     "minFontPx": 21,
     "fonts": {
       "outfit": true,
@@ -238,11 +238,11 @@
     "warnings": []
   },
   {
-    "id": "c3-detail-protect_link-1200x628_es",
+    "id": "c3-ceramic-surfaces_link-1200x628_es",
     "kind": "ad",
-    "textAreaPct": 13.4,
-    "minContrast": 7.51,
-    "minContrastText": "Cotización gratis · Citas sujetas a disponibilidad",
+    "textAreaPct": 17.6,
+    "minContrast": 6.88,
+    "minContrastText": "Sarasota · Bradenton · Venice · St. Pete",
     "minFontPx": 21,
     "fonts": {
       "outfit": true,
@@ -254,8 +254,8 @@
   {
     "id": "og-default_en",
     "kind": "og",
-    "textAreaPct": 11.4,
-    "minContrast": 8.61,
+    "textAreaPct": 18.8,
+    "minContrast": 8.53,
     "minContrastText": "shinetogomobiledetailing.com",
     "minFontPx": 27,
     "fonts": {
@@ -268,8 +268,8 @@
   {
     "id": "og-default_es",
     "kind": "og",
-    "textAreaPct": 11.5,
-    "minContrast": 8.61,
+    "textAreaPct": 17.5,
+    "minContrast": 8.53,
     "minContrastText": "shinetogomobiledetailing.com",
     "minFontPx": 27,
     "fonts": {
@@ -282,8 +282,8 @@
   {
     "id": "og-window-tint_en",
     "kind": "og",
-    "textAreaPct": 12.9,
-    "minContrast": 7.9,
+    "textAreaPct": 19.8,
+    "minContrast": 7.89,
     "minContrastText": "shinetogomobiledetailing.com",
     "minFontPx": 27,
     "fonts": {
@@ -296,8 +296,8 @@
   {
     "id": "og-window-tint_es",
     "kind": "og",
-    "textAreaPct": 12.5,
-    "minContrast": 7.9,
+    "textAreaPct": 19.6,
+    "minContrast": 7.89,
     "minContrastText": "shinetogomobiledetailing.com",
     "minFontPx": 27,
     "fonts": {
@@ -310,8 +310,8 @@
   {
     "id": "og-ceramic-coating_en",
     "kind": "og",
-    "textAreaPct": 15.2,
-    "minContrast": 8.61,
+    "textAreaPct": 17.9,
+    "minContrast": 8.53,
     "minContrastText": "shinetogomobiledetailing.com",
     "minFontPx": 27,
     "fonts": {
@@ -324,8 +324,8 @@
   {
     "id": "og-ceramic-coating_es",
     "kind": "og",
-    "textAreaPct": 16.7,
-    "minContrast": 8.61,
+    "textAreaPct": 18.9,
+    "minContrast": 8.53,
     "minContrastText": "shinetogomobiledetailing.com",
     "minFontPx": 27,
     "fonts": {

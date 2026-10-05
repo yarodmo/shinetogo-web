@@ -9,6 +9,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="{{ROOT}}/templates/base.css">
+<style>html, body, .stage { width: {{W}}px; height: {{H}}px; }</style>
 <style>
   .og .stage {
     background:
@@ -18,10 +19,14 @@
   }
   .og .badge { --bw: 300px; left: 92px; top: 178px; }
   .og .rule { position: absolute; left: 456px; top: 150px; width: 72px; height: 5px; border-radius: 3px; background: var(--brand-gold); }
-  .og h1 { position: absolute; left: 456px; top: 180px; width: 668px; font-size: 70px; color: var(--text-white); line-height: 1.04; text-wrap: balance; }
-  .og.lang-es h1 { font-size: 64px; }
-  .og .sub { position: absolute; left: 456px; width: 640px; font-size: 29px; font-weight: 500; color: var(--text-light); line-height: 1.3; text-wrap: balance; }
-  .og .domain { position: absolute; left: 456px; bottom: 62px; font-size: 27px; font-weight: 600; color: var(--brand-gold); letter-spacing: 0.01em; }
+  .og h1 { position: absolute; left: 456px; top: 180px; width: 668px; font-size: 66px; color: var(--text-white); line-height: 1.05; text-wrap: balance; }
+  .og.lang-es h1 { font-size: 60px; }
+  .og.type-ceramic-coating h1 { font-size: 58px; }
+  .og.type-ceramic-coating.lang-es h1 { font-size: 50px; }
+  .og .sub { position: absolute; left: 456px; width: 668px; font-size: 28px; font-weight: 500; color: var(--text-light); line-height: 1.3; white-space: pre-line; }
+  .og .contact { position: absolute; left: 456px; bottom: 54px; font-size: 27px; font-weight: 600; line-height: 1.35; }
+  .og .contact .domain { color: var(--brand-gold); display: block; }
+  .og .contact .phone { color: var(--text-light); display: block; }
   .og .motif { position: absolute; inset: 0; width: 1200px; height: 630px; }
   .og .m { display: none; }
   .og.type-default .m-default, .og.type-window-tint .m-tint, .og.type-ceramic-coating .m-ceramic { display: block; }
@@ -63,16 +68,14 @@
   <div class="rule"></div>
   <h1>{{h}}</h1>
   <div class="sub" id="sub">{{sub}}</div>
-  <div class="domain mono-url">{{domain}}</div>
+  <div class="contact mono-url"><span class="domain">{{domain}}</span><span class="phone">{{phone}}</span></div>
 </div>
 <script>
-  // Centre rule + headline + sub as one group in the area above the domain line.
+  // Centre rule + headline + sub as one group in the area above the contact lines.
   document.fonts.ready.then(function () {
     var r = document.querySelector('.rule'), h = document.querySelector('h1'), s = document.getElementById('sub');
-    // If the sub line would wrap, break it at the separator instead of leaving a dangling dot.
-    if (s.offsetHeight > 50 && s.textContent.indexOf(' \u00b7 ') > -1) s.innerHTML = s.textContent.replace(' \u00b7 ', '<br>');
     var total = 5 + 26 + h.offsetHeight + 18 + s.offsetHeight;
-    var top = Math.round(285 - total / 2);
+    var top = Math.round(270 - total / 2);
     r.style.top = top + 'px';
     h.style.top = (top + 31) + 'px';
     s.style.top = (top + 31 + h.offsetHeight + 18) + 'px';

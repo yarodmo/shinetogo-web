@@ -6,7 +6,8 @@
  *     transparent, then the worst 2nd-percentile pixel behind each text box is compared with the text color)
  *   - text area (union of text boxes / canvas) for the ~20 % Meta guideline
  *   - safe zone for stories (y 250..1670), canvas bounds, side margins, text/text overlaps
- *   - copy lint: banned phrases (legality claims about films/shades, "Tampa Bay", a 5 % VLT sample) in copy.mjs, templates and the web SVGs
+ *   - copy lint: vetoed legality phrases, the city that is not a service area (any form), hero-finish.jpg, durability/warranty claims,
+ *     a 5 % VLT sample, and tint/ceramic service mixing, over copy.mjs, templates and the web SVGs
  * Writes out/audit.json and prints a table. Exit code 1 if any hard failure.
  *
  *   node marketing/creatives/audit.mjs [--only c1|c2|c3|og]
@@ -18,6 +19,7 @@ import zlib from 'node:zlib';
 import { spawn } from 'node:child_process';
 import { pathToFileURL } from 'node:url';
 import { variants, buildHtml, screenshot, pool, CHROME, OUT, BUILD, HERE } from './render.mjs';
+import { CONCEPTS, ADS, OG } from './copy.mjs';
 
 const MEASURE = `
 <script>
@@ -187,14 +189,31 @@ async function auditOne(v, profile) {
 }
 
 
-// ---------- compliance lint (round 2: no "legal films / legal shade", no "Tampa Bay", no 5 % VLT sample) ----------
+// ---------- compliance lint ----------
+// Fails if any of these reappears in copy.mjs, templates or the web SVGs: the vetoed "film/shade is legal" family,
+// the city that is NOT a service area (any form), hero-finish.jpg, performance/durability/warranty claims.
 const BANNED = [
   [/legal\s+films?/i, 'legal films'],
   [/pel[ií]culas?\s+legales?/i, 'películas legales'],
   [/tono\s+legal/i, 'tono legal'],
   [/legal\s+shade/i, 'legal shade'],
-  [/tampa\s+bay/i, '"Tampa Bay"'],
+  [/tampa/i, 'Tampa (not a service area)'],
+  [/hero-finish/i, 'hero-finish.jpg (photo origin unconfirmed)'],
+  [/\b9\s?H\b/, '9H'],
+  [/de\s+por\s+vida|lifetime/i, 'lifetime claim'],
+  [/a\s+prueba\s+de\s+rayones|scratch[\s-]?proof|anti-?rayones/i, 'scratch-proof claim'],
+  [/garant[ií]a|warranty|guarantee/i, 'warranty claim'],
 ];
+// Tint and Ceramic Coating are separate services: no creative may mix them.
+const TINT_FORBIDS = /coating|recubrimiento|cer[aá]mico\b/i;
+const CERAMIC_FORBIDS = /tint|polarizado|window film|pel[ií]cula|sunroof|quemacocos/i;
+
+function strings(o, out = []) {
+  if (typeof o === 'string') out.push(o);
+  else if (o && typeof o === 'object') for (const v of Object.values(o)) strings(v, out);
+  return out;
+}
+
 function lint() {
   const out = [];
   const files = [path.join(HERE, 'copy.mjs')];
@@ -204,8 +223,22 @@ function lint() {
   if (fs.existsSync(svgDir)) for (const f of fs.readdirSync(svgDir)) if (f.endsWith('.svg')) files.push(path.join(svgDir, f));
   for (const f of files) {
     const text = fs.readFileSync(f, 'utf8').split('\n').filter((l) => !l.trim().startsWith('//')).join('\n');
-    for (const [re, name] of BANNED) if (re.test(text)) out.push(`${path.relative(HERE, f)}: banned phrase ${name}`);
+    for (const [re, name] of BANNED) if (re.test(text)) out.push(`${path.relative(HERE, f)}: banned ${name}`);
     if (/vlt-scale/.test(f) && /(^|[^0-9])5(\u00a0| )?%/.test(text.replace(/<desc[\s\S]*?<\/desc>/, ''))) out.push(`${path.relative(HERE, f)}: still contains a 5 % sample`);
+  }
+  if (fs.existsSync(path.join(HERE, 'assets', 'hero-finish.jpg'))) out.push('assets/hero-finish.jpg must not exist');
+  if (fs.readdirSync(OUT).some((f) => /^c\d-.*detail-protect/.test(f))) out.push('out/ still has files of the removed concept (detail-protect)');
+  // service separation + no "legal" in any ad text
+  const groups = [];
+  for (const [id, c] of Object.entries(CONCEPTS)) {
+    groups.push([`concept ${id}`, c.service, strings(c.copy)], [`ads ${id}`, c.service, strings(ADS[id])]);
+    for (const s of strings(ADS[id])) if (/legal/i.test(s)) out.push(`ads ${id}: "legal" in ad text: ${s.slice(0, 60)}`);
+  }
+  for (const [type, o] of Object.entries(OG)) groups.push([`og ${type}`, o.service, strings({ en: o.en, es: o.es })]);
+  for (const [name, service, list] of groups) {
+    const re = service === 'tint' ? TINT_FORBIDS : service === 'ceramic' ? CERAMIC_FORBIDS : null;
+    if (!re) continue;
+    for (const s of list) if (re.test(s)) out.push(`${name} (${service}): mixes services: "${s.slice(0, 60)}"`);
   }
   return out;
 }
@@ -224,7 +257,7 @@ async function main() {
 
   let bad = 0;
   const lintFails = lint();
-  console.log(lintFails.length ? 'COPY LINT: FAIL' : 'COPY LINT: ok (no banned phrases in copy.mjs, templates, web SVGs)');
+  console.log(lintFails.length ? 'COPY LINT: FAIL' : 'COPY LINT: ok (banned phrases, service separation, no city outside the service area)');
   for (const f of lintFails) { bad++; console.log('    FAIL', f); }
   console.log('id'.padEnd(46), 'text%'.padStart(6), 'minCR'.padStart(7), 'minPx'.padStart(6), ' result');
   for (const r of results) {

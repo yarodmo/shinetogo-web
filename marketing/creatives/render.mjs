@@ -25,12 +25,7 @@ export const OUT = path.join(HERE, 'out');
 export const BUILD = path.join(OUT, '_build');
 export const ROOT = pathToFileURL(HERE).href.replace(/\/$/, '');
 export const CHROME = process.env.CHROME_PATH || '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
-const TEMPLATES = {
-  c1: 'c1-florida-sun.html',
-  c2: 'c2-legal-tint.html',
-  c3: 'c3-detail-protect.html',
-  og: 'og.html',
-};
+const TEMPLATES = { og: 'og.html' };
 
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 
@@ -42,7 +37,7 @@ export function variants() {
       for (const lang of ['en', 'es']) {
         const id = `${cid}-${c.slug}_${fmt}-${f.w}x${f.h}_${lang}`;
         list.push({
-          id, kind: 'ad', concept: cid, tpl: TEMPLATES[cid], lang, fmt, w: f.w, h: f.h,
+          id, kind: 'ad', concept: cid, tpl: c.template, lang, fmt, w: f.w, h: f.h,
           out: path.join(OUT, `${id}.png`),
           vars: { ...COMMON[lang], ...c.copy[lang], lang, fmt, ROOT, W: f.w, H: f.h },
         });

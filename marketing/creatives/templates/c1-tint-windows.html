@@ -2,12 +2,13 @@
 <html lang="{{lang}}">
 <head>
 <meta charset="utf-8">
-<title>C1 · Florida sun, handled · {{lang}} · {{fmt}}</title>
+<title>C1 · Tint windows · {{lang}} · {{fmt}}</title>
 <!-- Template: render.mjs fills the double-brace placeholders from copy.mjs. -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="{{ROOT}}/templates/base.css">
+<style>html, body, .stage { width: {{W}}px; height: {{H}}px; }</style>
 <style>
   .c1 .stage { background: var(--bg-dark); }
   .c1 .glow {
@@ -19,8 +20,8 @@
   .c1 h1 { position: absolute; color: var(--text-white); }
   .c1 h1 .l2 { color: var(--brand-gold); }
   .c1 h1 span { display: block; }
-  .c1 .area { position: absolute; font-weight: 600; text-transform: uppercase; letter-spacing: 0.12em; color: var(--text-muted); white-space: nowrap; }
-  .c1 .sub { position: absolute; font-family: var(--font-heading); font-weight: 600; color: var(--text-white); white-space: nowrap; }
+  .c1 h1 .l1 { text-wrap: balance; }
+  .c1 .area { position: absolute; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); white-space: nowrap; }
   .c1 .films { position: absolute; font-weight: 500; color: var(--text-light); white-space: nowrap; }
   .c1 .url { position: absolute; color: var(--text-light); white-space: nowrap; }
   .c1 .fine { position: absolute; color: var(--text-muted); font-weight: 500; white-space: nowrap; }
@@ -29,38 +30,35 @@
 
   /* ---------- FEED 1080x1350 ---------- */
   .fmt-feed .badge { --bw: 200px; left: 72px; top: 60px; }
-  .fmt-feed .area { right: 72px; top: 132px; font-size: 25px; }
-  .fmt-feed h1 { left: 72px; top: 268px; width: 936px; font-size: 104px; }
-  .fmt-feed.lang-es h1 { font-size: 90px; }
-  .fmt-feed .scheme { left: 72px; top: 524px; width: 936px; height: 466px; }
-  .fmt-feed .sub { left: 72px; top: 1012px; font-size: 38px; }
-  .fmt-feed .films { left: 72px; top: 1066px; font-size: 28px; }
-  .fmt-feed .cta { left: 72px; top: 1128px; height: 96px; padding: 0 46px; border-radius: 48px; font-size: 38px; }
-  .fmt-feed .url { left: 72px; top: 1252px; font-size: 28px; }
-  .fmt-feed .fine { left: 72px; top: 1294px; font-size: 24px; }
+  .fmt-feed .area { right: 72px; top: 136px; font-size: 22px; }
+  .fmt-feed h1 { left: 72px; top: 266px; width: 936px; font-size: 80px; }
+  .fmt-feed.lang-es h1 { font-size: 68px; }
+  .fmt-feed .scheme { left: 72px; top: 540px; width: 936px; height: 466px; }
+  .fmt-feed .films { left: 72px; top: 1030px; font-size: 28px; }
+  .fmt-feed .cta { left: 72px; top: 1088px; height: 96px; padding: 0 46px; border-radius: 48px; font-size: 38px; }
+  .fmt-feed .url { left: 72px; top: 1218px; font-size: 28px; }
+  .fmt-feed .fine { left: 72px; top: 1262px; font-size: 24px; }
 
   /* ---------- STORY 1080x1920 (safe zone: y 250 .. 1670) ---------- */
   .fmt-story .badge { --bw: 230px; left: 72px; top: 284px; }
-  .fmt-story .area { right: 72px; top: 360px; font-size: 25px; }
-  .fmt-story h1 { left: 72px; top: 540px; width: 936px; font-size: 122px; }
-  .fmt-story.lang-es h1 { font-size: 104px; }
+  .fmt-story .area { right: 72px; top: 362px; font-size: 22px; }
+  .fmt-story h1 { left: 72px; top: 540px; width: 936px; font-size: 100px; }
+  .fmt-story.lang-es h1 { font-size: 84px; }
   .fmt-story .scheme { left: 72px; top: 850px; width: 936px; height: 466px; }
-  .fmt-story .sub { left: 72px; top: 1346px; font-size: 42px; }
-  .fmt-story .films { left: 72px; top: 1404px; font-size: 28px; }
-  .fmt-story .cta { left: 72px; top: 1466px; height: 104px; padding: 0 50px; border-radius: 52px; font-size: 40px; }
-  .fmt-story .url { left: 72px; top: 1598px; font-size: 28px; }
-  .fmt-story .fine { left: 72px; top: 1638px; font-size: 24px; }
+  .fmt-story .films { left: 72px; top: 1352px; font-size: 28px; }
+  .fmt-story .cta { left: 72px; top: 1410px; height: 104px; padding: 0 50px; border-radius: 52px; font-size: 40px; }
+  .fmt-story .url { left: 72px; top: 1554px; font-size: 28px; }
+  .fmt-story .fine { left: 72px; top: 1598px; font-size: 24px; }
 
   /* ---------- LINK 1200x628 ---------- */
   .fmt-link .badge { --bw: 150px; left: 56px; top: 44px; }
-  .fmt-link .area { left: 640px; width: 524px; top: 548px; font-size: 21px; text-align: center; }
-  .fmt-link h1 { left: 56px; top: 190px; width: 560px; font-size: 68px; }
-  .fmt-link.lang-es h1 { font-size: 58px; }
-  .fmt-link .sub { left: 56px; top: 350px; font-size: 30px; }
-  .fmt-link .films { left: 56px; top: 392px; width: 560px; white-space: normal; line-height: 1.25; font-size: 22px; }
-  .fmt-link .cta { left: 56px; top: 464px; height: 64px; padding: 0 32px; border-radius: 32px; font-size: 27px; }
-  .fmt-link .url { left: 56px; top: 544px; font-size: 22px; }
-  .fmt-link .fine { left: 56px; top: 580px; font-size: 21px; }
+  .fmt-link .area { left: 640px; width: 524px; top: 548px; font-size: 21px; text-align: center; text-transform: none; letter-spacing: 0.03em; }
+  .fmt-link h1 { left: 56px; top: 186px; width: 560px; font-size: 52px; }
+  .fmt-link.lang-es h1 { font-size: 44px; }
+  .fmt-link .films { left: 56px; top: 366px; width: 560px; white-space: normal; line-height: 1.25; font-size: 22px; }
+  .fmt-link .cta { left: 56px; top: 432px; height: 64px; padding: 0 32px; border-radius: 32px; font-size: 26px; }
+  .fmt-link .url { left: 56px; top: 520px; font-size: 22px; }
+  .fmt-link .fine { left: 56px; top: 558px; font-size: 21px; }
   .fmt-link .card { display: block; position: absolute; left: 640px; top: 36px; width: 524px; height: 556px; border-radius: 30px; background: var(--bg-card); border: 1px solid rgba(255,255,255,0.08); }
   .fmt-link .scheme { left: 658px; top: 166px; width: 488px; height: 243px; }
 </style>
@@ -132,7 +130,6 @@
     <rect x="238" y="426" width="460" height="38" rx="19" fill="url(#cabin)"/>
   </svg>
 
-  <div class="sub">{{sub}}</div>
   <div class="films">{{films}}</div>
   <div class="cta">{{cta}}</div>
   <div class="url mono-url">{{domain}} · {{phone}}</div>
