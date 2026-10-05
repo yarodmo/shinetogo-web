@@ -7,6 +7,14 @@ import { HAS_TRACKING, PHONE_TEL, waLink } from './lib/site'
 
 initTracking()
 
+/* ───────── cabecera: clara arriba y oscura al bajar 80 px, igual que la home ───────── */
+const siteHeader = document.getElementById('site-header')
+if (siteHeader) {
+  const sync = () => siteHeader.classList.toggle('is-scrolled', window.scrollY > 80)
+  sync()
+  window.addEventListener('scroll', sync, { passive: true })
+}
+
 const L = JSON.parse(document.getElementById('l10n')?.textContent || '{}')
 // v2: texto reescrito tras la revisión de cumplimiento; una versión por idioma (docs/CONSENT-TEXT.md).
 const CONSENT_VERSION = `v2-${L.lang}`

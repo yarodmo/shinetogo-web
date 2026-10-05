@@ -75,7 +75,7 @@ const other = { tint: 'ceramic', ceramic: 'tint' }
 const UI = {
   en: {
     skip: 'Skip to content', home: 'Home', services: 'Services', gallery: 'Gallery', contact: 'Contact',
-    altContact: 'Prefer WhatsApp or a call?', call: 'Call', quoteCta: 'Or request a quote with the form',
+    altContact: 'Prefer WhatsApp or a call?', call: 'Call', orCall: 'Or call', quoteCta: 'Or request a quote with the form',
     areasTitle: 'Where we work', faqTitle: 'Questions', otherServices: 'Other services',
     name: 'Full name', phone: 'Phone / WhatsApp', email: 'Email (optional)', vehicleType: 'Vehicle type', vehicleTypeChoose: 'Choose…',
     car: 'Car / Sedan', suv: 'SUV / Truck', exotic: 'Exotic / Luxury',
@@ -86,7 +86,7 @@ const UI = {
   },
   es: {
     skip: 'Saltar al contenido', home: 'Inicio', services: 'Servicios', gallery: 'Galería', contact: 'Contacto',
-    altContact: '¿Prefieres WhatsApp o una llamada?', call: 'Llamar', quoteCta: 'O pide la cotización con el formulario',
+    altContact: '¿Prefieres WhatsApp o una llamada?', call: 'Llamar', orCall: 'O llama al', quoteCta: 'O pide la cotización con el formulario',
     areasTitle: 'Dónde trabajamos', faqTitle: 'Preguntas', otherServices: 'Otros servicios',
     name: 'Nombre completo', phone: 'Teléfono / WhatsApp', email: 'Email (opcional)', vehicleType: 'Tipo de vehículo', vehicleTypeChoose: 'Elige…',
     car: 'Carro / Sedán', suv: 'SUV / Camioneta', exotic: 'Exótico / Lujo',
@@ -178,26 +178,33 @@ function businessNode(lang) {
   }
 }
 
+// Cabecera y pie: MISMO contenido, textos y estilo que la home (src/App.jsx y src/index.css). Los textos salen de src/i18n.jsx.
+const IG_HANDLE = `@${new URL(INSTAGRAM_URL).pathname.replace(/\//g, '')}`
+const LOGO_SRCSET = '/img/brand/logo-120.webp 1x, /img/brand/logo-240.webp 2x'
+
 function header(lang, key) {
   const u = UI[lang]
   const alt = lang === 'es' ? 'en' : 'es'
   const home = URLS.home[lang]
+  const t = (k) => i18nText(lang, k)
+  const quoteHref = key === 'tint' || key === 'ceramic' ? '#quote' : `${home}#contact`
   return `<a class="skip" href="#main">${u.skip}</a>
-<header class="site-header">
-  <div class="wrap bar">
+<header class="site-header" id="site-header">
+  <div class="bar">
     <a class="brand" href="${home}" aria-label="${esc(BRAND)}: ${u.home}">
-      <img src="/img/brand/logo-120.webp" width="40" height="40" alt="" />
-      <span>${esc(BRAND)}</span>
+      <img src="/img/brand/logo-120.webp" srcset="${LOGO_SRCSET}" width="60" height="60" alt="" />
     </a>
-    <nav class="nav" aria-label="Primary">
-      <a href="${home}#services">${u.services}</a>
-      <a href="${URLS.tint[lang]}"${key === 'tint' ? ' aria-current="page"' : ''}>${tint[lang].crumb}</a>
-      <a href="${URLS.ceramic[lang]}"${key === 'ceramic' ? ' aria-current="page"' : ''}>${ceramic[lang].crumb}</a>
-      <a href="${home}#contact">${u.contact}</a>
-      <a class="lang" href="${URLS[key][alt]}" hreflang="${alt}" lang="${alt}" title="${esc(u.langLabel)}">${u.lang}</a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="${home}#services">${esc(t('navServices'))}</a>
+      <a href="${URLS.tint[lang]}"${key === 'tint' ? ' aria-current="page"' : ''}>${esc(t('navTint'))}</a>
+      <a href="${URLS.ceramic[lang]}"${key === 'ceramic' ? ' aria-current="page"' : ''}>${esc(t('navCeramic'))}</a>
+      <a href="${home}#pricing">${esc(t('navPricing'))}</a>
+      <a href="${home}#gallery">${esc(t('navGallery'))}</a>
+      <a href="${quoteHref}">${esc(t('navContact'))}</a>
     </nav>
-    <div class="bar-cta">
-      <a class="btn btn-ghost" href="tel:${PHONE_TEL}" data-track="call_click" data-location="landing_header">${u.call}</a>
+    <div class="nav-end">
+      <a class="lang-btn" href="${URLS[key][alt]}" hreflang="${alt}" lang="${alt}" title="${esc(u.langLabel)}">${alt.toUpperCase()}</a>
+      <a class="btn btn-primary" href="${quoteHref}" data-track="cta_click" data-location="landing_header">${esc(t('navBook'))}</a>
     </div>
   </div>
 </header>`
@@ -206,23 +213,37 @@ function header(lang, key) {
 function footer(lang, key) {
   const u = UI[lang]
   const alt = lang === 'es' ? 'en' : 'es'
+  const home = URLS.home[lang]
+  const t = (k) => i18nText(lang, k)
   return `<footer class="site-footer">
-  <div class="wrap foot">
+  <div class="wrap footer-grid">
     <div>
-      <strong>${esc(BRAND)}</strong>
-      <p>${u.footerLine}</p>
-      <p><a href="tel:${PHONE_TEL}" data-track="call_click" data-location="landing_footer">${PHONE_DISPLAY}</a> · <a href="${waLink('')}" rel="noopener" target="_blank" data-track="whatsapp_click" data-location="landing_footer">WhatsApp</a></p>
-      <p class="muted">${AREAS.join(' · ')}</p>
+      <img class="footer-logo" src="/img/brand/logo-120.webp" srcset="${LOGO_SRCSET}" width="44" height="44" loading="lazy" alt="${esc(BRAND)}" />
+      <p>${esc(t('footerAbout'))}</p>
+      <div class="ig">
+        <a href="${INSTAGRAM_URL}" target="_blank" rel="noopener noreferrer"><img src="/img/brand/ig-qr-192.webp" width="64" height="64" loading="lazy" alt="Instagram QR" /></a>
+        <a href="${INSTAGRAM_URL}" target="_blank" rel="noopener noreferrer"><strong>${esc(IG_HANDLE)}</strong><span>${esc(t('footerIg'))}</span></a>
+      </div>
     </div>
-    <ul>
-      <li><a href="${URLS.home[lang]}">${u.home}</a></li>
-      <li><a href="${URLS.tint[lang]}">${tint[lang].crumb}</a></li>
-      <li><a href="${URLS.ceramic[lang]}">${ceramic[lang].crumb}</a></li>
-      <li><a href="${URLS.privacy[lang]}">${u.privacy}</a></li>${HAS_TRACKING ? `\n      <li><button type="button" class="linklike" data-open-consent>${esc(services[lang].footerPrivacyChoices)}</button></li>` : ''}
-      <li><a href="${URLS[key][alt]}" hreflang="${alt}" lang="${alt}">${u.lang}</a></li>
-    </ul>
+    <div class="col">
+      <h3>${esc(t('footerServices'))}</h3>
+      <a href="${home}#services">${esc(t('svc1Title'))}</a>
+      <a href="${home}#services">${esc(t('svc2Title'))}</a>
+      <a href="${URLS.tint[lang]}">${esc(t('navTint'))}</a>
+      <a href="${URLS.ceramic[lang]}">${esc(t('navCeramic'))}</a>
+    </div>
+    <div class="col">
+      <h3>${esc(t('footerAreas'))}</h3>
+      ${AREAS.map((a) => `<span>${esc(a)}</span>`).join('\n      ')}
+    </div>
+    <div class="col">
+      <h3>${esc(t('footerContact'))}</h3>
+      <a href="tel:${PHONE_TEL}" data-track="call_click" data-location="landing_footer">📞 ${PHONE_DISPLAY}</a>
+      <a class="wa" href="${waLink('')}" rel="noopener noreferrer" target="_blank" data-track="whatsapp_click" data-location="landing_footer">💬 WhatsApp</a>
+      <a href="${URLS.privacy[lang]}">${esc(t('footerPrivacy'))}</a>${HAS_TRACKING ? `\n      <button type="button" class="linklike" data-open-consent>${esc(t('footerPrivacyChoices'))}</button>` : ''}
+    </div>
   </div>
-  <p class="wrap legal">© ${new Date().getFullYear()} ${esc(BRAND)}. ${u.rights}</p>
+  <p class="wrap legal">© ${new Date().getFullYear()} ${esc(BRAND)}. Designed by Bliss Systems LLC.</p>
 </footer>`
 }
 
@@ -384,6 +405,12 @@ function ceramicBody(lang) {
   </section>` : ''}`
 }
 
+// Mismo ritmo que la home: hero claro, y después las secciones alternan oscuro / claro.
+function rhythm(html) {
+  let i = 0
+  return html.replace(/<section class="band(?: alt)?"/g, () => `<section class="band ${i++ % 2 === 0 ? 'tone-dark' : 'tone-light'}"`)
+}
+
 function landing(id, lang) {
   const c = PAGES[id][lang]
   const u = UI[lang]
@@ -426,24 +453,18 @@ function landing(id, lang) {
     ],
   }
 
-  return `${head({
-    lang, title: titleOf(c.title), desc: c.meta, key: id, ogImg: ogImage(id, lang), jsonld,
-    entry: { head: '' },
-  })}
-<body>
-${header(lang, id)}
-<main id="main">
-  <nav class="crumbs wrap" aria-label="Breadcrumb"><a href="${URLS.home[lang]}">${u.breadcrumbHome}</a><span aria-hidden="true"> › </span><span aria-current="page">${esc(c.crumb)}</span></nav>
-  <section class="hero">
+  const mainHtml = rhythm(`<main id="main">
+  <section class="hero tone-light">
     <div class="wrap">
+      <nav class="crumbs" aria-label="Breadcrumb"><a href="${URLS.home[lang]}">${u.breadcrumbHome}</a><span aria-hidden="true"> › </span><span aria-current="page">${esc(c.crumb)}</span></nav>
       <p class="eyebrow">${esc(c.eyebrow)}</p>
       <h1>${esc(c.h1)}</h1>
       <p class="answer">${esc(c.answer)}</p>
       <div class="cta-row">
+        <a class="btn btn-primary" href="#quote" data-track="cta_click" data-location="landing_hero" data-service="${id}">${esc(i18nText(lang, 'heroCta1'))}</a>
         <a class="btn btn-green" href="${wa}" target="_blank" rel="noopener" data-track="whatsapp_click" data-location="landing_hero" data-service="${id}"><span aria-hidden="true">💬</span> ${esc(c.cta.whatsapp)}</a>
-        <a class="btn btn-ghost" href="tel:${PHONE_TEL}" data-track="call_click" data-location="landing_hero" data-service="${id}">${u.call} ${PHONE_DISPLAY}</a>
       </div>
-      <p class="cta-text"><a class="textlink" href="#quote" data-track="cta_click" data-location="landing_hero" data-service="${id}">${u.quoteCta}</a></p>
+      <p class="cta-text">${u.orCall} <a class="textlink" href="tel:${PHONE_TEL}" data-track="call_click" data-location="landing_hero" data-service="${id}">${PHONE_DISPLAY}</a></p>
       <ul class="pills">${c.pills.map((x) => `<li>${esc(x)}</li>`).join('')}</ul>
     </div>
   </section>
@@ -462,16 +483,24 @@ ${header(lang, id)}
       </div>
     </div>
   </section>
-  <section class="band alt" aria-labelledby="faq-h">
+  <section class="band" aria-labelledby="faq-h">
     <div class="wrap narrow">
       <h2 id="faq-h">${u.faqTitle}</h2>
       ${c.faq.map((f) => `<details class="faq"><summary>${esc(f.q)}</summary><p>${esc(f.a)}</p></details>`).join('\n      ')}
       <p class="other">${u.otherServices}: <a class="textlink" href="${URLS[other[id]][lang]}">${esc(o.crumb)}</a></p>
     </div>
   </section>
-</main>
+</main>`)
+
+  return `${head({
+    lang, title: titleOf(c.title), desc: c.meta, key: id, ogImg: ogImage(id, lang), jsonld,
+    entry: { head: '' },
+  })}
+<body>
+${header(lang, id)}
+${mainHtml}
 <div class="sticky-cta">
-  <a class="btn btn-ghost" href="tel:${PHONE_TEL}" data-track="call_click" data-location="landing_sticky" data-service="${id}">${u.call}</a>
+  <a class="btn btn-ghost" href="tel:${PHONE_TEL}" data-track="call_click" data-location="landing_sticky" data-service="${id}"><span aria-hidden="true">📞</span> ${u.call}</a>
   <a class="btn btn-green" href="${wa}" target="_blank" rel="noopener" data-track="whatsapp_click" data-location="landing_sticky" data-service="${id}"><span aria-hidden="true">💬</span> WhatsApp</a>
 </div>
 ${footer(lang, id)}
@@ -561,10 +590,12 @@ function privacy(lang) {
 <body>
 <!-- BORRADOR: revisión de un abogado de Florida pendiente antes de campañas pagadas (TCPA/FTSA, cookies). -->
 ${header(lang, 'privacy')}
-<main id="main" class="wrap narrow doc">
+<main id="main" class="tone-light doc">
+  <div class="wrap narrow">
   <h1>${t.title}</h1>
   <p class="muted">${t.updated}: ${PRIVACY_UPDATED}</p>
   ${t.sections.map(([h, ps, id]) => `<h2${id ? ` id="${id}"` : ''}>${esc(h)}</h2>\n  ${ps.map((x) => `<p>${esc(x)}</p>`).join('\n  ')}`).join('\n  ')}
+  </div>
 </main>
 ${footer(lang, 'privacy')}
 ${l10nBlob(lang, 'privacy')}

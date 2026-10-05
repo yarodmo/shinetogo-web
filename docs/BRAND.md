@@ -54,6 +54,22 @@ Si algo aquí cambia, cambia en el código en un solo lugar (se indica dónde).
 
 Reglas: estética premium sobria; fotos reales antes que ilustraciones; diagramas esquemáticos cuando no hay foto (`src/assets/protection/`, ES y EN); nunca cifras inventadas dentro de un gráfico; botones con texto oscuro sobre azul/verde brillante.
 
+### Estándar común: home y páginas estáticas (decidido el 5-oct-2026)
+La home (React, `src/index.css`) es la referencia porque es la identidad que el cliente ya aprobó; las landings y la privacidad (HTML generado, `src/landing.css`) la siguen. Una landing que se vea distinta a la home es un error.
+
+| Elemento | Regla |
+|---|---|
+| Tokens | Un solo archivo, `src/tokens.css`, importado por las dos hojas. `check-dist` falla si una deja de importarlo |
+| Cabecera | Blanca arriba y oscura al bajar 80 px; 80 px de alto; logo de 60 px sin nombre al lado; menú idéntico (Services · Window Tint · Ceramic · Pricing · Projects · Contact, textos de `src/i18n.jsx`); botón de idioma «ES»/«EN»; CTA azul «Get a quote». `check-dist` compara el menú de cada página con el de la home |
+| Botones | Radio 12, Outfit 700, texto oscuro. Principal = azul (cotización por formulario). WhatsApp = `#25d366`. Teléfono = enlace o botón de contorno, nunca el CTA principal |
+| Hero | Fondo blanco, titular Outfit 900 en `#0f172a`, etiqueta azul `--brand-blue-text`, dos botones (azul + WhatsApp) |
+| Ritmo | Hero claro y después las secciones alternan oscuro / claro, como la home. Los componentes leen `--fg`, `--muted`, `--surface`, `--line`, `--link`: funcionan en los dos tonos |
+| Diagramas | Siempre en su propio panel oscuro (`.diagram`), sea cual sea el tono de la sección |
+| Contenedor | 1200 px con 24 px de margen |
+| Pie | Fondo `#0a0e1a`, cuatro columnas (marca + Instagram · Servicios · Zonas · Contacto), línea de derechos igual |
+| Cuatro tarjetas | 4 columnas en pantalla ancha, 2×2 en media, 1 en móvil. Nunca una sola en la segunda fila |
+| Ilustraciones | Dibujos propios del mismo trazo, no fotos de stock presentadas como trabajos |
+
 ## 4. Voz
 
 Premium, directa, concreta y bilingüe (EN y ES con la misma información). Frases cortas. Primero la respuesta, luego el detalle. Hablar de lo que se hace, no de superlativos. Español neutro de EE. UU., "tú".

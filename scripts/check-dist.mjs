@@ -141,6 +141,27 @@ for (const [where, text] of copyBlobs) {
   }
 }
 
+// La cabecera de las páginas estáticas debe ser la misma que la de la home (src/App.jsx): mismos enlaces, mismo orden, mismos textos.
+// Y la home y las landings deben seguir leyendo los mismos tokens de marca (src/tokens.css).
+{
+  const i18n = fs.readFileSync('src/i18n.jsx', 'utf8')
+  const [enBlock, esBlock] = i18n.split(/\n  es: \{/)
+  const services = fs.readFileSync('src/content/services.js', 'utf8')
+  const [svcEn, svcEs] = services.split(/\n  es: \{/)
+  const text = (block, extra, key) => (block.match(new RegExp(`\\b${key}: '((?:[^'\\\\\\n]|\\\\.)*)'`)) || extra.match(new RegExp(`\\b${key}: '((?:[^'\\\\\\n]|\\\\.)*)'`)) || [])[1]
+  const expected = (lang) => ['navServices', 'navTint', 'navCeramic', 'navPricing', 'navGallery', 'navContact'].map((k) => text(lang === 'es' ? esBlock : enBlock, lang === 'es' ? svcEs : svcEn, k))
+  for (const { url, html } of pages) {
+    const nav = html.match(/<nav class="nav-links"[\s\S]*?<\/nav>/)
+    if (!nav) continue
+    const links = [...nav[0].matchAll(/<a [^>]*>([^<]*)<\/a>/g)].map((m) => m[1])
+    const want = expected(url.startsWith('/es/') ? 'es' : 'en')
+    if (JSON.stringify(links) !== JSON.stringify(want)) fail(url, `el menú no coincide con el de la home: ${links.join(' | ')} (debería ser ${want.join(' | ')})`)
+  }
+  for (const css of ['src/index.css', 'src/landing.css']) {
+    if (!/@import\s+['"]\.\/tokens\.css['"]/.test(fs.readFileSync(css, 'utf8'))) fail(css, 'no importa src/tokens.css: los tokens de marca deben ser los mismos que en la otra hoja')
+  }
+}
+
 const totalMb = files.reduce((n, f) => n + fs.statSync(f).size, 0) / 1024 / 1024
 if (totalMb > BUDGET_MB) fail('dist', `pesa ${totalMb.toFixed(1)} MB (presupuesto ${BUDGET_MB} MB)`)
 
