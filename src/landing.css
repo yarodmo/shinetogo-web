@@ -112,7 +112,7 @@ p + p { margin-top: 12px; }
 .card h3, .tile h3, .module h3 { margin: 0 0 8px; }
 .card p, .tile p, .module p { color: var(--muted); font-size: 15px; }
 .checks li { position: relative; padding-left: 28px; margin-bottom: 10px; }
-.checks li::before { content: '✓'; position: absolute; left: 0; color: var(--apex-amber); font-weight: 800; }
+.checks li::before { content: '✓'; position: absolute; left: 0; color: var(--brand-green); font-weight: 800; }
 
 /* ─── Tablas y diagramas (los diagramas son oscuros: viven en su propio panel en cualquier tono) ─── */
 .tbl-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 14px; margin-bottom: 10px; background: var(--surface); }
@@ -156,6 +156,7 @@ p + p { margin-top: 12px; }
 .site-footer a, .linklike { font-size: 14px; color: var(--text-muted); text-decoration: none; }
 .site-footer a:hover, .linklike:hover { color: #fff; }
 .site-footer .wa { color: var(--brand-green); }
+.site-footer .col a { display: inline-flex; align-items: center; gap: 8px; }
 .footer-logo { height: 44px; width: auto; border-radius: 4px; margin-bottom: 16px; }
 .ig { margin-top: 24px; padding: 12px; background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 12px; max-width: 320px; display: flex; align-items: center; gap: 16px; }
 .ig img { width: 64px; height: 64px; border-radius: 6px; border: 1px solid rgba(255, 255, 255, 0.1); object-fit: cover; }

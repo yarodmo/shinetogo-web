@@ -46,7 +46,7 @@ export const services = {
     consentMore: 'Privacy policy',
     footerPrivacy: 'Privacy',
     footerPrivacyChoices: 'Privacy choices',
-    footerIg: 'Follow us for daily work',
+    footerIg: 'Follow us on Instagram',
   },
   es: {
     navTint: 'Polarizado',
@@ -85,6 +85,6 @@ export const services = {
     consentMore: 'Política de privacidad',
     footerPrivacy: 'Privacidad',
     footerPrivacyChoices: 'Opciones de privacidad',
-    footerIg: 'Síguenos para trabajos diarios',
+    footerIg: 'Síguenos en Instagram',
   },
 }

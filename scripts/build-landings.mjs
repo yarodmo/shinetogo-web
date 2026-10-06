@@ -174,6 +174,10 @@ const quoteHref = (lang, key) => (key === 'tint' || key === 'ceramic' ? `${URLS.
 
 // Cabecera y pie: MISMO contenido, textos y estilo que la home (src/App.jsx y src/index.css). Los textos salen de src/i18n.jsx.
 const IG_HANDLE = `@${new URL(INSTAGRAM_URL).pathname.replace(/\//g, '')}`
+// Mismos iconos de línea que la home (src/components/Icon.jsx), en vez de emojis.
+const svgIcon = (d, size = 18) => `<svg viewBox="0 0 24 24" width="${size}" height="${size}" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">${d}</svg>`
+const ICON_WA = svgIcon('<path d="M3.5 20.5l1.3-4A8.5 8.5 0 1 1 8 19.6Z"/><path d="M9 8.6c0 3.6 2.8 6.4 6.4 6.4l1.3-1.6-2.2-1.1-1 1c-1.2-.5-2.1-1.4-2.6-2.6l1-1-1.1-2.2Z"/>')
+const ICON_PHONE = svgIcon('<path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2Z"/>')
 const LOGO_SRCSET = '/img/brand/logo-120.webp 1x, /img/brand/logo-240.webp 2x'
 
 function header(lang, key) {
@@ -232,8 +236,8 @@ function footer(lang, key) {
     </div>
     <div class="col">
       <h3>${esc(t('footerContact'))}</h3>
-      <a href="tel:${PHONE_TEL}" data-track="call_click" data-location="landing_footer">📞 ${PHONE_DISPLAY}</a>
-      <a class="wa" href="${waLink('')}" rel="noopener noreferrer" target="_blank" data-track="whatsapp_click" data-location="landing_footer">💬 WhatsApp</a>
+      <a href="tel:${PHONE_TEL}" data-track="call_click" data-location="landing_footer">${ICON_PHONE} ${PHONE_DISPLAY}</a>
+      <a class="wa" href="${waLink('')}" rel="noopener noreferrer" target="_blank" data-track="whatsapp_click" data-location="landing_footer">${ICON_WA} WhatsApp</a>
       <a href="${URLS.privacy[lang]}">${esc(t('footerPrivacy'))}</a>${HAS_TRACKING ? `\n      <button type="button" class="linklike" data-open-consent>${esc(t('footerPrivacyChoices'))}</button>` : ''}
     </div>
   </div>
@@ -256,7 +260,7 @@ function quoteCard(lang, id) {
   <p class="lead">${esc(u.quoteCardLead.replace('{service}', c.service))}</p>
   <div class="cta-row">
     <a class="btn btn-primary" href="${href}" data-track="cta_click" data-location="landing_quote" data-service="${id}">${esc(i18nText(lang, 'heroCta1'))}</a>
-    <a class="btn btn-green" href="${waLink(c.wa)}" target="_blank" rel="noopener" data-track="whatsapp_click" data-location="landing_quote" data-service="${id}"><span aria-hidden="true">💬</span> ${esc(c.cta.whatsapp)}</a>
+    <a class="btn btn-green" href="${waLink(c.wa)}" target="_blank" rel="noopener" data-track="whatsapp_click" data-location="landing_quote" data-service="${id}">${ICON_WA} ${esc(c.cta.whatsapp)}</a>
   </div>
   <p class="alt-contact">${u.orCall} <a href="tel:${PHONE_TEL}" data-track="call_click" data-location="landing_quote" data-service="${id}">${PHONE_DISPLAY}</a></p>
 </div>`
@@ -430,7 +434,7 @@ function landing(id, lang) {
       <p class="answer">${esc(c.answer)}</p>
       <div class="cta-row">
         <a class="btn btn-primary" href="${quoteHref(lang, id)}" data-track="cta_click" data-location="landing_hero" data-service="${id}">${esc(i18nText(lang, 'heroCta1'))}</a>
-        <a class="btn btn-green" href="${wa}" target="_blank" rel="noopener" data-track="whatsapp_click" data-location="landing_hero" data-service="${id}"><span aria-hidden="true">💬</span> ${esc(c.cta.whatsapp)}</a>
+        <a class="btn btn-green" href="${wa}" target="_blank" rel="noopener" data-track="whatsapp_click" data-location="landing_hero" data-service="${id}">${ICON_WA} ${esc(c.cta.whatsapp)}</a>
       </div>
       <p class="cta-text">${u.orCall} <a class="textlink" href="tel:${PHONE_TEL}" data-track="call_click" data-location="landing_hero" data-service="${id}">${PHONE_DISPLAY}</a></p>
       <ul class="pills">${c.pills.map((x) => `<li>${esc(x)}</li>`).join('')}</ul>
@@ -467,8 +471,8 @@ function landing(id, lang) {
 ${header(lang, id)}
 ${mainHtml}
 <div class="sticky-cta">
-  <a class="btn btn-ghost" href="tel:${PHONE_TEL}" data-track="call_click" data-location="landing_sticky" data-service="${id}"><span aria-hidden="true">📞</span> ${u.call}</a>
-  <a class="btn btn-green" href="${wa}" target="_blank" rel="noopener" data-track="whatsapp_click" data-location="landing_sticky" data-service="${id}"><span aria-hidden="true">💬</span> WhatsApp</a>
+  <a class="btn btn-ghost" href="tel:${PHONE_TEL}" data-track="call_click" data-location="landing_sticky" data-service="${id}">${ICON_PHONE} ${u.call}</a>
+  <a class="btn btn-green" href="${wa}" target="_blank" rel="noopener" data-track="whatsapp_click" data-location="landing_sticky" data-service="${id}">${ICON_WA} WhatsApp</a>
 </div>
 ${footer(lang, id)}
 ${l10nBlob(lang, id)}

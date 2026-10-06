@@ -5,8 +5,8 @@ import { submitLead, newLeadId } from '../lib/leads'
 import { track } from '../lib/track'
 import { FORM } from '../content/forms'
 import { BRAND_NAME, PHONE_DISPLAY, PHONE_TEL, waLink } from '../lib/site'
+import Icon from '../components/Icon'
 
-const FAQ_KEYS = ['faq1', 'faq2', 'faq3', 'faq4', 'faq5', 'faq6']
 
 const VEHICLES = [
   { id: 'car', en: 'Car / Sedan', es: 'Carro / Sedán' },
@@ -47,7 +47,6 @@ export default function Contact() {
   const [status, setStatus] = useState('idle') // idle | sending | success | error
   const [errorKind, setErrorKind] = useState('')
   const [result, setResult] = useState(null)
-  const [openFaq, setOpenFaq] = useState(null)
   const leadId = useRef(newLeadId())
   const started = useRef(false)
 
@@ -64,12 +63,13 @@ export default function Contact() {
   // Los paquetes de Pricing pre-seleccionan el servicio.
   useEffect(() => {
     const apply = (p) => {
-      if (!p.service && !p.film) return
+      if (!p.service && !p.film && !p.vehicle_type) return
       setForm((f) => ({
         ...f,
         service: p.service || f.service,
         film: p.film || f.film,
-        vehicle_type: f.vehicle_type === 'boat' && p.service !== 'boat' ? '' : f.vehicle_type,
+        // Un bote solo admite su servicio; elegir «bote» desde la tarjeta deja el vehículo ya puesto.
+        vehicle_type: p.vehicle_type || (f.vehicle_type === 'boat' && p.service !== 'boat' ? '' : f.vehicle_type),
       }))
     }
     prefillFromUrl()
@@ -149,21 +149,17 @@ export default function Contact() {
   return (
     <>
       {/* CONTACT */}
-      <section id="contact" className="section section-light" style={{ paddingBottom: '60px' }}>
+      <section id="contact" className="section section-light">
         <div className="container">
-          <div style={{ textAlign: 'center', marginBottom: '56px' }}>
-            <h2 className="animated-fade-in" style={{ fontSize: 'clamp(28px, 4vw, 44px)', color: 'var(--text-dark)' }}>
-              {t('contactTitle')}
-            </h2>
-            <p className="animated-fade-in" style={{ marginTop: '12px', color: 'var(--text-body)', fontSize: '17px' }}>
-              {t('contactSub')}
-            </p>
+          <div className="section-head">
+            <h2 className="section-title">{t('contactTitle')}</h2>
+            <p className="section-sub">{t('contactSub')}</p>
           </div>
 
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 360px', gap: '32px', alignItems: 'start' }}>
             {/* FORM */}
             {status !== 'success' ? (
-              <form onSubmit={submit} noValidate className="light-card animated-fade-in" aria-busy={status === 'sending'}
+              <form onSubmit={submit} noValidate className="card" aria-busy={status === 'sending'}
                 onFocusCapture={() => { if (!started.current) { started.current = true; track('form_start') } }}
                 style={{ padding: '40px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
 
@@ -303,7 +299,7 @@ export default function Contact() {
                       <span style={{ display: 'flex', gap: '10px', flexWrap: 'wrap', marginTop: '10px' }}>
                         <a href={waLink(lang === 'en' ? 'Hi! I tried to send a quote request on your website.' : '¡Hola! Intenté enviar una solicitud de cotización en su sitio.')}
                           target="_blank" rel="noopener noreferrer" className="btn btn-green" style={{ padding: '10px 18px', fontSize: '13px' }}
-                          data-track="whatsapp_click" data-location="form_error">💬 WhatsApp</a>
+                          data-track="whatsapp_click" data-location="form_error"><Icon name="whatsapp" size={16} /> WhatsApp</a>
                         <a href={`tel:${PHONE_TEL}`} className="btn btn-outline" style={{ padding: '10px 18px', fontSize: '13px', color: 'var(--text-dark)', borderColor: 'var(--border-light)' }}
                           data-track="call_click" data-location="form_error">{PHONE_DISPLAY}</a>
                       </span>
@@ -318,22 +314,22 @@ export default function Contact() {
                 <p style={{ textAlign: 'center', fontSize: '13px', color: 'var(--text-body)', marginTop: '4px' }}>{t('formPrivacy')}</p>
               </form>
             ) : (
-              <div className="light-card animated-fade-in" role="status" style={{ textAlign: 'center', padding: '64px 32px', border: '2px solid var(--brand-green)' }}>
-                <div style={{ fontSize: '56px', marginBottom: '16px' }} aria-hidden="true">✅</div>
+              <div className="card" role="status" style={{ textAlign: 'center', padding: '56px 32px', border: '2px solid var(--brand-green)' }}>
+                <div className="icon-pill" style={{ margin: '0 auto 16px', background: 'rgba(16,185,129,.12)', color: 'var(--brand-green)' }}><Icon name="check" size={26} strokeWidth={2.5} /></div>
                 <h3 style={{ fontSize: '24px', fontWeight: 900, color: 'var(--text-dark)', marginBottom: '12px' }}>{t('successTitle')}</h3>
                 <p style={{ color: 'var(--text-body)', fontSize: '16px', lineHeight: 1.6, marginBottom: '8px' }}>{t('successBody')}</p>
                 <p className="form-note" style={{ marginBottom: '24px' }}>{t('successRef')}: <strong>{ref}</strong></p>
                 <a href={waAfter} target="_blank" rel="noopener noreferrer" className="btn btn-green" style={{ padding: '16px 36px' }}
                   data-track="whatsapp_click" data-location="post_form" data-service={form.service}>
-                  💬 {t('successWhatsapp')}
+                  <Icon name="whatsapp" size={18} /> {t('successWhatsapp')}
                 </a>
               </div>
             )}
 
             {/* SIDEBAR — WhatsApp + Call */}
             <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-              <div className="light-card animated-fade-in" style={{ padding: '28px', textAlign: 'center' }}>
-                <div style={{ fontSize: '32px', marginBottom: '12px' }} aria-hidden="true">💬</div>
+              <div className="card" style={{ textAlign: 'center' }}>
+                <div className="icon-pill" style={{ margin: '0 auto 14px', background: 'rgba(37,211,102,.12)', color: '#128c4a' }}><Icon name="whatsapp" size={24} /></div>
                 <h3 style={{ fontWeight: 800, color: 'var(--text-dark)', marginBottom: '6px' }}>{t('formWhatsapp')}</h3>
                 <p style={{ fontSize: '13px', color: 'var(--text-body)', marginBottom: '16px', lineHeight: 1.5 }}>{t('formWhatsappSub')}</p>
                 <a href={waLink(t('whatsappText'))} target="_blank" rel="noopener noreferrer" className="btn btn-green" style={{ width: '100%' }}
@@ -342,11 +338,11 @@ export default function Contact() {
                 </a>
               </div>
 
-              <div className="light-card animated-fade-in" style={{ padding: '28px', textAlign: 'center' }}>
-                <div style={{ fontSize: '32px', marginBottom: '12px' }} aria-hidden="true">📞</div>
+              <div className="card" style={{ textAlign: 'center' }}>
+                <div className="icon-pill" style={{ margin: '0 auto 14px' }}><Icon name="phone" size={24} /></div>
                 <h3 style={{ fontWeight: 800, color: 'var(--text-dark)', marginBottom: '6px' }}>{t('formCallTitle')}</h3>
                 <p style={{ fontSize: '13px', color: 'var(--text-body)', marginBottom: '16px' }}>{t('formCallSub')}</p>
-                <a href={`tel:${PHONE_TEL}`} className="btn btn-outline" style={{ width: '100%', color: 'var(--text-dark)', borderColor: 'var(--border-light)' }}
+                <a href={`tel:${PHONE_TEL}`} className="btn btn-secondary" style={{ width: '100%' }}
                   data-track="call_click" data-location="contact_card">
                   {PHONE_DISPLAY}
                 </a>
@@ -356,36 +352,6 @@ export default function Contact() {
         </div>
       </section>
 
-      {/* FAQ */}
-      <section id="faq" className="section section-dark" style={{ paddingTop: '60px' }}>
-        <div className="container" style={{ maxWidth: '800px' }}>
-          <h2 className="animated-fade-in" style={{ textAlign: 'center', fontSize: 'clamp(22px, 3vw, 36px)', color: '#fff', marginBottom: '48px' }}>
-            {t('faqTitle')}
-          </h2>
-
-          {FAQ_KEYS.map((key, i) => (
-            <div key={key} style={{ borderBottom: '1px solid var(--border-dark)', padding: '20px 0' }}>
-              <button type="button" id={`faq-q-${i}`} aria-expanded={openFaq === i} aria-controls={`faq-a-${i}`} onClick={() => {
-                setOpenFaq(openFaq === i ? null : i)
-                if (openFaq !== i) track('faq_open', { faq_id: key })
-              }} style={{
-                width: '100%', background: 'none', border: 'none', cursor: 'pointer',
-                display: 'flex', justifyContent: 'space-between', alignItems: 'center',
-                gap: '16px', padding: 0, textAlign: 'left'
-              }}>
-                <span style={{ fontWeight: 700, color: '#fff', fontSize: '16px' }}>{t(`${key}Q`)}</span>
-                <span aria-hidden="true" style={{
-                  color: 'var(--brand-blue)', fontSize: '22px', flexShrink: 0,
-                  transform: openFaq === i ? 'rotate(45deg)' : 'none', transition: 'transform 0.2s'
-                }}>+</span>
-              </button>
-              {/* La respuesta siempre está en el DOM (buscadores y asistentes la leen); solo se oculta a la vista. */}
-              <p id={`faq-a-${i}`} role="region" aria-labelledby={`faq-q-${i}`} hidden={openFaq !== i}
-                style={{ marginTop: '14px', fontSize: '15px', color: 'var(--text-muted)', lineHeight: 1.6, paddingRight: '40px' }}>{t(`${key}A`)}</p>
-            </div>
-          ))}
-        </div>
-      </section>
     </>
   )
 }

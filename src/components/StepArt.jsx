@@ -26,9 +26,9 @@ const Arrive = () => (
     <path d="M8 66V40a5 5 0 0 1 5-5h38a5 5 0 0 1 5 5v26" />
     <path d="M56 46h14l14 12v8H56Z" fill={ACCENT} fillOpacity=".2" stroke={ACCENT} />
     <path d="M8 66h8m22 0h12m22 0h12" />
-    <circle cx="27" cy="68" r="8" fill="var(--bg-card, #111827)" />
+    <circle cx="27" cy="68" r="8" fill="var(--step-fill, #fff)" />
     <circle cx="27" cy="68" r="2.5" fill="currentColor" stroke="none" />
-    <circle cx="71" cy="68" r="8" fill="var(--bg-card, #111827)" />
+    <circle cx="71" cy="68" r="8" fill="var(--step-fill, #fff)" />
     <circle cx="71" cy="68" r="2.5" fill="currentColor" stroke="none" />
     <path d="M10 84h20m10 0h14m10 0h22" stroke={GOLD} strokeDasharray="1 7" />
     <path d="M18 50h24" stroke={ACCENT} />
@@ -42,9 +42,9 @@ const Work = () => (
     <path d="M32 48l7-10h18v10Z" fill={ACCENT} fillOpacity=".22" stroke={ACCENT} />
     <path d="M63 48V38h6l8 10Z" fill={ACCENT} fillOpacity=".22" stroke={ACCENT} />
     <path d="M8 66h8m24 0h20m24 0h4" />
-    <circle cx="28" cy="68" r="8" fill="var(--bg-card, #111827)" />
+    <circle cx="28" cy="68" r="8" fill="var(--step-fill, #fff)" />
     <circle cx="28" cy="68" r="2.5" fill="currentColor" stroke="none" />
-    <circle cx="72" cy="68" r="8" fill="var(--bg-card, #111827)" />
+    <circle cx="72" cy="68" r="8" fill="var(--step-fill, #fff)" />
     <circle cx="72" cy="68" r="2.5" fill="currentColor" stroke="none" />
     <path d="M22 18v12M16 24h12" stroke={GOLD} />
     <path d="M52 10v8M48 14h8" stroke={GOLD} />
@@ -57,7 +57,7 @@ const Work = () => (
 const Done = () => (
   <svg {...common}>
     <rect x="16" y="14" width="46" height="62" rx="6" />
-    <rect x="29" y="8" width="20" height="12" rx="4" fill="var(--bg-card, #111827)" />
+    <rect x="29" y="8" width="20" height="12" rx="4" fill="var(--step-fill, #fff)" />
     <path d="M26 44l8 8 14-16" stroke={ACCENT} strokeWidth="4" />
     <path d="M26 62h22" strokeOpacity=".6" />
     <circle cx="68" cy="66" r="17" fill={GOLD} fillOpacity=".22" stroke={GOLD} />

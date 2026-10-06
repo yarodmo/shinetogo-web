@@ -1,18 +1,19 @@
 import { useState, useEffect, useCallback } from 'react'
 import { useI18n } from '../i18n'
 import { waLink } from '../lib/site'
+import Icon from '../components/Icon'
 
 // Versiones 640/1080 (4:3) generadas por scripts/optimize-assets.cjs.
 const SLIDES = [
   { base: '/img/hero/finish', wide: 1080, label: { en: 'Exterior detail', es: 'Detallado exterior' } },
-  { base: '/img/hero/polish', wide: 1024, label: { en: 'Precision Polish', es: 'Pulido de Precisión' } },
-  { base: '/img/hero/foam', wide: 1080, label: { en: 'Snow Foam Wash', es: 'Lavado con Espuma' } },
+  // La foto del pulido (polish-*) se retiró: matrícula británica legible y logo que no es el real (docs/OPEN-QUESTIONS #43).
+  { base: '/img/hero/foam', wide: 1080, label: { en: 'Foam wash', es: 'Lavado con espuma' } },
 ]
 
 const BADGES = [
-  { key: 'heroBadge1', sub: 'heroBadge1b', icon: '🛡️' },
-  { key: 'heroBadge2', sub: 'heroBadge2b', icon: '⚡' },
-  { key: 'heroBadge3', sub: 'heroBadge3b', icon: '📷' },
+  { key: 'heroBadge1', icon: 'car' },
+  { key: 'heroBadge2', icon: 'pin' },
+  { key: 'heroBadge3', icon: 'camera' },
 ]
 
 export default function Hero() {
@@ -33,13 +34,13 @@ export default function Hero() {
 
   return (
     <section id="hero" style={{
-      minHeight: '100vh', display: 'flex', flexDirection: 'column',
+      display: 'flex', flexDirection: 'column',
       justifyContent: 'center', position: 'relative', overflow: 'hidden',
       paddingTop: '80px', background: '#fff'
     }}>
       <div className="container" style={{
         display: 'grid', gridTemplateColumns: '1fr 1fr',
-        gap: '48px', alignItems: 'center', padding: '40px 24px',
+        gap: '48px', alignItems: 'center', padding: '56px 24px 72px',
         flex: 1
       }}>
 
@@ -73,7 +74,7 @@ export default function Hero() {
             <a href={waUrl} target="_blank" rel="noopener noreferrer"
               className="btn btn-green" style={{ padding: '16px 32px', fontSize: '14px' }}
               data-track="whatsapp_click" data-location="hero">
-              💬 {t('heroCta2')}
+              <Icon name="whatsapp" size={18} /> {t('heroCta2')}
             </a>
           </div>
         </div>
@@ -153,15 +154,10 @@ export default function Hero() {
               display: 'flex', alignItems: 'center', gap: '10px',
               flexShrink: 0 /* Prevent shrinking */
             }}>
-              <div style={{
-                width: '40px', height: '40px', borderRadius: '10px',
-                background: '#f0f9ff', display: 'flex', alignItems: 'center',
-                justifyContent: 'center', fontSize: '18px', flexShrink: 0
-              }}>{b.icon}</div>
-              <div>
-                <div style={{ fontWeight: 800, fontSize: '13px', color: '#0f172a', lineHeight: 1.2, whiteSpace: 'nowrap' }}>{t(b.key)}</div>
-                <div style={{ fontSize: '11px', color: '#64748b', whiteSpace: 'nowrap' }}>{t(b.sub)}</div>
+              <div className="icon-pill" style={{ width: '40px', height: '40px', borderRadius: '12px', marginBottom: 0 }}>
+                <Icon name={b.icon} size={20} />
               </div>
+              <div style={{ fontWeight: 700, fontSize: '14px', color: 'var(--text-dark)', whiteSpace: 'nowrap' }}>{t(b.key)}</div>
             </div>
           ))}
         </div>

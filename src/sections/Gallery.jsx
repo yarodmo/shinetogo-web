@@ -5,18 +5,18 @@ import { useI18n } from '../i18n'
 // Los videos no se descargan hasta que alguien los reproduce (preload="none" + póster).
 const ITEMS = [
   { type: 'image', thumb: '/img/gallery/mobile-car-detailing-florida-exterior-wash-640.webp', src: '/img/gallery/mobile-car-detailing-florida-exterior-wash-1400.webp',
-    label: { en: 'Premium Exterior Wash', es: 'Lavado Exterior Premium' }, tag: { en: 'Premium Wash', es: 'Lavado Premium' } },
+    label: { en: 'Exterior wash', es: 'Lavado exterior' }, tag: { en: 'Exterior', es: 'Exterior' } },
   // Este video se publicaba como "Ceramic Coating Finish", pero muestra un recorrido del interior de un auto.
   { type: 'video', src: '/video/ceramic-water-beading.mp4', poster: '/video/ceramic-water-beading-poster.webp',
-    label: { en: 'Interior Detail Walkthrough', es: 'Recorrido de Detallado Interior' }, tag: { en: 'Interior Detail', es: 'Detallado Interior' } },
+    label: { en: 'Interior walkthrough', es: 'Recorrido del interior' }, tag: { en: 'Interior', es: 'Interior' } },
   { type: 'video', src: '/video/snow-foam-wash.mp4', poster: '/video/snow-foam-wash-poster.webp',
-    label: { en: 'Snow Foam Luxury Wash', es: 'Lavado de Lujo con Espuma' }, tag: { en: 'Foam Wash', es: 'Lavado con Espuma' } },
+    label: { en: 'Foam wash', es: 'Lavado con espuma' }, tag: { en: 'Exterior', es: 'Exterior' } },
   { type: 'image', thumb: '/img/gallery/interior-car-cleaning-deep-shampoo-640.webp', src: '/img/gallery/interior-car-cleaning-deep-shampoo-1400.webp',
-    label: { en: 'Interior Deep Clean', es: 'Limpieza Profunda Interior' }, tag: { en: 'Interior Detail', es: 'Detallado Interior' } },
+    label: { en: 'Interior deep clean', es: 'Limpieza profunda del interior' }, tag: { en: 'Interior', es: 'Interior' } },
   { type: 'video', src: '/video/mobile-detailers-in-action.mp4', poster: '/video/mobile-detailers-in-action-poster.webp',
-    label: { en: 'Detailing Process', es: 'Proceso de Detallado' }, tag: { en: 'Mobile Service', es: 'Servicio Móvil' } },
+    label: { en: 'Our team at work', es: 'Nuestro equipo trabajando' }, tag: { en: 'Mobile', es: 'Móvil' } },
   { type: 'image', thumb: '/img/gallery/boat-detailing-gelcoat-polishing-640.webp', src: '/img/gallery/boat-detailing-gelcoat-polishing-1400.webp',
-    label: { en: 'Boat Gelcoat Polish', es: 'Pulido de Gelcoat de Bote' }, tag: { en: 'Marine', es: 'Marino' } },
+    label: { en: 'Boat gelcoat polish', es: 'Pulido de gelcoat' }, tag: { en: 'Boats', es: 'Botes' } },
 ]
 
 const FOCUSABLE = 'button, [href], video[controls], [tabindex]:not([tabindex="-1"])'
@@ -58,20 +58,20 @@ export default function Gallery() {
   return (
     <>
       {/* GALLERY */}
-      <section id="gallery" className="section section-light">
+      <section id="gallery" className="section section-dark">
         <div className="container">
-          <div style={{ textAlign: 'center', marginBottom: '56px' }}>
-            <h2 className="animated-fade-in" style={{ fontSize: 'clamp(28px, 4vw, 44px)', color: 'var(--text-dark)' }}>{t('galleryTitle')}</h2>
-            <p className="animated-fade-in" style={{ marginTop: '12px', color: 'var(--text-body)', fontSize: '17px' }}>{t('gallerySub')}</p>
+          <div className="section-head">
+            <h2 className="section-title">{t('galleryTitle')}</h2>
+            <p className="section-sub">{t('gallerySub')}</p>
           </div>
 
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 300px), 1fr))', gap: '20px' }}>
             {ITEMS.map((item, i) => (
-              <div key={item.src} className="light-card animated-fade-in" style={{ overflow: 'hidden' }}>
+              <div key={item.src} className="card card--media">
                 <button type="button" onClick={() => setActive(i)}
                   aria-label={`${item.type === 'video' ? 'Video: ' : ''}${item.label[lang]}`}
                   style={{ display: 'block', width: '100%', padding: 0, border: 0, background: 'none', cursor: 'pointer', textAlign: 'left' }}>
-                  <div style={{ position: 'relative', paddingTop: '70%', background: '#f1f5f9' }}>
+                  <div style={{ position: 'relative', paddingTop: '70%', background: 'var(--bg-card)' }}>
                     {item.type === 'video' ? (
                       <>
                         <video src={item.src} poster={item.poster} muted loop playsInline preload="none" aria-hidden="true" tabIndex={-1}
@@ -86,9 +86,9 @@ export default function Gallery() {
                     )}
                   </div>
                 </button>
-                <div style={{ padding: '20px' }}>
-                  <span style={{ fontSize: '11px', fontWeight: 700, color: 'var(--brand-blue-text)', textTransform: 'uppercase', letterSpacing: '0.08em' }}>{item.tag[lang]}</span>
-                  <h3 style={{ fontSize: '16px', fontWeight: 700, color: 'var(--text-dark)', marginTop: '4px' }}>{item.label[lang]}</h3>
+                <div className="card-body" style={{ padding: '18px 22px 22px' }}>
+                  <span className="eyebrow" style={{ marginBottom: '4px', fontSize: '11px' }}>{item.tag[lang]}</span>
+                  <h3 style={{ fontSize: '16px', margin: 0 }}>{item.label[lang]}</h3>
                 </div>
               </div>
             ))}

@@ -17,12 +17,16 @@ body {
   line-height: 1.6;
 }
 
+/* Escala de títulos única: 900 solo para el h1; h2 y h3 en 800/700 para que haya jerarquía. */
 h1, h2, h3, h4 {
   font-family: var(--font-heading);
-  font-weight: 900;
+  font-weight: 800;
   letter-spacing: -0.03em;
   line-height: 1.1;
+  text-wrap: balance;
 }
+h1 { font-weight: 900; }
+h3, h4 { font-weight: 700; letter-spacing: -0.01em; }
 
 img, video { max-width: 100%; display: block; }
 a { text-decoration: none; color: inherit; }
@@ -34,11 +38,84 @@ ul { list-style: none; }
   padding: 0 24px;
 }
 
-/* ─── SECTION BASE ─── */
-.section { padding: 100px 0; }
+/* ─── SECTION BASE ───
+   Tres tonos y nada más: blanco, gris muy claro y un solo oscuro. El orden de la home los alterna. */
+.section { padding: 96px 0; }
+.section-white { background: #fff; color: var(--text-dark); }
 .section-light { background: var(--bg-light); color: var(--text-dark); }
 .section-dark { background: var(--bg-dark); color: var(--text-white); }
-.section-card { background: var(--bg-card); color: var(--text-white); }
+
+/* Cabecera de sección: misma estructura y tamaños en todas */
+.section-head { text-align: center; max-width: 720px; margin: 0 auto 48px; }
+.eyebrow { display: block; font-size: 12px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--brand-blue-text); margin-bottom: 12px; }
+.section-dark .eyebrow { color: var(--brand-blue); }
+.section-title { font-size: clamp(26px, 3.6vw, 40px); color: var(--text-dark); }
+.section-dark .section-title { color: #fff; }
+.section-sub { margin-top: 14px; font-size: 18px; line-height: 1.6; color: var(--text-body); }
+.section-dark .section-sub { color: var(--text-muted); }
+
+/* Tarjeta base y variantes: un solo radio (16), un solo padding, borde de 1 px */
+.card { background: #fff; border: 1px solid var(--border-light); border-radius: var(--radius); padding: 28px; transition: var(--transition); }
+.section-dark .card { background: var(--bg-card); border-color: var(--border-dark); }
+.card:hover { box-shadow: var(--shadow-soft); }
+.section-dark .card:hover { border-color: rgba(255, 255, 255, 0.16); box-shadow: none; }
+.card h3 { font-size: 18px; color: var(--text-dark); margin-bottom: 8px; }
+.section-dark .card h3 { color: #fff; }
+.card p { font-size: 15px; line-height: 1.6; color: var(--text-body); }
+.section-dark .card p { color: var(--text-muted); }
+.card--media { padding: 0; overflow: hidden; display: flex; flex-direction: column; }
+.card--media .card-body { padding: 24px 28px 28px; display: flex; flex-direction: column; flex: 1; }
+.card--plan { display: flex; flex-direction: column; position: relative; }
+.card--plan.is-featured { border: 2px solid var(--brand-gold); }
+
+/* Icono en pastilla: 48 px, radio 14, fondo del azul al 12 % */
+.icon-pill { width: 48px; height: 48px; border-radius: 14px; display: grid; place-items: center; background: rgba(14, 165, 233, 0.12); color: var(--brand-blue-text); margin-bottom: 18px; flex-shrink: 0; }
+.section-dark .icon-pill { color: var(--brand-blue); }
+
+/* Lista con marca: un solo color de ✓ en todo el sitio */
+.check-list { display: flex; flex-direction: column; gap: 10px; }
+.check-list li { display: flex; gap: 10px; align-items: flex-start; font-size: 15px; font-weight: 500; color: var(--text-dark); }
+.section-dark .check-list li { color: var(--text-light); }
+.check-list svg { color: var(--brand-green); flex-shrink: 0; margin-top: 3px; }
+
+/* Enlace secundario con flecha */
+.link-more { display: inline-flex; align-items: center; gap: 6px; font-size: 14px; font-weight: 700; color: var(--brand-blue-text); }
+.link-more:hover { text-decoration: underline; }
+.section-dark .link-more { color: var(--brand-blue); }
+
+/* Botones con icono */
+.btn svg { flex-shrink: 0; }
+
+/* Tres tarjetas: 3 columnas en pantalla ancha, 1 en móvil */
+.cards-3 { display: grid; gap: 24px; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+@media (max-width: 900px) { .cards-3 { grid-template-columns: minmax(0, 1fr); } }
+
+/* Imagen o esquema de la tarjeta de servicio (16:10) e insignia */
+.svc-media { position: relative; aspect-ratio: 16 / 10; max-width: 100%; background: var(--bg-card); }
+.svc-media img { width: 100%; height: 100%; object-fit: cover; }
+.svc-badge { position: absolute; top: 14px; right: 14px; padding: 5px 12px; border-radius: 99px; font: 700 12px var(--font-main); color: var(--ink); }
+.svc-badge--gold { background: var(--brand-gold); }
+.svc-badge--blue { background: var(--brand-blue); }
+.svc-badge--green { background: var(--brand-green); }
+
+/* Acciones de tarjeta: mismo alto en todas para que los botones queden alineados */
+.card-actions { display: flex; flex-direction: column; align-items: center; gap: 14px; min-height: 90px; }
+.card-actions .btn { width: 100%; }
+
+/* Botón secundario sobre fondo claro */
+.btn.btn-secondary { background: #fff; color: var(--text-dark); border: 1.5px solid var(--border-light); }
+.btn.btn-secondary:hover { border-color: var(--text-dark); transform: translateY(-2px); }
+
+/* Zonas */
+.area-chips { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
+.area-chips li { display: inline-flex; align-items: center; gap: 6px; padding: 8px 14px; border: 1px solid var(--border-light); border-radius: 99px; font-size: 14px; font-weight: 600; color: var(--text-dark); background: #fff; }
+.area-chips svg { color: var(--brand-blue-text); }
+
+/* Preguntas frecuentes */
+.faq-item { border-bottom: 1px solid var(--border-dark); padding: 20px 0; }
+.faq-item button { width: 100%; background: none; border: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 0; text-align: left; font: 700 16px var(--font-main); color: #fff; }
+.faq-item .plus { color: var(--brand-blue); font-size: 22px; flex-shrink: 0; transition: transform 0.2s; }
+.faq-item p { margin-top: 14px; font-size: 15px; color: var(--text-muted); line-height: 1.6; padding-right: 40px; }
 
 /* ─── NAVBAR ─── */
 .navbar-glass {
@@ -262,10 +339,11 @@ ul { list-style: none; }
 .form-note a { color: var(--brand-blue-text); text-decoration: underline; }
 
 /* Número decorativo de cada paso: va en CSS para que no cuente como texto */
-.step-num { position: absolute; top: 12px; left: 20px; font: 900 48px var(--font-heading); color: #fff; opacity: 0.04; user-select: none; pointer-events: none; }
+.step-num { position: absolute; top: 12px; left: 20px; font: 900 48px var(--font-heading); color: var(--text-dark); opacity: 0.06; user-select: none; pointer-events: none; }
 .step-num::before { content: attr(data-num); }
 /* Ilustración de cada paso de «Cómo funciona» (src/components/StepArt.jsx) */
-.step-art { width: 92px; height: 92px; margin: 0 auto 16px; color: var(--text-light); }
+.step-art { width: 92px; height: 92px; margin: 0 auto 16px; color: var(--text-dark); --step-fill: #fff; }
+.section-dark .step-art { color: var(--text-light); --step-fill: var(--bg-card); }
 .step-art svg { display: block; width: 100%; height: 100%; }
 .form-alert { padding: 14px 16px; border-radius: 12px; font-size: 14px; line-height: 1.5; border: 1px solid #fecaca; background: #fef2f2; color: #991b1b; }
 .form-details { border: 1.5px dashed var(--border-light); border-radius: 14px; padding: 4px 16px; }
@@ -300,9 +378,9 @@ ul { list-style: none; }
 @media (max-width: 768px) {
   .container { padding: 0 16px; }
   .section { padding: 72px 0; }
-  h1 { font-size: 32px !important; }
-  h2 { font-size: 26px !important; }
-  
+  .section-head { margin-bottom: 36px; }
+  .section-sub { font-size: 16px; }
+
   .sticky-cta { display: flex !important; }
   main { padding-bottom: 70px; }
   
