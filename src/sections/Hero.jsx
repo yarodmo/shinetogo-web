@@ -55,10 +55,13 @@ export default function Hero() {
           <h1 className="animated-fade-in" style={{
             fontSize: 'clamp(30px, 4.5vw, 52px)', fontWeight: 900,
             color: '#0f172a', lineHeight: 1.1, letterSpacing: '-0.04em',
-            marginBottom: '24px'
+            marginBottom: '16px'
           }}>
             {t('heroTitle')}
           </h1>
+          <p className="animated-fade-in" style={{ fontSize: '17px', color: 'var(--text-body)', lineHeight: 1.6, maxWidth: '46ch', marginBottom: '28px' }}>
+            {t('heroSub')}
+          </p>
 
           <div className="animated-fade-in hero-ctas" style={{
             display: 'flex', gap: '14px', flexWrap: 'wrap', marginBottom: '32px'

@@ -12,16 +12,17 @@ const base = {
 
 
     // Hero
-    heroTag: 'MOBILE DETAILING • WINDOW TINT • CERAMIC COATING • BOATS',
-    heroTitle: 'Car wash and boat detailing that comes to you',
+    heroTag: 'SARASOTA · BRADENTON · VENICE · ST. PETE',
+    heroTitle: 'Car and boat detailing, window tint and ceramic coating',
+    heroSub: 'One quote form for every service. Send photos on WhatsApp for a faster answer.',
     heroCta1: 'Request a quote',
     heroCta2: 'Chat on WhatsApp',
     heroBadge1: 'Professional',
-    heroBadge1b: '& Careful',
-    heroBadge2: 'We Come',
-    heroBadge2b: 'To You',
+    heroBadge1b: '& careful',
+    heroBadge2: 'We come',
+    heroBadge2b: 'to you',
     heroBadge3: 'Quotes',
-    heroBadge3b: 'By Photo',
+    heroBadge3b: 'by photo',
 
 
     // About
@@ -104,7 +105,9 @@ const base = {
     faq4Q: 'What payment methods do you accept?',
     faq4A: 'We accept credit and debit cards, Zelle and cash. Payment is due upon service completion.',
     faq5Q: 'Are your products safe for my vehicle?',
-    faq5A: 'We use professional-grade products chosen for your paint and surface. Tell us about your car and we’ll confirm.',
+    faq5A: 'We choose the product for your paint and surfaces and tell you which one before we start.',
+    faq6Q: 'Do you also do window tint and ceramic coating?',
+    faq6A: 'Yes, for cars. Pick the service in the form above and we reply with a price range. If you want to read more first, see the Window Tint and Ceramic pages in the menu.',
 
     // Contact
     contactTitle: 'Request a quote',
@@ -150,16 +153,17 @@ const base = {
 
 
     // Hero
-    heroTag: 'DETALLADO MÓVIL • POLARIZADO • RECUBRIMIENTO CERÁMICO • BOTES',
-    heroTitle: 'Lavado de carros y detallado de botes a domicilio',
+    heroTag: 'SARASOTA · BRADENTON · VENICE · ST. PETE',
+    heroTitle: 'Detallado de carros y botes, polarizado y recubrimiento cerámico',
+    heroSub: 'Una sola cotización para cualquier servicio. Manda fotos por WhatsApp y te respondemos más rápido.',
     heroCta1: 'Pedir cotización',
     heroCta2: 'Escríbenos por WhatsApp',
     heroBadge1: 'Profesionales',
     heroBadge1b: 'y cuidadosos',
     heroBadge2: 'Vamos',
-    heroBadge2b: 'A Ti',
+    heroBadge2b: 'a ti',
     heroBadge3: 'Cotiza',
-    heroBadge3b: 'Por Foto',
+    heroBadge3b: 'por foto',
 
 
     // About
@@ -242,7 +246,9 @@ const base = {
     faq4Q: '¿Qué métodos de pago aceptan?',
     faq4A: 'Aceptamos tarjetas de crédito y débito, Zelle y efectivo. Pago al completar el servicio.',
     faq5Q: '¿Sus productos son seguros para mi vehículo?',
-    faq5A: 'Usamos productos de grado profesional elegidos para tu pintura y tus superficies. Cuéntanos de tu auto y lo confirmamos.',
+    faq5A: 'Elegimos el producto según tu pintura y tus superficies, y te decimos cuál antes de empezar.',
+    faq6Q: '¿También hacen polarizado y recubrimiento cerámico?',
+    faq6A: 'Sí, para carros. Elige el servicio en el formulario de arriba y te respondemos con un rango de precio. Si quieres leer más antes, mira las páginas de Polarizado y Cerámico en el menú.',
 
     // Contact
     contactTitle: 'Pide tu cotización',

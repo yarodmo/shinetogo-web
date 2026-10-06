@@ -575,17 +575,17 @@ ${l10nBlob(lang, 'privacy')}
 /* ───────────────────────── cascarón de la SPA (home) ───────────────────────── */
 const HOME = {
   en: {
-    title: `Mobile Car & Boat Detailing in Sarasota & Bradenton | ${BRAND_SHORT}`,
+    title: `Detailing, Window Tint & Ceramic Coating in Sarasota | ${BRAND_SHORT}`,
     desc: 'Mobile car and boat detailing in Sarasota, Bradenton, Venice and St. Pete. Window tint and ceramic coating for cars. Send photos on WhatsApp for a quote.',
-    h1: 'Car wash and boat detailing that comes to you',
+    h1: 'Car and boat detailing, window tint and ceramic coating',
     lead: `${BRAND} washes and details cars and boats at your home, office or marina. Window tint and ceramic coating are separate services, for cars only.`,
     list: [['Window tint', URLS.tint.en], ['Ceramic coating', URLS.ceramic.en]],
     contact: 'Call', quote: 'or send photos on WhatsApp for a quote.',
   },
   es: {
-    title: `Lavado y detallado de carros y botes en Sarasota | ${BRAND_SHORT}`,
+    title: `Detallado, polarizado y cerámico en Sarasota | ${BRAND_SHORT}`,
     desc: 'Lavado y detallado móvil de carros y botes en Sarasota, Bradenton, Venice y St. Pete. Polarizado y cerámico para carros. Cotiza con fotos por WhatsApp.',
-    h1: 'Lavado de carros y detallado de botes a domicilio',
+    h1: 'Detallado de carros y botes, polarizado y recubrimiento cerámico',
     lead: `${BRAND} lava y detalla carros y botes en tu casa, tu oficina o tu marina. El polarizado y el recubrimiento cerámico son servicios aparte, solo para carros.`,
     list: [['Polarizado de vidrios', URLS.tint.es], ['Recubrimiento cerámico', URLS.ceramic.es]],
     contact: 'Llama al', quote: 'o manda fotos por WhatsApp para cotizar.',

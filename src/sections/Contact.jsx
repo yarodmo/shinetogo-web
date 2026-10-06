@@ -6,7 +6,7 @@ import { track } from '../lib/track'
 import { FORM } from '../content/forms'
 import { BRAND_NAME, PHONE_DISPLAY, PHONE_TEL, waLink } from '../lib/site'
 
-const FAQ_KEYS = ['faq1', 'faq2', 'faq3', 'faq4', 'faq5']
+const FAQ_KEYS = ['faq1', 'faq2', 'faq3', 'faq4', 'faq5', 'faq6']
 
 const VEHICLES = [
   { id: 'car', en: 'Car / Sedan', es: 'Carro / Sedán' },
