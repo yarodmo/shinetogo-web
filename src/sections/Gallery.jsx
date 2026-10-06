@@ -58,20 +58,24 @@ export default function Gallery() {
   return (
     <>
       {/* GALLERY */}
-      <section id="gallery" className="section section-dark">
+      <section id="gallery" className="section section-light">
         <div className="container">
-          <div className="section-head">
-            <h2 className="section-title">{t('galleryTitle')}</h2>
-            <p className="section-sub">{t('gallerySub')}</p>
+          <div style={{ textAlign: 'center', marginBottom: '56px' }}>
+            <h2 className="animated-fade-in" style={{
+              fontSize: 'clamp(28px, 4vw, 44px)', color: 'var(--text-dark)'
+            }}>{t('galleryTitle')}</h2>
+            <p className="animated-fade-in" style={{ marginTop: '12px', color: 'var(--text-body)', fontSize: '17px' }}>
+              {t('gallerySub')}
+            </p>
           </div>
 
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 300px), 1fr))', gap: '20px' }}>
             {ITEMS.map((item, i) => (
-              <div key={item.src} className="card card--media">
+              <div key={item.src} className="light-card animated-fade-in" style={{ overflow: 'hidden' }}>
                 <button type="button" onClick={() => setActive(i)}
                   aria-label={`${item.type === 'video' ? 'Video: ' : ''}${item.label[lang]}`}
                   style={{ display: 'block', width: '100%', padding: 0, border: 0, background: 'none', cursor: 'pointer', textAlign: 'left' }}>
-                  <div style={{ position: 'relative', paddingTop: '70%', background: 'var(--bg-card)' }}>
+                  <div style={{ position: 'relative', paddingTop: '70%', background: '#f1f5f9' }}>
                     {item.type === 'video' ? (
                       <>
                         <video src={item.src} poster={item.poster} muted loop playsInline preload="none" aria-hidden="true" tabIndex={-1}
@@ -86,9 +90,14 @@ export default function Gallery() {
                     )}
                   </div>
                 </button>
-                <div className="card-body" style={{ padding: '18px 22px 22px' }}>
-                  <span className="eyebrow" style={{ marginBottom: '4px', fontSize: '11px' }}>{item.tag[lang]}</span>
-                  <h3 style={{ fontSize: '16px', margin: 0 }}>{item.label[lang]}</h3>
+                <div style={{ padding: '20px' }}>
+                  <span style={{
+                    fontSize: '11px', fontWeight: 700, color: 'var(--brand-blue-text)',
+                    textTransform: 'uppercase', letterSpacing: '0.08em'
+                  }}>{item.tag[lang]}</span>
+                  <h3 style={{ fontSize: '16px', fontWeight: 700, color: 'var(--text-dark)', marginTop: '4px' }}>
+                    {item.label[lang]}
+                  </h3>
                 </div>
               </div>
             ))}

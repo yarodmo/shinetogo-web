@@ -1,20 +1,18 @@
 import { useI18n } from '../i18n'
 import { prefill } from '../lib/prefill'
-import Icon from '../components/Icon'
 
-// Cuatro servicios, una sola tarjeta. El botón principal de TODAS es cotizar aquí mismo (el lead se queda en la home),
-// con el servicio ya elegido en el formulario. "Ver detalles/paquetes" es un enlace secundario.
-// Tint y cerámico usan esquemas (no hay fotos propias de esos trabajos todavía; ver docs/OPEN-QUESTIONS #21 y #43).
+// Auto y bote son los protagonistas (tarjetas grandes con foto). Polarizado y cerámico van debajo,
+// en un segundo nivel más compacto: son servicios aparte, con su página de detalle, y se cotizan en el mismo formulario.
 const diagrams = import.meta.glob('../assets/protection/{heat-path,ceramic-layers}.*.svg', { query: '?raw', import: 'default', eager: true })
 
-// La insignia «Nuevo» de los dos servicios nuevos se retira sola a los seis meses (2027-04-05).
-const NEW_UNTIL = Date.parse('2027-04-05')
-
 const SERVICES = [
-  { key: 'svc1', img: '/img/services/auto-800.webp', badgeTone: 'gold', more: { href: '#pricing', label: 'svc1Btn' }, prefill: {} },
-  { key: 'svc2', img: '/img/services/boat-800.webp', badgeTone: 'blue', prefill: { service: 'boat', vehicle_type: 'boat' } },
-  { key: 'svc4', isNew: true, diagram: 'heat-path', badgeTone: 'green', more: { href: { en: '/window-tint/', es: '/es/polarizado-de-vidrios/' }, label: 'svcMore' }, prefill: { service: 'tint' } },
-  { key: 'svc5', isNew: true, diagram: 'ceramic-layers', badgeTone: 'green', more: { href: { en: '/ceramic-coating/', es: '/es/recubrimiento-ceramico/' }, label: 'svcMore' }, prefill: { service: 'ceramic' } },
+  { key: 'svc1', img: '/img/services/auto-800.webp', color: 'var(--brand-gold)', href: '#pricing', prefill: null },
+  { key: 'svc2', img: '/img/services/boat-800.webp', color: 'var(--brand-blue)', href: '#contact', prefill: { service: 'boat', vehicle_type: 'boat' } },
+]
+
+const PROTECTION = [
+  { key: 'svc4', diagram: 'heat-path', service: 'tint', href: { en: '/window-tint/', es: '/es/polarizado-de-vidrios/' } },
+  { key: 'svc5', diagram: 'ceramic-layers', service: 'ceramic', href: { en: '/ceramic-coating/', es: '/es/recubrimiento-ceramico/' } },
 ]
 
 export default function Services() {
@@ -23,48 +21,101 @@ export default function Services() {
   return (
     <section id="services" className="section section-light">
       <div className="container">
-        <div className="section-head">
-          <h2 className="section-title">{t('svcHeadline')}</h2>
+        <h2 className="animated-fade-in" style={{
+          textAlign: 'center', fontSize: 'clamp(28px, 4vw, 44px)',
+          color: 'var(--text-dark)', maxWidth: '700px',
+          margin: '0 auto 64px'
+        }}>
+          {t('svcHeadline')}
+        </h2>
+
+        <div className="services-grid" style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 360px), 1fr))',
+          gap: '28px'
+        }}>
+          {SERVICES.map((svc) => (
+            <div key={svc.key} className="light-card animated-fade-in" style={{
+              display: 'flex', flexDirection: 'column', overflow: 'hidden'
+            }}>
+              {/* Image */}
+              <div role="img" aria-label={t(`${svc.key}Title`)} style={{
+                height: '240px', width: '100%', position: 'relative',
+                background: `url(${svc.img}) center/cover no-repeat`
+              }}>
+                <div className="badge" style={{
+                  position: 'absolute', top: '16px', right: '16px',
+                  background: svc.color, color: '#fff',
+                  boxShadow: '0 4px 12px rgba(0,0,0,0.2)'
+                }}>
+                  {t(`${svc.key}Badge`)}
+                </div>
+              </div>
+
+              {/* Content */}
+              <div style={{ padding: '32px', display: 'flex', flexDirection: 'column', flex: 1 }}>
+                <h3 style={{ fontSize: '24px', fontWeight: 800, color: 'var(--text-dark)', marginBottom: '12px' }}>
+                  {t(`${svc.key}Title`)}
+                </h3>
+                <p style={{ fontSize: '15px', color: 'var(--text-body)', lineHeight: 1.7, marginBottom: '24px' }}>
+                  {t(`${svc.key}Desc`)}
+                </p>
+                <ul style={{ display: 'flex', flexDirection: 'column', gap: '12px', marginBottom: '32px', flex: 1 }}>
+                  {[1, 2, 3, 4].map(n => (
+                    <li key={n} style={{
+                      fontSize: '15px', display: 'flex', gap: '10px',
+                      color: 'var(--text-dark)', fontWeight: 500
+                    }}>
+                      <span aria-hidden="true" style={{ color: 'var(--brand-green)', flexShrink: 0 }}>✓</span>
+                      {t(`${svc.key}F${n}`)}
+                    </li>
+                  ))}
+                </ul>
+                <a href={svc.href} className="btn btn-primary" style={{ width: '100%', borderRadius: '99px', padding: '16px' }}
+                  onClick={() => svc.prefill && prefill.set(svc.prefill)}
+                  data-track="service_card_click" data-location="services" data-service={svc.key}>
+                  {t(`${svc.key}Btn`)}
+                </a>
+              </div>
+            </div>
+          ))}
         </div>
 
-        <div className="services-grid cards-4">
-          {SERVICES.map((svc) => {
-            const diagram = svc.diagram ? diagrams[`../assets/protection/${svc.diagram}.${lang}.svg`] : null
-            const moreHref = svc.more && (typeof svc.more.href === 'string' ? svc.more.href : svc.more.href[lang])
-            const showBadge = !svc.isNew || Date.now() < NEW_UNTIL
-            return (
-              <article key={svc.key} className="card card--media">
-                <div className="svc-media">
-                  {diagram
-                    ? <div className="svc-diagram" dangerouslySetInnerHTML={{ __html: diagram }} />
-                    : <img src={svc.img} alt="" width="800" height="560" loading="lazy" decoding="async" />}
-                  {showBadge && <span className={`svc-badge svc-badge--${svc.badgeTone}`}>{t(`${svc.key}Badge`)}</span>}
+        {/* POLARIZADO Y CERÁMICO — segundo nivel */}
+        <div style={{ marginTop: '72px' }}>
+          <div style={{ textAlign: 'center', marginBottom: '32px' }}>
+            <h3 className="animated-fade-in" style={{ fontSize: 'clamp(22px, 2.6vw, 30px)', fontWeight: 800, color: 'var(--text-dark)' }}>
+              {t('protHeadline')}
+            </h3>
+            <p className="animated-fade-in" style={{ marginTop: '10px', color: 'var(--text-body)', fontSize: '16px' }}>
+              {t('protSub')}
+            </p>
+          </div>
+
+          <div className="prot-grid">
+            {PROTECTION.map((p) => (
+              <div key={p.key} className="light-card prot-card animated-fade-in">
+                <div className="svc-diagram-wrap">
+                  <div className="svc-diagram" dangerouslySetInnerHTML={{ __html: diagrams[`../assets/protection/${p.diagram}.${lang}.svg`] }} />
                 </div>
-                <div className="card-body">
-                  <h3>{t(`${svc.key}Title`)}</h3>
-                  <p style={{ marginBottom: '18px' }}>{t(`${svc.key}Desc`)}</p>
-                  <ul className="check-list" style={{ marginBottom: '24px', flex: 1 }}>
-                    {[1, 2, 3, 4].map((n) => (
-                      <li key={n}><Icon name="check" size={16} strokeWidth={2.25} />{t(`${svc.key}F${n}`)}</li>
-                    ))}
-                  </ul>
-                  <div className="card-actions">
-                    <a href="#contact" className="btn btn-primary"
-                      onClick={() => prefill.set(svc.prefill)}
-                      data-track="service_card_click" data-location="services" data-service={svc.key}>
+                <div style={{ padding: '24px 26px', display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                  <h4 style={{ fontSize: '20px', fontWeight: 800, color: 'var(--text-dark)' }}>{t(`${p.key}Title`)}</h4>
+                  <p style={{ fontSize: '14px', color: 'var(--text-body)', lineHeight: 1.6 }}>{t(`${p.key}Desc`)}</p>
+                  <div style={{ display: 'flex', gap: '16px', alignItems: 'center', flexWrap: 'wrap', marginTop: 'auto', paddingTop: '6px' }}>
+                    <a href="#contact" className="btn btn-primary" style={{ padding: '11px 22px', fontSize: '13px' }}
+                      onClick={() => prefill.set({ service: p.service })}
+                      data-track="service_card_click" data-location="services" data-service={p.key}>
                       {t('svcQuote')}
                     </a>
-                    {svc.more && (
-                      <a href={moreHref} className="link-more"
-                        data-track="service_more_click" data-location="services" data-service={svc.key}>
-                        {t(svc.more.label)} <Icon name="arrow" size={16} />
-                      </a>
-                    )}
+                    <a href={p.href[lang]} style={{ fontSize: '14px', fontWeight: 700, color: 'var(--brand-blue-text)' }}
+                      data-track="service_more_click" data-location="services" data-service={p.key}>
+                      {t('svcMore')} →
+                    </a>
                   </div>
                 </div>
-              </article>
-            )
-          })}
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>

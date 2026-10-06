@@ -1,19 +1,18 @@
 import { useState, useEffect, useCallback } from 'react'
 import { useI18n } from '../i18n'
 import { waLink } from '../lib/site'
-import Icon from '../components/Icon'
 
 // Versiones 640/1080 (4:3) generadas por scripts/optimize-assets.cjs.
 const SLIDES = [
-  { base: '/img/hero/finish', wide: 1080, label: { en: 'Exterior detail', es: 'Detallado exterior' } },
+  { base: '/img/hero/finish', wide: 1080, label: { en: 'Exterior Finish', es: 'Acabado Exterior' } },
   // La foto del pulido (polish-*) se retiró: matrícula británica legible y logo que no es el real (docs/OPEN-QUESTIONS #43).
-  { base: '/img/hero/foam', wide: 1080, label: { en: 'Foam wash', es: 'Lavado con espuma' } },
+  { base: '/img/hero/foam', wide: 1080, label: { en: 'Snow Foam Wash', es: 'Lavado con Espuma' } },
 ]
 
 const BADGES = [
-  { key: 'heroBadge1', icon: 'car' },
-  { key: 'heroBadge2', icon: 'pin' },
-  { key: 'heroBadge3', icon: 'camera' },
+  { key: 'heroBadge1', sub: 'heroBadge1b', icon: '🚚' },
+  { key: 'heroBadge2', sub: 'heroBadge2b', icon: '🚤' },
+  { key: 'heroBadge3', sub: 'heroBadge3b', icon: '📸' },
 ]
 
 export default function Hero() {
@@ -34,13 +33,13 @@ export default function Hero() {
 
   return (
     <section id="hero" style={{
-      display: 'flex', flexDirection: 'column',
+      minHeight: '100vh', display: 'flex', flexDirection: 'column',
       justifyContent: 'center', position: 'relative', overflow: 'hidden',
       paddingTop: '80px', background: '#fff'
     }}>
       <div className="container" style={{
         display: 'grid', gridTemplateColumns: '1fr 1fr',
-        gap: '48px', alignItems: 'center', padding: '56px 24px 72px',
+        gap: '48px', alignItems: 'center', padding: '40px 24px',
         flex: 1
       }}>
 
@@ -56,13 +55,10 @@ export default function Hero() {
           <h1 className="animated-fade-in" style={{
             fontSize: 'clamp(30px, 4.5vw, 52px)', fontWeight: 900,
             color: '#0f172a', lineHeight: 1.1, letterSpacing: '-0.04em',
-            marginBottom: '16px'
+            marginBottom: '24px'
           }}>
             {t('heroTitle')}
           </h1>
-          <p className="animated-fade-in" style={{ fontSize: '17px', color: 'var(--text-body)', lineHeight: 1.6, maxWidth: '46ch', marginBottom: '28px' }}>
-            {t('heroSub')}
-          </p>
 
           <div className="animated-fade-in hero-ctas" style={{
             display: 'flex', gap: '14px', flexWrap: 'wrap', marginBottom: '32px'
@@ -74,7 +70,7 @@ export default function Hero() {
             <a href={waUrl} target="_blank" rel="noopener noreferrer"
               className="btn btn-green" style={{ padding: '16px 32px', fontSize: '14px' }}
               data-track="whatsapp_click" data-location="hero">
-              <Icon name="whatsapp" size={18} /> {t('heroCta2')}
+              💬 {t('heroCta2')}
             </a>
           </div>
         </div>
@@ -139,14 +135,14 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* TRUST BADGES */}
+      {/* TRUST BADGES — ALWAYS HORIZONTAL */}
       <div className="animated-fade-in" style={{
         width: '100%', padding: '24px 0',
         borderTop: '1px solid #f1f5f9',
         background: '#fafbfc'
       }}>
         <div className="container" style={{
-          display: 'flex', justifyContent: 'center', gap: '16px 40px',
+          display: 'flex', justifyContent: 'center', gap: '16px 48px',
           flexWrap: 'wrap' /* en pantallas angostas baja a dos filas en vez de recortar la primera insignia */
         }}>
           {BADGES.map((b, i) => (
@@ -154,10 +150,15 @@ export default function Hero() {
               display: 'flex', alignItems: 'center', gap: '10px',
               flexShrink: 0 /* Prevent shrinking */
             }}>
-              <div className="icon-pill" style={{ width: '40px', height: '40px', borderRadius: '12px', marginBottom: 0 }}>
-                <Icon name={b.icon} size={20} />
+              <div aria-hidden="true" style={{
+                width: '40px', height: '40px', borderRadius: '10px',
+                background: '#f0f9ff', display: 'flex', alignItems: 'center',
+                justifyContent: 'center', fontSize: '18px', flexShrink: 0
+              }}>{b.icon}</div>
+              <div>
+                <div style={{ fontWeight: 800, fontSize: '13px', color: '#0f172a', lineHeight: 1.2, whiteSpace: 'nowrap' }}>{t(b.key)}</div>
+                <div style={{ fontSize: '11px', color: '#64748b', whiteSpace: 'nowrap' }}>{t(b.sub)}</div>
               </div>
-              <div style={{ fontWeight: 700, fontSize: '14px', color: 'var(--text-dark)', whiteSpace: 'nowrap' }}>{t(b.key)}</div>
             </div>
           ))}
         </div>

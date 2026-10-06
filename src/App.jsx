@@ -114,17 +114,16 @@ export default function App() {
     <>
       <Navbar />
       <main>
-        {/* Orden: qué hacemos → por qué importa aquí → precios → cómo funciona → trabajos → zonas → dudas → cotizar.
-            Tonos: blanco, claro, oscuro, blanco, claro, oscuro, blanco, oscuro, claro (nunca dos iguales seguidos). */}
+        {/* Orden de producción; Zonas ocupa el lugar de las reseñas retiradas y FAQ sigue al formulario. */}
         <Hero />
-        <Services />
         <About />
+        <Services />
         <Pricing />
         <Process />
         <Gallery />
         <Areas />
-        <Faq />
         <Contact />
+        <Faq />
       </main>
       <footer style={{
         background: 'var(--bg-dark)', padding: '48px 0',

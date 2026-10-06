@@ -5,7 +5,6 @@ import { submitLead, newLeadId } from '../lib/leads'
 import { track } from '../lib/track'
 import { FORM } from '../content/forms'
 import { BRAND_NAME, PHONE_DISPLAY, PHONE_TEL, waLink } from '../lib/site'
-import Icon from '../components/Icon'
 
 
 const VEHICLES = [
@@ -149,17 +148,21 @@ export default function Contact() {
   return (
     <>
       {/* CONTACT */}
-      <section id="contact" className="section section-light">
+      <section id="contact" className="section section-light" style={{ paddingBottom: '60px' }}>
         <div className="container">
-          <div className="section-head">
-            <h2 className="section-title">{t('contactTitle')}</h2>
-            <p className="section-sub">{t('contactSub')}</p>
+          <div style={{ textAlign: 'center', marginBottom: '56px' }}>
+            <h2 className="animated-fade-in" style={{ fontSize: 'clamp(28px, 4vw, 44px)', color: 'var(--text-dark)' }}>
+              {t('contactTitle')}
+            </h2>
+            <p className="animated-fade-in" style={{ marginTop: '12px', color: 'var(--text-body)', fontSize: '17px' }}>
+              {t('contactSub')}
+            </p>
           </div>
 
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 360px', gap: '32px', alignItems: 'start' }}>
             {/* FORM */}
             {status !== 'success' ? (
-              <form onSubmit={submit} noValidate className="card" aria-busy={status === 'sending'}
+              <form onSubmit={submit} noValidate className="light-card animated-fade-in" aria-busy={status === 'sending'}
                 onFocusCapture={() => { if (!started.current) { started.current = true; track('form_start') } }}
                 style={{ padding: '40px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
 
@@ -299,7 +302,7 @@ export default function Contact() {
                       <span style={{ display: 'flex', gap: '10px', flexWrap: 'wrap', marginTop: '10px' }}>
                         <a href={waLink(lang === 'en' ? 'Hi! I tried to send a quote request on your website.' : '¡Hola! Intenté enviar una solicitud de cotización en su sitio.')}
                           target="_blank" rel="noopener noreferrer" className="btn btn-green" style={{ padding: '10px 18px', fontSize: '13px' }}
-                          data-track="whatsapp_click" data-location="form_error"><Icon name="whatsapp" size={16} /> WhatsApp</a>
+                          data-track="whatsapp_click" data-location="form_error">💬 WhatsApp</a>
                         <a href={`tel:${PHONE_TEL}`} className="btn btn-outline" style={{ padding: '10px 18px', fontSize: '13px', color: 'var(--text-dark)', borderColor: 'var(--border-light)' }}
                           data-track="call_click" data-location="form_error">{PHONE_DISPLAY}</a>
                       </span>
@@ -314,23 +317,23 @@ export default function Contact() {
                 <p style={{ textAlign: 'center', fontSize: '13px', color: 'var(--text-body)', marginTop: '4px' }}>{t('formPrivacy')}</p>
               </form>
             ) : (
-              <div className="card" role="status" style={{ textAlign: 'center', padding: '56px 32px', border: '2px solid var(--brand-green)' }}>
-                <div className="icon-pill" style={{ margin: '0 auto 16px', background: 'rgba(16,185,129,.12)', color: 'var(--brand-green)' }}><Icon name="check" size={26} strokeWidth={2.5} /></div>
+              <div className="light-card animated-fade-in" role="status" style={{ textAlign: 'center', padding: '80px 40px', border: '2px solid var(--brand-green)' }}>
+                <div aria-hidden="true" style={{ fontSize: '56px', marginBottom: '20px' }}>✅</div>
                 <h3 style={{ fontSize: '24px', fontWeight: 900, color: 'var(--text-dark)', marginBottom: '12px' }}>{t('successTitle')}</h3>
                 <p style={{ color: 'var(--text-body)', fontSize: '16px', lineHeight: 1.6, marginBottom: '8px' }}>{t('successBody')}</p>
                 <p className="form-note" style={{ marginBottom: '24px' }}>{t('successRef')}: <strong>{ref}</strong></p>
                 <a href={waAfter} target="_blank" rel="noopener noreferrer" className="btn btn-green" style={{ padding: '16px 36px' }}
                   data-track="whatsapp_click" data-location="post_form" data-service={form.service}>
-                  <Icon name="whatsapp" size={18} /> {t('successWhatsapp')}
+                  💬 {t('successWhatsapp')}
                 </a>
               </div>
             )}
 
             {/* SIDEBAR — WhatsApp + Call */}
             <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-              <div className="card" style={{ textAlign: 'center' }}>
-                <div className="icon-pill" style={{ margin: '0 auto 14px', background: 'rgba(37,211,102,.12)', color: '#128c4a' }}><Icon name="whatsapp" size={24} /></div>
-                <h3 style={{ fontWeight: 800, color: 'var(--text-dark)', marginBottom: '6px' }}>{t('formWhatsapp')}</h3>
+              <div className="light-card animated-fade-in" style={{ padding: '28px', textAlign: 'center' }}>
+                <div aria-hidden="true" style={{ fontSize: '32px', marginBottom: '12px' }}>💬</div>
+                <h3 style={{ fontSize: '16px', fontWeight: 800, color: 'var(--text-dark)', marginBottom: '6px' }}>{t('formWhatsapp')}</h3>
                 <p style={{ fontSize: '13px', color: 'var(--text-body)', marginBottom: '16px', lineHeight: 1.5 }}>{t('formWhatsappSub')}</p>
                 <a href={waLink(t('whatsappText'))} target="_blank" rel="noopener noreferrer" className="btn btn-green" style={{ width: '100%' }}
                   data-track="whatsapp_click" data-location="contact_card">
@@ -338,11 +341,11 @@ export default function Contact() {
                 </a>
               </div>
 
-              <div className="card" style={{ textAlign: 'center' }}>
-                <div className="icon-pill" style={{ margin: '0 auto 14px' }}><Icon name="phone" size={24} /></div>
-                <h3 style={{ fontWeight: 800, color: 'var(--text-dark)', marginBottom: '6px' }}>{t('formCallTitle')}</h3>
+              <div className="light-card animated-fade-in" style={{ padding: '28px', textAlign: 'center' }}>
+                <div aria-hidden="true" style={{ fontSize: '32px', marginBottom: '12px' }}>📞</div>
+                <h3 style={{ fontSize: '16px', fontWeight: 800, color: 'var(--text-dark)', marginBottom: '6px' }}>{t('formCallTitle')}</h3>
                 <p style={{ fontSize: '13px', color: 'var(--text-body)', marginBottom: '16px' }}>{t('formCallSub')}</p>
-                <a href={`tel:${PHONE_TEL}`} className="btn btn-secondary" style={{ width: '100%' }}
+                <a href={`tel:${PHONE_TEL}`} className="btn btn-outline" style={{ width: '100%', color: 'var(--text-dark)', borderColor: 'var(--border-light)' }}
                   data-track="call_click" data-location="contact_card">
                   {PHONE_DISPLAY}
                 </a>
