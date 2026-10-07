@@ -390,9 +390,8 @@ ul { list-style: none; }
     grid-template-columns: 1fr !important;
     text-align: center !important;
   }
-  .hero-image-wrap {
-    order: -1 !important; /* Image first on mobile */
-    max-height: 300px;
+  .hero-slider {
+    order: -1; /* en celular la foto va primero y el texto debajo */
   }
   .hero-badges {
     flex-direction: column;
