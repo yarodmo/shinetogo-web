@@ -82,7 +82,7 @@ export default function Pricing() {
         }}>
           <p style={{ color: 'var(--text-muted)', fontSize: '15px' }}>
             {t('pkgHelp')}{' '}
-            <a href={waLink(t('whatsappText'))} target="_blank" rel="noopener noreferrer" data-track="whatsapp_click" data-location="pricing_help" style={{ color: 'var(--brand-blue-text)', fontWeight: 700 }}>{t('pkgHelpCta')}</a>
+            <a href={waLink(t('whatsappText'))} target="_blank" rel="noopener noreferrer" data-track="whatsapp_click" data-location="pricing_help" style={{ color: 'var(--brand-blue)', fontWeight: 700 }}>{t('pkgHelpCta')}</a>
           </p>
         </div>
       </div>

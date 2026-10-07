@@ -10,7 +10,7 @@
 export const tint = {
   en: {
     title: `Window Tint in Sarasota & Bradenton | {brand}`,
-    meta: `Carbon tint or ceramic tint for your car in Sarasota and Bradenton, We go over each window’s limit with you. Send photos on WhatsApp.`,
+    meta: `Carbon tint or ceramic tint for your car in Sarasota and Bradenton. We go over each window’s limit with you. Send photos on WhatsApp.`,
     eyebrow: `WINDOW TINT · SARASOTA AND BRADENTON`,
     h1: `Is your car an oven in the sun? Tint it.`,
     heroLine: `Send photos and we reply with a price range.`,

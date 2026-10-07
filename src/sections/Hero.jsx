@@ -17,16 +17,19 @@ const CHECKS = ['heroCheck1', 'heroCheck2', 'heroCheck3']
 export default function Hero() {
   const { t, lang } = useI18n()
   const [current, setCurrent] = useState(0)
+  const [paused, setPaused] = useState(false)
 
   const next = useCallback(() => setCurrent((c) => (c + 1) % SLIDES.length), [])
 
+  // Sin avance automático si el sistema pide menos movimiento o si la persona está sobre el hero (WCAG 2.2.2)
   useEffect(() => {
+    if (paused || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return undefined
     const timer = setInterval(next, 4000)
     return () => clearInterval(timer)
-  }, [next])
+  }, [next, paused])
 
   return (
-    <section id="hero" className="hero hero-dark tone-dark">
+    <section id="hero" className="hero hero-dark tone-dark" onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)} onFocus={() => setPaused(true)} onBlur={() => setPaused(false)}>
       <div className="hero-media">
         {SLIDES.map((slide, i) => (
           <img

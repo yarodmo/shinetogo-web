@@ -116,8 +116,9 @@ export default function App() {
 
   return (
     <>
+      <a className="skip" href="#main">{es ? 'Saltar al contenido' : 'Skip to content'}</a>
       <Navbar />
-      <main>
+      <main id="main">
         {/* Orden de producción; Zonas ocupa el lugar de las reseñas retiradas y FAQ sigue al formulario. */}
         <Hero />
         <About />

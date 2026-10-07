@@ -9,6 +9,10 @@
 
 :root { --card-radius: 24px; --card-pad: 28px; }
 
+/* ─── Enlace «saltar al contenido» ─── */
+.skip { position: absolute; left: -999px; top: 8px; z-index: 2000; background: var(--brand-gold); color: var(--ink); padding: 10px 16px; border-radius: 8px; font-weight: 700; }
+.skip:focus { left: 8px; }
+
 /* ─── Hero oscuro a todo el ancho ─── */
 .hero-dark { position: relative; overflow: hidden; padding-block: 36px 72px; min-height: 560px; display: flex; align-items: center; background: var(--bg-dark); color: #fff; }
 .hero-media { position: absolute; inset: 0; z-index: 0; }
@@ -31,6 +35,11 @@
 .hero-dots { position: absolute; right: 24px; bottom: 20px; z-index: 3; display: flex; gap: 8px; }
 .hero-dots button { width: 24px; height: 24px; padding: 8px; border: 0; border-radius: 99px; cursor: pointer; background: rgba(255, 255, 255, .4); background-clip: content-box; transition: all .3s ease; }
 .hero-dots button[aria-current="true"] { width: 40px; background-color: #fff; }
+
+/* Entre celular y escritorio el texto cae sobre la zona clara de la foto: capa pareja para no bajar de 4.5:1 */
+@media (min-width: 769px) and (max-width: 1100px) {
+  .hero-dark::before { background: linear-gradient(90deg, rgba(10, 14, 26, .92) 0%, rgba(10, 14, 26, .84) 55%, rgba(10, 14, 26, .5) 100%); }
+}
 
 @media (max-width: 768px) {
   /* Celular: la foto arriba, entera, y el texto debajo sobre el marino (no la tapa) */

@@ -55,8 +55,6 @@ ul { list-style: none; }
 .wrap { width: 100%; max-width: 1200px; margin-inline: auto; padding-inline: 24px; }
 .wrap.narrow { max-width: 808px; }
 .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
-.skip { position: absolute; left: -999px; top: 8px; z-index: 2000; background: var(--brand-gold); color: var(--ink); padding: 10px 16px; border-radius: 8px; font-weight: 700; }
-.skip:focus { left: 8px; }
 .muted { color: var(--muted); }
 .small { font-size: 13px; }
 
@@ -103,6 +101,7 @@ p + p { margin-top: 12px; }
 /* Hero a todo el ancho: foto oscura, titular grande y tres puntos de confianza */
 .crumbs-foot { padding-block: 22px; border-top: 1px solid var(--border-light); }
 .crumbs-foot .crumbs { margin: 0; padding: 0; }
+.crumbs-foot .crumbs, .crumbs-foot .crumbs a { color: var(--text-body); }
 .photo { margin: 0; }
 .photo img { width: 100%; height: auto; border-radius: var(--radius); display: block; background: var(--bg-card); }
 .photo figcaption { margin-top: 8px; font-size: 13px; color: var(--muted); }

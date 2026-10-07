@@ -81,7 +81,6 @@ async function main() {
   // Furgoneta lavando con espuma (oct 2026): reemplaza a hero-foam. 4:3 exacto, sin recorte; se ocultan los teléfonos que no son del negocio.
   const PHONES = [{ left: 796, top: 384, width: 112, height: 40 }]
   await webpBlurred(path.join(SRC, 'protection/service-van-foam-wash-action.jpg'), path.join(OUT_IMG, 'hero/action'), [640, 1080], PHONES, { ratio: 4 / 3 })
-  await webp(path.join(SRC, 'hero-polish.png'), path.join(OUT_IMG, 'hero/polish'), [[640, 480], [1024, 768]])
 
   console.log('Services')
   await webp(path.join(SRC, 'hero-auto.jpg'), path.join(OUT_IMG, 'services/auto'), [[800, 480]])

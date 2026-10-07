@@ -32,9 +32,9 @@ export default function About() {
               padding: '40px 32px', textAlign: 'center'
             }}>
               <div aria-hidden="true" style={{ fontSize: '36px', marginBottom: '20px' }}>{c.icon}</div>
-              <h3 style={{ fontSize: '18px', fontWeight: 800, color: '#fff', marginBottom: '12px' }}>
+              <h2 style={{ fontSize: '18px', fontWeight: 800, color: '#fff', marginBottom: '12px' }}>
                 {t(c.key)}
-              </h3>
+              </h2>
               <p style={{ fontSize: '14px', color: 'var(--text-muted)', lineHeight: 1.6 }}>
                 {t(`${c.key}d`)}
               </p>
