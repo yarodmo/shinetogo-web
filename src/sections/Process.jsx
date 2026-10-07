@@ -14,7 +14,6 @@ export default function Process() {
 
   return (
     <section className="section section-card" style={{ position: 'relative', overflow: 'hidden' }}>
-      <div className="glow-blue" style={{ top: '50%', left: '-5%', transform: 'translateY(-50%)' }} />
       <div className="container" style={{ position: 'relative', zIndex: 1 }}>
         <h2 className="animated-fade-in" style={{
           textAlign: 'center', fontSize: 'clamp(24px, 3.5vw, 40px)',

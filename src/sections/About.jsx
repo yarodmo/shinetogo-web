@@ -12,7 +12,6 @@ export default function About() {
 
   return (
     <section id="about" className="section section-dark" style={{ position: 'relative', overflow: 'hidden' }}>
-      <div className="glow-blue" style={{ top: '20%', right: '-10%' }} />
       <div className="container" style={{ position: 'relative', zIndex: 1 }}>
         <p className="animated-fade-in" style={{
           fontSize: 'clamp(18px, 2.5vw, 22px)', color: 'var(--text-light)',

@@ -222,17 +222,6 @@ ul { list-style: none; }
   background-clip: text;
 }
 
-/* ─── GLOW EFFECTS ─── */
-.glow-blue {
-  position: absolute;
-  width: 400px;
-  height: 400px;
-  background: var(--brand-blue);
-  filter: blur(160px);
-  opacity: 0.08;
-  pointer-events: none;
-}
-
 /* ─── FORM ─── */
 .form-input {
   width: 100%;

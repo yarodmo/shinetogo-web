@@ -8,7 +8,6 @@ export default function Areas() {
   const { t, lang } = useI18n()
   return (
     <section id="areas" className="section section-dark" style={{ position: 'relative', overflow: 'hidden' }}>
-      <div className="glow-blue" style={{ top: '10%', left: '-10%' }} />
       <div className="container" style={{ position: 'relative', zIndex: 1, maxWidth: '900px' }}>
         <div style={{ textAlign: 'center', marginBottom: '40px' }}>
           <h2 className="animated-fade-in" style={{ fontSize: 'clamp(28px, 4vw, 44px)', color: '#fff' }}>
