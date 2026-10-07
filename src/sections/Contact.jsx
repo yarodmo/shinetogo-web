@@ -63,13 +63,14 @@ export default function Contact() {
   useEffect(() => {
     const apply = (p) => {
       if (!p.service && !p.film && !p.vehicle_type) return
-      setForm((f) => ({
-        ...f,
-        service: p.service || f.service,
-        film: p.film || f.film,
-        // Un bote solo admite su servicio; elegir «bote» desde la tarjeta deja el vehículo ya puesto.
-        vehicle_type: p.vehicle_type || (f.vehicle_type === 'boat' && p.service !== 'boat' ? '' : f.vehicle_type),
-      }))
+      setForm((f) => {
+        const service = p.service || f.service
+        let vehicle_type = p.vehicle_type || f.vehicle_type
+        // Un bote solo admite su servicio; tint y cerámico son solo para carros de pasajeros (ni bote ni RV).
+        if (service === 'boat') vehicle_type = 'boat'
+        else if (vehicle_type === 'boat' || (vehicle_type === 'rv' && PROTECTION_SERVICES.includes(service))) vehicle_type = ''
+        return { ...f, service, film: p.film || f.film, vehicle_type }
+      })
     }
     prefillFromUrl()
     apply(prefill.get())
@@ -200,7 +201,7 @@ export default function Contact() {
                   </div>
                   <div>
                     <select id="f-service" aria-label={t('formService')} aria-invalid={errors.service ? 'true' : undefined} className={`${inputCls} ${errors.service ? 'input-error' : ''}`}
-                      style={{ appearance: 'none' }} value={form.service} onChange={(e) => set({ service: e.target.value })}>
+                      style={{ appearance: 'none' }} value={serviceOptions.includes(form.service) ? form.service : ''} onChange={(e) => set({ service: e.target.value })}>
                       <option value="" disabled hidden>{t('formService')}</option>
                       {serviceOptions.map((id) => <option key={id} value={id}>{label(id)}</option>)}
                     </select>

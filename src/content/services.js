@@ -4,7 +4,7 @@
  * La copia de cada landing vive aparte: src/content/tint.js y src/content/ceramic.js.
  *
  * Reglas (docs/BRAND.md): sin cifras de calor/UV, precios, garantías ni plazos que no estén respaldados;
- * nunca «legal» como cualidad de una película; en español: carro, polarizado, cotización.
+ * nunca «legal» como cualidad de un polarizado; en español: carro, polarizado, cotización.
  */
 export const services = {
   en: {
@@ -13,9 +13,9 @@ export const services = {
 
     // Tarjetas de servicio de la home (cada una abre su propia página)
     svc4Title: 'Window Tint',
-    svc4Desc: 'Carbon or ceramic film for your car’s side windows, back window, windshield strip and sunroof. Quote by photo.',
+    svc4Desc: 'Carbon or ceramic tint for your car’s side windows, back window, windshield strip and sunroof. Quote by photo.',
     svc4Alt: 'The Shine to Go van in a driveway, with a technician beside a black SUV and a table of window tint tools',
-    svc4F1: 'Front and rear side windows', svc4F2: 'Back window and windshield strip', svc4F3: 'Sunroof', svc4F4: 'Carbon or ceramic film',
+    svc4F1: 'Front and rear side windows', svc4F2: 'Back window and windshield strip', svc4F3: 'Sunroof', svc4F4: 'Carbon or ceramic tint',
     svc4Btn: 'See window tint', svc4Badge: 'New',
     svc5Title: 'Ceramic Coating',
     svc5Desc: 'Ceramic coating for paint, glass, wheels, trim and interior. Quote by photo.',
@@ -58,7 +58,7 @@ export const services = {
     navCeramic: 'Cerámico',
 
     svc4Title: 'Polarizado de vidrios',
-    svc4Desc: 'Película de carbono o cerámica para las ventanas, el vidrio trasero, la franja del parabrisas y el sunroof de tu carro. Cotiza con fotos.',
+    svc4Desc: 'Polarizado de carbono o cerámico para las ventanas, el vidrio trasero, la franja del parabrisas y el sunroof de tu carro. Cotiza con fotos.',
     svc4Alt: 'La furgoneta de Shine to Go en una entrada de casa, con un técnico junto a una SUV negra y una mesa con herramientas de polarizado',
     svc4F1: 'Ventanas de adelante y de atrás', svc4F2: 'Vidrio trasero y franja del parabrisas', svc4F3: 'Sunroof (quemacocos)', svc4F4: 'Carbono o cerámica',
     svc4Btn: 'Ver polarizado', svc4Badge: 'Nuevo',

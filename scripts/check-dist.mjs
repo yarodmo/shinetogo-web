@@ -82,6 +82,7 @@ for (const pg of pages) {
   // El FAQPage del JSON-LD debe coincidir con las preguntas visibles.
   const faqVisible = (html.match(/<details class="faq">/g) || []).length
   const faqLd = [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)].flatMap((m) => { try { return JSON.parse(m[1])['@graph'] || [] } catch { return [] } }).find((n) => n['@type'] === 'FAQPage')
+  if ((url === '/' || url === '/es/') && !faqLd) fail(url, 'la home no trae FAQPage en el HTML servido (los rastreadores sin JavaScript no verían las preguntas)')
   if (faqLd && faqLd.mainEntity.length !== faqVisible) fail(url, `FAQPage tiene ${faqLd.mainEntity.length} preguntas y la página muestra ${faqVisible}`)
   // Cada landing habla solo de su servicio: la de cerámica no menciona polarizado fuera del enlace cruzado.
   if (/^\/(es\/)?(ceramic-coating|recubrimiento-ceramico)\//.test(url)) {

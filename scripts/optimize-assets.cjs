@@ -52,10 +52,35 @@ async function webpCrop(srcFile, outBase, sizes, { ratio, cx = 0.5, cy = 0.5, re
   }
 }
 
+// La furgoneta de esta imagen muestra teléfonos que no son los del negocio: se difuminan al generar la versión web.
+// El original en assets-src no se modifica. region en píxeles del original.
+async function webpBlurred(srcFile, outBase, sizes, regions, { ratio, cx = 0.5, cy = 0.5 } = {}) {
+  const upright = await sharp(srcFile).rotate().toBuffer()
+  const patches = []
+  for (const r of regions) {
+    patches.push({ input: await sharp(upright).extract(r).blur(9).toBuffer(), left: r.left, top: r.top })
+  }
+  const base = await sharp(upright).composite(patches).toBuffer()
+  const { width: W, height: H } = await sharp(base).metadata()
+  let crop = { left: 0, top: 0, width: W, height: H }
+  if (ratio) {
+    if (W / H > ratio) { const w = Math.round(H * ratio); crop = { left: Math.round((W - w) * cx), top: 0, width: w, height: H } }
+    else { const h = Math.round(W / ratio); crop = { left: 0, top: Math.round((H - h) * cy), width: W, height: h } }
+  }
+  for (const w of sizes) {
+    const out = `${outBase}-${w}.webp`
+    fs.mkdirSync(path.dirname(out), { recursive: true })
+    await sharp(base).extract(crop).resize({ width: w, withoutEnlargement: true }).webp(q).toFile(out)
+    console.log('  ', path.relative(ROOT, out), kb(out))
+  }
+}
+
 async function main() {
   console.log('Hero (4:3)')
   await webp(path.join(SRC, 'hero-finish.jpg'), path.join(OUT_IMG, 'hero/finish'), [[640, 480], [1080, 810]])
-  await webp(path.join(SRC, 'hero-foam.jpg'), path.join(OUT_IMG, 'hero/foam'), [[640, 480], [1080, 810]])
+  // Furgoneta lavando con espuma (oct 2026): reemplaza a hero-foam. 4:3 exacto, sin recorte; se ocultan los teléfonos que no son del negocio.
+  const PHONES = [{ left: 796, top: 384, width: 112, height: 40 }]
+  await webpBlurred(path.join(SRC, 'protection/service-van-foam-wash-action.jpg'), path.join(OUT_IMG, 'hero/action'), [640, 1080], PHONES, { ratio: 4 / 3 })
   await webp(path.join(SRC, 'hero-polish.png'), path.join(OUT_IMG, 'hero/polish'), [[640, 480], [1024, 768]])
 
   console.log('Services')
@@ -85,6 +110,9 @@ async function main() {
   await webpCrop(path.join(PR, 'ceramic-applying-sponge-hood.jpg'), path.join(OUT_IMG, 'protection/ceramic-sponge'), [640, 960], { region: { left: 0, top: 0.36, width: 0.7, height: 0.48 } })
   await webpCrop(path.join(PR, 'ceramic-water-beading-pour.jpg'), path.join(OUT_IMG, 'protection/ceramic-beading'), [800, 1400], {})
 
+  await webpBlurred(path.join(SRC, 'protection/service-van-foam-wash-action.jpg'), path.join(OUT_IMG, 'gallery/team-at-work'), [640], PHONES, { ratio: 10 / 7 })
+  await webpBlurred(path.join(SRC, 'protection/service-van-foam-wash-action.jpg'), path.join(OUT_IMG, 'gallery/team-at-work'), [1195], PHONES, {})
+
   console.log('Marca')
   const logo = path.join(SRC, 'logo-shinetogo.jpg')
   await webp(logo, path.join(OUT_IMG, 'brand/logo'), [[120, 120], [240, 240]], { fit: 'contain' })
@@ -101,7 +129,6 @@ async function main() {
   const videos = [
     ['ceramic-coating-water-beading-proof.mov', 'ceramic-water-beading', 960, 1500],
     ['mobile-detailing-snow-foam-wash-video.MOV', 'snow-foam-wash', 960, 1500],
-    ['florida-mobile-detailers-in-action.mov', 'mobile-detailers-in-action', 848, 1100],
   ]
   const tmp = fs.mkdtempSync(path.join(require('os').tmpdir(), 'qlthumb-'))
   for (const [file, slug, maxLong, kbps] of videos) {

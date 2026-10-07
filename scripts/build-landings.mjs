@@ -290,6 +290,9 @@ const sourceLink = (src) => (src ? ` <a class="textlink" href="${src.url}" rel="
 
 /* ───────────────────────── plantillas: una por servicio ───────────────────────── */
 
+// Tablas que pueden desbordar en pantallas angostas: región enfocable y rotulada para desplazarla con teclado.
+const TBL_LABEL = { en: 'Table, scrolls sideways on small screens', es: 'Tabla, se desplaza de lado en pantallas pequeñas' }
+
 function tintBody(lang) {
   const c = tint[lang]
   const rowHtml = (row) => (row.cells.length === 1
@@ -316,7 +319,7 @@ function tintBody(lang) {
       <div>
         <h2 id="film-h">${esc(c.film.title)}</h2>
         <p class="lead">${esc(c.film.lead)}</p>
-        <div class="tbl-wrap"><table class="tbl">
+        <div class="tbl-wrap" role="region" tabindex="0" aria-label="${esc(TBL_LABEL[lang])}"><table class="tbl">
           <caption class="sr-only">${esc(c.film.title)}</caption>
           <thead><tr>${c.film.head.map((h) => `<th scope="col">${h ? esc(h) : `<span class="sr-only">${esc(c.film.title)}</span>`}</th>`).join('')}</tr></thead>
           <tbody>${c.film.rows.map(([label, a, b]) => `<tr><th scope="row">${esc(label)}</th><td>${esc(a)}</td><td>${esc(b)}</td></tr>`).join('')}</tbody>
@@ -331,7 +334,7 @@ function tintBody(lang) {
       <div>
         <h2 id="lim-h">${esc(c.limits.title)}</h2>
         <p class="lead">${esc(c.limits.lead)}</p>
-        <div class="tbl-wrap"><table class="tbl">
+        <div class="tbl-wrap" role="region" tabindex="0" aria-label="${esc(TBL_LABEL[lang])}"><table class="tbl">
           <thead><tr>${c.limits.head.map((h) => `<th scope="col">${esc(h)}</th>`).join('')}</tr></thead>
           <tbody>${c.limits.rows.map(rowHtml).join('')}</tbody>
         </table></div>
@@ -355,7 +358,7 @@ function ceramicBody(lang) {
       <div>
         <h2 id="ch-h">${esc(c.choose.title)}</h2>
         <p class="lead">${esc(c.choose.lead)}</p>
-        <div class="tbl-wrap"><table class="tbl">
+        <div class="tbl-wrap" role="region" tabindex="0" aria-label="${esc(TBL_LABEL[lang])}"><table class="tbl">
           <thead><tr>${c.choose.head.map((h) => `<th scope="col">${esc(h)}</th>`).join('')}</tr></thead>
           <tbody>${c.choose.rows.map((r) => `<tr><th scope="row">${esc(r.name)}</th><td>${esc(r.does)}</td><td>${esc(r.send)}</td></tr>`).join('')}</tbody>
         </table></div>
@@ -489,6 +492,7 @@ ${mainHtml}
 <div class="sticky-cta">
   <a class="btn btn-ghost" href="tel:${PHONE_TEL}" data-track="call_click" data-location="landing_sticky" data-service="${id}">${ICON_PHONE} ${u.call}</a>
   <a class="btn btn-green" href="${wa}" target="_blank" rel="noopener" data-track="whatsapp_click" data-location="landing_sticky" data-service="${id}">${ICON_WA} WhatsApp</a>
+  <a class="btn btn-primary" href="${quoteHref(lang, id)}" data-track="cta_click" data-location="landing_sticky" data-service="${id}">${esc(i18nText(lang, 'navBook'))}</a>
 </div>
 ${footer(lang, id)}
 ${l10nBlob(lang, id)}
@@ -507,7 +511,7 @@ const PRIVACY = {
     sections: [
       ['Who we are', [`${BRAND} provides mobile car and boat detailing in Southwest Florida, and window tint and ceramic coating as separate services for cars. You can reach us at ${PHONE_DISPLAY} (call, text or WhatsApp).`]],
       ['What we collect', [
-        'When you request a quote we collect the details you type: name, phone number, email (optional), vehicle type and description, the service you ask for and its details (which windows and film for tint, which surfaces for ceramic coating), ZIP code, preferred date and time, and your message.',
+        'When you request a quote we collect the details you type: name, phone number, email (optional), vehicle type and description, the service you ask for and its details (which windows and type of tint, which surfaces for ceramic coating), ZIP code, preferred date and time, and your message.',
         'We also record how you reached us (the page, the referring site, and campaign tags such as utm_source or ad click IDs), the language you used, your choice about text and WhatsApp messages with the date, time and the exact wording you saw, and the IP address and browser information that came with the request.',
         'If you message us on WhatsApp or call, we keep what you send us to answer you. That includes the photos of your vehicle you send for a quote and, if you show us one, a medical-exemption certificate for the vehicle.',
       ]],
@@ -541,7 +545,7 @@ const PRIVACY = {
     sections: [
       ['Quiénes somos', [`${BRAND} ofrece lavado y detallado móvil de carros y botes en el suroeste de Florida, y polarizado de vidrios y recubrimiento cerámico como servicios aparte para carros. Puedes contactarnos al ${PHONE_DISPLAY} (llamada, texto o WhatsApp).`]],
       ['Qué recopilamos', [
-        'Cuando pides una cotización recopilamos lo que escribes: nombre, teléfono, email (opcional), tipo y descripción del vehículo, el servicio que pides y sus detalles (qué vidrios y qué película en el polarizado, qué superficies en el recubrimiento cerámico), código postal, fecha y hora preferidas, y tu mensaje.',
+        'Cuando pides una cotización recopilamos lo que escribes: nombre, teléfono, email (opcional), tipo y descripción del vehículo, el servicio que pides y sus detalles (qué vidrios y qué tipo de polarizado, qué superficies en el recubrimiento cerámico), código postal, fecha y hora preferidas, y tu mensaje.',
         'También registramos cómo llegaste a nosotros (la página, el sitio de referencia y etiquetas de campaña como utm_source o identificadores de clics de anuncios), el idioma que usaste, tu decisión sobre mensajes de texto y WhatsApp con la fecha, la hora y el texto exacto que viste, y la dirección IP y los datos del navegador que acompañaron la solicitud.',
         'Si nos escribes por WhatsApp o nos llamas, guardamos lo que nos envías para responderte. Eso incluye las fotos de tu vehículo que mandas para la cotización y, si nos lo muestras, un certificado de exención médica del vehículo.',
       ]],
@@ -597,16 +601,12 @@ const HOME = {
   en: {
     title: `Detailing, Window Tint & Ceramic Coating in Sarasota | ${BRAND_SHORT}`,
     desc: 'Mobile car and boat detailing in Sarasota, Bradenton, Venice and St. Pete. Window tint and ceramic coating for cars. Send photos on WhatsApp for a quote.',
-    h1: 'Car and boat detailing, window tint and ceramic coating',
-    lead: `${BRAND} washes and details cars and boats at your home, office or marina. Window tint and ceramic coating are separate services, for cars only.`,
     list: [['Window tint', URLS.tint.en], ['Ceramic coating', URLS.ceramic.en]],
     contact: 'Call', quote: 'or send photos on WhatsApp for a quote.',
   },
   es: {
     title: `Detallado, polarizado y cerámico en Sarasota | ${BRAND_SHORT}`,
     desc: 'Lavado y detallado móvil de carros y botes en Sarasota, Bradenton, Venice y St. Pete. Polarizado y cerámico para carros. Cotiza con fotos por WhatsApp.',
-    h1: 'Detallado de carros y botes, polarizado y recubrimiento cerámico',
-    lead: `${BRAND} lava y detalla carros y botes en tu casa, tu oficina o tu marina. El polarizado y el recubrimiento cerámico son servicios aparte, solo para carros.`,
     list: [['Polarizado de vidrios', URLS.tint.es], ['Recubrimiento cerámico', URLS.ceramic.es]],
     contact: 'Llama al', quote: 'o manda fotos por WhatsApp para cotizar.',
   },
@@ -621,6 +621,9 @@ const i18nText = (lang, key) => {
   if (!m) throw new Error(`falta la clave ${key} (${lang}) en src/i18n.jsx`)
   return m[1].replace(/\\'/g, "'")
 }
+
+// Las preguntas de la home salen del mismo i18n que pinta React (src/sections/Faq.jsx): una sola fuente.
+const HOME_FAQ = ['faq1', 'faq2', 'faq3', 'faq4', 'faq5', 'faq6']
 
 function spaShell(lang) {
   const h = HOME[lang]
@@ -642,6 +645,10 @@ function spaShell(lang) {
         },
       },
       { '@type': 'WebSite', '@id': `${SITE}/#website`, url: SITE + '/', name: BRAND, inLanguage: lang, publisher: { '@id': `${SITE}/#business` } },
+      {
+        '@type': 'FAQPage',
+        mainEntity: HOME_FAQ.map((k) => ({ '@type': 'Question', name: i18nText(lang, `${k}Q`), acceptedAnswer: { '@type': 'Answer', text: i18nText(lang, `${k}A`) } })),
+      },
     ],
   }
   const preload = `  <link rel="preload" as="image" href="/img/brand/logo-120.webp" imagesrcset="/img/brand/logo-120.webp 1x, /img/brand/logo-240.webp 2x" fetchpriority="high" />\n`
@@ -654,8 +661,8 @@ function spaShell(lang) {
 <body>
   <div id="root">
     <main id="seo-shell" style="max-width:760px;margin:0 auto;padding:110px 24px 48px">
-      <h1>${esc(h.h1)}</h1>
-      <p>${esc(h.lead)}</p>
+      <h1>${esc(i18nText(lang, 'heroTitle'))}</h1>
+      <p>${esc(i18nText(lang, 'heroSub'))}</p>
       <h2>${esc(u.services)}</h2>
       ${['svc1', 'svc2'].map((k) => `<h3>${esc(i18nText(lang, `${k}Title`))}</h3>\n      <p>${esc(i18nText(lang, `${k}Desc`))}</p>`).join('\n      ')}
       <h3><a href="${URLS.tint[lang]}">${esc(i18nText(lang, 'svc4Title'))}</a></h3>
@@ -664,6 +671,8 @@ function spaShell(lang) {
       <p>${esc(i18nText(lang, 'svc5Desc'))}</p>
       <h2>${esc(u.areasTitle)}</h2>
       <p>${esc(AREA_COPY[lang])}</p>
+      <h2>${esc(i18nText(lang, 'faqTitle'))}</h2>
+      ${HOME_FAQ.map((k) => `<details class="faq"><summary>${esc(i18nText(lang, `${k}Q`))}</summary><p>${esc(i18nText(lang, `${k}A`))}</p></details>`).join('\n      ')}
       <p>${h.contact} <a href="tel:${PHONE_TEL}">${PHONE_DISPLAY}</a> ${h.quote}</p>
       <p><a href="${URLS.privacy[lang]}">${u.privacy}</a> · <a href="${URLS.home[lang === 'es' ? 'en' : 'es']}" hreflang="${lang === 'es' ? 'en' : 'es'}">${u.lang}</a></p>
     </main>
@@ -724,7 +733,7 @@ const LLMS = `# ${BRAND}
 > Mobile car and boat detailing in Southwest Florida: Sarasota, Bradenton, Venice, St. Petersburg, Brandon, Lido Key, Siesta Key, Longboat Key and nearby. Window tint and ceramic coating are separate services, for cars only. Quotes by photo on WhatsApp or by form.
 
 ## Services
-- [Window tint](${absolute(URLS.tint.en)}): carbon or ceramic film for a car’s side windows, back window, windshield strip and sunroof; Florida tint limits window by window.
+- [Window tint](${absolute(URLS.tint.en)}): carbon or ceramic tint for a car’s side windows, back window, windshield strip and sunroof; Florida tint limits window by window.
 - [Ceramic coating](${absolute(URLS.ceramic.en)}): paint, glass, wheels and calipers, exterior trim and interior; what a coating does and does not do.
 - [Home](${absolute(URLS.home.en)}): car wash and boat detailing, gallery, contact form.
 

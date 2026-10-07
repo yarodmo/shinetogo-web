@@ -44,7 +44,7 @@ export default function Services() {
               }}>
                 <div className="badge" style={{
                   position: 'absolute', top: '16px', right: '16px',
-                  background: svc.color, color: '#fff',
+                  background: svc.color, color: 'var(--ink)',
                   boxShadow: '0 4px 12px rgba(0,0,0,0.2)'
                 }}>
                   {t(`${svc.key}Badge`)}

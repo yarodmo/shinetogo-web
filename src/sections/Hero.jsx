@@ -7,7 +7,7 @@ const SLIDES = [
   { base: '/img/hero/van', wide: 1080, label: { en: 'Mobile detailing', es: 'Detallado móvil' } },
   { base: '/img/hero/finish', wide: 1080, label: { en: 'Exterior Finish', es: 'Acabado Exterior' } },
   // La foto del pulido (polish-*) se retiró: matrícula británica legible y logo que no es el real (docs/OPEN-QUESTIONS #43).
-  { base: '/img/hero/foam', wide: 1080, label: { en: 'Snow Foam Wash', es: 'Lavado con Espuma' } },
+  { base: '/img/hero/action', wide: 1080, label: { en: 'Snow Foam Wash', es: 'Lavado con Espuma' } },
 ]
 
 const BADGES = [
@@ -111,7 +111,7 @@ export default function Hero() {
             display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end'
           }}>
             <span style={{
-              fontSize: '14px', fontWeight: 700, color: '#fff',
+              fontSize: '14px', fontWeight: 700, color: 'var(--ink)',
               background: 'rgba(14,165,233,0.9)', padding: '6px 14px',
               borderRadius: '8px'
             }}>

@@ -15,6 +15,14 @@ if (siteHeader) {
   window.addEventListener('scroll', sync, { passive: true })
 }
 
+/* ───────── barra fija móvil: aparece al bajar 500 px, igual que en la home ───────── */
+const stickyBar = document.querySelector('.sticky-cta')
+if (stickyBar) {
+  const sync = () => stickyBar.classList.toggle('is-visible', window.scrollY > 500)
+  sync()
+  window.addEventListener('scroll', sync, { passive: true })
+}
+
 const L = JSON.parse(document.getElementById('l10n')?.textContent || '{}')
 
 /* ───────── banner de privacidad (solo si hay IDs de analítica y aún no eligió) ───────── */

@@ -12,7 +12,7 @@ export const ceramic = {
     meta: `Ceramic coating for paint, glass, wheels, trim and interior. Prep first, coating after. Send photos on WhatsApp for a quote. Sarasota and Bradenton.`,
     eyebrow: `CERAMIC COATING`,
     h1: `Ceramic coating for paint, glass, wheels, trim and interior`,
-    answer: `A ceramic coating is a hard, slick layer that bonds to the surface under it, so dirt and water let go more easily. We do paint, glass, wheels and calipers, exterior trim and the interior. It isn’t scratch-proof, and the prep underneath is part of the job. Send photos on WhatsApp for a quote.`,
+    answer: `A ceramic coating is a hard, slick layer that bonds to the surface under it and helps dirt and water let go more easily. We do paint, glass, wheels and calipers, exterior trim and the interior. It isn’t scratch-proof, and the prep underneath is part of the job. Send photos on WhatsApp for a quote.`,
     pills: [`Paint, glass, wheels, trim, interior`, `Quote by photo`],
     crumb: `Ceramic Coating`,
     service: `Ceramic Coating`,

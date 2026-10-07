@@ -1,6 +1,6 @@
 /**
  * Opciones del formulario de cotización, compartidas por la home (React) y las landings (HTML generado).
- * Cada servicio pide sus propios detalles: el tint, qué vidrios y qué película; el cerámico, qué partes cubrir.
+ * Cada servicio pide sus propios detalles: el tint, qué vidrios y qué tipo de polarizado; el cerámico, qué partes cubrir.
  * Los valores (primer elemento) los valida la API (api/lib/lead.js): no cambiarlos sin cambiar allá.
  */
 export const FORM = {
@@ -14,8 +14,8 @@ export const FORM = {
       [`sunroof`, `Sunroof`],
       [`full_car`, `All the windows (not the windshield)`],
     ],
-    filmLabel: `Film`,
-    films: [[`carbon`, `Carbon film`], [`ceramic`, `Ceramic film`], [`unsure`, `Not sure, recommend one`]],
+    filmLabel: `Tint type`,
+    films: [[`carbon`, `Carbon tint`], [`ceramic`, `Ceramic tint`], [`unsure`, `Not sure, recommend one`]],
     oldTint: `I have tint to take off`,
     areasLabel: `What to cover`,
     areas: [
@@ -37,8 +37,8 @@ export const FORM = {
       [`sunroof`, `Sunroof`],
       [`full_car`, `Todas las ventanas (menos el parabrisas)`],
     ],
-    filmLabel: `Película`,
-    films: [[`carbon`, `Película de carbono`], [`ceramic`, `Película cerámica`], [`unsure`, `No sé, recomiéndame una`]],
+    filmLabel: `Tipo de polarizado`,
+    films: [[`carbon`, `Polarizado de carbono`], [`ceramic`, `Polarizado cerámico`], [`unsure`, `No sé, recomiéndame una`]],
     oldTint: `Tengo polarizado que quitar`,
     areasLabel: `Qué cubrir`,
     areas: [
