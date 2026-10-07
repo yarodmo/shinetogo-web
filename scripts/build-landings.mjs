@@ -277,7 +277,6 @@ function quoteCard(lang, id) {
     <a class="btn btn-primary" href="${href}" data-track="cta_click" data-location="landing_quote" data-service="${id}">${esc(i18nText(lang, 'heroCta1'))}</a>
     <a class="btn btn-green" href="${waLink(c.wa)}" target="_blank" rel="noopener" data-track="whatsapp_click" data-location="landing_quote" data-service="${id}">${ICON_WA} ${esc(c.cta.whatsapp)}</a>
   </div>
-  <p class="alt-contact">${u.orCall} <a href="tel:${PHONE_TEL}" data-track="call_click" data-location="landing_quote" data-service="${id}">${PHONE_DISPLAY}</a></p>
 </div>`
 }
 
@@ -452,7 +451,6 @@ function landing(id, lang) {
   <section class="hero hero-dark tone-dark">
     ${HERO_BG[id](lang)}
     <div class="wrap hero-inner">
-      <nav class="crumbs" aria-label="Breadcrumb"><a href="${URLS.home[lang]}">${u.breadcrumbHome}</a><span aria-hidden="true"> › </span><span aria-current="page">${esc(c.crumb)}</span></nav>
       <p class="eyebrow">${esc(c.eyebrow)}</p>
       <h1>${esc(c.h1)}</h1>
       <p class="answer">${esc(c.answer)}</p>
@@ -484,6 +482,7 @@ function landing(id, lang) {
       <p class="other">${u.otherServices}: <a class="textlink" href="${URLS[other[id]][lang]}">${esc(o.crumb)}</a></p>
     </div>
   </section>
+<div class="crumbs-foot tone-white"><div class="wrap"><nav class="crumbs" aria-label="Breadcrumb"><a href="${URLS.home[lang]}">${u.breadcrumbHome}</a><span aria-hidden="true"> › </span><span aria-current="page">${esc(c.crumb)}</span></nav></div></div>
 </main>`)
 
   return `${head({

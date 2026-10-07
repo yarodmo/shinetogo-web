@@ -108,7 +108,8 @@ p + p { margin-top: 12px; }
 .hero-bg--square { object-position: 70% 42%; }
 .hero-dark::before { content: ''; position: absolute; inset: 0; z-index: 1; background: linear-gradient(90deg, rgba(10, 14, 26, .96) 0%, rgba(10, 14, 26, .86) 42%, rgba(10, 14, 26, .35) 75%, rgba(10, 14, 26, .15) 100%); }
 .hero-inner { position: relative; z-index: 2; }
-.hero-dark .crumbs, .hero-dark .crumbs a { color: #c4d0e0; }
+.crumbs-foot { padding-block: 22px; border-top: 1px solid var(--border-light); }
+.crumbs-foot .crumbs { margin: 0; padding: 0; }
 .hero-dark .eyebrow { color: var(--brand-blue); }
 .hero-dark h1 { color: #fff; font-size: clamp(34px, 5vw, 60px); max-width: 17ch; text-shadow: 0 2px 24px rgba(0, 0, 0, .35); }
 .hero-dark .answer { color: #e2e8f0; max-width: 54ch; font-size: 18px; }
