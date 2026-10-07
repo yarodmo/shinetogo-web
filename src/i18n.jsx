@@ -165,7 +165,7 @@ const base = {
 
     // Hero
     heroTag: 'DETALLADO MÓVIL · SARASOTA Y BRADENTON',
-    heroTitle: 'Vuelve a ver tu carro o tu bote como nuevo.',
+    heroTitle: 'Vuelve a ver tu carro o bote como nuevo.',
     heroSub: 'Déjalo en nuestras manos. Desde el principio te decimos hasta dónde podemos llegar.',
     heroCheck1: 'En tu casa, tu oficina o tu marina',
     heroCheck2: 'Carros y botes, además polarizado y cerámico para carros',
