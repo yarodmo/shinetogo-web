@@ -83,7 +83,7 @@ const base = {
     processHeadline: 'From the first photo to the final check',
     proc1Title: 'Send a photo', proc1Desc: 'On WhatsApp. Or ask for a quote in the form and send the photos after.',
     proc2Title: 'We reply with a range', proc2Desc: 'And agree on a day and place with you.',
-    proc3Title: 'We do the work', proc3Desc: 'We do what we quoted.',
+    proc3Title: 'We do the work', proc3Desc: 'We do the job as agreed.',
     proc4Title: 'Check and pay', proc4Desc: 'We go over it together, then you pay.',
     processCta: 'Want a quote?',
     processCtaSub: 'Send a photo on WhatsApp and we reply with a price range.',
@@ -118,7 +118,7 @@ const base = {
     faq5Q: 'What do you use on my paint?',
     faq5A: 'We choose the product for your paint and surfaces and tell you which one before we start.',
     faq6Q: 'Do you do window tint and ceramic coating?',
-    faq6A: 'Yes, on cars (not boats). Pick it in the form and we reply with a price range. To read more first, open the Window Tint and Ceramic pages from the menu.',
+    faq6A: 'Yes, for cars. Boats aren’t included. Pick it in the form and we reply with a price range. To read more first, open the Window Tint and Ceramic pages from the menu.',
 
     // Contact
     contactTitle: 'Ask for your quote',
@@ -138,7 +138,7 @@ const base = {
     formWhatsappSub: 'Send photos and we reply with a price range.',
     formWhatsappCta: 'Open WhatsApp',
     formCallTitle: 'Prefer to talk?',
-    formCallSub: 'Call us.',
+    formCallSub: 'Give us a call.',
     formPrivacy: 'We use your details to answer your request.',
 
     // Footer
@@ -235,7 +235,7 @@ const base = {
     processHeadline: 'De la primera foto a la revisión final',
     proc1Title: 'Mandas una foto', proc1Desc: 'Por WhatsApp. O pide la cotización en el formulario y manda las fotos después.',
     proc2Title: 'Te damos un rango', proc2Desc: 'Y quedamos contigo en el día y el lugar.',
-    proc3Title: 'Hacemos el trabajo', proc3Desc: 'Hacemos lo que cotizamos.',
+    proc3Title: 'Hacemos el trabajo', proc3Desc: 'Hacemos el trabajo como lo acordamos.',
     proc4Title: 'Revisas y pagas', proc4Desc: 'Lo revisamos juntos y luego pagas.',
     processCta: '¿Quieres una cotización?',
     processCtaSub: 'Manda una foto por WhatsApp y te damos un rango de precio.',
@@ -270,7 +270,7 @@ const base = {
     faq5Q: '¿Qué le ponen a mi pintura?',
     faq5A: 'Elegimos el producto según tu pintura y tus superficies, y te decimos cuál antes de empezar.',
     faq6Q: '¿Hacen polarizado y cerámico?',
-    faq6A: 'Sí, en carros (en botes no). Elígelo en el formulario y te respondemos con un rango de precio. Si quieres leer más antes, abre las páginas de Polarizado y Cerámico desde el menú.',
+    faq6A: 'Sí, para carros; en botes no los hacemos. Elígelo en el formulario y te respondemos con un rango de precio. Si quieres leer más antes, abre las páginas de Polarizado y Cerámico desde el menú.',
 
     // Contact
     contactTitle: 'Pide tu cotización',
@@ -290,7 +290,7 @@ const base = {
     formWhatsappSub: 'Manda fotos y te respondemos con un rango de precio.',
     formWhatsappCta: 'Abrir WhatsApp',
     formCallTitle: '¿Prefieres hablar?',
-    formCallSub: 'Llámanos.',
+    formCallSub: 'Llámanos, con gusto te atendemos.',
     formPrivacy: 'Usamos tus datos para responder tu solicitud.',
 
     // Footer
