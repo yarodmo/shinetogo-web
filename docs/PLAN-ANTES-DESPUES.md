@@ -1,6 +1,6 @@
 # Plan: «antes y después» con barra deslizante
 
-Estado: propuesta, sin código. Fecha: 2026-10-07. Referencia revisada: `projects/10psicarwash` (`src/components/BeforeAfter.jsx`, bloque `.ba*` de `src/index.css`, uso en `src/sections/Hero.jsx`).
+Estado: **POSPUESTO al siguiente sprint** (decisión del usuario, 2026-10-07: primero consolidar lo visual y lo ya definido; además faltan pares reales de fotos). Propuesta, sin código. Fecha: 2026-10-07. Referencia revisada: `projects/10psicarwash` (`src/components/BeforeAfter.jsx`, bloque `.ba*` de `src/index.css`, uso en `src/sections/Hero.jsx`).
 
 ## 1. Cómo lo hace 10PSI (código real)
 
