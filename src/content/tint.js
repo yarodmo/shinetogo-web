@@ -10,11 +10,11 @@
 export const tint = {
   en: {
     title: `Window Tint in Sarasota & Bradenton | {brand}`,
-    meta: `Window tint for your car in Sarasota and Bradenton, carbon or ceramic, with Florida’s limits explained. Send photos on WhatsApp for a price range.`,
+    meta: `Carbon tint or ceramic tint for your car in Sarasota and Bradenton, with Florida’s limits explained. Send photos on WhatsApp for a price range.`,
     eyebrow: `WINDOW TINT · SARASOTA AND BRADENTON`,
     h1: `Is your car an oven in the Florida sun? Let’s tint it.`,
-    answer: `We tint your car’s side windows, the back window and the strip across the top of the windshield, in carbon or ceramic, and the sunroof when the car allows it. Florida’s limit changes from one window to another, and we go over each one with you before we cut. Send photos on WhatsApp and we reply with a price range.`,
-    pills: [`Carbon or ceramic`, `Quote by photo`, `Florida limits, explained`],
+    answer: `We tint your car’s side windows, the back window and the strip across the top of the windshield, with carbon tint or ceramic tint, and the sunroof when the car allows it. Florida’s limit changes from one window to another, and we go over each one with you before we cut. Send photos on WhatsApp and we reply with a price range.`,
+    pills: [`Carbon or ceramic tint`, `Quote by photo`, `Florida limits, explained`],
     crumb: `Window Tint`,
     service: `Window Tint`,
     serviceType: `Automotive window tinting`,
@@ -40,8 +40,8 @@ export const tint = {
     },
 
     film: {
-      title: `Carbon or ceramic?`,
-      lead: `Short version: carbon for the everyday car, ceramic for the car that sits in the sun all day. The table says why.`,
+      title: `Carbon tint or ceramic tint?`,
+      lead: `Short version: carbon tint for the everyday car, ceramic tint for the car that sits in the sun all day. The table says why.`,
       head: [``, `Carbon tint`, `Ceramic tint`],
       rows: [
         [`Heat`, `Takes the edge off`, `Usually turns away more. Exact numbers are on each tint’s spec sheet`],
@@ -80,7 +80,7 @@ export const tint = {
     },
 
     faq: [
-      { q: `Carbon or ceramic: which one should I get?`, a: `Carbon is the everyday choice and looks a little matte. Ceramic usually turns away more heat and looks clearer from the inside, which matters most on a car that sits in the sun. Send photos, tell us how you use the car, and we’ll point you to one.` },
+      { q: `Carbon tint or ceramic tint: which one should I get?`, a: `Carbon tint is the everyday choice and looks a little matte. Ceramic tint usually turns away more heat and looks clearer from the inside, which matters most on a car that sits in the sun. Send photos, tell us how you use the car, and we’ll point you to one.` },
       { q: `How dark can I go?`, a: `It depends on the window: the rear ones can go darker than the front ones. The limits are in the “Florida tint limits, window by window” section of this page. If you drive an SUV or a truck, tell us which, because the rule changes with how the vehicle is classified.` },
       { q: `Can you tint the whole windshield?`, a: `No. Florida only allows a transparent strip across the top, above the AS-1 line printed on the glass. That strip we can do.` },
       { q: `What about the sunroof and the back window?`, a: `The back window, yes. For the sunroof, send us a photo and we’ll tell you.` },
@@ -98,11 +98,11 @@ export const tint = {
 
   es: {
     title: `Polarizado de vidrios en Sarasota y Bradenton | {brand}`,
-    meta: `Polarizado de vidrios para tu carro en Sarasota y Bradenton, de carbono o cerámico. Te explicamos los límites de Florida. Manda fotos por WhatsApp.`,
+    meta: `Polarizado de carbono o polarizado cerámico para tu carro en Sarasota y Bradenton. Te explicamos los límites de Florida. Manda fotos por WhatsApp.`,
     eyebrow: `POLARIZADO · SARASOTA Y BRADENTON`,
     h1: `¿Tu carro es un horno bajo el sol de Florida? Polarízalo.`,
-    answer: `Polarizamos las ventanas de los lados, el vidrio de atrás y la franja de arriba del parabrisas, en carbono o cerámico, y el sunroof cuando el carro lo permite. El límite de Florida cambia de una ventana a otra y lo repasamos contigo antes de cortar. Manda fotos por WhatsApp y te respondemos con un rango de precio.`,
-    pills: [`Carbono o cerámico`, `Cotización por foto`, `Límites de Florida explicados`],
+    answer: `Polarizamos las ventanas de los lados, el vidrio de atrás y la franja de arriba del parabrisas, con polarizado de carbono o cerámico, y el sunroof cuando el carro lo permite. El límite de Florida cambia de una ventana a otra y lo repasamos contigo antes de cortar. Manda fotos por WhatsApp y te respondemos con un rango de precio.`,
+    pills: [`Polarizado de carbono o cerámico`, `Cotización por foto`, `Límites de Florida explicados`],
     crumb: `Polarizado de vidrios`,
     service: `Polarizado de vidrios`,
     serviceType: `Polarizado de vidrios para carros`,
@@ -128,8 +128,8 @@ export const tint = {
     },
 
     film: {
-      title: `¿Carbono o cerámico?`,
-      lead: `Si no quieres leer la tabla: carbono para el carro de todos los días, cerámico para el que se pasa el día al sol.`,
+      title: `¿Polarizado de carbono o cerámico?`,
+      lead: `Si no quieres leer la tabla: polarizado de carbono para el carro de todos los días, polarizado cerámico para el que se pasa el día al sol.`,
       head: [``, `Polarizado de carbono`, `Polarizado cerámico`],
       rows: [
         [`Calor`, `Le baja el golpe`, `Normalmente deja pasar menos. Los números exactos están en la ficha de cada modelo`],
@@ -169,7 +169,7 @@ export const tint = {
 
     faq: [
       { q: `Polarizado, tinte, tint: ¿es lo mismo?`, a: `Sí, es lo mismo: lo que se le pone a los vidrios del carro. «Polarizado» no es el nombre técnico, pero así lo conoce todo el mundo.` },
-      { q: `¿Carbono o cerámico? ¿Cuál me conviene?`, a: `El carbono es el de todos los días y se ve un poco mate. El cerámico normalmente deja pasar menos calor y se ve más claro desde adentro, y eso se nota más en un carro que se pasa el día al sol. Mándanos fotos, cuéntanos cómo usas el carro y te decimos cuál va mejor.` },
+      { q: `¿Polarizado de carbono o cerámico? ¿Cuál me conviene?`, a: `El de carbono es el de todos los días y se ve un poco mate. El polarizado cerámico normalmente deja pasar menos calor y se ve más claro desde adentro, y eso se nota más en un carro que se pasa el día al sol. Mándanos fotos, cuéntanos cómo usas el carro y te decimos cuál va mejor.` },
       { q: `¿Qué tan oscuro lo puedo poner?`, a: `Depende de la ventana: atrás se puede más oscuro que adelante. Los límites están en la sección «Los límites de Florida, ventana por ventana» de esta página. Si tu carro es SUV o camioneta, dinos cuál es, porque la regla cambia según cómo esté clasificado.` },
       { q: `¿Se puede polarizar todo el parabrisas? ¿Y el sunroof?`, a: `El parabrisas completo no: Florida solo deja la franja transparente de arriba, sobre la línea AS-1, y esa sí la hacemos. El vidrio de atrás también. Del sunroof (quemacocos), mándanos una foto y te decimos.` },
       { q: `¿Tiene garantía?`, a: `Cada marca de polarizado escribe la suya y los términos cambian. Antes de decidir, lee los del polarizado exacto que te cotizamos.` },
