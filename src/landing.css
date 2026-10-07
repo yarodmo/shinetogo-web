@@ -83,12 +83,7 @@ p + p { margin-top: 12px; }
 
 /* ─── Botones (copia de la home) ─── */
 .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 14px 32px; border: 0; border-radius: 12px; font: 700 14px var(--font-heading); letter-spacing: 0.02em; text-decoration: none; cursor: pointer; min-height: 48px; max-width: 100%; text-align: center; transition: var(--transition); }
-.btn:hover { transform: translateY(-2px); }
 .btn[disabled] { opacity: .6; cursor: progress; transform: none; }
-.btn-primary { background: var(--brand-blue); color: var(--ink); box-shadow: 0 8px 24px var(--brand-blue-glow); }
-.btn-primary:hover { background: #38bdf8; box-shadow: 0 12px 32px var(--brand-blue-glow); }
-.btn-green { background: #25d366; color: var(--ink); }
-.btn-green:hover { background: #1fba57; }
 .btn-icon { padding: 14px 18px; }
 .btn-icon svg { width: 24px; height: 24px; }
 .btn-ghost { background: transparent; color: var(--ghost-fg); border: 1.5px solid var(--ghost-line); }

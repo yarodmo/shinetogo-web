@@ -105,18 +105,6 @@ ul { list-style: none; }
   min-height: 48px;
 }
 
-.btn-primary {
-  background: var(--brand-blue);
-  color: var(--ink); /* texto oscuro: el blanco sobre este azul mide 2.8 y no llega a 4.5 */
-  box-shadow: 0 8px 24px var(--brand-blue-glow);
-}
-
-.btn-primary:hover {
-  background: #38bdf8;
-  transform: translateY(-2px);
-  box-shadow: 0 12px 32px var(--brand-blue-glow);
-}
-
 /* Botón solo con icono (WhatsApp, llamar): el texto va en aria-label y title */
 .btn-icon { padding: 14px 18px; }
 .btn-icon svg { width: 24px; height: 24px; }
@@ -129,7 +117,6 @@ ul { list-style: none; }
 
 .btn-outline:hover {
   background: rgba(255, 255, 255, 0.05);
-  transform: translateY(-2px);
 }
 
 .btn-secondary {
@@ -138,7 +125,7 @@ ul { list-style: none; }
   border: 1.5px solid var(--border-light);
 }
 
-.btn-secondary:hover { border-color: var(--text-dark); transform: translateY(-2px); }
+.btn-secondary:hover { border-color: var(--text-dark); }
 
 .btn-white {
   background: #fff;
@@ -148,7 +135,6 @@ ul { list-style: none; }
 
 .btn-white:hover {
   background: var(--bg-soft);
-  transform: translateY(-2px);
 }
 
 .btn-green {
@@ -158,7 +144,6 @@ ul { list-style: none; }
 
 .btn-green:hover {
   background: #1fba57;
-  transform: translateY(-2px);
 }
 
 /* ─── CARDS ─── */
