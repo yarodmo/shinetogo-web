@@ -256,6 +256,10 @@ const photo = (base, sizes, w, h, alt, { eager = false, caption = '' } = {}) => 
   const img = `<img src="${base}-${small}.webp" srcset="${base}-${small}.webp ${small}w, ${base}-${large}.webp ${large}w" sizes="(max-width: 900px) 100vw, 560px" width="${w}" height="${h}" alt="${esc(alt)}" ${eager ? 'fetchpriority="high"' : 'loading="lazy" decoding="async"'} />`
   return `<figure class="photo">${img}${caption ? `<figcaption>${esc(caption)}</figcaption>` : ''}</figure>`
 }
+const HERO_BG = {
+  tint: (lang) => `<img class="hero-bg" src="/img/protection/tint-van-wide-1376.webp" srcset="/img/protection/tint-van-wide-800.webp 800w, /img/protection/tint-van-wide-1376.webp 1376w" sizes="100vw" width="1376" height="768" alt="${esc(i18nText(lang, 'svc4Alt'))}" fetchpriority="high" />`,
+  ceramic: (lang) => `<img class="hero-bg hero-bg--square" src="/img/protection/ceramic-bottle-1024.webp" srcset="/img/protection/ceramic-bottle-640.webp 640w, /img/protection/ceramic-bottle-1024.webp 1024w" sizes="100vw" width="1024" height="1024" alt="${esc(i18nText(lang, 'svc5Alt'))}" fetchpriority="high" />`,
+}
 const HERO_PHOTO = {
   tint: (lang) => photo('/img/protection/tint-van', [640, 1080], 1080, 810, i18nText(lang, 'svc4Alt'), { eager: true }),
   ceramic: (lang) => photo('/img/protection/ceramic-bottle', [640, 1024], 1024, 1024, i18nText(lang, 'svc5Alt'), { eager: true }),
@@ -395,8 +399,11 @@ function ceramicBody(lang) {
 
 // Mismo ritmo que la home: hero claro, y después las secciones alternan oscuro / claro.
 function rhythm(html) {
+  // El hero es oscuro: las secciones empiezan en claro y alternan. Las preguntas (la última) quedan claras y blancas para no tocar el pie oscuro.
   let i = 0
-  return html.replace(/<section class="band(?: alt)?"/g, () => `<section class="band ${i++ % 2 === 0 ? 'tone-dark' : 'tone-light'}"`)
+  return html.replace(/<section class="band(?: alt)?"( aria-labelledby="faq-h")?/g, (_m, faq) => faq
+    ? `<section class="band tone-light tone-white"${faq}`
+    : `<section class="band ${i++ % 2 === 0 ? 'tone-light' : 'tone-dark'}"`)
 }
 
 function landing(id, lang) {
@@ -442,9 +449,9 @@ function landing(id, lang) {
   }
 
   const mainHtml = rhythm(`<main id="main">
-  <section class="hero tone-light">
-    <div class="wrap hero-grid">
-      <div>
+  <section class="hero hero-dark tone-dark">
+    ${HERO_BG[id](lang)}
+    <div class="wrap hero-inner">
       <nav class="crumbs" aria-label="Breadcrumb"><a href="${URLS.home[lang]}">${u.breadcrumbHome}</a><span aria-hidden="true"> › </span><span aria-current="page">${esc(c.crumb)}</span></nav>
       <p class="eyebrow">${esc(c.eyebrow)}</p>
       <h1>${esc(c.h1)}</h1>
@@ -453,10 +460,7 @@ function landing(id, lang) {
         <a class="btn btn-primary" href="${quoteHref(lang, id)}" data-track="cta_click" data-location="landing_hero" data-service="${id}">${esc(i18nText(lang, 'heroCta1'))}</a>
         <a class="btn btn-green" href="${wa}" target="_blank" rel="noopener" data-track="whatsapp_click" data-location="landing_hero" data-service="${id}">${ICON_WA} ${esc(c.cta.whatsapp)}</a>
       </div>
-      <p class="cta-text">${u.orCall} <a class="textlink" href="tel:${PHONE_TEL}" data-track="call_click" data-location="landing_hero" data-service="${id}">${PHONE_DISPLAY}</a></p>
-      <ul class="pills">${c.pills.map((x) => `<li>${esc(x)}</li>`).join('')}</ul>
-      </div>
-      ${HERO_PHOTO[id](lang)}
+      <ul class="hero-checks">${c.pills.map((x) => `<li>${esc(x)}</li>`).join('')}</ul>
     </div>
   </section>
   ${id === 'tint' ? tintBody(lang) : ceramicBody(lang)}

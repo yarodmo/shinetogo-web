@@ -105,6 +105,8 @@ async function main() {
   const PR = path.join(SRC, 'protection')
   await webpCrop(path.join(PR, 'hero-van-detailing-range-rover.jpg'), path.join(OUT_IMG, 'hero/van'), [640, 1080], { ratio: 4 / 3 })
   await webpCrop(path.join(PR, 'tint-van-mobile-station.jpg'), path.join(OUT_IMG, 'protection/tint-van'), [640, 1080], { ratio: 4 / 3, cx: 0.62 })
+  // Versión ancha completa (sin recorte) para el hero a todo el ancho de la página de polarizado
+  await webpCrop(path.join(PR, 'tint-van-mobile-station.jpg'), path.join(OUT_IMG, 'protection/tint-van-wide'), [800, 1376], {})
   await webpCrop(path.join(PR, 'ceramic-applying-bottle-label.jpg'), path.join(OUT_IMG, 'protection/ceramic-bottle'), [640, 1024], {})
   // Esponja sobre el capó: solo la mitad izquierda, sin el frasco, cuya etiqueta sale deformada.
   await webpCrop(path.join(PR, 'ceramic-applying-sponge-hood.jpg'), path.join(OUT_IMG, 'protection/ceramic-sponge'), [640, 960], { region: { left: 0, top: 0.36, width: 0.7, height: 0.48 } })
