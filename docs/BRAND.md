@@ -60,7 +60,7 @@ La home (React, `src/index.css`) es la referencia porque es la identidad que el 
 | Elemento | Regla |
 |---|---|
 | Tokens | Un solo archivo, `src/tokens.css`, importado por las dos hojas. `check-dist` falla si una deja de importarlo |
-| Cabecera | Blanca arriba y oscura al bajar 80 px; 80 px de alto; logo de 60 px sin nombre al lado; menú idéntico (Services · Window Tint · Ceramic · Pricing · Projects · Contact, textos de `src/i18n.jsx`); botón de idioma «ES»/«EN»; CTA azul «Get a quote». `check-dist` compara el menú de cada página con el de la home |
+| Cabecera | Blanca arriba y oscura al bajar 80 px; 80 px de alto; logo de 60 px sin nombre al lado; menú idéntico (Services · Window Tint · Ceramic · Packages · Gallery · Contact, textos de `src/i18n.jsx`); botón de idioma «ES»/«EN»; CTA azul «Get a quote». `check-dist` compara el menú de cada página con el de la home |
 | Botones | Radio 12, Outfit 700, texto oscuro. Principal = azul (cotización por formulario). WhatsApp = `#25d366`. Teléfono = enlace o botón de contorno, nunca el CTA principal |
 | Hero | Fondo blanco, titular Outfit 900 en `#0f172a`, etiqueta azul `--brand-blue-text`, dos botones (azul + WhatsApp) |
 | Ritmo | Hero claro y después las secciones alternan oscuro / claro, como la home. Los componentes leen `--fg`, `--muted`, `--surface`, `--line`, `--link`: funcionan en los dos tonos |
