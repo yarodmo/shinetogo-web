@@ -13,7 +13,7 @@ const base = {
 
     // Hero
     heroTag: 'MOBILE DETAILING · SARASOTA AND BRADENTON',
-    heroTitle: 'Want to see your car or boat like it’s the first day again?',
+    heroTitle: 'See your car or boat looking new again.',
     heroSub: 'Leave it in our hands. We’ll tell you up front how close we can get.',
     heroCheck1: 'At your home, office or marina',
     heroCheck2: 'Cars and boats, plus tint and ceramic for cars',
@@ -165,7 +165,7 @@ const base = {
 
     // Hero
     heroTag: 'DETALLADO MÓVIL · SARASOTA Y BRADENTON',
-    heroTitle: '¿Te gustaría ver tu carro o tu bote como el primer día?',
+    heroTitle: 'Vuelve a ver tu carro o tu bote como nuevo.',
     heroSub: 'Déjalo en nuestras manos. Desde el principio te decimos hasta dónde podemos llegar.',
     heroCheck1: 'En tu casa, tu oficina o tu marina',
     heroCheck2: 'Carros y botes, además polarizado y cerámico para carros',
