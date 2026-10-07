@@ -3,16 +3,15 @@ import { prefill } from '../lib/prefill'
 
 // Auto y bote son los protagonistas (tarjetas grandes con foto). Polarizado y cerámico van debajo,
 // en un segundo nivel más compacto: son servicios aparte, con su página de detalle, y se cotizan en el mismo formulario.
-const diagrams = import.meta.glob('../assets/protection/{heat-path,ceramic-layers}.*.svg', { query: '?raw', import: 'default', eager: true })
-
+// Los esquemas de calor y capas viven en las páginas de detalle, donde hay espacio para leerlos.
 const SERVICES = [
   { key: 'svc1', img: '/img/services/auto-800.webp', color: 'var(--brand-gold)', href: '#pricing', prefill: null },
   { key: 'svc2', img: '/img/services/boat-800.webp', color: 'var(--brand-blue)', href: '#contact', prefill: { service: 'boat', vehicle_type: 'boat' } },
 ]
 
 const PROTECTION = [
-  { key: 'svc4', diagram: 'heat-path', service: 'tint', href: { en: '/window-tint/', es: '/es/polarizado-de-vidrios/' } },
-  { key: 'svc5', diagram: 'ceramic-layers', service: 'ceramic', href: { en: '/ceramic-coating/', es: '/es/recubrimiento-ceramico/' } },
+  { key: 'svc4', img: '/img/protection/tint-van', pos: '70% 50%', service: 'tint', href: { en: '/window-tint/', es: '/es/polarizado-de-vidrios/' } },
+  { key: 'svc5', img: '/img/protection/ceramic-bottle', pos: '50% 40%', service: 'ceramic', href: { en: '/ceramic-coating/', es: '/es/recubrimiento-ceramico/' } },
 ]
 
 export default function Services() {
@@ -96,7 +95,8 @@ export default function Services() {
             {PROTECTION.map((p) => (
               <div key={p.key} className="light-card prot-card animated-fade-in">
                 <div className="svc-diagram-wrap">
-                  <div className="svc-diagram" dangerouslySetInnerHTML={{ __html: diagrams[`../assets/protection/${p.diagram}.${lang}.svg`] }} />
+                  <img className="prot-img" src={`${p.img}-640.webp`} alt={t(`${p.key}Alt`)} width="640" height={p.key === 'svc4' ? 480 : 640}
+                    loading="lazy" decoding="async" style={{ objectPosition: p.pos }} />
                 </div>
                 <div style={{ padding: '24px 26px', display: 'flex', flexDirection: 'column', gap: '10px' }}>
                   <h4 style={{ fontSize: '20px', fontWeight: 800, color: 'var(--text-dark)' }}>{t(`${p.key}Title`)}</h4>

@@ -4,6 +4,7 @@ import { waLink } from '../lib/site'
 
 // Versiones 640/1080 (4:3) generadas por scripts/optimize-assets.cjs.
 const SLIDES = [
+  { base: '/img/hero/van', wide: 1080, label: { en: 'Mobile detailing', es: 'Detallado móvil' } },
   { base: '/img/hero/finish', wide: 1080, label: { en: 'Exterior Finish', es: 'Acabado Exterior' } },
   // La foto del pulido (polish-*) se retiró: matrícula británica legible y logo que no es el real (docs/OPEN-QUESTIONS #43).
   { base: '/img/hero/foam', wide: 1080, label: { en: 'Snow Foam Wash', es: 'Lavado con Espuma' } },

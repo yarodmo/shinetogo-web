@@ -33,6 +33,25 @@ async function webp(srcFile, outBase, sizes, { fit = 'cover', position = 'centre
   }
 }
 
+// Recorte por proporción y centro (cx, cy en 0..1) o por región; sirve para fotos horizontales y verticales.
+async function webpCrop(srcFile, outBase, sizes, { ratio, cx = 0.5, cy = 0.5, region } = {}) {
+  const upright = await sharp(srcFile).rotate().toBuffer()
+  const { width: W, height: H } = await sharp(upright).metadata()
+  let crop = { left: 0, top: 0, width: W, height: H }
+  if (region) {
+    crop = { left: Math.round(W * region.left), top: Math.round(H * region.top), width: Math.round(W * region.width), height: Math.round(H * region.height) }
+  } else if (ratio) {
+    if (W / H > ratio) { const w = Math.round(H * ratio); crop = { left: Math.round((W - w) * cx), top: 0, width: w, height: H } }
+    else { const h = Math.round(W / ratio); crop = { left: 0, top: Math.round((H - h) * cy), width: W, height: h } }
+  }
+  for (const w of sizes) {
+    const out = `${outBase}-${w}.webp`
+    fs.mkdirSync(path.dirname(out), { recursive: true })
+    await sharp(upright).extract(crop).resize({ width: w, withoutEnlargement: true }).webp(q).toFile(out)
+    console.log('  ', path.relative(ROOT, out), kb(out))
+  }
+}
+
 async function main() {
   console.log('Hero (4:3)')
   await webp(path.join(SRC, 'hero-finish.jpg'), path.join(OUT_IMG, 'hero/finish'), [[640, 480], [1080, 810]])
@@ -54,6 +73,17 @@ async function main() {
     await webp(f, path.join(OUT_IMG, 'gallery', slug), [[640, 448]], { position: 'attention' })
     await webp(f, path.join(OUT_IMG, 'gallery', slug), [[1400, 0]], { fit: 'inside' })
   }
+
+  // Ilustraciones de oct 2026 (assets-src/protection): la furgoneta en el hero, y las de tint y cerámico.
+  // carbon-fiber-water-beading.jpg queda sin publicar hasta definir si «carbono» es película de vidrio o un tratamiento aparte.
+  console.log('Furgoneta y servicios nuevos')
+  const PR = path.join(SRC, 'protection')
+  await webpCrop(path.join(PR, 'hero-van-detailing-range-rover.jpg'), path.join(OUT_IMG, 'hero/van'), [640, 1080], { ratio: 4 / 3 })
+  await webpCrop(path.join(PR, 'tint-van-mobile-station.jpg'), path.join(OUT_IMG, 'protection/tint-van'), [640, 1080], { ratio: 4 / 3, cx: 0.62 })
+  await webpCrop(path.join(PR, 'ceramic-applying-bottle-label.jpg'), path.join(OUT_IMG, 'protection/ceramic-bottle'), [640, 1024], {})
+  // Esponja sobre el capó: solo la mitad izquierda, sin el frasco, cuya etiqueta sale deformada.
+  await webpCrop(path.join(PR, 'ceramic-applying-sponge-hood.jpg'), path.join(OUT_IMG, 'protection/ceramic-sponge'), [640, 960], { region: { left: 0, top: 0.36, width: 0.7, height: 0.48 } })
+  await webpCrop(path.join(PR, 'ceramic-water-beading-pour.jpg'), path.join(OUT_IMG, 'protection/ceramic-beading'), [800, 1400], {})
 
   console.log('Marca')
   const logo = path.join(SRC, 'logo-shinetogo.jpg')

@@ -337,10 +337,11 @@ ul { list-style: none; }
 
 /* ─── POLARIZADO Y CERÁMICO: segundo nivel, debajo de auto y bote ─── */
 .prot-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
-.prot-card { display: grid; grid-template-columns: 200px minmax(0, 1fr); overflow: hidden; }
+.prot-card { display: grid; grid-template-columns: 260px minmax(0, 1fr); overflow: hidden; }
+.prot-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .prot-card .svc-diagram-wrap { position: relative; min-height: 100%; }
 @media (max-width: 1000px) { .prot-grid { grid-template-columns: minmax(0, 1fr); } }
-@media (max-width: 560px) { .prot-card { grid-template-columns: minmax(0, 1fr); } .prot-card .svc-diagram-wrap { aspect-ratio: 16 / 9; } }
+@media (max-width: 560px) { .prot-card { grid-template-columns: minmax(0, 1fr); } .prot-card .svc-diagram-wrap { aspect-ratio: 4 / 3; } }
 
 /* ─── ZONAS ─── */
 .area-chips { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }

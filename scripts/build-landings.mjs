@@ -250,6 +250,17 @@ function figure(name, lang, label) {
   return markup ? `<figure class="diagram" role="group" aria-label="${esc(label)}">${markup}</figure>` : ''
 }
 
+// Fotos de las páginas de detalle (ilustraciones de oct 2026; archivos generados por scripts/optimize-assets.cjs).
+const photo = (base, sizes, w, h, alt, { eager = false, caption = '' } = {}) => {
+  const [small, large] = sizes
+  const img = `<img src="${base}-${small}.webp" srcset="${base}-${small}.webp ${small}w, ${base}-${large}.webp ${large}w" sizes="(max-width: 900px) 100vw, 560px" width="${w}" height="${h}" alt="${esc(alt)}" ${eager ? 'fetchpriority="high"' : 'loading="lazy" decoding="async"'} />`
+  return `<figure class="photo">${img}${caption ? `<figcaption>${esc(caption)}</figcaption>` : ''}</figure>`
+}
+const HERO_PHOTO = {
+  tint: (lang) => photo('/img/protection/tint-van', [640, 1080], 1080, 810, i18nText(lang, 'svc4Alt'), { eager: true }),
+  ceramic: (lang) => photo('/img/protection/ceramic-bottle', [640, 1024], 1024, 1024, i18nText(lang, 'svc5Alt'), { eager: true }),
+}
+
 // Toda cotización se hace en el formulario de la home. Estas páginas son informativas: la tarjeta lleva ahí con el servicio ya elegido.
 function quoteCard(lang, id) {
   const u = UI[lang]
@@ -354,12 +365,14 @@ function ceramicBody(lang) {
   </section>
   <section class="band alt" aria-label="${esc(c.choose.title)}">
     <div class="wrap">
+      ${photo('/img/protection/ceramic-beading', [800, 1400], 1400, 764, i18nText(lang, 'photoBeadingAlt'), { caption: i18nText(lang, 'photoBeadingCaption') })}
       <div class="modules">${c.modules.map((m) => `<article class="module" id="${m.id}"><h3>${esc(m.h)}</h3><p>${esc(m.p)}${sourceLink(m.source)}</p></article>`).join('')}</div>
     </div>
   </section>
   <section class="band" aria-labelledby="prep-h">
     <div class="wrap two">
       <div>
+        ${photo('/img/protection/ceramic-sponge', [640, 960], 960, 640, i18nText(lang, 'photoSpongeAlt'))}
         <h2 id="prep-h">${esc(c.prep.title)}</h2>
         <p>${esc(c.prep.p)}</p>
       </div>
@@ -427,7 +440,8 @@ function landing(id, lang) {
 
   const mainHtml = rhythm(`<main id="main">
   <section class="hero tone-light">
-    <div class="wrap">
+    <div class="wrap hero-grid">
+      <div>
       <nav class="crumbs" aria-label="Breadcrumb"><a href="${URLS.home[lang]}">${u.breadcrumbHome}</a><span aria-hidden="true"> › </span><span aria-current="page">${esc(c.crumb)}</span></nav>
       <p class="eyebrow">${esc(c.eyebrow)}</p>
       <h1>${esc(c.h1)}</h1>
@@ -438,6 +452,8 @@ function landing(id, lang) {
       </div>
       <p class="cta-text">${u.orCall} <a class="textlink" href="tel:${PHONE_TEL}" data-track="call_click" data-location="landing_hero" data-service="${id}">${PHONE_DISPLAY}</a></p>
       <ul class="pills">${c.pills.map((x) => `<li>${esc(x)}</li>`).join('')}</ul>
+      </div>
+      ${HERO_PHOTO[id](lang)}
     </div>
   </section>
   ${id === 'tint' ? tintBody(lang) : ceramicBody(lang)}
@@ -629,7 +645,7 @@ function spaShell(lang) {
     ],
   }
   const preload = `  <link rel="preload" as="image" href="/img/brand/logo-120.webp" imagesrcset="/img/brand/logo-120.webp 1x, /img/brand/logo-240.webp 2x" fetchpriority="high" />\n`
-    + `  <link rel="preload" as="image" href="/img/hero/finish-640.webp" imagesrcset="/img/hero/finish-640.webp 640w, /img/hero/finish-1080.webp 1080w" imagesizes="(max-width: 900px) 100vw, 560px" fetchpriority="high" />\n`
+    + `  <link rel="preload" as="image" href="/img/hero/van-640.webp" imagesrcset="/img/hero/van-640.webp 640w, /img/hero/van-1080.webp 1080w" imagesizes="(max-width: 900px) 100vw, 560px" fetchpriority="high" />\n`
   const inlineLang = lang === 'es' ? `  <script>window.__LANG__='es'</script>\n` : ''
   return `${head({
     lang, title: h.title, desc: h.desc, key: 'home', ogImg: ogImage('home', lang), jsonld,
