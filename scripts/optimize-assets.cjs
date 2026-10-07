@@ -130,7 +130,6 @@ async function main() {
   // [archivo origen, slug, lado largo máx. en px, bitrate en kbps]
   const videos = [
     ['ceramic-coating-water-beading-proof.mov', 'ceramic-water-beading', 960, 1500],
-    ['mobile-detailing-snow-foam-wash-video.MOV', 'snow-foam-wash', 960, 1500],
   ]
   const tmp = fs.mkdtempSync(path.join(require('os').tmpdir(), 'qlthumb-'))
   for (const [file, slug, maxLong, kbps] of videos) {

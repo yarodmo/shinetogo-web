@@ -453,7 +453,7 @@ function landing(id, lang) {
     <div class="wrap hero-inner">
       <p class="eyebrow">${esc(c.eyebrow)}</p>
       <h1>${esc(c.h1)}</h1>
-      <p class="answer">${esc(c.answer)}</p>
+      <p class="hero-line">${esc(c.heroLine)}</p>
       <div class="cta-row">
         <a class="btn btn-primary" href="${quoteHref(lang, id)}" data-track="cta_click" data-location="landing_hero" data-service="${id}">${esc(i18nText(lang, 'heroCta1'))}</a>
         <a class="btn btn-green" href="${wa}" target="_blank" rel="noopener" data-track="whatsapp_click" data-location="landing_hero" data-service="${id}">${ICON_WA} ${esc(c.cta.whatsapp)}</a>
@@ -461,6 +461,7 @@ function landing(id, lang) {
       <ul class="hero-checks">${c.pills.map((x) => `<li>${esc(x)}</li>`).join('')}</ul>
     </div>
   </section>
+  <section class="band"><div class="wrap narrow"><p class="answer answer--lead">${esc(c.answer)}</p></div></section>
   ${id === 'tint' ? tintBody(lang) : ceramicBody(lang)}
   <section class="band" aria-labelledby="how-h">
     <div class="wrap two">

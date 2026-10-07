@@ -9,8 +9,7 @@ const ITEMS = [
   // Este video se publicaba como "Ceramic Coating Finish", pero muestra un recorrido del interior de un auto.
   { type: 'video', src: '/video/ceramic-water-beading.mp4', poster: '/video/ceramic-water-beading-poster.webp',
     label: { en: 'Interior walkthrough', es: 'Recorrido del interior' }, tag: { en: 'Interior', es: 'Interior' } },
-  { type: 'video', src: '/video/snow-foam-wash.mp4', poster: '/video/snow-foam-wash-poster.webp',
-    label: { en: 'Foam wash', es: 'Lavado con espuma' }, tag: { en: 'Exterior', es: 'Exterior' } },
+  // El video «snow-foam-wash» salió: mostraba el interior de un Cadillac (no espuma) y repetía al de arriba.
   { type: 'image', thumb: '/img/gallery/interior-car-cleaning-deep-shampoo-640.webp', src: '/img/gallery/interior-car-cleaning-deep-shampoo-1400.webp',
     label: { en: 'Gloss and reflections', es: 'Brillo y reflejos' }, tag: { en: 'Exterior', es: 'Exterior' } },
   { type: 'image', thumb: '/img/gallery/team-at-work-640.webp', src: '/img/gallery/team-at-work-1195.webp',
