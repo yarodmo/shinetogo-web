@@ -4,43 +4,44 @@
  * no traducido del inglés. Reglas de docs/BRAND.md: sin cifras de calor/UV, precios, garantías ni duraciones
  * que no estén respaldados; "legal" nunca describe al polarizado (la ley mide el vidrio ya terminado).
  * Las cifras de la ley viven SOLO en la tabla y en el mapa (F.S. 316.2951-316.2957 y 316.29545).
+ * Voz: de conductor a conductor. El gancho parte del problema (el carro convertido en horno), no de la lista de vidrios.
  * `{brand}` se reemplaza por el nombre corto en los títulos.
  */
 export const tint = {
   en: {
     title: `Window Tint in Sarasota & Bradenton | {brand}`,
-    meta: `Carbon or ceramic window tint for your car’s side windows, back window, windshield strip and sunroof. Quote by photo on WhatsApp. Sarasota and Bradenton.`,
-    eyebrow: `WINDOW TINT · CARBON AND CERAMIC`,
-    h1: `Window tint for your car’s side windows, back window, windshield strip and sunroof`,
-    answer: `We tint the front and rear side windows, the back window, the transparent strip on top of the windshield and the sunroof (send a photo and we’ll tell you if tint fits). Carbon or ceramic tint, your pick. Florida sets a different minimum for each window, and we go over each one with you before we cut. Send photos on WhatsApp for a quote.`,
-    pills: [`Carbon and ceramic tint`, `Quote by photo`],
+    meta: `Window tint for your car in Sarasota and Bradenton, carbon or ceramic, with Florida’s limits explained. Send photos on WhatsApp for a price range.`,
+    eyebrow: `WINDOW TINT · SARASOTA AND BRADENTON`,
+    h1: `Is your car an oven in the Florida sun? Let’s tint it.`,
+    answer: `We tint your car’s side windows, the back window and the strip across the top of the windshield, in carbon or ceramic, and the sunroof when the car allows it. Florida’s limit changes from one window to another, and we go over each one with you before we cut. Send photos on WhatsApp and we reply with a price range.`,
+    pills: [`Carbon or ceramic`, `Quote by photo`, `Florida limits, explained`],
     crumb: `Window Tint`,
     service: `Window Tint`,
     serviceType: `Automotive window tinting`,
-    serviceDescription: `Carbon or ceramic window tint for a car’s side windows, back window, windshield strip and sunroof, in Sarasota, Bradenton and nearby.`,
+    serviceDescription: `Carbon or ceramic window tint for a car’s side windows, back window and windshield strip, plus the sunroof when the car allows it, in Sarasota, Bradenton and nearby.`,
 
     windows: {
-      title: `Which windows`,
+      title: `Which windows we tint`,
       items: [
-        { h: `Side windows`, p: `Front and rear. The ones up front can’t go as dark as the ones behind the driver.` },
-        { h: `Back window`, p: `Same tint as the sides, cut for the rear glass. If your car already has dark factory glass back there, there may be little room to add tint; we tell you before we start.` },
-        { h: `Windshield top strip`, p: `Florida only allows the transparent strip above the AS-1 line printed on the glass. The rest of the windshield stays bare.` },
-        { h: `Sunroof`, p: `Send a photo of it with the rest of the car and we’ll tell you if tint fits it.` },
+        { h: `Side windows`, p: `Front and rear. Florida lets the rear ones go darker than the front ones.` },
+        { h: `Back window`, p: `Done the same way as the sides. If your car already has dark factory glass back there, there may be little room to add tint, and we tell you before we start.` },
+        { h: `Windshield top strip`, p: `On the windshield, Florida only allows the transparent strip above the AS-1 line printed on the glass. The rest stays as it is.` },
+        { h: `Sunroof`, p: `Send us a photo of it with the rest of the car and we’ll tell you if it can be tinted.` },
       ],
     },
 
     why: {
-      title: `Why people do it here`,
+      title: `Why people tint their cars here`,
       items: [
-        { h: `Parked in the sun.`, p: `Heat-rejecting tint helps keep a car that sits in a Florida parking lot all afternoon from getting so hot, and it reduces glare. How much depends on the tint; the maker’s spec sheet has the numbers.` },
-        { h: `Dash and seats.`, p: `If the car sleeps outside, the dash and the seats are the first things the sun fades. UV-blocking tint helps slow that down.` },
-        { h: `Some privacy.`, p: `Behind the driver the law lets you go darker than up front, and that is where most of the privacy comes from.` },
+        { h: `The car is an oven when you get back.`, p: `Heat-rejecting tint helps keep a car from getting so hot after an afternoon in a Florida parking lot, and it reduces glare. How much depends on the tint; the maker’s spec sheet has the numbers.` },
+        { h: `The sun goes after the dash and the seats.`, p: `If the car sleeps outside, the dash and the seats are the first things to fade. Tint that filters UV helps slow that down; the maker’s spec sheet says how much.` },
+        { h: `A little privacy.`, p: `Behind the driver the law lets you go darker than up front, and that is where most of the privacy comes from.` },
       ],
     },
 
     film: {
-      title: `Carbon or ceramic tint?`,
-      lead: `If you only want to know which to pick: carbon for the everyday car, ceramic for the car that sits in the sun all day. The table says why.`,
+      title: `Carbon or ceramic?`,
+      lead: `Short version: carbon for the everyday car, ceramic for the car that sits in the sun all day. The table says why.`,
       head: [``, `Carbon tint`, `Ceramic tint`],
       rows: [
         [`Heat`, `Takes the edge off`, `Usually turns away more. Exact numbers are on each tint’s spec sheet`],
@@ -52,7 +53,7 @@ export const tint = {
 
     limits: {
       title: `Florida tint limits, window by window`,
-      lead: `Florida measures the finished window, glass and tint together. A tint’s own rating isn’t the number that counts, so before you pick we go over the minimum for each window of your car.`,
+      lead: `Florida doesn’t measure the tint on its own. It measures the finished window, glass and tint together, so the number on the box isn’t the one that counts. Before you choose, we go over the minimum for each window of your car.`,
       head: [`Window`, `Passenger car`, `SUV, van or truck that counts as multipurpose*`],
       rows: [
         { label: `Front side windows`, cells: [`28%`] },
@@ -61,8 +62,8 @@ export const tint = {
       ],
       note: `*Minimum visible light that has to get through. “Multipurpose” is the law’s word for a vehicle built to carry 10 people or fewer that is made on a truck chassis or has special features for occasional off-road use. If we can’t tell how yours is classified, we use the passenger car limit.`,
       paragraphs: [
-        `Reflectivity is capped too, at 25% on the front side windows and 35% behind the driver, so most mirrored tints won’t pass. The installer has to put a label on the inside of the left door jamb that says the tint complies, with the tint’s name and the installer’s business name.`,
-        `Tint that is too dark can mean a ticket for the driver (a non-moving violation in Florida).`,
+        `Reflectivity is capped too, at 25% on the front side windows and 35% behind the driver, so most mirrored tints won’t pass. The installer has to put a label on the inside of the left door jamb with the tint’s name and the installer’s business name, where the installer certifies that the material complies. The law still measures the finished window.`,
+        `If a window ends up darker than the law allows, the ticket goes to whoever is driving (a non-moving violation in Florida). That’s why we go over each window’s minimum with you before we cut.`,
         `Medical exemptions: the Florida Department of Highway Safety and Motor Vehicles issues a certificate for one vehicle, and it can’t be moved to another. If you have one for this car, tell us before you order and show it to us. We don’t give medical advice or file exemptions.`,
       ],
       foot: `Summary based on Florida Statutes 316.2951 to 316.2957 and 316.29545, checked October 5, 2026. It is not legal advice. Rules change, so confirm with the state before you order.`,
@@ -72,22 +73,22 @@ export const tint = {
     quote: {
       title: `How the quote works`,
       steps: [
-        { h: `You send`, p: `Photos of the car from both sides and the back, one of the sunroof if it has one, and one of any tint you already have. In the message: year, make, model and your ZIP code.` },
-        { h: `You get back`, p: `A price range, the tint we’d use and the limit for each window. The final price is set once we see the car. If it falls outside the range, we tell you before we begin and you decide.` },
-        { h: `Then`, p: `If it works for you, we pick a day and confirm it with you.` },
+        { h: `You send photos`, p: `Both sides and the back of the car, one of the sunroof if it has one, and one of any tint you have now. In the message: year, make, model and your ZIP code.` },
+        { h: `We reply with a range`, p: `A price range, the tint we’d use and the limit for each window. The final price is set once we see the car. If it falls outside the range, we tell you before we begin and you decide.` },
+        { h: `Then we set the day`, p: `If it works for you, we pick a day and confirm it with you.` },
       ],
     },
 
     faq: [
-      { q: `Carbon or ceramic: which one should I get?`, a: `Carbon is the everyday choice and looks a little matte. Ceramic usually turns away more heat and is clearer to look through, which matters most on a car that sits in the sun. Send photos and tell us how you use the car, and we’ll point you to one.` },
-      { q: `How dark can I go?`, a: `It depends on the window, and the rear ones can go darker than the front ones. The limits are in the ‘Florida tint limits, window by window’ section of this page. If you drive an SUV or a truck, tell us which, because the rule changes with how the vehicle is classified.` },
+      { q: `Carbon or ceramic: which one should I get?`, a: `Carbon is the everyday choice and looks a little matte. Ceramic usually turns away more heat and looks clearer from the inside, which matters most on a car that sits in the sun. Send photos, tell us how you use the car, and we’ll point you to one.` },
+      { q: `How dark can I go?`, a: `It depends on the window: the rear ones can go darker than the front ones. The limits are in the “Florida tint limits, window by window” section of this page. If you drive an SUV or a truck, tell us which, because the rule changes with how the vehicle is classified.` },
       { q: `Can you tint the whole windshield?`, a: `No. Florida only allows a transparent strip across the top, above the AS-1 line printed on the glass. That strip we can do.` },
-      { q: `What about the sunroof and the back window?`, a: `The back window, yes. For the sunroof, send us a photo and we’ll tell you if tint fits it.` },
+      { q: `What about the sunroof and the back window?`, a: `The back window, yes. For the sunroof, send us a photo and we’ll tell you.` },
       { q: `Is there a warranty?`, a: `Tint makers write their own warranties, and the terms differ from brand to brand. Before you decide, read the terms for the exact tint we quote you.` },
       { q: `How much does it cost?`, a: `There isn’t one price. It depends on how many windows, the tint, and whether old tint has to come off. Send photos and you’ll get a range; the final price is set once we see the car.` },
     ],
 
-    cta: { whatsapp: `Quote my tint on WhatsApp`, form: `Request a quote`, limitsLink: `Florida limits by window` },
+    cta: { whatsapp: `Send photos on WhatsApp`, form: `Request a quote`, limitsLink: `Florida limits by window` },
     wa: `Hi! I’d like a window tint quote. Car (year, make, model): `,
     form: {
       title: `Get your tint quote`,
@@ -97,50 +98,50 @@ export const tint = {
 
   es: {
     title: `Polarizado de vidrios en Sarasota y Bradenton | {brand}`,
-    meta: `Polarizado de carbono o cerámico para las ventanas, el vidrio trasero y el sunroof de tu carro. Cotiza con fotos por WhatsApp. Sarasota, Bradenton y Venice.`,
-    eyebrow: `POLARIZADO (TINT) · CARBONO Y CERÁMICO`,
-    h1: `Polarizado para las ventanas, el vidrio trasero, la franja del parabrisas y el sunroof de tu carro`,
-    answer: `Polarizamos las ventanas de adelante y de atrás, el vidrio trasero, la franja transparente de arriba del parabrisas y el sunroof (quemacocos; mándanos una foto y te decimos si el polarizado le va). Carbono o cerámico, tú escoges. Florida pone un mínimo distinto para cada ventana y lo repasamos contigo antes de cortar. Manda fotos por WhatsApp y te cotizamos.`,
-    pills: [`Polarizado de carbono y cerámico`, `Cotización por foto`],
+    meta: `Polarizado de vidrios para tu carro en Sarasota y Bradenton, de carbono o cerámico. Te explicamos los límites de Florida. Manda fotos por WhatsApp.`,
+    eyebrow: `POLARIZADO · SARASOTA Y BRADENTON`,
+    h1: `¿Tu carro es un horno bajo el sol de Florida? Polarízalo.`,
+    answer: `Polarizamos las ventanas de los lados, el vidrio de atrás y la franja de arriba del parabrisas, en carbono o cerámico, y el sunroof cuando el carro lo permite. El límite de Florida cambia de una ventana a otra y lo repasamos contigo antes de cortar. Manda fotos por WhatsApp y te respondemos con un rango de precio.`,
+    pills: [`Carbono o cerámico`, `Cotización por foto`, `Límites de Florida explicados`],
     crumb: `Polarizado de vidrios`,
     service: `Polarizado de vidrios`,
     serviceType: `Polarizado de vidrios para carros`,
-    serviceDescription: `Polarizado de carbono o cerámico para las ventanas, el vidrio trasero, la franja del parabrisas y el sunroof de un carro, en Sarasota, Bradenton y alrededores.`,
+    serviceDescription: `Polarizado de carbono o cerámico para las ventanas, el vidrio trasero y la franja del parabrisas de un carro, y el sunroof cuando el carro lo permite, en Sarasota, Bradenton y alrededores.`,
 
     windows: {
-      title: `Qué vidrios`,
+      title: `Qué vidrios polarizamos`,
       items: [
-        { h: `Ventanas de los lados`, p: `Las de adelante y las de atrás. Las de adelante no pueden ir tan oscuras como las de atrás.` },
-        { h: `Vidrio trasero`, p: `El mismo polarizado que los lados, cortada para el vidrio de atrás. Si tu carro ya trae ese vidrio oscuro de fábrica, puede haber poco margen para agregar más polarizado; te lo decimos antes de empezar.` },
-        { h: `Franja del parabrisas`, p: `En Florida solo se permite la franja transparente sobre la línea AS-1 que trae el vidrio. El resto del parabrisas queda sin polarizar.` },
-        { h: `Sunroof (quemacocos)`, p: `Mándanos una foto junto con las del resto del carro y te decimos si el polarizado le va.` },
+        { h: `Ventanas de los lados`, p: `Las de adelante y las de atrás. En Florida las de atrás pueden ir más oscuras que las de adelante.` },
+        { h: `Vidrio trasero`, p: `Se hace igual que los lados. Si tu carro ya trae ese vidrio oscuro de fábrica, puede que quede poco margen para agregar más; te lo decimos antes de empezar.` },
+        { h: `Franja del parabrisas`, p: `Del parabrisas, Florida solo permite la franja transparente de arriba, sobre la línea AS-1 que trae el vidrio. El resto se queda como está.` },
+        { h: `Sunroof (quemacocos)`, p: `Mándanos una foto junto con las del resto del carro y te decimos si se le puede poner.` },
       ],
     },
 
     why: {
-      title: `Por qué lo hace la gente aquí`,
+      title: `Por qué la gente polariza aquí`,
       items: [
-        { h: `Estacionado al sol.`, p: `El polarizado que rechaza calor ayuda a que un carro que pasa la tarde estacionado al sol en Florida no se ponga tan caliente, y baja el resplandor. Cuánto, depende del polarizado; la ficha del fabricante trae los números.` },
-        { h: `Tablero y asientos.`, p: `Si el carro duerme afuera, el tablero y los asientos son lo primero que se descolora con el sol. El polarizado que bloquea los rayos UV ayuda a frenarlo.` },
-        { h: `Algo de privacidad.`, p: `Atrás la ley deja ir más oscuro que adelante, y de ahí sale casi toda la privacidad.` },
+        { h: `Vuelves al carro y es un horno.`, p: `Un polarizado hecho para el calor ayuda a que el carro no se caliente tanto después de una tarde estacionado al sol en Florida, y reduce el resplandor. Cuánto depende del polarizado; la ficha del fabricante trae los números.` },
+        { h: `El sol se ensaña con el tablero y los asientos.`, p: `Si el carro duerme afuera, el tablero y los asientos son lo primero que se descolora. Un polarizado que filtra rayos UV ayuda a frenarlo; la ficha del fabricante dice cuánto.` },
+        { h: `Un poco de privacidad.`, p: `Atrás la ley deja ir más oscuro que adelante, y de ahí sale casi toda la privacidad.` },
       ],
     },
 
     film: {
-      title: `¿Polarizado de carbono o cerámico?`,
-      lead: `Si solo quieres saber cuál escoger: carbono para el carro de todos los días, cerámica para el que pasa el día al sol. La tabla dice por qué.`,
+      title: `¿Carbono o cerámico?`,
+      lead: `Si no quieres leer la tabla: carbono para el carro de todos los días, cerámico para el que se pasa el día al sol.`,
       head: [``, `Polarizado de carbono`, `Polarizado cerámico`],
       rows: [
         [`Calor`, `Le baja el golpe`, `Normalmente deja pasar menos. Los números exactos están en la ficha de cada modelo`],
-        [`Cómo se ve`, `Oscura y un poco mate`, `Neutra, y se ve más clara desde adentro`],
-        [`Para quién`, `El carro de diario`, `El carro que pasa el día al sol`],
+        [`Cómo se ve`, `Oscuro y un poco mate`, `Neutro, y se ve más claro desde adentro`],
+        [`Para quién`, `El carro de todos los días`, `El carro que se pasa el día al sol`],
       ],
       note: `Cada marca de polarizado escribe su propia garantía. Lee los términos del polarizado exacto antes de decidir.`,
     },
 
     limits: {
       title: `Los límites de Florida, ventana por ventana`,
-      lead: `Florida mide el vidrio ya terminado: el del carro más el polarizado, juntos. El porcentaje que trae el polarizado no es el que cuenta, así que antes de que escojas repasamos contigo el mínimo de cada ventana de tu carro.`,
+      lead: `Florida no mide el polarizado solo. Mide el vidrio ya terminado, el del carro más el polarizado, así que el porcentaje de la caja no es el que cuenta. Antes de que escojas, repasamos contigo el mínimo de cada ventana de tu carro.`,
       head: [`Ventana`, `Carro de pasajeros`, `SUV, van o camioneta que cuenta como multipropósito*`],
       rows: [
         { label: `Ventanas de adelante`, cells: [`28 %`] },
@@ -149,8 +150,8 @@ export const tint = {
       ],
       note: `*Luz visible mínima que tiene que pasar. «Multipropósito» es como la ley llama a un vehículo para 10 personas o menos hecho sobre chasis de camión o con características para uso todoterreno ocasional. Si no podemos saber cómo está clasificado el tuyo, usamos el límite de carro de pasajeros.`,
       paragraphs: [
-        `También hay tope de reflejo: 25 % en las de adelante y 35 % detrás del conductor, así que la mayoría de los polarizados espejo no pasan. El instalador tiene que pegar una etiqueta en el marco interior de la puerta izquierda que diga que el polarizado cumple, con el nombre del polarizado y el del negocio que la puso.`,
-        `Si queda más oscuro de lo permitido, te pueden multar a ti, que eres el que maneja (es una infracción no moviente).`,
+        `También hay tope de reflejo: 25 % en las de adelante y 35 % detrás del conductor, así que la mayoría de los polarizados espejo no pasan. El instalador tiene que pegar una etiqueta en el marco interior de la puerta izquierda con el nombre del polarizado y el del negocio que lo puso, donde el instalador certifica que el material cumple. La ley mide la ventana terminada.`,
+        `Si una ventana queda más oscura de lo que permite la ley, la multa le llega a quien maneje (es una infracción no moviente). Por eso repasamos contigo el mínimo de cada ventana antes de cortar.`,
         `Exención médica: el Departamento de Seguridad en las Carreteras y Vehículos Motorizados de Florida (FLHSMV) da un certificado para un solo vehículo, y no se puede pasar a otro. Si tienes uno para este carro, avísanos antes de pedir y muéstranoslo. No damos consejo médico ni tramitamos exenciones.`,
       ],
       foot: `Resumen basado en los Estatutos de Florida 316.2951 a 316.2957 y 316.29545, revisado el 5 de octubre de 2026. No es asesoría legal. Las reglas cambian: confírmalas con el estado antes de hacerte el trabajo.`,
@@ -160,22 +161,22 @@ export const tint = {
     quote: {
       title: `Cómo funciona la cotización`,
       steps: [
-        { h: `Tú mandas`, p: `Fotos del carro por los dos lados y por atrás, una del sunroof si tiene y una del polarizado que tengas ahora. En el mensaje: año, marca, modelo y tu ZIP code.` },
-        { h: `Tú recibes`, p: `Un rango de precio, el polarizado que te pondríamos y el límite de cada ventana. El precio final se fija cuando vemos el carro. Si queda fuera del rango, te lo decimos antes de empezar y tú decides.` },
-        { h: `Después`, p: `Si te funciona, fijamos el día y te lo confirmamos.` },
+        { h: `Tú mandas fotos`, p: `Del carro por los dos lados y por atrás, una del sunroof si tiene, y una del polarizado que tengas ahora. En el mensaje: año, marca, modelo y tu ZIP code.` },
+        { h: `Te respondemos con un rango`, p: `Un rango de precio, el polarizado que te pondríamos y el límite de cada ventana. El precio final se fija cuando vemos el carro. Si queda fuera del rango, te avisamos antes de empezar y tú decides.` },
+        { h: `Después fijamos el día`, p: `Si te funciona, escogemos el día y te lo confirmamos.` },
       ],
     },
 
     faq: [
-      { q: `Polarizado, tinte, tint: ¿es lo mismo?`, a: `Sí. Polarizado, tinte o tint, todos hablan de lo mismo: lo que se le pone a los vidrios del carro. Lo de «polarizado» no es técnicamente exacto, pero así lo conoce todo el mundo.` },
-      { q: `¿Carbono o cerámica? ¿Cuál me conviene?`, a: `El carbono es el de todos los días y se ve un poco mate. La cerámica normalmente deja pasar menos calor y se ve más clara desde adentro, algo que se nota más en un carro que pasa el día al sol. Mándanos fotos y dinos cómo usas el carro, y te decimos cuál va mejor.` },
-      { q: `¿Qué tan oscuro lo puedo poner?`, a: `Depende de la ventana, y atrás se puede más oscuro que adelante. Los límites están en la sección «Los límites de Florida, ventana por ventana» de esta página. Si tu carro es SUV o camioneta, dinos cuál es, porque la regla cambia según cómo esté clasificado.` },
-      { q: `¿Se puede polarizar todo el parabrisas? ¿Y el sunroof?`, a: `El parabrisas completo no: Florida solo deja una franja transparente arriba, sobre la línea AS-1. Esa franja sí la hacemos. El vidrio de atrás sí. Del sunroof (quemacocos) mándanos una foto y te decimos si el polarizado le va.` },
+      { q: `Polarizado, tinte, tint: ¿es lo mismo?`, a: `Sí, es lo mismo: lo que se le pone a los vidrios del carro. «Polarizado» no es el nombre técnico, pero así lo conoce todo el mundo.` },
+      { q: `¿Carbono o cerámico? ¿Cuál me conviene?`, a: `El carbono es el de todos los días y se ve un poco mate. El cerámico normalmente deja pasar menos calor y se ve más claro desde adentro, y eso se nota más en un carro que se pasa el día al sol. Mándanos fotos, cuéntanos cómo usas el carro y te decimos cuál va mejor.` },
+      { q: `¿Qué tan oscuro lo puedo poner?`, a: `Depende de la ventana: atrás se puede más oscuro que adelante. Los límites están en la sección «Los límites de Florida, ventana por ventana» de esta página. Si tu carro es SUV o camioneta, dinos cuál es, porque la regla cambia según cómo esté clasificado.` },
+      { q: `¿Se puede polarizar todo el parabrisas? ¿Y el sunroof?`, a: `El parabrisas completo no: Florida solo deja la franja transparente de arriba, sobre la línea AS-1, y esa sí la hacemos. El vidrio de atrás también. Del sunroof (quemacocos), mándanos una foto y te decimos.` },
       { q: `¿Tiene garantía?`, a: `Cada marca de polarizado escribe la suya y los términos cambian. Antes de decidir, lee los del polarizado exacto que te cotizamos.` },
-      { q: `¿Cuánto cuesta?`, a: `No hay un precio único. Depende de cuántos vidrios, del tipo de polarizado y de si hay que quitar uno viejo. Manda fotos y te damos un rango; el precio final se fija cuando vemos el carro.` },
+      { q: `¿Cuánto cuesta?`, a: `No hay un precio único: depende de cuántos vidrios, del tipo de polarizado y de si hay que quitar uno viejo. Manda fotos y te damos un rango; el precio final se fija cuando vemos el carro.` },
     ],
 
-    cta: { whatsapp: `Cotiza tu polarizado por WhatsApp`, form: `Pedir cotización`, limitsLink: `Límites de Florida por ventana` },
+    cta: { whatsapp: `Manda fotos por WhatsApp`, form: `Pedir cotización`, limitsLink: `Límites de Florida por ventana` },
     wa: `¡Hola! Quiero cotizar el polarizado de mi carro. Es un (año, marca y modelo): `,
     form: {
       title: `Pide tu cotización de polarizado`,

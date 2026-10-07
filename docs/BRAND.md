@@ -31,9 +31,9 @@ Si algo aquí cambia, cambia en el código en un solo lugar (se indica dónde).
 | Contenido | `src/content/tint.js` | `src/content/ceramic.js` |
 | Formulario pide | vidrios (chips), película, «tengo polarizado que quitar» | superficies a cubrir (chips) |
 | Voz | práctica, de conductor a conductor; la ley de Florida ventana por ventana | de oficio, superficie por superficie; la preparación primero |
-| Vocabulario ES | polarizado, película de carbono / **película cerámica**, vidrios (títulos) y ventanas (límites), sunroof (quemacocos) | recubrimiento cerámico (corto: «cerámico»), rines (aros), molduras |
+| Vocabulario ES | polarizado, **polarizado de carbono / polarizado cerámico** (nunca «película» ni «film»: suena a traducción), vidrios (títulos) y ventanas (límites), sunroof (quemacocos) | recubrimiento cerámico (corto: «cerámico»), rines (aros), molduras |
 
-- «Cerámico» a secas no se usa para la película: choca con el otro servicio. Siempre «película cerámica» en tint.
+- En la página de polarizado, «cerámico» siempre acompaña a «polarizado» (polarizado cerámico). En inglés: «carbon tint / ceramic tint», no «film». «Paint protection film» sí se queda: es el nombre de otro producto.
 - **Cerámico: lista de superficies.** La página cubre las cinco que cubren los detallistas de la zona (pintura, vidrios, rines y calipers, molduras y plásticos de afuera, interior). **El dueño debe confirmar cuáles hace de verdad** (y si hace faros, capotas, escapes); lo que no haga se quita de la página, la tabla, los chips y el esquema.
 - Competencia local de referencia (Sarasota): Ceramic Pro, Detail M.D., DRK Customs, Sharkey's Detailing & Tint, My Detail Guy, Alset Custom, 941 Mobile Detailing. Varias prometen «9H», «de por vida» o garantías de 10 años; este sitio no, y esa franqueza es parte de su voz.
 

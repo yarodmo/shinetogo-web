@@ -9,11 +9,11 @@
 export const ceramic = {
   en: {
     title: `Ceramic Coating in Sarasota & Bradenton | {brand}`,
-    meta: `Ceramic coating for paint, glass, wheels, trim and interior. Prep first, coating after. Send photos on WhatsApp for a quote. Sarasota and Bradenton.`,
-    eyebrow: `CERAMIC COATING`,
-    h1: `Ceramic coating for paint, glass, wheels, trim and interior`,
-    answer: `A ceramic coating is a hard, slick layer that bonds to the surface under it and helps dirt and water let go more easily. We do paint, glass, wheels and calipers, exterior trim and the interior. It isn’t scratch-proof, and the prep underneath is part of the job. Send photos on WhatsApp for a quote.`,
-    pills: [`Paint, glass, wheels, trim, interior`, `Quote by photo`],
+    meta: `Ceramic coating for your car’s paint, glass, wheels, trim and interior in Sarasota and Bradenton. Prep first. Send photos on WhatsApp for a price range.`,
+    eyebrow: `CERAMIC COATING · SARASOTA AND BRADENTON`,
+    h1: `Tired of scrubbing off bird droppings and water spots? A ceramic coating helps.`,
+    answer: `A ceramic coating is a thin, slick layer that bonds to the surface under it and helps dirt and water let go more easily. We do paint, glass, wheels and calipers, exterior trim and the interior. It isn’t scratch-proof, and the prep underneath is part of the job. Send photos on WhatsApp and we reply with a price range.`,
+    pills: [`Paint, glass, wheels, trim, interior`, `Quote by photo`, `Prep comes first`],
     crumb: `Ceramic Coating`,
     service: `Ceramic Coating`,
     serviceType: `Automotive ceramic coating`,
@@ -35,14 +35,14 @@ export const ceramic = {
     modules: [
       { id: `paint`, h: `Paint`, p: `The coating goes on the clear coat after a wash, decontamination and a polish to whatever level the paint needs. It helps dirt, bird droppings and water spots come off more easily when you wash.` },
       { id: `glass`, h: `Glass`, p: `A coating for the windshield and windows that helps rain bead up and run off. It doesn’t replace your wipers. Rainy season here runs from about mid-to-late May to mid-October.`, source: { label: `National Weather Service`, url: `https://www.weather.gov/tbw/rainyseason` } },
-      { id: `wheels`, h: `Wheels and calipers`, p: `Wheels take the brake dust and the road grime. A coating made for wheels and calipers helps brake dust stick less and makes it easier to wash off. Tell us if the wheels are painted, polished or chrome.` },
+      { id: `wheels`, h: `Wheels and calipers`, p: `Wheels take the brake dust and the road grime. A coating made for wheels and calipers helps brake dust stick less and come off more easily when you wash. Tell us if the wheels are painted, polished or chrome.` },
       { id: `trim`, h: `Exterior trim and plastics`, p: `The sun turns black plastic and rubber gray. This coating goes on trim that is still dark; it can’t bring back color that has already faded. If yours has faded, send a photo and we tell you what to expect before we start.` },
-      { id: `interior`, h: `Interior`, p: `Sand and sunscreen get into everything. Tell us what you want covered (seats, leather, fabric, plastics) and send a photo; we tell you which product fits each one.` },
+      { id: `interior`, h: `Interior`, p: `The interior takes its share of the sun and the beach. Tell us what you want covered (seats, leather, fabric, plastics) and send a photo; we tell you which product fits each one.` },
     ],
 
     prep: {
       title: `The prep comes first`,
-      p: `A coating seals in whatever is under it, scratches included. That is why the paint is washed, decontaminated and polished to the level it needs before anything goes on, and why the other surfaces get cleaned first too.`,
+      p: `A coating seals in whatever is under it, scratches included. That is why the paint is washed, decontaminated and, almost always, polished to the level it needs before anything goes on, and why the other surfaces get cleaned first too.`,
     },
 
     doesnt: {
@@ -70,22 +70,22 @@ export const ceramic = {
     quote: {
       title: `How the quote works`,
       steps: [
-        { h: `You send`, p: `Hood, roof and sides in daylight, and the paint color. If you want glass, wheels, trim or the interior, one photo of each, and tell us which.` },
-        { h: `You get back`, p: `A price range, the product we’d use and how to care for it. The final price is set once we see the paint. If it falls outside the range, we tell you before we begin and you decide.` },
-        { h: `Then`, p: `We pick a day and confirm it with you.` },
+        { h: `You send photos`, p: `Hood, roof and sides in daylight, and the paint color. If you want glass, wheels, trim or the interior, one photo of each, and tell us which.` },
+        { h: `We reply with a range`, p: `A price range, the product we’d use and how to care for it. The final price is set once we see the paint. If it falls outside the range, we tell you before we begin and you decide.` },
+        { h: `Then we set the day`, p: `We pick a day and confirm it with you.` },
       ],
     },
 
     faq: [
-      { q: `Is a ceramic coating scratch-proof?`, a: `No. It’s a hard, slick layer on top of the clear coat. Scratches, swirls and rock chips can still happen. What changes is how easily dirt, bird droppings and water spots come off.` },
+      { q: `Is a ceramic coating scratch-proof?`, a: `No. It’s a thin, slick layer on top of the clear coat. Scratches, swirls and rock chips can still happen. What changes is how easily dirt, bird droppings and water spots come off.` },
       { q: `Which parts of the car can you coat?`, a: `Paint, glass, wheels and calipers, exterior trim and plastics, and the interior. Tell us which ones you want and send a photo of each.` },
       { q: `Does the paint get polished first?`, a: `Almost always. A coating seals in what’s under it, so the paint is washed, decontaminated and polished first. How far we go depends on the paint.` },
       { q: `How long does a coating last?`, a: `We won’t give a number here. It depends on the product, how the paint was prepared and how the car is washed. The warranty belongs to the product, so ask for its exact terms with your quote.` },
-      { q: `Salt, lovebugs, sprinkler water: does the coating stop them?`, a: `No coating stops them. A coating gives them a slicker surface, so they can come off more easily when you wash. The lovebug rule still holds: don’t leave them on the paint for days.` },
+      { q: `Salt, lovebugs, sprinkler water: does the coating stop them?`, a: `No. No coating stops them, and we make no promise about salt or sprinkler water. With lovebugs, a slicker surface helps when you wash; still, don’t leave them on the paint for days.` },
       { q: `How much does it cost?`, a: `There isn’t one price. It depends on how many parts you cover, the size of the car and the state of the paint. Send photos and you’ll get a range; the final price is set once we see the car.` },
     ],
 
-    cta: { whatsapp: `Quote my coating on WhatsApp`, form: `Request a quote` },
+    cta: { whatsapp: `Send photos on WhatsApp`, form: `Request a quote` },
     wa: `Hi! I’d like a ceramic coating quote. Car (year, make, model): `,
     form: {
       title: `Get your ceramic coating quote`,
@@ -95,11 +95,11 @@ export const ceramic = {
 
   es: {
     title: `Recubrimiento cerámico en Sarasota y Bradenton | {brand}`,
-    meta: `Recubrimiento cerámico para pintura, vidrios, rines, molduras e interior. Cotiza con fotos por WhatsApp. Sarasota, Bradenton y Venice.`,
-    eyebrow: `RECUBRIMIENTO CERÁMICO`,
-    h1: `Recubrimiento cerámico para pintura, vidrios, rines, molduras e interior`,
-    answer: `El recubrimiento cerámico (ceramic coating) es una capa dura y lisa que se pega a la superficie y ayuda a que la tierra y el agua se suelten más fácil. Lo hacemos en pintura, vidrios, rines y calipers, molduras de afuera e interior. No evita los rayones, y la preparación es parte del trabajo. Manda fotos por WhatsApp y te cotizamos.`,
-    pills: [`Pintura, vidrios, rines, molduras, interior`, `Cotización por foto`],
+    meta: `Recubrimiento cerámico para la pintura, los vidrios, los rines, las molduras y el interior de tu carro en Sarasota y Bradenton. Manda fotos por WhatsApp.`,
+    eyebrow: `RECUBRIMIENTO CERÁMICO · SARASOTA Y BRADENTON`,
+    h1: `¿Cansado de restregar lo que dejan los pájaros y las manchas de agua? El recubrimiento cerámico ayuda.`,
+    answer: `El recubrimiento cerámico (ceramic coating) es una capa fina y lisa que se pega a la superficie y ayuda a que la tierra y el agua se suelten más fácil. Lo hacemos en pintura, vidrios, rines y calipers, molduras de afuera e interior. No evita los rayones, y la preparación es parte del trabajo. Manda fotos por WhatsApp y te damos un rango.`,
+    pills: [`Pintura, vidrios, rines, molduras, interior`, `Cotización por foto`, `Primero la preparación`],
     crumb: `Recubrimiento cerámico`,
     service: `Recubrimiento cerámico`,
     serviceType: `Recubrimiento cerámico para carros`,
@@ -123,12 +123,12 @@ export const ceramic = {
       { id: `vidrios`, h: `Vidrios`, p: `Un recubrimiento para el parabrisas y las ventanas que ayuda a que el agua de lluvia forme gotas y corra. No sustituye los limpiaparabrisas. La temporada de lluvias de aquí va más o menos de mediados o finales de mayo a mediados de octubre.`, source: { label: `National Weather Service`, url: `https://www.weather.gov/tbw/rainyseason` } },
       { id: `rines`, h: `Rines (aros) y calipers`, p: `Los rines reciben el polvo de los frenos y la mugre de la calle. Un recubrimiento hecho para rines y calipers ayuda a que el polvo de los frenos se pegue menos y salga más fácil al lavar. Dinos si los rines son pintados, pulidos o cromados.` },
       { id: `molduras`, h: `Molduras y plásticos de afuera`, p: `El sol pone grises el plástico y la goma negros. Este recubrimiento se aplica en molduras que todavía están oscuras; no devuelve el color que ya se perdió. Si las tuyas ya se destiñeron, mándanos una foto y te decimos qué esperar antes de empezar.` },
-      { id: `interior`, h: `Interior`, p: `La arena y el bloqueador se meten en todo. Dinos qué quieres cubrir (asientos, cuero, tela, plásticos) y manda una foto; te decimos qué producto va en cada material.` },
+      { id: `interior`, h: `Interior`, p: `El interior se lleva su parte del sol y de la playa. Dinos qué quieres cubrir (asientos, cuero, tela, plásticos) y manda una foto; te decimos qué producto va en cada material.` },
     ],
 
     prep: {
       title: `Primero la preparación`,
-      p: `El recubrimiento sella lo que haya debajo, rayones incluidos. Por eso la pintura se lava, se descontamina y se pule hasta el nivel que necesita antes de ponerle nada, y las demás superficies también se limpian primero.`,
+      p: `El recubrimiento sella lo que haya debajo, rayones incluidos. Por eso la pintura se lava, se descontamina y, casi siempre, se pule hasta el nivel que necesita antes de ponerle nada, y las demás superficies también se limpian primero.`,
     },
 
     doesnt: {
@@ -156,22 +156,22 @@ export const ceramic = {
     quote: {
       title: `Cómo funciona la cotización`,
       steps: [
-        { h: `Tú mandas`, p: `Capó, techo y laterales con luz de día, y el color de la pintura. Si quieres vidrios, rines, molduras o interior, una foto de cada uno y dinos cuáles.` },
-        { h: `Tú recibes`, p: `Un rango de precio, el producto que usaríamos y cómo cuidarlo. El precio final se fija cuando vemos la pintura. Si queda fuera del rango, te lo decimos antes de empezar y tú decides.` },
-        { h: `Después`, p: `Fijamos el día y te lo confirmamos.` },
+        { h: `Tú mandas fotos`, p: `Capó, techo y laterales con luz de día, y el color de la pintura. Si quieres vidrios, rines, molduras o interior, una foto de cada uno y dinos cuáles.` },
+        { h: `Te respondemos con un rango`, p: `Un rango de precio, el producto que usaríamos y cómo cuidarlo. El precio final se fija cuando vemos la pintura. Si queda fuera del rango, te avisamos antes de empezar y tú decides.` },
+        { h: `Después fijamos el día`, p: `Escogemos el día y te lo confirmamos.` },
       ],
     },
 
     faq: [
-      { q: `¿El recubrimiento cerámico evita los rayones?`, a: `No. Es una capa dura y lisa encima del barniz. Los rayones, los remolinos y las piedritas de la carretera pueden seguir pasando. Lo que cambia es lo fácil que se quitan la tierra, lo que dejan los pájaros y las manchas de agua.` },
+      { q: `¿El recubrimiento cerámico evita los rayones?`, a: `No. Es una capa fina y lisa encima del barniz. Los rayones, los remolinos y las piedritas de la carretera pueden seguir pasando. Lo que cambia es lo fácil que se quitan la tierra, lo que dejan los pájaros y las manchas de agua.` },
       { q: `¿Qué partes del carro se pueden cubrir?`, a: `Pintura, vidrios, rines y calipers, molduras y plásticos de afuera, e interior. Dinos cuáles quieres y manda una foto de cada una.` },
       { q: `¿Hay que pulir la pintura antes?`, a: `Casi siempre. El recubrimiento sella lo que tenga debajo, así que primero se lava, se descontamina y se pule. Hasta dónde llegamos depende de la pintura.` },
       { q: `¿Cuánto dura?`, a: `Aquí no te damos una cifra. Depende del producto, de cómo se preparó la pintura y de cómo lavas el carro. La garantía es la del producto, así que pide sus términos exactos con tu cotización.` },
-      { q: `Sal, lovebugs, agua de aspersor: ¿el recubrimiento los frena?`, a: `Ningún recubrimiento los frena. Lo que hace es darles una superficie más lisa, y por eso pueden salir más fácil al lavar. La regla de los lovebugs sigue igual: no los dejes varios días sobre la pintura.` },
+      { q: `Sal, lovebugs, agua de aspersor: ¿el recubrimiento los frena?`, a: `Ningún recubrimiento los frena, y no prometemos nada sobre la sal ni el agua de aspersor. Con los lovebugs, una superficie más lisa ayuda al lavar; aun así, no los dejes varios días sobre la pintura.` },
       { q: `¿Cuánto cuesta?`, a: `No hay un precio único. Depende de cuántas partes cubras, del tamaño del carro y del estado de la pintura. Manda fotos y te damos un rango; el precio final se fija cuando vemos el carro.` },
     ],
 
-    cta: { whatsapp: `Cotiza tu recubrimiento por WhatsApp`, form: `Pedir cotización` },
+    cta: { whatsapp: `Manda fotos por WhatsApp`, form: `Pedir cotización` },
     wa: `¡Hola! Quiero cotizar un recubrimiento cerámico. Mi carro es un (año, marca y modelo): `,
     form: {
       title: `Pide tu cotización de recubrimiento cerámico`,

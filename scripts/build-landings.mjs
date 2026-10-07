@@ -733,7 +733,7 @@ const LLMS = `# ${BRAND}
 > Mobile car and boat detailing in Southwest Florida: Sarasota, Bradenton, Venice, St. Petersburg, Brandon, Lido Key, Siesta Key, Longboat Key and nearby. Window tint and ceramic coating are separate services, for cars only. Quotes by photo on WhatsApp or by form.
 
 ## Services
-- [Window tint](${absolute(URLS.tint.en)}): carbon or ceramic tint for a car’s side windows, back window, windshield strip and sunroof; Florida tint limits window by window.
+- [Window tint](${absolute(URLS.tint.en)}): carbon or ceramic tint for a car’s side windows, back window and windshield strip, and the sunroof when the car allows it; Florida tint limits window by window.
 - [Ceramic coating](${absolute(URLS.ceramic.en)}): paint, glass, wheels and calipers, exterior trim and interior; what a coating does and does not do.
 - [Home](${absolute(URLS.home.en)}): car wash and boat detailing, gallery, contact form.
 
