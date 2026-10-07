@@ -5,6 +5,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Outfit:wght@400;500;600;700;800;900&display=swap');
 
 @import './tokens.css';
+@import './shared.css';
 
 /* Acentos propios de la home (paquetes) */
 :root {
@@ -364,11 +365,9 @@ ul { list-style: none; }
 .area-chips { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
 .area-chips li { padding: 10px 18px; border: 1px solid var(--border-dark); border-radius: 99px; font-size: 14px; font-weight: 600; color: var(--text-light); background: var(--bg-card); }
 
-/* ─── PREGUNTAS FRECUENTES ─── */
-.faq-item { border-bottom: 1px solid var(--border-dark); padding: 20px 0; }
-.faq-item button { width: 100%; background: none; border: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 0; text-align: left; font: 700 16px var(--font-main); color: #fff; }
-.faq-item .plus { color: var(--brand-blue); font-size: 22px; flex-shrink: 0; transition: transform 0.2s; }
-.faq-item p { margin-top: 14px; font-size: 15px; color: var(--text-muted); line-height: 1.6; padding-right: 40px; }
+/* ─── PREGUNTAS FRECUENTES: estilo compartido en shared.css ─── */
+#hero.hero-dark { padding-top: 110px; min-height: 640px; }
+@media (max-width: 768px) { #hero.hero-dark { padding-top: 76px; min-height: 0; } }
 
 /* ─── RESPONSIVE ─── */
 @media (max-width: 900px) {
@@ -385,22 +384,6 @@ ul { list-style: none; }
   
   .nav-links { display: none; }
 
-  /* Hero: stack with image on TOP for mobile retention */
-  #hero > .container {
-    grid-template-columns: 1fr !important;
-    text-align: center !important;
-  }
-  .hero-slider {
-    order: -1; /* en celular la foto va primero y el texto debajo */
-  }
-  .hero-badges {
-    flex-direction: column;
-    gap: 12px !important;
-    align-items: center !important;
-  }
-  .hero-video-bg { display: none; } /* Hide video on mobile, image is king */
-  .hero-ctas { justify-content: center !important; }
-  
   /* Contact: stack form above sidebar */
   #contact .container > div {
     grid-template-columns: 1fr !important;
@@ -413,8 +396,6 @@ ul { list-style: none; }
 }
 
 @media (max-width: 480px) {
-  .hero-ctas { flex-direction: column; width: 100%; }
-  .hero-ctas .btn { width: 100%; }
   footer .footer-grid { grid-template-columns: minmax(0, 1fr) !important; }
 }
 

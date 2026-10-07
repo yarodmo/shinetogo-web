@@ -5,6 +5,7 @@
    Reglas comunes en docs/BRAND.md §3. Si algo se ve distinto a la home, es un error: se arregla aquí.
    ========================================================================= */
 @import './tokens.css';
+@import './shared.css';
 
 /* Tonos de sección. Los componentes leen estos nombres, así que un componente nuevo funciona en claro y oscuro. */
 :root, .tone-dark {
@@ -98,40 +99,26 @@ p + p { margin-top: 12px; }
 /* ─── Secciones ─── */
 .crumbs { padding-block: 4px 0; margin-bottom: 28px; font-size: 13px; color: var(--muted); }
 .crumbs a { color: var(--muted); }
-.hero { padding-block: 24px 80px; }
-.hero .btn { padding: 16px 32px; }
 .eyebrow { font-size: 11px; font-weight: 700; letter-spacing: .16em; color: var(--link); margin-bottom: 14px; }
-.hero h1 { max-width: 24ch; }
 /* Hero a todo el ancho: foto oscura, titular grande y tres puntos de confianza */
-.hero-dark { position: relative; overflow: hidden; padding-block: 36px 72px; min-height: 560px; display: flex; align-items: center; background: var(--bg-dark); }
-.hero-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 78% 50%; z-index: 0; }
-.hero-bg--square { object-position: 70% 42%; }
-.hero-dark::before { content: ''; position: absolute; inset: 0; z-index: 1; background: linear-gradient(90deg, rgba(10, 14, 26, .92) 0%, rgba(10, 14, 26, .7) 34%, rgba(10, 14, 26, .12) 62%, rgba(10, 14, 26, 0) 100%); }
-.hero-inner { position: relative; z-index: 2; }
 .crumbs-foot { padding-block: 22px; border-top: 1px solid var(--border-light); }
 .crumbs-foot .crumbs { margin: 0; padding: 0; }
-.hero-dark .eyebrow { color: var(--brand-blue); }
-.hero-dark h1 { color: #fff; font-size: clamp(34px, 5vw, 60px); max-width: 13ch; text-shadow: 0 2px 24px rgba(0, 0, 0, .35); }
-.hero-line { color: #e2e8f0; max-width: 34ch; font-size: 19px; line-height: 1.45; margin: 18px 0 28px; }
-.answer--lead { margin: 0 auto; max-width: 62ch; font-size: 19px; color: var(--fg); text-align: center; }
-.band:has(.answer--lead) { padding-block: 44px; }
-.hero-checks { display: grid; gap: 8px; margin-top: 26px; }
-.hero-checks li { position: relative; padding-left: 28px; font-size: 15px; font-weight: 600; color: #fff; }
-.hero-checks li::before { content: '✓'; position: absolute; left: 0; color: #34d399; font-weight: 800; }
 .photo { margin: 0; }
 .photo img { width: 100%; height: auto; border-radius: var(--radius); display: block; background: var(--bg-card); }
 .photo figcaption { margin-top: 8px; font-size: 13px; color: var(--muted); }
 .band .photo { margin-bottom: 28px; }
 .band .photo img { max-height: 420px; object-fit: cover; }
+.answer--lead { margin: 0 auto; max-width: 62ch; font-size: 19px; color: var(--fg); text-align: center; }
+.band:has(.answer--lead) { padding-block: 44px; }
 .answer { max-width: 62ch; font-size: 18px; color: var(--fg); margin: 20px 0 28px; }
-.cta-row { display: flex; gap: 16px; flex-wrap: wrap; }
+.cta-row { display: flex; gap: 12px; flex-wrap: wrap; }
 .pills { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 24px; }
 .pills li { border: 1px solid var(--line); border-radius: 99px; padding: 6px 14px; font-size: 13px; color: var(--muted); }
 .band { padding-block: 100px; }
 .two { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
 .two > * { min-width: 0; }
 .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-top: 18px; }
-.card, .tile, .module { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 22px; }
+.card, .tile, .module { background: var(--surface); border: 1px solid var(--line); }
 .card h3, .tile h3, .module h3 { margin: 0 0 8px; }
 .card p, .tile p, .module p { color: var(--muted); font-size: 15px; }
 .checks li { position: relative; padding-left: 28px; margin-bottom: 10px; }
@@ -151,12 +138,6 @@ p + p { margin-top: 12px; }
 .diagram svg { width: 100%; height: auto; }
 
 /* ─── Preguntas ─── */
-.faq { border: 1px solid var(--line); border-radius: 14px; background: var(--surface); margin-bottom: 10px; }
-.faq summary { cursor: pointer; padding: 16px 20px; font-weight: 700; color: var(--fg-strong); list-style: none; }
-.faq summary::-webkit-details-marker { display: none; }
-.faq summary::after { content: '+'; float: right; color: var(--link); font-size: 20px; line-height: 1; }
-.faq[open] summary::after { content: '–'; }
-.faq p { padding: 0 20px 18px; color: var(--muted); }
 
 /* ─── Tarjeta de cotización: lleva al formulario de la home ─── */
 .quote-card { background: var(--surface); border: 1px solid var(--line); border-radius: 20px; padding: 28px; box-shadow: var(--shadow-soft); }
@@ -235,16 +216,7 @@ p + p { margin-top: 12px; }
   .site-footer { padding-bottom: 104px; }
   body:has(.sticky-cta) .consent-banner { bottom: 84px; }
   .two { grid-template-columns: 1fr; gap: 32px; }
-  /* Celular: la foto arriba, entera, y el texto debajo sobre el marino (no la tapa) */
-  .hero-dark { display: block; min-height: 0; padding-block: 0 40px; }
-  .hero-dark::before { display: none; }
-  .hero-bg, .hero-bg--square { position: relative; inset: auto; display: block; width: 100%; height: auto; aspect-ratio: 16 / 10; object-fit: cover; object-position: 60% 40%; }
-  .hero-inner { padding-top: 22px; }
-  .hero-dark h1 { max-width: 14ch; }
-  .hero-line { font-size: 17px; }
   .band { padding-block: 72px; }
-  .hero { padding-block: 16px 56px; }
-  .cta-row .btn { flex: 1 1 100%; }
 }
 @media (max-width: 560px) {
   .footer-grid { grid-template-columns: minmax(0, 1fr); }

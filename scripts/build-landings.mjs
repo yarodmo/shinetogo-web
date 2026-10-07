@@ -257,8 +257,8 @@ const photo = (base, sizes, w, h, alt, { eager = false, caption = '' } = {}) => 
   return `<figure class="photo">${img}${caption ? `<figcaption>${esc(caption)}</figcaption>` : ''}</figure>`
 }
 const HERO_BG = {
-  tint: (lang) => `<img class="hero-bg" src="/img/protection/tint-van-wide-1376.webp" srcset="/img/protection/tint-van-wide-800.webp 800w, /img/protection/tint-van-wide-1376.webp 1376w" sizes="100vw" width="1376" height="768" alt="${esc(i18nText(lang, 'svc4Alt'))}" fetchpriority="high" />`,
-  ceramic: (lang) => `<img class="hero-bg hero-bg--square" src="/img/protection/ceramic-bottle-1024.webp" srcset="/img/protection/ceramic-bottle-640.webp 640w, /img/protection/ceramic-bottle-1024.webp 1024w" sizes="100vw" width="1024" height="1024" alt="${esc(i18nText(lang, 'svc5Alt'))}" fetchpriority="high" />`,
+  tint: (lang) => `<img src="/img/protection/tint-van-wide-1376.webp" srcset="/img/protection/tint-van-wide-800.webp 800w, /img/protection/tint-van-wide-1376.webp 1376w" sizes="100vw" width="1376" height="768" alt="${esc(i18nText(lang, 'svc4Alt'))}" fetchpriority="high" />`,
+  ceramic: (lang) => `<img class="hero-bg--square" src="/img/protection/ceramic-bottle-1024.webp" srcset="/img/protection/ceramic-bottle-640.webp 640w, /img/protection/ceramic-bottle-1024.webp 1024w" sizes="100vw" width="1024" height="1024" alt="${esc(i18nText(lang, 'svc5Alt'))}" fetchpriority="high" />`,
 }
 const HERO_PHOTO = {
   tint: (lang) => photo('/img/protection/tint-van', [640, 1080], 1080, 810, i18nText(lang, 'svc4Alt'), { eager: true }),
@@ -379,11 +379,9 @@ function ceramicBody(lang) {
 
 // Mismo ritmo que la home: hero claro, y después las secciones alternan oscuro / claro.
 function rhythm(html) {
-  // El hero es oscuro: las secciones empiezan en claro y alternan. Las preguntas (la última) quedan claras y blancas para no tocar el pie oscuro.
+  // El hero es oscuro: las secciones empiezan en claro y alternan; las preguntas son oscuras, como en la home.
   let i = 0
-  return html.replace(/<section class="band(?: alt)?"( aria-labelledby="faq-h")?/g, (_m, faq) => faq
-    ? `<section class="band tone-light tone-white"${faq}`
-    : `<section class="band ${i++ % 2 === 0 ? 'tone-light' : 'tone-dark'}"`)
+  return html.replace(/<section class="band(?: alt)?"/g, () => `<section class="band ${i++ % 2 === 0 ? 'tone-light' : 'tone-dark'}"`)
 }
 
 function landing(id, lang) {
@@ -430,7 +428,7 @@ function landing(id, lang) {
 
   const mainHtml = rhythm(`<main id="main">
   <section class="hero hero-dark tone-dark">
-    ${HERO_BG[id](lang)}
+    <div class="hero-media">${HERO_BG[id](lang)}</div>
     <div class="wrap hero-inner">
       <p class="eyebrow">${esc(c.eyebrow)}</p>
       <h1>${esc(c.h1)}</h1>
@@ -459,7 +457,7 @@ function landing(id, lang) {
   </section>
   <section class="band" aria-labelledby="faq-h">
     <div class="wrap narrow">
-      <h2 id="faq-h">${u.faqTitle}</h2>
+      <h2 id="faq-h" class="faq-title">${u.faqTitle}</h2>
       ${c.faq.map((f) => `<details class="faq"><summary>${esc(f.q)}</summary><p>${esc(f.a)}</p></details>`).join('\n      ')}
       <p class="other">${u.otherServices}: <a class="textlink" href="${URLS[other[id]][lang]}">${esc(o.crumb)}</a></p>
     </div>

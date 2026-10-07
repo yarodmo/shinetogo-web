@@ -1,0 +1,62 @@
+/* =========================================================================
+   Patrones que comparten la home (index.css) y las páginas de servicio (landing.css).
+   Se definen UNA vez aquí para que las tres se vean con la misma arquitectura de estilo:
+   - Hero oscuro a todo el ancho: foto detrás, capa a la izquierda, titular corto, una línea, botones y tres marcas.
+   - Preguntas frecuentes: filas separadas por una línea, con «+» que gira.
+   - Geometría de tarjetas: un solo radio y un solo relleno.
+   Si algo de esto cambia, cambia aquí y se mueven las tres.
+   ========================================================================= */
+
+:root { --card-radius: 24px; --card-pad: 28px; }
+
+/* ─── Hero oscuro a todo el ancho ─── */
+.hero-dark { position: relative; overflow: hidden; padding-block: 36px 72px; min-height: 560px; display: flex; align-items: center; background: var(--bg-dark); color: #fff; }
+.hero-media { position: absolute; inset: 0; z-index: 0; }
+.hero-media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 78% 50%; transition: opacity .8s ease-in-out; }
+.hero-media img.hero-bg--square { object-position: 70% 42%; }
+.hero-media img.is-off { opacity: 0; }
+.hero-dark::before { content: ''; position: absolute; inset: 0; z-index: 1; background: linear-gradient(90deg, rgba(10, 14, 26, .92) 0%, rgba(10, 14, 26, .7) 34%, rgba(10, 14, 26, .12) 62%, rgba(10, 14, 26, 0) 100%); }
+.hero-inner { position: relative; z-index: 2; width: 100%; }
+.hero-dark .container.hero-inner { padding-inline: 24px; }
+.hero-dark .crumbs, .hero-dark .crumbs a { color: #c4d0e0; }
+.hero-dark .eyebrow { display: block; font-size: 11px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--brand-blue); margin-bottom: 14px; }
+.hero-dark h1 { color: #fff; font-size: clamp(34px, 5vw, 60px); line-height: 1.08; max-width: 16ch; margin: 0; letter-spacing: -0.04em; text-shadow: 0 2px 24px rgba(0, 0, 0, .35); }
+.hero-dark .btn { padding: 16px 32px; }
+.hero-dark .btn.btn-icon { padding: 16px 22px; }
+.hero-line { color: #e2e8f0; max-width: 34ch; font-size: 19px; line-height: 1.45; margin: 18px 0 28px; }
+.hero-dark .cta-row { display: flex; gap: 12px; flex-wrap: wrap; }
+.hero-checks { display: grid; gap: 8px; margin: 26px 0 0; padding: 0; list-style: none; }
+.hero-checks li { position: relative; padding-left: 28px; font-size: 15px; font-weight: 600; color: #fff; }
+.hero-checks li::before { content: '✓'; position: absolute; left: 0; color: #34d399; font-weight: 800; }
+.hero-dots { position: absolute; right: 24px; bottom: 20px; z-index: 3; display: flex; gap: 8px; }
+.hero-dots button { width: 24px; height: 24px; padding: 8px; border: 0; border-radius: 99px; cursor: pointer; background: rgba(255, 255, 255, .4); background-clip: content-box; transition: all .3s ease; }
+.hero-dots button[aria-current="true"] { width: 40px; background-color: #fff; }
+
+@media (max-width: 768px) {
+  /* Celular: la foto arriba, entera, y el texto debajo sobre el marino (no la tapa) */
+  .hero-dark { display: block; min-height: 0; padding-block: 0 40px; }
+  .hero-dark::before { display: none; }
+  .hero-media { position: relative; inset: auto; aspect-ratio: 16 / 10; }
+  .hero-media img { object-position: 60% 40%; }
+  .hero-dark .hero-inner { padding: 22px 24px 0; }
+  .hero-dark h1 { max-width: 16ch; }
+  .hero-line { font-size: 17px; }
+  .hero-dark .cta-row .btn:not(.btn-icon) { flex: 1 1 140px; }
+  .hero-dark .btn { padding-inline: 20px; }
+  .hero-dark .btn.btn-icon { padding: 16px 22px; }
+  .hero-dots { right: 16px; bottom: 12px; }
+}
+
+/* ─── Preguntas frecuentes: la misma fila en la home (botón) y en las páginas de servicio (details) ─── */
+.faq-item, details.faq { border: 0; border-bottom: 1px solid var(--border-dark); border-radius: 0; background: none; margin: 0; padding: 20px 0; }
+.faq-item button, details.faq summary { width: 100%; background: none; border: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 0; text-align: left; font: 700 16px var(--font-main); color: #fff; list-style: none; }
+details.faq summary::-webkit-details-marker { display: none; }
+.faq-item .plus, details.faq summary::after { color: var(--brand-blue); font-size: 22px; line-height: 1; flex-shrink: 0; transition: transform .2s; }
+details.faq summary::after { content: '+'; }
+.faq-title { text-align: center; margin-bottom: 40px; }
+details.faq[open] summary::after { content: '+'; transform: rotate(45deg); }
+.faq-item p, details.faq p { margin-top: 14px; padding: 0 40px 0 0; font-size: 15px; color: var(--text-muted); line-height: 1.6; }
+
+/* ─── Tarjetas: un solo radio y un solo relleno ─── */
+.glass-card, .light-card, .card, .tile, .module { border-radius: var(--card-radius); }
+.card, .tile, .module { padding: var(--card-pad); }
