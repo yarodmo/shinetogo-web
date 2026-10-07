@@ -490,8 +490,8 @@ function landing(id, lang) {
 ${header(lang, id)}
 ${mainHtml}
 <div class="sticky-cta">
-  <a class="btn btn-ghost" href="tel:${PHONE_TEL}" data-track="call_click" data-location="landing_sticky" data-service="${id}">${ICON_PHONE} ${u.call}</a>
-  <a class="btn btn-green" href="${wa}" target="_blank" rel="noopener" data-track="whatsapp_click" data-location="landing_sticky" data-service="${id}">${ICON_WA} WhatsApp</a>
+  <a class="btn btn-ghost btn-icon" href="tel:${PHONE_TEL}" aria-label="${esc(u.call)}" title="${esc(u.call)}" data-track="call_click" data-location="landing_sticky" data-service="${id}">${ICON_PHONE}</a>
+  <a class="btn btn-green btn-icon" href="${wa}" target="_blank" rel="noopener" aria-label="WhatsApp" title="WhatsApp" data-track="whatsapp_click" data-location="landing_sticky" data-service="${id}">${ICON_WA}</a>
   <a class="btn btn-primary" href="${quoteHref(lang, id)}" data-track="cta_click" data-location="landing_sticky" data-service="${id}">${esc(i18nText(lang, 'navBook'))}</a>
 </div>
 ${footer(lang, id)}

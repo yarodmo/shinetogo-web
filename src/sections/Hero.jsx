@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from 'react'
 import { useI18n } from '../i18n'
 import { waLink } from '../lib/site'
+import Icon from '../components/Icon'
 
 // Versiones 640/1080 (4:3) generadas por scripts/optimize-assets.cjs.
 const SLIDES = [
@@ -69,9 +70,10 @@ export default function Hero() {
               {t('heroCta1')}
             </a>
             <a href={waUrl} target="_blank" rel="noopener noreferrer"
-              className="btn btn-green" style={{ padding: '16px 32px', fontSize: '14px' }}
+              className="btn btn-green btn-icon" style={{ padding: '16px 22px' }}
+              aria-label={t('heroCta2')} title={t('heroCta2')}
               data-track="whatsapp_click" data-location="hero">
-              💬 {t('heroCta2')}
+              <Icon name="whatsapp" size={24} />
             </a>
           </div>
         </div>

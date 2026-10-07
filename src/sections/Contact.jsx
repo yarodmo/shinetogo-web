@@ -5,6 +5,7 @@ import { submitLead, newLeadId } from '../lib/leads'
 import { track } from '../lib/track'
 import { FORM } from '../content/forms'
 import { BRAND_NAME, PHONE_DISPLAY, PHONE_TEL, waLink } from '../lib/site'
+import Icon from '../components/Icon'
 
 
 const VEHICLES = [
@@ -302,8 +303,9 @@ export default function Contact() {
                     {errorKind !== 'validation' && (
                       <span style={{ display: 'flex', gap: '10px', flexWrap: 'wrap', marginTop: '10px' }}>
                         <a href={waLink(lang === 'en' ? 'Hi! I tried to send a quote request on your website.' : '¡Hola! Intenté enviar una solicitud de cotización en su sitio.')}
-                          target="_blank" rel="noopener noreferrer" className="btn btn-green" style={{ padding: '10px 18px', fontSize: '13px' }}
-                          data-track="whatsapp_click" data-location="form_error">💬 WhatsApp</a>
+                          target="_blank" rel="noopener noreferrer" className="btn btn-green btn-icon" style={{ padding: '10px 16px' }}
+                          aria-label={t('heroCta2')} title={t('heroCta2')}
+                          data-track="whatsapp_click" data-location="form_error"><Icon name="whatsapp" size={20} /></a>
                         <a href={`tel:${PHONE_TEL}`} className="btn btn-outline" style={{ padding: '10px 18px', fontSize: '13px', color: 'var(--text-dark)', borderColor: 'var(--border-light)' }}
                           data-track="call_click" data-location="form_error">{PHONE_DISPLAY}</a>
                       </span>
@@ -325,7 +327,7 @@ export default function Contact() {
                 <p className="form-note" style={{ marginBottom: '24px' }}>{t('successRef')}: <strong>{ref}</strong></p>
                 <a href={waAfter} target="_blank" rel="noopener noreferrer" className="btn btn-green" style={{ padding: '16px 36px' }}
                   data-track="whatsapp_click" data-location="post_form" data-service={form.service}>
-                  💬 {t('successWhatsapp')}
+                  <Icon name="whatsapp" size={20} /> {t('successWhatsapp')}
                 </a>
               </div>
             )}
@@ -336,9 +338,10 @@ export default function Contact() {
                 <div aria-hidden="true" style={{ fontSize: '32px', marginBottom: '12px' }}>💬</div>
                 <h3 style={{ fontSize: '16px', fontWeight: 800, color: 'var(--text-dark)', marginBottom: '6px' }}>{t('formWhatsapp')}</h3>
                 <p style={{ fontSize: '13px', color: 'var(--text-body)', marginBottom: '16px', lineHeight: 1.5 }}>{t('formWhatsappSub')}</p>
-                <a href={waLink(t('whatsappText'))} target="_blank" rel="noopener noreferrer" className="btn btn-green" style={{ width: '100%' }}
+                <a href={waLink(t('whatsappText'))} target="_blank" rel="noopener noreferrer" className="btn btn-green btn-icon" style={{ width: '100%' }}
+                  aria-label={t('formWhatsappCta')} title={t('formWhatsappCta')}
                   data-track="whatsapp_click" data-location="contact_card">
-                  {t('formWhatsappCta')}
+                  <Icon name="whatsapp" size={24} />
                 </a>
               </div>
 

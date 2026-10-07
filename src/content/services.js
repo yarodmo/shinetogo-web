@@ -40,7 +40,7 @@ export const services = {
     formRetry: 'Try again',
     successTitle: 'Got it, thanks.',
     successBody: 'We’ll reply with a price range. For the fastest quote, send photos on WhatsApp.',
-    successWhatsapp: 'Send photos on WhatsApp',
+    successWhatsapp: 'Send photos',
     successRef: 'Your reference',
     formAvailability: 'We’ll reply to let you know if we have room for the day you want.',
 
@@ -84,7 +84,7 @@ export const services = {
     formRetry: 'Intentar de nuevo',
     successTitle: 'Recibido, gracias.',
     successBody: 'Te respondemos con un rango de precio. Para cotizar más rápido, manda fotos por WhatsApp.',
-    successWhatsapp: 'Mandar fotos por WhatsApp',
+    successWhatsapp: 'Mandar fotos',
     successRef: 'Tu referencia',
     formAvailability: 'Te respondemos si tenemos espacio para el día que pides.',
 

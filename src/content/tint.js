@@ -88,7 +88,7 @@ export const tint = {
       { q: `How much does it cost?`, a: `There isn’t one price. It depends on how many windows, the tint, and whether old tint has to come off. Send photos and you’ll get a range; the final price is set once we see the car.` },
     ],
 
-    cta: { whatsapp: `Send photos on WhatsApp`, form: `Request a quote`, limitsLink: `Florida limits by window` },
+    cta: { whatsapp: `Send photos`, form: `Request a quote`, limitsLink: `Florida limits by window` },
     wa: `Hi! I’d like a window tint quote. Car (year, make, model): `,
     form: {
       title: `Get your tint quote`,
@@ -176,7 +176,7 @@ export const tint = {
       { q: `¿Cuánto cuesta?`, a: `No hay un precio único: depende de cuántos vidrios, del tipo de polarizado y de si hay que quitar uno viejo. Manda fotos y te damos un rango; el precio final se fija cuando vemos el carro.` },
     ],
 
-    cta: { whatsapp: `Manda fotos por WhatsApp`, form: `Pedir cotización`, limitsLink: `Límites de Florida por ventana` },
+    cta: { whatsapp: `Manda fotos`, form: `Pedir cotización`, limitsLink: `Límites de Florida por ventana` },
     wa: `¡Hola! Quiero cotizar el polarizado de mi carro. Es un (año, marca y modelo): `,
     form: {
       title: `Pide tu cotización de polarizado`,

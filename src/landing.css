@@ -90,6 +90,8 @@ p + p { margin-top: 12px; }
 .btn-primary:hover { background: #38bdf8; box-shadow: 0 12px 32px var(--brand-blue-glow); }
 .btn-green { background: #25d366; color: var(--ink); }
 .btn-green:hover { background: #1fba57; }
+.btn-icon { padding: 14px 18px; }
+.btn-icon svg { width: 24px; height: 24px; }
 .btn-ghost { background: transparent; color: var(--ghost-fg); border: 1.5px solid var(--ghost-line); }
 .textlink { color: var(--link); font-weight: 700; }
 
@@ -212,6 +214,8 @@ p + p { margin-top: 12px; }
   .sticky-cta { position: fixed; inset: auto 0 0 0; z-index: 1000; display: none; gap: 10px; padding: 14px 20px calc(14px + env(safe-area-inset-bottom, 0px)); background: rgba(10, 14, 26, 0.95); border-top: 1px solid var(--border-dark); }
   .sticky-cta.is-visible { display: flex; }
   .sticky-cta .btn { flex: 1; max-width: 220px; padding: 12px 8px; font-size: 14px; }
+  .sticky-cta .btn-icon { flex: 0 0 56px; max-width: 56px; padding: 0; }
+  .sticky-cta .btn-primary { max-width: none; }
   .sticky-cta .btn-ghost { background: #fff; color: var(--text-dark); border-color: var(--border-light); }
   .site-footer { padding-bottom: 104px; }
   body:has(.sticky-cta) .consent-banner { bottom: 84px; }

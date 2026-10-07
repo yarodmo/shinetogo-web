@@ -85,7 +85,7 @@ export const ceramic = {
       { q: `How much does it cost?`, a: `There isn’t one price. It depends on how many parts you cover, the size of the car and the state of the paint. Send photos and you’ll get a range; the final price is set once we see the car.` },
     ],
 
-    cta: { whatsapp: `Send photos on WhatsApp`, form: `Request a quote` },
+    cta: { whatsapp: `Send photos`, form: `Request a quote` },
     wa: `Hi! I’d like a ceramic coating quote. Car (year, make, model): `,
     form: {
       title: `Get your ceramic coating quote`,
@@ -171,7 +171,7 @@ export const ceramic = {
       { q: `¿Cuánto cuesta?`, a: `No hay un precio único. Depende de cuántas partes cubras, del tamaño del carro y del estado de la pintura. Manda fotos y te damos un rango; el precio final se fija cuando vemos el carro.` },
     ],
 
-    cta: { whatsapp: `Manda fotos por WhatsApp`, form: `Pedir cotización` },
+    cta: { whatsapp: `Manda fotos`, form: `Pedir cotización` },
     wa: `¡Hola! Quiero cotizar un recubrimiento cerámico. Mi carro es un (año, marca y modelo): `,
     form: {
       title: `Pide tu cotización de recubrimiento cerámico`,

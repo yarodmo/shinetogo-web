@@ -116,6 +116,10 @@ ul { list-style: none; }
   box-shadow: 0 12px 32px var(--brand-blue-glow);
 }
 
+/* Botón solo con icono (WhatsApp, llamar): el texto va en aria-label y title */
+.btn-icon { padding: 14px 18px; }
+.btn-icon svg { width: 24px; height: 24px; }
+
 .btn-outline {
   background: transparent;
   border: 1.5px solid var(--glass-border);
@@ -335,6 +339,8 @@ ul { list-style: none; }
 /* ─── BARRA FIJA MÓVIL (Llamar | WhatsApp) ─── */
 .sticky-cta { gap: 10px; }
 .sticky-cta .btn { flex: 1; max-width: 220px; padding: 12px 8px; font-size: 14px; min-height: 48px; }
+.sticky-cta .btn-icon { flex: 0 0 56px; max-width: 56px; padding: 0; }
+.sticky-cta .btn-primary { max-width: none; }
 
 @media (max-width: 768px) {
   footer { padding-bottom: 104px !important; } /* la barra fija Llamar | WhatsApp no tapa el copyright */

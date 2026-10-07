@@ -87,12 +87,13 @@ function StickyCta() {
 
   return (
     <div className="sticky-cta">
-      <a href={`tel:${PHONE_TEL}`} className="btn btn-secondary" data-track="call_click" data-location="sticky">
-        <Icon name="phone" size={18} /> {t('stickyCall')}
+      <a href={`tel:${PHONE_TEL}`} className="btn btn-secondary btn-icon" aria-label={t('stickyCall')} title={t('stickyCall')}
+        data-track="call_click" data-location="sticky">
+        <Icon name="phone" size={22} />
       </a>
-      <a href={waLink(t('whatsappText'))} target="_blank" rel="noopener noreferrer" className="btn btn-green"
-        data-track="whatsapp_click" data-location="sticky">
-        <Icon name="whatsapp" size={18} /> {t('stickyWhatsapp')}
+      <a href={waLink(t('whatsappText'))} target="_blank" rel="noopener noreferrer" className="btn btn-green btn-icon"
+        aria-label={t('stickyWhatsapp')} title={t('stickyWhatsapp')} data-track="whatsapp_click" data-location="sticky">
+        <Icon name="whatsapp" size={24} />
       </a>
       <a href="#contact" className="btn btn-primary" data-track="cta_click" data-location="sticky">
         {t('navBook')}

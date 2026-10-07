@@ -1,5 +1,6 @@
 import { useI18n } from '../i18n'
 import { waLink } from '../lib/site'
+import Icon from '../components/Icon'
 
 const STEPS = [
   { key: 'proc1', icon: '📋', num: '01' },
@@ -68,9 +69,10 @@ export default function Process() {
               {t('heroCta1')}
             </a>
             <a href={waLink(t('whatsappText'))} target="_blank" rel="noopener noreferrer"
-              className="btn btn-green" style={{ padding: '16px 36px' }}
+              className="btn btn-green btn-icon" style={{ padding: '16px 24px' }}
+              aria-label={t('heroCta2')} title={t('heroCta2')}
               data-track="whatsapp_click" data-location="process">
-              💬 WhatsApp
+              <Icon name="whatsapp" size={24} />
             </a>
           </div>
         </div>
