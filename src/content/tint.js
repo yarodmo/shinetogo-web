@@ -64,7 +64,7 @@ export const tint = {
     faq: [
       { q: `Carbon tint or ceramic tint: which one should I get?`, a: `Carbon tint is the everyday choice and looks a little matte. Ceramic tint usually turns away more heat and looks clearer from the inside, which matters most on a car that sits in the sun. Send photos, tell us how you use the car, and we’ll point you to one.` },
       { q: `How dark can I go?`, a: `It depends on the window: the rear ones can go darker than the front ones. We tell you the limit for each one before we cut. If you drive an SUV or a truck, tell us which, because the rule changes with how the vehicle is classified.` },
-      { q: `Can you tint the whole windshield?`, a: `No. Florida only allows a transparent strip across the top, above the AS-1 line printed on the glass. That strip we can do.` },
+      { q: `Can you tint the whole windshield?`, a: `Not the whole thing. Florida only allows a transparent strip across the top, above the AS-1 line printed on the glass, and that strip we can do.` },
       { q: `What about the sunroof and the back window?`, a: `The back window, yes. For the sunroof, send us a photo and we’ll tell you.` },
       { q: `Is there a warranty?`, a: `Tint makers write their own warranties, and the terms differ from brand to brand. Before you decide, read the terms for the exact tint we quote you.` },
       { q: `How much does it cost?`, a: `There isn’t one price. It depends on how many windows, the tint, and whether old tint has to come off. Send photos and you’ll get a range; the final price is set once we see the car.` },

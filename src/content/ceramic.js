@@ -48,7 +48,7 @@ export const ceramic = {
 
     doesnt: {
       title: `What a coating doesn’t do`,
-      p: `It isn’t armor. A scratch is still a scratch and a rock chip is still a rock chip; paint protection film is a different product for that. You will still wash the car. How long a coating lasts depends on the product, the prep and how you wash, so we don’t print a number.`,
+      p: `A coating isn’t armor. Scratches and rock chips can still happen; paint protection film is a different product for that. The car still needs washing. How long a coating lasts depends on the product, the prep and how you wash, so we don’t put a number on it.`,
     },
 
     local: {
@@ -81,8 +81,8 @@ export const ceramic = {
       { q: `Is a ceramic coating scratch-proof?`, a: `No. It’s a thin, slick layer on top of the clear coat. Scratches, swirls and rock chips can still happen. What changes is how easily dirt, bird droppings and water spots come off.` },
       { q: `Which parts of the car can you coat?`, a: `Paint, glass, wheels and calipers, exterior trim and plastics, and the interior. Tell us which ones you want and send a photo of each.` },
       { q: `Does the paint get polished first?`, a: `Almost always. A coating seals in what’s under it, so the paint is washed, decontaminated and polished first. How far we go depends on the paint.` },
-      { q: `How long does a coating last?`, a: `We won’t give a number here. It depends on the product, how the paint was prepared and how the car is washed. The warranty belongs to the product, so ask for its exact terms with your quote.` },
-      { q: `Salt, lovebugs, sprinkler water: does the coating stop them?`, a: `No. No coating stops them, and we make no promise about salt or sprinkler water. With lovebugs, a slicker surface helps when you wash; still, don’t leave them on the paint for days.` },
+      { q: `How long does a coating last?`, a: `We don’t put a number on it here. It depends on the product, how the paint was prepared and how the car is washed. The warranty belongs to the product, so ask for its exact terms with your quote.` },
+      { q: `Salt, lovebugs, sprinkler water: does the coating stop them?`, a: `No coating stops them, and we don’t promise anything about salt or sprinkler water. With lovebugs, a slicker surface helps when you wash; still, try not to leave them on the paint for days.` },
       { q: `How much does it cost?`, a: `There isn’t one price. It depends on how many parts you cover, the size of the car and the state of the paint. Send photos and you’ll get a range; the final price is set once we see the car.` },
     ],
 
@@ -135,7 +135,7 @@ export const ceramic = {
 
     doesnt: {
       title: `Lo que un recubrimiento no hace`,
-      p: `No es una armadura. Un rayón sigue siendo un rayón y una piedrita de la carretera sigue picando la pintura; para eso existe otro producto, la película de protección de pintura. El carro se sigue lavando. Cuánto dura depende del producto, de la preparación y de cómo lo laves, así que no ponemos una cifra.`,
+      p: `El recubrimiento no es una armadura. Los rayones y las piedritas de la carretera todavía pueden dejar su marca; para eso existe otro producto, la película de protección de pintura. El carro se sigue lavando. Cuánto dura depende del producto, de la preparación y de cómo lo laves, así que no te ponemos una cifra.`,
     },
 
     local: {
@@ -168,8 +168,8 @@ export const ceramic = {
       { q: `¿El recubrimiento cerámico evita los rayones?`, a: `No. Es una capa fina y lisa encima del barniz. Los rayones, los remolinos y las piedritas de la carretera pueden seguir pasando. Lo que cambia es lo fácil que se quitan la tierra, lo que dejan los pájaros y las manchas de agua.` },
       { q: `¿Qué partes del carro se pueden cubrir?`, a: `Pintura, vidrios, rines y calipers, molduras y plásticos de afuera, e interior. Dinos cuáles quieres y manda una foto de cada una.` },
       { q: `¿Hay que pulir la pintura antes?`, a: `Casi siempre. El recubrimiento sella lo que tenga debajo, así que primero se lava, se descontamina y se pule. Hasta dónde llegamos depende de la pintura.` },
-      { q: `¿Cuánto dura?`, a: `Aquí no te damos una cifra. Depende del producto, de cómo se preparó la pintura y de cómo lavas el carro. La garantía es la del producto, así que pide sus términos exactos con tu cotización.` },
-      { q: `Sal, lovebugs, agua de aspersor: ¿el recubrimiento los frena?`, a: `Ningún recubrimiento los frena, y no prometemos nada sobre la sal ni el agua de aspersor. Con los lovebugs, una superficie más lisa ayuda al lavar; aun así, no los dejes varios días sobre la pintura.` },
+      { q: `¿Cuánto dura?`, a: `No ponemos una cifra aquí. Depende del producto, de cómo se preparó la pintura y de cómo lavas el carro. La garantía es la del producto, así que pide sus términos exactos con tu cotización.` },
+      { q: `Sal, lovebugs, agua de aspersor: ¿el recubrimiento los frena?`, a: `Ningún recubrimiento los frena, y no prometemos nada sobre la sal ni el agua de aspersor. Con los lovebugs, una superficie más lisa ayuda al lavar; aun así, intenta no dejarlos varios días sobre la pintura.` },
       { q: `¿Cuánto cuesta?`, a: `No hay un precio único. Depende de cuántas partes cubras, del tamaño del carro y del estado de la pintura. Manda fotos y te damos un rango; el precio final se fija cuando vemos el carro.` },
     ],
 
