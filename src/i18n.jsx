@@ -13,8 +13,8 @@ const base = {
 
     // Hero
     heroTag: 'MOBILE DETAILING · SARASOTA AND BRADENTON',
-    heroTitle: 'We detail your car or boat right where it sits.',
-    heroSub: 'Send a photo and we reply with a price range.',
+    heroTitle: 'Your car or boat, looking like the day it left the factory.',
+    heroSub: 'We come to you. Leave it in our hands and get it back looking its best.',
     heroCheck1: 'At your home, office or marina',
     heroCheck2: 'Cars and boats, plus tint and ceramic for cars',
     heroCheck3: 'A price range before we start',
@@ -165,8 +165,8 @@ const base = {
 
     // Hero
     heroTag: 'DETALLADO MÓVIL · SARASOTA Y BRADENTON',
-    heroTitle: 'Detallamos tu carro o tu bote justo donde está.',
-    heroSub: 'Mándanos una foto y te respondemos con un rango de precio.',
+    heroTitle: 'Tu carro o tu bote, con el aspecto del día que salió de fábrica.',
+    heroSub: 'Vamos a ti. Déjalo en nuestras manos y recíbelo luciendo mejor.',
     heroCheck1: 'En tu casa, tu oficina o tu marina',
     heroCheck2: 'Carros y botes, además polarizado y cerámico para carros',
     heroCheck3: 'Un rango de precio antes de empezar',
