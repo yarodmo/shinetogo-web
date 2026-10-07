@@ -298,9 +298,6 @@ const TBL_LABEL = { en: 'Table, scrolls sideways on small screens', es: 'Tabla, 
 
 function tintBody(lang) {
   const c = tint[lang]
-  const rowHtml = (row) => (row.cells.length === 1
-    ? `<tr><th scope="row">${esc(row.label)}</th><td colspan="2">${esc(row.cells[0])}</td></tr>`
-    : `<tr><th scope="row">${esc(row.label)}</th>${row.cells.map((x) => `<td>${esc(x)}</td>`).join('')}</tr>`)
   return `
   <section class="band" aria-labelledby="win-h">
     <div class="wrap">
@@ -330,22 +327,6 @@ function tintBody(lang) {
         <p class="muted small">${esc(c.film.note)}</p>
       </div>
       <div class="visuals">${figure('film-layers', lang, c.film.title)}</div>
-    </div>
-  </section>
-  <section class="band alt" id="limits" aria-labelledby="lim-h">
-    <div class="wrap two">
-      <div>
-        <h2 id="lim-h">${esc(c.limits.title)}</h2>
-        <p class="lead">${esc(c.limits.lead)}</p>
-        <div class="tbl-wrap" role="region" tabindex="0" aria-label="${esc(TBL_LABEL[lang])}"><table class="tbl">
-          <thead><tr>${c.limits.head.map((h) => `<th scope="col">${esc(h)}</th>`).join('')}</tr></thead>
-          <tbody>${c.limits.rows.map(rowHtml).join('')}</tbody>
-        </table></div>
-        <p class="muted small">${esc(c.limits.note)}</p>
-        ${c.limits.paragraphs.map((p) => `<p>${esc(p)}</p>`).join('\n        ')}
-        <p class="muted small">${esc(c.limits.foot)} ${esc(c.limits.sourceLabel)}: <a class="textlink" href="https://www.flsenate.gov/Laws/Statutes/2026/316.2953" rel="noopener">F.S. 316.2953</a> · <a class="textlink" href="https://www.flsenate.gov/Laws/Statutes/2026/316.2954" rel="noopener">316.2954</a></p>
-      </div>
-      <div class="visuals">${figure('fl-windows-map', lang, c.limits.title)}</div>
     </div>
   </section>`
 }
