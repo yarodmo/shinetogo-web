@@ -7,11 +7,25 @@ import Pricing from './sections/Pricing'
 import Process from './sections/Process'
 import Gallery from './sections/Gallery'
 import Contact from './sections/Contact'
+import Areas from './sections/Areas'
+import Faq from './sections/Faq'
+import Icon from './components/Icon'
+import ConsentBanner from './components/ConsentBanner'
+import { AREAS, BRAND_NAME, HAS_TRACKING, PHONE_DISPLAY, PHONE_TEL, waLink } from './lib/site'
+import { openConsent } from './lib/track'
 
 /* ═══════ NAVBAR — Adapts from Light Hero to Dark Scroll ═══════ */
 function Navbar() {
   const { t, lang, toggle } = useI18n()
   const [scrolled, setScrolled] = useState(false)
+  const [open, setOpen] = useState(false)
+
+  useEffect(() => {
+    if (!open) return undefined
+    const onKey = (e) => { if (e.key === 'Escape') setOpen(false) }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [open])
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 80)
@@ -32,34 +46,47 @@ function Navbar() {
     }}>
       {/* Logo */}
       <a href="#" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
-        <img src="/logo-shinetogo.jpg" alt="ShineToGo Detail" style={{ height: '60px', width: 'auto', borderRadius: '6px' }} />
+        <img src="/img/brand/logo-120.webp" srcSet="/img/brand/logo-120.webp 1x, /img/brand/logo-240.webp 2x" width="60" height="60" alt={BRAND_NAME} style={{ height: '60px', width: 'auto', borderRadius: '6px' }} />
       </a>
 
-      <div className="nav-links">
-        {[['#hero', 'navHome'], ['#about', 'navAbout'], ['#services', 'navServices'], ['#pricing', 'navPricing'], ['#gallery', 'navGallery'], ['#contact', 'navContact']].map(([href, key]) => (
-          <a key={key} href={href} style={{ color: linkColor }}>{t(key)}</a>
+      <div id="nav-menu" className={`nav-links${open ? ' is-open' : ''}`} style={open ? { background: navBg, borderBottom: `1px solid ${borderColor}` } : undefined}>
+        {[
+          ['#services', 'navServices'],
+          [lang === 'es' ? '/es/polarizado-de-vidrios/' : '/window-tint/', 'navTint'],
+          [lang === 'es' ? '/es/recubrimiento-ceramico/' : '/ceramic-coating/', 'navCeramic'],
+          ['#pricing', 'navPricing'],
+          ['#gallery', 'navGallery'],
+          ['#contact', 'navContact'],
+        ].map(([href, key]) => (
+          <a key={key} href={href} style={{ color: linkColor }} onClick={() => setOpen(false)}>{t(key)}</a>
         ))}
       </div>
 
       <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
-        <button onClick={toggle} style={{
+        <button onClick={toggle} aria-label={lang === 'en' ? 'Ver en español' : 'View in English'} lang={lang === 'en' ? 'es' : 'en'} style={{
           fontWeight: 700, fontSize: '12px', background: 'none',
           color: linkColor, border: `1.5px solid ${borderColor}`,
           padding: '6px 14px', borderRadius: '8px', cursor: 'pointer'
         }}>
-          {lang === 'en' ? '🇪🇸 ES' : '🇺🇸 EN'}
+          {lang === 'en' ? 'ES' : 'EN'}
         </button>
         <a href="#contact" className="btn btn-primary" style={{
           padding: '10px 24px', fontSize: '13px'
         }}>
           {t('navBook')}
         </a>
+        <button type="button" className={`menu-btn${open ? ' is-open' : ''}`} aria-label={open ? t('menuClose') : t('menuOpen')}
+          aria-expanded={open} aria-controls="nav-menu" onClick={() => setOpen((o) => !o)}
+          style={{ color: linkColor, borderColor }}>
+          <svg className="i-menu" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" /></svg>
+          <svg className="i-close" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18" /></svg>
+        </button>
       </div>
     </nav>
   )
 }
 
-/* ═══════ STICKY CTA — Mobile ═══════ */
+/* ═══════ STICKY CTA — Mobile: Llamar | WhatsApp | Cotizar (la misma barra en las páginas de detalle) ═══════ */
 function StickyCta() {
   const { t } = useI18n()
   const [visible, setVisible] = useState(false)
@@ -74,10 +101,16 @@ function StickyCta() {
 
   return (
     <div className="sticky-cta">
-      <a href="#contact" className="btn btn-primary" style={{
-        width: '100%', maxWidth: '400px', padding: '14px', fontSize: '14px'
-      }}>
-        {t('stickyCta')}
+      <a href={`tel:${PHONE_TEL}`} className="btn btn-secondary btn-icon" aria-label={t('stickyCall')} title={t('stickyCall')}
+        data-track="call_click" data-location="sticky">
+        <Icon name="phone" size={22} />
+      </a>
+      <a href={waLink(t('whatsappText'))} target="_blank" rel="noopener noreferrer" className="btn btn-green btn-icon"
+        aria-label={t('stickyWhatsapp')} title={t('stickyWhatsapp')} data-track="whatsapp_click" data-location="sticky">
+        <Icon name="whatsapp" size={24} />
+      </a>
+      <a href="#contact" className="btn btn-primary" data-track="cta_click" data-location="sticky">
+        {t('navBook')}
       </a>
     </div>
   )
@@ -85,81 +118,98 @@ function StickyCta() {
 
 /* ═══════ APP — Showroom Grade Funnel ═══════ */
 export default function App() {
+  const { t, lang } = useI18n()
+  const es = lang === 'es'
+  // La página se dibuja con JS: el navegador no encuentra #ancla al cargar, así que se salta aquí.
+  useEffect(() => {
+    const id = window.location.hash.slice(1)
+    if (!id) return undefined
+    const timer = setTimeout(() => document.getElementById(id)?.scrollIntoView({ behavior: 'instant' }), 120)
+    return () => clearTimeout(timer)
+  }, [])
+
   return (
     <>
+      <a className="skip" href="#main">{es ? 'Saltar al contenido' : 'Skip to content'}</a>
       <Navbar />
-      <main>
+      <main id="main">
+        {/* Orden de producción; Zonas ocupa el lugar de las reseñas retiradas y FAQ sigue al formulario. */}
         <Hero />
         <About />
         <Services />
         <Pricing />
         <Process />
         <Gallery />
+        <Areas />
         <Contact />
+        <Faq />
       </main>
       <footer style={{
         background: 'var(--bg-dark)', padding: '48px 0',
         borderTop: '1px solid var(--border-dark)'
       }}>
-        <div className="container" style={{
+        <div className="container footer-grid" style={{
           display: 'grid', gridTemplateColumns: '2fr 1fr 1fr 1fr',
           gap: '40px'
         }}>
           <div>
-            <img src="/logo-shinetogo.jpg" alt="ShineToGo Detail" style={{ height: '44px', width: 'auto', borderRadius: '4px', marginBottom: '16px' }} />
+            <img src="/img/brand/logo-120.webp" srcSet="/img/brand/logo-120.webp 1x, /img/brand/logo-240.webp 2x" width="44" height="44" loading="lazy" alt={BRAND_NAME} style={{ height: '44px', width: 'auto', borderRadius: '4px', marginBottom: '16px' }} />
             <p style={{ fontSize: '14px', color: 'var(--text-muted)', lineHeight: 1.6, maxWidth: '280px' }}>
-              Professional mobile car and boat detailing services. We bring premium care to your location.
+              {t('footerAbout')}
             </p>
             <div style={{ marginTop: '24px', padding: '12px', background: 'rgba(255,255,255,0.02)', borderRadius: '12px', border: '1px solid rgba(255,255,255,0.05)', maxWidth: '320px', display: 'flex', alignItems: 'center', gap: '16px' }}>
               <a href="https://www.instagram.com/shinetogomobilecarwash?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener noreferrer" style={{ display: 'flex' }}>
-                <img src="/shinetogomobilecarwash_qr.png" alt="Instagram QR" style={{ width: '64px', height: '64px', borderRadius: '6px', border: '1px solid rgba(255,255,255,0.1)', objectFit: 'cover' }} />
+                <img src="/img/brand/ig-qr-192.webp" width="64" height="64" loading="lazy" alt="Instagram QR" style={{ width: '64px', height: '64px', borderRadius: '6px', border: '1px solid rgba(255,255,255,0.1)', objectFit: 'cover' }} />
               </a>
               <div>
                 <a href="https://www.instagram.com/shinetogomobilecarwash?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none' }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '4px' }}>
-                    <div style={{ width: '16px', height: '16px', borderRadius: '4px', background: 'linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', fontSize: '10px' }}>
-                      📸
-                    </div>
                     <div style={{ fontWeight: 700, fontSize: '13px', color: '#fff' }}>@shinetogomobilecarwash</div>
                   </div>
-                  <div style={{ fontSize: '11.5px', color: 'var(--text-muted)' }}>Síguenos para trabajos diarios</div>
+                  <div style={{ fontSize: '11.5px', color: 'var(--text-muted)' }}>{t('footerIg')}</div>
                 </a>
               </div>
             </div>
           </div>
           <div>
-            <h4 style={{ fontSize: '14px', fontWeight: 800, color: '#fff', marginBottom: '16px', textTransform: 'uppercase', letterSpacing: '0.1em' }}>Services</h4>
+            <h3 style={{ fontSize: '14px', fontWeight: 800, color: '#fff', marginBottom: '16px', textTransform: 'uppercase', letterSpacing: '0.1em' }}>{t('footerServices')}</h3>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-              <a href="#services" style={{ fontSize: '14px', color: 'var(--text-muted)' }}>Auto Detailing</a>
-              <a href="#services" style={{ fontSize: '14px', color: 'var(--text-muted)' }}>Boat Detailing</a>
-              <a href="#pricing" style={{ fontSize: '14px', color: 'var(--text-muted)' }}>Ceramic Coating</a>
+              <a href="#services" style={{ fontSize: '14px', color: 'var(--text-muted)' }}>{t('svc1Title')}</a>
+              <a href="#services" style={{ fontSize: '14px', color: 'var(--text-muted)' }}>{t('svc2Title')}</a>
+              <a href={es ? '/es/polarizado-de-vidrios/' : '/window-tint/'} style={{ fontSize: '14px', color: 'var(--text-muted)' }}>{t('navTint')}</a>
+              <a href={es ? '/es/recubrimiento-ceramico/' : '/ceramic-coating/'} style={{ fontSize: '14px', color: 'var(--text-muted)' }}>{t('navCeramic')}</a>
             </div>
           </div>
           <div>
-            <h4 style={{ fontSize: '14px', fontWeight: 800, color: '#fff', marginBottom: '16px', textTransform: 'uppercase', letterSpacing: '0.1em' }}>Areas</h4>
+            <h3 style={{ fontSize: '14px', fontWeight: 800, color: '#fff', marginBottom: '16px', textTransform: 'uppercase', letterSpacing: '0.1em' }}>{t('footerAreas')}</h3>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-              <span style={{ fontSize: '14px', color: 'var(--text-muted)' }}>Sarasota</span>
-              <span style={{ fontSize: '14px', color: 'var(--text-muted)' }}>Bradenton</span>
-              <span style={{ fontSize: '14px', color: 'var(--text-muted)' }}>Tampa Bay</span>
-              <span style={{ fontSize: '14px', color: 'var(--text-muted)' }}>St. Petersburg</span>
+              {AREAS.map((a) => (
+                <span key={a} style={{ fontSize: '14px', color: 'var(--text-muted)' }}>{a}</span>
+              ))}
             </div>
           </div>
           <div>
-            <h4 style={{ fontSize: '14px', fontWeight: 800, color: '#fff', marginBottom: '16px', textTransform: 'uppercase', letterSpacing: '0.1em' }}>Contact</h4>
+            <h3 style={{ fontSize: '14px', fontWeight: 800, color: '#fff', marginBottom: '16px', textTransform: 'uppercase', letterSpacing: '0.1em' }}>{t('footerContact')}</h3>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-              <a href="tel:+19414224405" style={{ fontSize: '14px', color: 'var(--text-muted)' }}>📞 (941) 422-4405</a>
-              <a href="https://wa.me/19414224405" target="_blank" rel="noopener noreferrer" style={{ fontSize: '14px', color: 'var(--brand-green)' }}>💬 WhatsApp</a>
-              <span style={{ fontSize: '14px', color: 'var(--text-muted)' }}>Available 24/7</span>
+              <a href={`tel:${PHONE_TEL}`} data-track="call_click" data-location="footer" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', fontSize: '14px', color: 'var(--text-muted)' }}><Icon name="phone" size={16} /> {PHONE_DISPLAY}</a>
+              <a href={waLink('')} target="_blank" rel="noopener noreferrer" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', fontSize: '14px', color: 'var(--brand-green)' }} data-track="whatsapp_click" data-location="footer"><Icon name="whatsapp" size={16} /> WhatsApp</a>
+              <a href={es ? '/es/privacidad/' : '/privacy/'} style={{ fontSize: '14px', color: 'var(--text-muted)' }}>{t('footerPrivacy')}</a>
+              {HAS_TRACKING && (
+                <button type="button" onClick={openConsent} style={{ fontSize: '14px', color: 'var(--text-muted)', background: 'none', border: 0, padding: 0, cursor: 'pointer', textAlign: 'left', font: 'inherit' }}>
+                  {t('footerPrivacyChoices')}
+                </button>
+              )}
             </div>
           </div>
         </div>
         <div className="container" style={{ marginTop: '40px', paddingTop: '24px', borderTop: '1px solid var(--border-dark)' }}>
-          <p style={{ fontSize: '13px', color: '#334155', textAlign: 'center' }}>
-            © 2026 ShineToGo Mobile Car Wash. Designed by Bliss Systems LLC.
+          <p style={{ fontSize: '13px', color: 'var(--text-muted)', textAlign: 'center' }}>
+            © {new Date().getFullYear()} {BRAND_NAME}. Designed by Bliss Systems LLC.
           </p>
         </div>
       </footer>
       <StickyCta />
+      <ConsentBanner />
     </>
   )
 }

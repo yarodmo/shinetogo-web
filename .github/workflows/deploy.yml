@@ -2,15 +2,22 @@ name: 🚀 ShineToGo Mobile Detailing — Production Deploy
 
 # Secrets del repo (Settings → Secrets and variables → Actions → Secrets):
 #   VPS_HOST, VPS_PORT, VPS_USER, VPS_SSH_KEY, SMTP_PASS, RECIPIENT
+#   (opcional) LEAD_WEBHOOK_URL y LEAD_WEBHOOK_SECRET: reenvío del lead a n8n/GHL. Los dos son SECRETOS: la URL de un
+#   webhook suele llevar un token en la ruta y las variables de Actions se imprimen en los logs
 # Variables del repo (misma pantalla, pestaña Variables):
 #   API_PORT, SMTP_HOST, SMTP_PORT, SMTP_USER, ALLOWED_ORIGINS,
 #   VITE_SITE_URL, VITE_API_URL
+# Opcionales (si no existen, el sitio usa su valor por defecto o desactiva la función):
+#   VITE_BRAND_NAME, BRAND_NAME, VITE_GTM_ID, VITE_GA4_ID, VITE_META_PIXEL_ID
 # Ver .env.example para el significado de las VITE_*.
 
 on:
   push:
     branches: [main]
-  workflow_dispatch:  # Trigger manual desde GitHub UI
+  workflow_dispatch:  # Trigger manual desde GitHub UI (solo despliega desde main, ver `if:` del job)
+
+permissions:
+  contents: read
 
 concurrency:
   group: production-deploy
@@ -19,6 +26,7 @@ concurrency:
 jobs:
   deploy:
     name: Deploy to VPS
+    if: github.ref == 'refs/heads/main'  # un dispatch desde otra rama no toca producción
     runs-on: ubuntu-latest
     timeout-minutes: 10
 
@@ -37,11 +45,48 @@ jobs:
       - name: 📦 Instalar dependencias frontend
         run: npm ci
 
-      - name: 🏗️ Build React (Vite)
+      # Las pruebas corren ANTES de tocar el servidor: si fallan, no hay deploy.
+      - name: 🧪 Pruebas de la API de leads
+        working-directory: api
+        run: |
+          npm ci
+          npm test
+
+      - name: 🏗️ Build React (Vite) + páginas estáticas
         env:
           VITE_SITE_URL: ${{ vars.VITE_SITE_URL }}
           VITE_API_URL: ${{ vars.VITE_API_URL }}
+          VITE_BRAND_NAME: ${{ vars.VITE_BRAND_NAME }}
+          VITE_GTM_ID: ${{ vars.VITE_GTM_ID }}
+          VITE_GA4_ID: ${{ vars.VITE_GA4_ID }}
+          VITE_META_PIXEL_ID: ${{ vars.VITE_META_PIXEL_ID }}
         run: npm run build
+
+      - name: 🔎 Verificar SEO técnico de dist/
+        env:
+          VITE_SITE_URL: ${{ vars.VITE_SITE_URL }}
+        run: node scripts/check-dist.mjs
+
+      # ── 2b. PREPARAR .ENV (ANTES DE TOCAR EL SERVIDOR) ───────────
+      # .env físico — única fuente de verdad para lo que depende del dominio/cuenta (puerto, SMTP, CORS).
+      # Se genera aquí con comillas correctas (una contraseña con $, # o ` no se corrompe) y el deploy se
+      # detiene si falta una variable o ALLOWED_ORIGINS es inválido: así un valor faltante nunca deja
+      # la API de producción sin configuración.
+      - name: 🔑 Preparar .env de la API (validación)
+        env:
+          PORT: ${{ vars.API_PORT }}
+          SMTP_HOST: ${{ vars.SMTP_HOST }}
+          SMTP_PORT: ${{ vars.SMTP_PORT }}
+          SMTP_USER: ${{ vars.SMTP_USER }}
+          ALLOWED_ORIGINS: ${{ vars.ALLOWED_ORIGINS }}
+          BRAND_NAME: ${{ vars.BRAND_NAME }}
+          LEAD_WEBHOOK_URL: ${{ secrets.LEAD_WEBHOOK_URL }}
+          LEAD_WEBHOOK_SECRET: ${{ secrets.LEAD_WEBHOOK_SECRET }}
+          SMTP_PASS: ${{ secrets.SMTP_PASS }}
+          RECIPIENT: ${{ secrets.RECIPIENT }}
+        run: |
+          umask 077
+          node scripts/write-env.cjs > "$RUNNER_TEMP/api.env"
 
       # ── 3. CONFIGURAR SSH ────────────────────────────────────────
       - name: 🔐 Configurar SSH Agent
@@ -53,32 +98,60 @@ jobs:
         run: |
           ssh-keyscan -p ${{ secrets.VPS_PORT }} -H ${{ secrets.VPS_HOST }} >> ~/.ssh/known_hosts
 
+      # ── 3b. GUARDA DE DISCO (Regla D-018: host compartido) ────────
+      # Aborta ANTES de copiar nada si la partición del usuario tiene <15% libre.
+      - name: 💾 Verificar espacio libre en el VPS
+        run: |
+          ssh -p ${{ secrets.VPS_PORT }} -o ConnectTimeout=15 -o ServerAliveInterval=15 -o ServerAliveCountMax=4 ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} << 'ENDSSH'
+            set -euo pipefail
+            USED=$(df -P "$HOME" | awk 'NR==2 {gsub("%","",$5); print $5}')
+            echo "Disco usado en \$HOME: ${USED}%"
+            if [ "$USED" -gt 85 ]; then
+              echo "❌ Menos de 15% libre. Deploy abortado para no afectar el host compartido."
+              exit 1
+            fi
+          ENDSSH
+
       # ── 4. DEPLOY FRONTEND → public_html via rsync ───────────────
       # rsync opera SOLO sobre el directorio dist/ del usuario shinetogo.
       # Sin acceso root. Sin tocar otros usuarios ni vhosts del servidor.
       # rsync SOLO archivos compilados (dist/) al web root
       # El código fuente y la API viven en ~/app — nunca en public_html
+      # --exclude protege del --delete lo que el panel coloca en el web root:
+      # .well-known (validación AutoSSL/ACME) y cgi-bin. El .htaccess SÍ viaja en dist/.
       - name: 📤 Deploy frontend (rsync dist/ → public_html)
         run: |
           rsync -az --delete \
-            -e "ssh -p ${{ secrets.VPS_PORT }}" \
+            --exclude '.well-known' --exclude 'cgi-bin' \
+            -e "ssh -p ${{ secrets.VPS_PORT }} -o ConnectTimeout=15 -o ServerAliveInterval=15 -o ServerAliveCountMax=4" \
             ./dist/ \
             ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }}:/home/${{ secrets.VPS_USER }}/public_html/
 
+      # node_modules y test/ no viajan: el servidor instala con `npm install --omit=dev`.
+      # .env se excluye del --delete: lo escribe el paso siguiente y nunca debe quedar sin archivo.
       - name: 📤 Deploy API (rsync api/ → ~/app/api)
         run: |
           rsync -az --delete \
-            -e "ssh -p ${{ secrets.VPS_PORT }}" \
+            --exclude 'node_modules' --exclude 'test' --exclude '.env' \
+            -e "ssh -p ${{ secrets.VPS_PORT }} -o ConnectTimeout=15 -o ServerAliveInterval=15 -o ServerAliveCountMax=4" \
             ./api/ \
             ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }}:/home/${{ secrets.VPS_USER }}/app/api/
 
-      # ── 5. DEPLOY API + LIMPIEZA PM2 + .ENV PERSISTENTE ────────────
-      # .env físico — única fuente de verdad para lo que depende del
-      # dominio/cuenta (puerto, SMTP, CORS). Nada de esto va hardcodeado
-      # en ecosystem.config.cjs (ver comentario ahí).
+      # ── 5. SUBIR .ENV (0600) ─────────────────────────────────────
+      # El archivo ya se generó y validó en «Preparar .env» (antes de tocar el servidor); aquí solo se sube
+      # por stdin con permisos restrictivos (host compartido) y reemplazo atómico.
+      - name: 🔑 Subir .env de la API (0600)
+        run: |
+          ssh -p ${{ secrets.VPS_PORT }} -o ConnectTimeout=15 -o ServerAliveInterval=15 -o ServerAliveCountMax=4 \
+            ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} \
+            'umask 077; cat > "$HOME/app/api/.env.new" && mv "$HOME/app/api/.env.new" "$HOME/app/api/.env"' \
+            < "$RUNNER_TEMP/api.env"
+          rm -f "$RUNNER_TEMP/api.env"
+
+      # ── 5b. DEPENDENCIAS + LIMPIEZA PM2 + ARRANQUE ───────────────
       - name: 🚀 Configurar Entorno, Limpiar PM2 y Desplegar API
         run: |
-          ssh -p ${{ secrets.VPS_PORT }} ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} << 'ENDSSH'
+          ssh -p ${{ secrets.VPS_PORT }} -o ConnectTimeout=15 -o ServerAliveInterval=15 -o ServerAliveCountMax=4 ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} << 'ENDSSH'
             set -euo pipefail
 
             APP_DIR="/home/${{ secrets.VPS_USER }}/app/api"
@@ -89,18 +162,12 @@ jobs:
 
             # 1. Instalar dependencias
             cd "$APP_DIR"
-            npm install --omit=dev --silent
+            npm install --omit=dev --ignore-scripts --no-audit --no-fund --silent
             node --check server.js
+            node --check app.js
 
-            # 2. Escribir .env persistente
-            echo "NODE_ENV=production" > .env
-            echo "PORT=${{ vars.API_PORT }}" >> .env
-            echo "SMTP_HOST=${{ vars.SMTP_HOST }}" >> .env
-            echo "SMTP_PORT=${{ vars.SMTP_PORT }}" >> .env
-            echo "SMTP_USER=${{ vars.SMTP_USER }}" >> .env
-            echo "ALLOWED_ORIGINS=${{ vars.ALLOWED_ORIGINS }}" >> .env
-            echo "SMTP_PASS=${{ secrets.SMTP_PASS }}" >> .env
-            echo "RECIPIENT=${{ secrets.RECIPIENT }}" >> .env
+            # 2. El .env ya llegó en el paso anterior (0600)
+            test -s .env
 
             # 3. Limpiar estado corrupto de PM2 y residuales
             pm2 delete shinetogo-api || true
@@ -117,7 +184,7 @@ jobs:
       # ── 6. HEALTH CHECK ──────────────────────────────────────────
       - name: 🏥 Health Check API
         run: |
-          ssh -p ${{ secrets.VPS_PORT }} ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} << 'ENDSSH'
+          ssh -p ${{ secrets.VPS_PORT }} -o ConnectTimeout=15 -o ServerAliveInterval=15 -o ServerAliveCountMax=4 ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} << 'ENDSSH'
             PASS=false
             for i in 1 2 3 4 5; do
               HTTP=$(curl -s -o /dev/null -w "%{http_code}" --max-time 10 "http://localhost:${{ vars.API_PORT }}/api/health" 2>/dev/null || echo "000")
@@ -134,6 +201,28 @@ jobs:
               exit 1
             fi
           ENDSSH
+
+      # ── 6b. PRUEBA DE CORS DESDE FUERA ───────────────────────────
+      # El health check local no depende de CORS/.env. Este preflight va por la URL pública
+      # con el Origin real del sitio; no crea leads ni gasta el límite de solicitudes.
+      - name: 🌐 Verificar CORS del formulario (preflight público)
+        env:
+          API_URL: ${{ vars.VITE_API_URL }}
+          SITE_URL: ${{ vars.VITE_SITE_URL }}
+        run: |
+          API_URL="${API_URL:-https://api.shinetogomobiledetailing.com/api/book}"
+          SITE_URL="${SITE_URL:-https://shinetogomobiledetailing.com}"
+          SITE_URL="${SITE_URL%/}"
+          for i in 1 2 3; do
+            ALLOW=$(curl -s -D - -o /dev/null --max-time 15 -X OPTIONS "$API_URL" \
+              -H "Origin: $SITE_URL" -H 'Access-Control-Request-Method: POST' -H 'Access-Control-Request-Headers: content-type' \
+              | tr -d '\r' | awk 'tolower($1)=="access-control-allow-origin:" {print $2}')
+            if [ "$ALLOW" = "$SITE_URL" ]; then echo "✅ CORS OK para $SITE_URL"; exit 0; fi
+            echo "⏳ Intento $i/3 — Access-Control-Allow-Origin='$ALLOW'. Esperando 5s..."
+            sleep 5
+          done
+          echo "::error::El formulario no podrá enviar: la API no autoriza el origen $SITE_URL"
+          exit 1
 
       # ── 7. RESULTADO ─────────────────────────────────────────────
       - name: 📣 Resultado del deploy

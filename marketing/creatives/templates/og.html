@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="{{lang}}">
+<head>
+<meta charset="utf-8">
+<title>OG · {{type}} · {{lang}}</title>
+<!-- Open Graph 1200x630. Sober by design: short headline, logo in a white badge, domain.
+     Template: render.mjs fills the double-brace placeholders from copy.mjs. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ROOT}}/templates/base.css">
+<style>html, body, .stage { width: {{W}}px; height: {{H}}px; }</style>
+<style>
+  .og .stage {
+    background:
+      radial-gradient(60% 90% at 14% 50%, rgba(245, 158, 11, 0.10), transparent 70%),
+      radial-gradient(70% 90% at 100% 100%, rgba(14, 165, 233, 0.14), transparent 70%),
+      var(--bg-dark);
+  }
+  .og .badge { --bw: 300px; left: 92px; top: 178px; }
+  .og .rule { position: absolute; left: 456px; top: 150px; width: 72px; height: 5px; border-radius: 3px; background: var(--brand-gold); }
+  .og h1 { position: absolute; left: 456px; top: 180px; width: 668px; font-size: 66px; color: var(--text-white); line-height: 1.05; text-wrap: balance; }
+  .og.lang-es h1 { font-size: 60px; }
+  .og.type-ceramic-coating h1 { font-size: 58px; }
+  .og.type-ceramic-coating.lang-es h1 { font-size: 50px; }
+  .og .sub { position: absolute; left: 456px; width: 668px; font-size: 28px; font-weight: 500; color: var(--text-light); line-height: 1.3; white-space: pre-line; }
+  .og .contact { position: absolute; left: 456px; bottom: 54px; font-size: 27px; font-weight: 600; line-height: 1.35; }
+  .og .contact .domain { color: var(--brand-gold); display: block; }
+  .og .contact .phone { color: var(--text-light); display: block; }
+  .og .motif { position: absolute; inset: 0; width: 1200px; height: 630px; }
+  .og .m { display: none; }
+  .og.type-default .m-default, .og.type-window-tint .m-tint, .og.type-ceramic-coating .m-ceramic { display: block; }
+</style>
+</head>
+<body class="og type-{{type}} lang-{{lang}}">
+<div class="stage">
+  <svg class="motif" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <!-- default: horizon sun arcs -->
+    <g class="m m-default" fill="none" stroke="#d4af37">
+      <circle cx="1040" cy="700" r="170" stroke-opacity="0.34" stroke-width="3"/>
+      <circle cx="1040" cy="700" r="250" stroke-opacity="0.22" stroke-width="2.5"/>
+      <circle cx="1040" cy="700" r="330" stroke-opacity="0.14" stroke-width="2"/>
+      <circle cx="1040" cy="700" r="410" stroke-opacity="0.09" stroke-width="2"/>
+      <path d="M840 700 A200 200 0 0 1 1240 700 Z" fill="#f59e0b" fill-opacity="0.10" stroke="none"/>
+    </g>
+    <!-- window tint: glass reflection streaks + one gold hairline -->
+    <g class="m m-tint">
+      <polygon points="800,0 900,0 640,630 540,630" fill="#ffffff" fill-opacity="0.03"/>
+      <polygon points="960,0 1020,0 760,630 700,630" fill="#ffffff" fill-opacity="0.045"/>
+      <polygon points="1060,0 1200,0 1200,60 940,630 860,630" fill="#0ea5e9" fill-opacity="0.07"/>
+    </g>
+    <!-- ceramic coating: water beads on a surface line -->
+    <g class="m m-ceramic">
+      <line x1="890" y1="590" x2="1200" y2="590" stroke="#0ea5e9" stroke-opacity="0.35" stroke-width="3"/>
+      <g fill="#0ea5e9" fill-opacity="0.12" stroke="#0ea5e9" stroke-opacity="0.55" stroke-width="2.5">
+        <path d="M980 590 A60 70 0 0 1 1100 590 Z"/>
+        <path d="M1118 590 A38 44 0 0 1 1194 590 Z"/>
+        <path d="M912 590 A30 34 0 0 1 972 590 Z"/>
+      </g>
+      <g fill="none" stroke="#ffffff" stroke-opacity="0.35" stroke-width="3" stroke-linecap="round">
+        <path d="M1002 560 Q1012 534 1040 530"/>
+        <path d="M1130 566 Q1138 552 1152 550"/>
+      </g>
+    </g>
+  </svg>
+
+  <div class="badge"><img src="{{ROOT}}/assets/logo.jpg" alt=""></div>
+  <div class="rule"></div>
+  <h1>{{h}}</h1>
+  <div class="sub" id="sub">{{sub}}</div>
+  <div class="contact mono-url"><span class="domain">{{domain}}</span><span class="phone">{{phone}}</span></div>
+</div>
+<script>
+  // Centre rule + headline + sub as one group in the area above the contact lines.
+  document.fonts.ready.then(function () {
+    var r = document.querySelector('.rule'), h = document.querySelector('h1'), s = document.getElementById('sub');
+    var total = 5 + 26 + h.offsetHeight + 18 + s.offsetHeight;
+    var top = Math.round(270 - total / 2);
+    r.style.top = top + 'px';
+    h.style.top = (top + 31) + 'px';
+    s.style.top = (top + 31 + h.offsetHeight + 18) + 'px';
+  });
+</script>
+</body>
+</html>

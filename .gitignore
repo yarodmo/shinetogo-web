@@ -27,3 +27,6 @@ dist-ssr/
 # Env files (NEVER PUSH SECRETS TO GIT)
 .env
 api/.env
+
+# Residuos de render/auditoría de creativos
+marketing/creatives/out/_build/

@@ -1,0 +1,25 @@
+name: CI
+
+# Revisión de cada PR: pruebas, build y verificación del SEO técnico. No despliega nada
+# y no usa secretos (el deploy a producción vive en deploy.yml y solo corre en main).
+on:
+  pull_request:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      - run: npm ci
+      - name: API tests
+        working-directory: api
+        run: |
+          npm ci
+          npm test
+      - run: npm run build
+      - run: node scripts/check-dist.mjs

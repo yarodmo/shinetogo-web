@@ -4,7 +4,7 @@ const CARDS = [
   { key: 'aboutCard1', icon: '🎯' },
   { key: 'aboutCard2', icon: '🚚' },
   { key: 'aboutCard3', icon: '🛡️' },
-  { key: 'aboutCard4', icon: '🌿' },
+  { key: 'aboutCard4', icon: '🧴' },
 ]
 
 export default function About() {
@@ -12,7 +12,6 @@ export default function About() {
 
   return (
     <section id="about" className="section section-dark" style={{ position: 'relative', overflow: 'hidden' }}>
-      <div className="glow-blue" style={{ top: '20%', right: '-10%' }} />
       <div className="container" style={{ position: 'relative', zIndex: 1 }}>
         <p className="animated-fade-in" style={{
           fontSize: 'clamp(18px, 2.5vw, 22px)', color: 'var(--text-light)',
@@ -24,17 +23,17 @@ export default function About() {
 
         <div style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 260px), 1fr))',
           gap: '20px'
         }}>
-          {CARDS.map((c, i) => (
-            <div key={i} className="glass-card animated-fade-in" style={{
+          {CARDS.map((c) => (
+            <div key={c.key} className="glass-card animated-fade-in" style={{
               padding: '40px 32px', textAlign: 'center'
             }}>
-              <div style={{ fontSize: '36px', marginBottom: '20px' }}>{c.icon}</div>
-              <h3 style={{ fontSize: '18px', fontWeight: 800, color: '#fff', marginBottom: '12px' }}>
+              <div aria-hidden="true" style={{ fontSize: '36px', marginBottom: '20px' }}>{c.icon}</div>
+              <h2 style={{ fontSize: '18px', fontWeight: 800, color: '#fff', marginBottom: '12px' }}>
                 {t(c.key)}
-              </h3>
+              </h2>
               <p style={{ fontSize: '14px', color: 'var(--text-muted)', lineHeight: 1.6 }}>
                 {t(`${c.key}d`)}
               </p>

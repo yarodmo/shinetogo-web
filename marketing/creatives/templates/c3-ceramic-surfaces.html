@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="{{lang}}">
+<head>
+<meta charset="utf-8">
+<title>C3 · Ceramic coating, not only for the paint · {{lang}} · {{fmt}}</title>
+<!-- Ceramic Coating only (never mixed with Window Tint). Schematic only: simple icons, no photos of cars, no performance claims.
+     Template: render.mjs fills the double-brace placeholders from copy.mjs. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ROOT}}/templates/base.css">
+<style>html, body, .stage { width: {{W}}px; height: {{H}}px; }</style>
+<style>
+  .c3 .stage { background: var(--bg-dark); }
+  .c3 .glow {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(60% 34% at 85% 8%, rgba(14, 165, 233, 0.18), transparent 70%),
+      radial-gradient(70% 36% at 0% 100%, rgba(245, 158, 11, 0.09), transparent 70%);
+  }
+  .c3 h1 { position: absolute; color: var(--text-white); }
+  .c3 h1 span { display: block; text-wrap: balance; }
+  .c3 h1 .l2 { color: var(--brand-gold); }
+  .c3 .area { position: absolute; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); white-space: nowrap; }
+  .c3 .url { position: absolute; color: var(--text-light); white-space: nowrap; }
+  .c3 .fine { position: absolute; color: var(--text-muted); font-weight: 500; white-space: nowrap; }
+
+  /* Five surfaces as tiles (icon + name) and a sixth tile with the process line. */
+  .c3 .tiles { position: absolute; display: grid; }
+  .c3 .tile {
+    background: var(--bg-card); border: 1.5px solid rgba(255, 255, 255, 0.1); border-radius: 26px;
+    display: flex; flex-direction: column; justify-content: space-between; min-width: 0;
+  }
+  .c3 .tile .ic { width: var(--ic); height: var(--ic); display: block; }
+  .c3 .tile .name { font-family: var(--font-heading); font-weight: 600; color: var(--text-white); line-height: 1.12; letter-spacing: -0.01em; }
+  .c3 .tile.prep { background: linear-gradient(145deg, rgba(245, 158, 11, 0.18), rgba(245, 158, 11, 0.05)); border-color: rgba(245, 158, 11, 0.6); justify-content: center; }
+  .c3 .tile.prep .name { color: var(--brand-gold); font-weight: 700; text-wrap: balance; }
+
+  /* ---------- FEED 1080x1350 ---------- */
+  .fmt-feed .badge { --bw: 200px; left: 72px; top: 60px; }
+  .fmt-feed .area { right: 72px; top: 136px; font-size: 22px; }
+  .fmt-feed h1 { left: 72px; top: 266px; width: 936px; font-size: 80px; }
+  .fmt-feed.lang-es h1 { font-size: 68px; }
+  .fmt-feed .tiles { left: 72px; top: 478px; width: 936px; grid-template-columns: repeat(3, 1fr); grid-auto-rows: 262px; gap: 24px; --ic: 100px; }
+  .fmt-feed .tile { padding: 28px; }
+  .fmt-feed .tile .name { font-size: 30px; }
+  .fmt-feed .tile.prep .name { font-size: 34px; }
+  .fmt-feed .cta { left: 72px; top: 1070px; height: 96px; padding: 0 46px; border-radius: 48px; font-size: 38px; }
+  .fmt-feed .url { left: 72px; top: 1210px; font-size: 28px; }
+  .fmt-feed .fine { left: 72px; top: 1254px; font-size: 24px; }
+
+  /* ---------- STORY 1080x1920 (safe zone: y 250 .. 1670) ---------- */
+  .fmt-story .badge { --bw: 230px; left: 72px; top: 284px; }
+  .fmt-story .area { right: 72px; top: 362px; font-size: 22px; }
+  .fmt-story h1 { left: 72px; top: 540px; width: 936px; font-size: 84px; }
+  .fmt-story.lang-es h1 { font-size: 72px; }
+  .fmt-story .tiles { left: 72px; top: 790px; width: 936px; grid-template-columns: repeat(3, 1fr); grid-auto-rows: 290px; gap: 24px; --ic: 112px; }
+  .fmt-story .tile { padding: 30px; }
+  .fmt-story .tile .name { font-size: 34px; }
+  .fmt-story .tile.prep .name { font-size: 38px; }
+  .fmt-story .cta { left: 72px; top: 1450px; height: 104px; padding: 0 50px; border-radius: 52px; font-size: 40px; }
+  .fmt-story .url { left: 72px; top: 1588px; font-size: 28px; }
+  .fmt-story .fine { left: 72px; top: 1630px; font-size: 24px; }
+
+  /* ---------- LINK 1200x628 ---------- */
+  .fmt-link .badge { --bw: 150px; left: 56px; top: 44px; }
+  .fmt-link .area { left: 56px; top: 584px; font-size: 21px; text-transform: none; letter-spacing: 0.03em; }
+  .fmt-link h1 { left: 56px; top: 186px; width: 540px; font-size: 60px; }
+  .fmt-link.lang-es h1 { font-size: 52px; }
+  .fmt-link .tiles { left: 636px; top: 36px; width: 512px; height: 556px; grid-template-columns: repeat(2, 1fr); grid-template-rows: repeat(3, 1fr); gap: 16px; --ic: 64px; }
+  .fmt-link .tile { padding: 20px; }
+  .fmt-link .tile .name { font-size: 25px; }
+  .fmt-link .tile.prep .name { font-size: 26px; }
+  .fmt-link .cta { left: 56px; top: 400px; height: 64px; padding: 0 32px; border-radius: 32px; font-size: 26px; }
+  .fmt-link .url { left: 56px; top: 488px; font-size: 22px; }
+  .fmt-link .fine { left: 56px; top: 526px; font-size: 21px; }
+</style>
+</head>
+<body class="c3 fmt-{{fmt}} lang-{{lang}}">
+<div class="stage">
+  <div class="glow"></div>
+
+  <div class="badge"><img src="{{ROOT}}/assets/logo.jpg" alt=""></div>
+  <div class="area">{{area}}</div>
+
+  <h1><span class="l1">{{h1a}}</span><span class="l2">{{h1b}}</span></h1>
+
+  <div class="tiles">
+    <!-- Paint -->
+    <div class="tile">
+      <svg class="ic" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <g fill="none" stroke="#0ea5e9" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M6 44 V36 Q6 32 10 31 L17 29 L24 20 Q26 18 29 18 H42 Q45 18 47 21 L52 29 L56 31 Q59 32 59 36 V44 Z"/>
+          <path d="M27 29 L30 22 H41 L45 29 Z"/>
+        </g>
+        <g fill="#111827" stroke="#0ea5e9" stroke-width="3.5"><circle cx="19" cy="45" r="6.5"/><circle cx="47" cy="45" r="6.5"/></g>
+        <path d="M54 3 L56 8 L61 10 L56 12 L54 17 L52 12 L47 10 L52 8 Z" fill="#f59e0b"/>
+      </svg>
+      <div class="name">{{s1}}</div>
+    </div>
+    <!-- Glass -->
+    <div class="tile">
+      <svg class="ic" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M11 52 L16 13 H48 L53 52 Z" fill="none" stroke="#0ea5e9" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <g stroke="#f59e0b" stroke-width="3.5" stroke-linecap="round"><path d="M23 43 L33 22"/><path d="M34 45 L42 29"/></g>
+      </svg>
+      <div class="name">{{s2}}</div>
+    </div>
+    <!-- Wheels and calipers -->
+    <div class="tile">
+      <svg class="ic" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <g fill="none" stroke="#0ea5e9" stroke-width="3.5" stroke-linecap="round">
+          <circle cx="32" cy="32" r="22"/><circle cx="32" cy="32" r="5"/>
+          <path d="M32 27 V15 M36.8 30.5 L48.2 26.7 M34.9 36 L42 45.8 M29.1 36 L22 45.8 M27.2 30.5 L15.8 26.7"/>
+        </g>
+        <path d="M44 17 A19 19 0 0 1 51 30" fill="none" stroke="#f59e0b" stroke-width="7" stroke-linecap="round"/>
+      </svg>
+      <div class="name">{{s3}}</div>
+    </div>
+    <!-- Trim -->
+    <div class="tile">
+      <svg class="ic" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <g fill="none" stroke="#0ea5e9" stroke-width="3.5" stroke-linecap="round"><path d="M8 50 A24 24 0 0 1 56 50"/><path d="M17 50 A15 15 0 0 1 47 50"/></g>
+        <path d="M4 50 H60" stroke="#f59e0b" stroke-width="3.5" stroke-linecap="round"/>
+      </svg>
+      <div class="name">{{s4}}</div>
+    </div>
+    <!-- Interior -->
+    <div class="tile">
+      <svg class="ic" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <g fill="none" stroke="#0ea5e9" stroke-width="3.5" stroke-linecap="round"><circle cx="32" cy="32" r="22"/><path d="M10 32 H25 M39 32 H54 M32 39 V54"/></g>
+        <circle cx="32" cy="32" r="7" fill="#f59e0b"/>
+      </svg>
+      <div class="name">{{s5}}</div>
+    </div>
+    <!-- Process line -->
+    <div class="tile prep"><div class="name">{{prep}}</div></div>
+  </div>
+
+  <div class="cta">{{cta}}</div>
+  <div class="url mono-url">{{domain}} · {{phone}}</div>
+  <div class="fine">{{free}}</div>
+</div>
+</body>
+</html>

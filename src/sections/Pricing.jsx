@@ -1,10 +1,11 @@
 import { useI18n } from '../i18n'
+import { waLink } from '../lib/site'
+import { prefill } from '../lib/prefill'
 
 const PKGS = [
-  { key: 'pkg1', accent: 'var(--titanium)' },
-  { key: 'pkg2', accent: 'var(--apex-amber)', popular: true },
-  { key: 'pkg3', accent: 'var(--titanium)' },
-  { key: 'pkg4', accent: 'var(--text-light)' },
+  { key: 'pkg1', service: 'express', accent: 'var(--titanium)' },
+  { key: 'pkg2', service: 'full', accent: 'var(--apex-amber)', popular: true },
+  { key: 'pkg3', service: 'premium', accent: 'var(--titanium)' },
 ]
 
 export default function Pricing() {
@@ -12,9 +13,6 @@ export default function Pricing() {
 
   return (
     <section id="pricing" className="section section-dark" style={{ position: 'relative', overflow: 'hidden' }}>
-      {/* Removed heavy neon glows for Stealth Wealth aesthetic */}
-
-
       <div className="container" style={{ position: 'relative', zIndex: 1 }}>
         <div style={{ textAlign: 'center', marginBottom: '64px' }}>
           <h2 className="animated-fade-in" style={{ fontSize: 'clamp(28px, 4vw, 44px)', color: '#fff' }}>
@@ -27,7 +25,7 @@ export default function Pricing() {
 
         <div className="pricing-grid" style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 260px), 1fr))',
           gap: '20px', alignItems: 'stretch'
         }}>
           {PKGS.map((pkg) => (
@@ -59,7 +57,7 @@ export default function Pricing() {
                     fontSize: '14px', display: 'flex', gap: '10px',
                     color: 'var(--text-light)', fontWeight: 500
                   }}>
-                    <span style={{ color: pkg.accent, flexShrink: 0 }}>✓</span>
+                    <span aria-hidden="true" style={{ color: pkg.accent, flexShrink: 0 }}>✓</span>
                     {t(`${pkg.key}F${n}`)}
                   </li>
                 ))}
@@ -67,7 +65,9 @@ export default function Pricing() {
 
               <a href="#contact" className="btn btn-outline" style={{
                 width: '100%', borderColor: pkg.accent, color: pkg.accent
-              }}>
+              }}
+                onClick={() => prefill.set({ service: pkg.service })}
+                data-track="package_select" data-location="pricing" data-service={pkg.service}>
                 {t('pkgSelect')}
               </a>
             </div>
@@ -82,7 +82,7 @@ export default function Pricing() {
         }}>
           <p style={{ color: 'var(--text-muted)', fontSize: '15px' }}>
             {t('pkgHelp')}{' '}
-            <a href="#contact" style={{ color: 'var(--brand-blue)', fontWeight: 700 }}>{t('pkgHelpCta')}</a>
+            <a href={waLink(t('whatsappText'))} target="_blank" rel="noopener noreferrer" data-track="whatsapp_click" data-location="pricing_help" style={{ color: 'var(--brand-blue)', fontWeight: 700 }}>{t('pkgHelpCta')}</a>
           </p>
         </div>
       </div>

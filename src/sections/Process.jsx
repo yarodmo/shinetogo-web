@@ -1,4 +1,6 @@
 import { useI18n } from '../i18n'
+import { waLink } from '../lib/site'
+import Icon from '../components/Icon'
 
 const STEPS = [
   { key: 'proc1', icon: '📋', num: '01' },
@@ -12,7 +14,6 @@ export default function Process() {
 
   return (
     <section className="section section-card" style={{ position: 'relative', overflow: 'hidden' }}>
-      <div className="glow-blue" style={{ top: '50%', left: '-5%', transform: 'translateY(-50%)' }} />
       <div className="container" style={{ position: 'relative', zIndex: 1 }}>
         <h2 className="animated-fade-in" style={{
           textAlign: 'center', fontSize: 'clamp(24px, 3.5vw, 40px)',
@@ -23,7 +24,7 @@ export default function Process() {
 
         <div className="process-grid" style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 250px), 1fr))',
           gap: '24px'
         }}>
           {STEPS.map((s, i) => (
@@ -33,11 +34,11 @@ export default function Process() {
               border: '1px solid var(--border-dark)',
               position: 'relative'
             }}>
-              <span style={{
+              <span aria-hidden="true" style={{
                 position: 'absolute', top: '12px', left: '20px',
                 fontSize: '48px', fontWeight: 900, color: '#fff', opacity: 0.04
               }}>{s.num}</span>
-              <div style={{ fontSize: '40px', marginBottom: '20px' }}>{s.icon}</div>
+              <div aria-hidden="true" style={{ fontSize: '40px', marginBottom: '20px' }}>{s.icon}</div>
               <h3 style={{ fontSize: '18px', fontWeight: 800, color: '#fff', marginBottom: '12px' }}>
                 {t(`${s.key}Title`)}
               </h3>
@@ -62,12 +63,15 @@ export default function Process() {
             {t('processCtaSub')}
           </p>
           <div style={{ display: 'flex', gap: '16px', justifyContent: 'center', flexWrap: 'wrap' }}>
-            <a href="#contact" className="btn btn-primary" style={{ padding: '16px 36px' }}>
+            <a href="#contact" className="btn btn-primary" style={{ padding: '16px 36px' }}
+              data-track="cta_click" data-location="process">
               {t('heroCta1')}
             </a>
-            <a href="https://wa.me/19414224405" target="_blank" rel="noopener noreferrer"
-              className="btn btn-green" style={{ padding: '16px 36px' }}>
-              💬 WhatsApp
+            <a href={waLink(t('whatsappText'))} target="_blank" rel="noopener noreferrer"
+              className="btn btn-green btn-icon" style={{ padding: '16px 24px' }}
+              aria-label={t('heroCta2')} title={t('heroCta2')}
+              data-track="whatsapp_click" data-location="process">
+              <Icon name="whatsapp" size={24} />
             </a>
           </div>
         </div>

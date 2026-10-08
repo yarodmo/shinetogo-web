@@ -1,0 +1,73 @@
+/* Shared base for every creative. Tokens mirror src/index.css (dark navy, brand blue, gold, amber, titanium). */
+:root {
+  --bg-dark: #0a0e1a;
+  --bg-card: #111827;
+  --bg-card-hover: #1a2235;
+  --bg-light: #f8fafc;
+  --bg-soft: #f1f5f9;
+  --text-white: #ffffff;
+  --text-light: #e2e8f0;
+  --text-muted: #94a3b8;
+  --text-dark: #0f172a;
+  --text-body: #475569;
+  --brand-blue: #0ea5e9;
+  --brand-blue-deep: #0077ff;
+  --brand-gold: #f59e0b;
+  --apex-amber: #d4af37;
+  --titanium: #8e95a5;
+  --font-heading: 'Outfit', system-ui, sans-serif;
+  --font-main: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { width: 100%; height: 100%; overflow: hidden; background: var(--bg-dark); }
+body {
+  font-family: var(--font-main);
+  color: var(--text-light);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+.stage { position: relative; width: 100vw; height: 100vh; overflow: hidden; }
+.abs { position: absolute; }
+
+h1 {
+  font-family: var(--font-heading);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.02;
+}
+
+/* Logo, never recolored or stretched: shown inside a white rounded badge.
+   The JPG has a white margin, so it is cropped ~4% per side (no distortion). */
+.badge {
+  position: absolute;
+  width: var(--bw);
+  height: calc(var(--bw) / 1.1);
+  border-radius: calc(var(--bw) * 0.14);
+  background: #ffffff;
+  overflow: hidden;
+  box-shadow: 0 10px 34px rgba(0, 0, 0, 0.28), 0 0 0 1px rgba(15, 23, 42, 0.06);
+}
+.badge img {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 108%;
+  height: auto;
+  transform: translate(-50%, -49.7%);
+  mix-blend-mode: multiply;
+}
+
+.cta {
+  position: absolute;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--text-dark);
+  background: var(--brand-gold);
+  white-space: nowrap;
+}
+.mono-url { font-family: var(--font-main); font-weight: 600; letter-spacing: 0.01em; }

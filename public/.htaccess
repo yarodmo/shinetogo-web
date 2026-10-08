@@ -1,0 +1,45 @@
+# Se despliega con el sitio. rsync --delete borra cualquier .htaccess que solo exista en el servidor,
+# por eso vive aquí. Cada bloque va envuelto en <IfModule> para que un módulo ausente nunca tire el sitio.
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  # Validación de certificados (AutoSSL / ACME): nunca redirigir ni reescribir.
+  RewriteRule ^\.well-known/ - [L]
+
+  # Un solo host canónico: https + sin www. (la query -gclid, utm- se conserva en la redirección)
+  RewriteCond %{HTTP_HOST} ^www\. [NC]
+  RewriteRule ^ https://shinetogomobiledetailing.com%{REQUEST_URI} [R=301,L]
+
+  # Detrás de un proxy/CDN que termina TLS, %{HTTPS} siempre dice "off": también se mira X-Forwarded-Proto
+  # para no entrar en un bucle de redirecciones.
+  RewriteCond %{HTTPS} !=on
+  RewriteCond %{HTTP:X-Forwarded-Proto} !https [NC]
+  RewriteRule ^ https://shinetogomobiledetailing.com%{REQUEST_URI} [R=301,L]
+</IfModule>
+
+<IfModule mod_headers.c>
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>
+
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css text/javascript application/javascript application/x-javascript application/json image/svg+xml text/plain application/xml
+</IfModule>
+
+<IfModule mod_expires.c>
+  ExpiresActive On
+  # Imágenes y video no llevan hash en el nombre: si se reemplazan, deben refrescarse pronto.
+  ExpiresByType image/webp "access plus 30 days"
+  ExpiresByType image/png "access plus 30 days"
+  ExpiresByType image/jpeg "access plus 30 days"
+  ExpiresByType video/mp4 "access plus 30 days"
+  # CSS y JS de Vite llevan hash en el nombre: pueden cachearse un año.
+  ExpiresByType text/css "access plus 1 year"
+  ExpiresByType application/javascript "access plus 1 year"
+  ExpiresByType text/javascript "access plus 1 year"
+  ExpiresByType application/x-javascript "access plus 1 year"
+  ExpiresByType text/html "access plus 0 seconds"
+  ExpiresByType application/xml "access plus 1 day"
+  ExpiresByType text/plain "access plus 1 day"
+</IfModule>
