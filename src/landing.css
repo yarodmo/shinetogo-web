@@ -102,9 +102,7 @@ p + p { margin-top: 12px; }
 .photo figcaption { margin-top: 8px; font-size: 13px; color: var(--muted); }
 .band .photo { margin-bottom: 28px; }
 .band .photo img { max-height: 420px; object-fit: cover; }
-.answer--lead { margin: 0 auto; max-width: 62ch; font-size: 19px; color: var(--fg); text-align: center; }
-.band:has(.answer--lead) { padding-block: 44px; }
-.answer { max-width: 62ch; font-size: 18px; color: var(--fg); margin: 20px 0 28px; }
+.answer { max-width: 62ch; font-size: 17px; color: var(--muted); margin: 12px 0 24px; }
 .cta-row { display: flex; gap: 12px; flex-wrap: wrap; }
 .pills { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 24px; }
 .pills li { border: 1px solid var(--line); border-radius: 99px; padding: 6px 14px; font-size: 13px; color: var(--muted); }

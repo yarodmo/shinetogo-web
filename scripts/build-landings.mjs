@@ -322,6 +322,7 @@ function tintBody(lang) {
   <section class="band" aria-labelledby="win-h">
     <div class="wrap">
       <h2 id="win-h">${esc(c.windows.title)}</h2>
+      <p class="answer">${esc(c.answer)}</p>
       <div class="tiles">${c.windows.items.map((w) => `<article class="tile">${ico(w.i)}<h3>${esc(w.h)}</h3><p>${esc(w.p)}</p></article>`).join('')}</div>
     </div>
   </section>
@@ -350,7 +351,7 @@ function ceramicBody(lang) {
   <section class="band" id="surfaces" aria-labelledby="ch-h">
     <div class="wrap">
       <h2 id="ch-h">${esc(c.choose.title)}</h2>
-      <p class="lead">${esc(c.choose.lead)}</p>
+      <p class="answer">${esc(c.answer)}</p>
       <div class="tiles tiles-5">${c.choose.rows.map((r) => `<article class="tile" id="${r.id}">${ico(r.i)}<h3>${esc(r.name)}</h3><p>${esc(r.does)}</p></article>`).join('')}</div>
     </div>
   </section>
@@ -438,7 +439,6 @@ function landing(id, lang) {
       <ul class="hero-checks">${c.pills.map((x) => `<li>${esc(x)}</li>`).join('')}</ul>
     </div>
   </section>
-  <section class="band"><div class="wrap narrow"><p class="answer answer--lead">${esc(c.answer)}</p></div></section>
   ${id === 'tint' ? tintBody(lang) : ceramicBody(lang)}
   <section class="band" aria-labelledby="how-h">
     <div class="wrap two">
