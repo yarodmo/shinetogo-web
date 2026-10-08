@@ -42,7 +42,7 @@ export const tint = {
 
     film: {
       title: `Carbon tint or ceramic tint?`,
-      lead: `Short version: carbon tint for the everyday car, ceramic tint for the car that sits in the sun all day. The table says why.`,
+      lead: `Short version: carbon tint for the everyday car, ceramic tint for the car that sits in the sun all day.`,
       head: [``, `Carbon tint`, `Ceramic tint`],
       rows: [
         [`Heat`, `Takes the edge off`, `Usually turns away more. Exact numbers are on each tint’s spec sheet`],
@@ -111,7 +111,7 @@ export const tint = {
 
     film: {
       title: `¿Polarizado de carbono o cerámico?`,
-      lead: `Si no quieres leer la tabla: polarizado de carbono para el carro de todos los días, polarizado cerámico para el que se pasa el día al sol.`,
+      lead: `En corto: polarizado de carbono para el carro de todos los días, polarizado cerámico para el que se pasa el día al sol.`,
       head: [``, `Polarizado de carbono`, `Polarizado cerámico`],
       rows: [
         [`Calor`, `Le baja el golpe`, `Normalmente deja pasar menos. Los números exactos están en la ficha de cada modelo`],

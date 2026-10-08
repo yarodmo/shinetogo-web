@@ -179,6 +179,14 @@ p + p { margin-top: 12px; }
 /* ─── Plantillas por servicio ─── */
 .cta-text { margin-top: 14px; font-size: 14px; }
 .tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-top: 18px; }
+.compare { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin: 18px 0 14px; }
+@media (max-width: 699px) { .compare { grid-template-columns: 1fr; } }
+details.more { border-bottom: 1px solid var(--line); padding: 16px 0; }
+details.more summary { cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; gap: 16px; font-weight: 700; color: var(--fg-strong); }
+details.more summary::-webkit-details-marker { display: none; }
+details.more summary::after { content: '+'; color: var(--link); font-size: 22px; line-height: 1; transition: transform .2s; }
+details.more[open] summary::after { transform: rotate(45deg); }
+details.more p { margin-top: 12px; color: var(--muted); font-size: 15px; }
 .tiles-5 { grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); }
 @media (min-width: 1100px) { .tiles-5 { grid-template-columns: repeat(5, 1fr); } }
 @media (min-width: 700px) and (max-width: 1099px) { .tiles-5 { grid-template-columns: repeat(3, 1fr); } }

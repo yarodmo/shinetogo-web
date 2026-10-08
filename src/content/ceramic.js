@@ -70,7 +70,6 @@ export const ceramic = {
 
     faq: [
       { q: `Is a ceramic coating scratch-proof?`, a: `No. It’s a thin, slick layer on top of the clear coat. Scratches, swirls and rock chips can still happen. What changes is how easily dirt, bird droppings and water spots come off.` },
-      { q: `Which parts of the car can you coat?`, a: `Paint, glass, wheels and calipers, exterior trim and plastics, and the interior. Tell us which ones you want and send a photo of each.` },
       { q: `Does the paint get polished first?`, a: `Almost always. A coating seals in what’s under it, so the paint is washed, decontaminated and polished first. How far we go depends on the paint.` },
       { q: `How long does a coating last?`, a: `We don’t put a number on it here. It depends on the product, how the paint was prepared and how the car is washed. The warranty belongs to the product, so ask for its exact terms with your quote.` },
       { q: `Salt, lovebugs, sprinkler water: does the coating stop them?`, a: `No coating stops them, and we don’t promise anything about salt or sprinkler water. With lovebugs, a slicker surface helps when you wash; still, try not to leave them on the paint for days.` },
@@ -148,7 +147,6 @@ export const ceramic = {
 
     faq: [
       { q: `¿El recubrimiento cerámico evita los rayones?`, a: `No. Es una capa fina y lisa encima del barniz. Los rayones, los remolinos y las piedritas de la carretera pueden seguir pasando. Lo que cambia es lo fácil que se quitan la tierra, lo que dejan los pájaros y las manchas de agua.` },
-      { q: `¿Qué partes del carro se pueden cubrir?`, a: `Pintura, vidrios, rines y calipers, molduras y plásticos de afuera, e interior. Dinos cuáles quieres y manda una foto de cada una.` },
       { q: `¿Hay que pulir la pintura antes?`, a: `Casi siempre. El recubrimiento sella lo que tenga debajo, así que primero se lava, se descontamina y se pule. Hasta dónde llegamos depende de la pintura.` },
       { q: `¿Cuánto dura?`, a: `No ponemos una cifra aquí. Depende del producto, de cómo se preparó la pintura y de cómo lavas el carro. La garantía es la del producto, así que pide sus términos exactos con tu cotización.` },
       { q: `Sal, lovebugs, agua de aspersor: ¿el recubrimiento los frena?`, a: `Ningún recubrimiento los frena, y no prometemos nada sobre la sal ni el agua de aspersor. Con los lovebugs, una superficie más lisa ayuda al lavar; aun así, intenta no dejarlos varios días sobre la pintura.` },

@@ -193,6 +193,8 @@ const ICON_PATHS = {
   trim: '<path d="M3 17h18M5 17l1.5-6h11L19 17"/><circle cx="8" cy="17.5" r="1.5"/><circle cx="16" cy="17.5" r="1.5"/>',
   interior: '<path d="M7 4h5l1 8h5a2 2 0 0 1 2 2v4H6Z"/><path d="M6 18v2M18 18v2"/>',
   prep: '<path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8Z"/>',
+  carbon: '<rect x="4" y="4" width="16" height="16" rx="3"/><path d="M8 16 16 8M8 12l4-4M12 16l4-4"/>',
+  ceramic: '<path d="M12 3l8 6-8 12L4 9Z"/><path d="M4 9h16M9 9l3 12M15 9l-3 12"/>',
   shield: '<path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6Z"/>',
 }
 const ico = (name) => `<span class="ico">${svgIcon(ICON_PATHS[name], 24)}</span>`
@@ -330,18 +332,11 @@ function tintBody(lang) {
     </div>
   </section>
   <section class="band" aria-labelledby="film-h">
-    <div class="wrap two">
-      <div>
-        <h2 id="film-h">${esc(c.film.title)}</h2>
-        <p class="lead">${esc(c.film.lead)}</p>
-        <div class="tbl-wrap" role="region" tabindex="0" aria-label="${esc(TBL_LABEL[lang])}"><table class="tbl">
-          <caption class="sr-only">${esc(c.film.title)}</caption>
-          <thead><tr>${c.film.head.map((h) => `<th scope="col">${h ? esc(h) : `<span class="sr-only">${esc(c.film.title)}</span>`}</th>`).join('')}</tr></thead>
-          <tbody>${c.film.rows.map(([label, a, b]) => `<tr><th scope="row">${esc(label)}</th><td>${esc(a)}</td><td>${esc(b)}</td></tr>`).join('')}</tbody>
-        </table></div>
-        <p class="muted small">${esc(c.film.note)}</p>
-      </div>
-      <div class="visuals">${figure('film-layers', lang, c.film.title)}</div>
+    <div class="wrap">
+      <h2 id="film-h">${esc(c.film.title)}</h2>
+      <p class="lead">${esc(c.film.lead)}</p>
+      <div class="compare">${[1, 2].map((col) => `<article class="tile">${ico(col === 1 ? 'carbon' : 'ceramic')}<h3>${esc(c.film.head[col])}</h3><ul class="plain">${c.film.rows.map((r) => `<li><strong>${esc(r[0])}</strong> ${esc(r[col])}</li>`).join('')}</ul></article>`).join('')}</div>
+      <p class="muted small">${esc(c.film.note)}</p>
     </div>
   </section>`
 }
@@ -373,16 +368,18 @@ function ceramicBody(lang) {
   ${localItems.length ? `<section class="band alt" aria-labelledby="loc-h">
     <div class="wrap narrow">
       <h2 id="loc-h">${esc(c.local.title)}</h2>
-      <ul class="plain">${localItems.map((it) => `<li><strong>${esc(it.h)}</strong> ${esc(it.p)}${sourceLink(it.source)}</li>`).join('')}</ul>
+      ${localItems.map((it) => `<details class="more"><summary>${esc(it.h.replace(/\.$/, ''))}</summary><p>${esc(it.p)}${sourceLink(it.source)}</p></details>`).join('\n      ')}
     </div>
   </section>` : ''}`
 }
 
 // Mismo ritmo que la home: hero claro, y después las secciones alternan oscuro / claro.
 function rhythm(html) {
-  // El hero es oscuro: las secciones empiezan en claro y alternan; las preguntas son oscuras, como en la home.
+  // El hero es oscuro: las secciones empiezan en claro y alternan; las preguntas son siempre oscuras, como en la home.
   let i = 0
-  return html.replace(/<section class="band(?: alt)?"/g, () => `<section class="band ${i++ % 2 === 0 ? 'tone-light' : 'tone-dark'}"`)
+  return html.replace(/<section class="band(?: alt)?"( aria-labelledby="faq-h")?/g, (_m, faq) => faq
+    ? `<section class="band tone-dark"${faq}`
+    : `<section class="band ${i++ % 2 === 0 ? 'tone-light' : 'tone-dark'}"`)
 }
 
 function landing(id, lang) {
