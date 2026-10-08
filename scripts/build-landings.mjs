@@ -178,6 +178,24 @@ const IG_HANDLE = `@${new URL(INSTAGRAM_URL).pathname.replace(/\//g, '')}`
 const svgIcon = (d, size = 18) => `<svg viewBox="0 0 24 24" width="${size}" height="${size}" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">${d}</svg>`
 const ICON_WA = svgIcon('<path d="M3.5 20.5l1.3-4A8.5 8.5 0 1 1 8 19.6Z"/><path d="M9 8.6c0 3.6 2.8 6.4 6.4 6.4l1.3-1.6-2.2-1.1-1 1c-1.2-.5-2.1-1.4-2.6-2.6l1-1-1.1-2.2Z"/>')
 const ICON_PHONE = svgIcon('<path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2Z"/>')
+// Iconos de línea de las tarjetas de las páginas de detalle (mismo trazo que los de la home).
+const ICON_PATHS = {
+  side: '<rect x="3" y="5" width="18" height="14" rx="2"/><path d="M12 5v14"/>',
+  back: '<path d="M5 18 4 9a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2l-1 9Z"/><path d="M8 12h8"/>',
+  strip: '<path d="M3 17c2-8 16-8 18 0Z"/><path d="M5 11c4-2 10-2 14 0"/>',
+  roof: '<rect x="3" y="4" width="18" height="16" rx="3"/><circle cx="12" cy="12" r="3"/>',
+  heat: '<path d="M10 14V5a2 2 0 1 1 4 0v9a4 4 0 1 1-4 0Z"/>',
+  sun: '<circle cx="12" cy="12" r="4"/><path d="M12 3v2M12 19v2M3 12h2M19 12h2M5.6 5.6 7 7M17 17l1.4 1.4M5.6 18.4 7 17M17 7l1.4-1.4"/>',
+  lock: '<rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/>',
+  paint: '<path d="M12 3s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11Z"/>',
+  glass: '<rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20l1-2M12 20l1-2M16 20l1-2"/>',
+  wheels: '<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="2.5"/><path d="M12 3v6.5M12 14.5V21M3 12h6.5M14.5 12H21"/>',
+  trim: '<path d="M3 17h18M5 17l1.5-6h11L19 17"/><circle cx="8" cy="17.5" r="1.5"/><circle cx="16" cy="17.5" r="1.5"/>',
+  interior: '<path d="M7 4h5l1 8h5a2 2 0 0 1 2 2v4H6Z"/><path d="M6 18v2M18 18v2"/>',
+  prep: '<path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8Z"/>',
+  shield: '<path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6Z"/>',
+}
+const ico = (name) => `<span class="ico">${svgIcon(ICON_PATHS[name], 24)}</span>`
 const LOGO_SRCSET = '/img/brand/logo-120.webp 1x, /img/brand/logo-240.webp 2x'
 
 function header(lang, key) {
@@ -302,16 +320,13 @@ function tintBody(lang) {
   <section class="band" aria-labelledby="win-h">
     <div class="wrap">
       <h2 id="win-h">${esc(c.windows.title)}</h2>
-      <div class="tiles">${c.windows.items.map((w) => `<article class="tile"><h3>${esc(w.h)}</h3><p>${esc(w.p)}</p></article>`).join('')}</div>
+      <div class="tiles">${c.windows.items.map((w) => `<article class="tile">${ico(w.i)}<h3>${esc(w.h)}</h3><p>${esc(w.p)}</p></article>`).join('')}</div>
     </div>
   </section>
   <section class="band alt" aria-labelledby="why-h">
-    <div class="wrap two">
-      <div>
-        <h2 id="why-h">${esc(c.why.title)}</h2>
-        <ul class="plain">${c.why.items.map((w) => `<li><strong>${esc(w.h)}</strong> ${esc(w.p)}</li>`).join('')}</ul>
-      </div>
-      <div class="visuals">${figure('heat-path', lang, c.why.title)}</div>
+    <div class="wrap">
+      <h2 id="why-h">${esc(c.why.title)}</h2>
+      <div class="tiles">${c.why.items.map((w) => `<article class="tile">${ico(w.i)}<h3>${esc(w.h)}</h3><p>${esc(w.p)}</p></article>`).join('')}</div>
     </div>
   </section>
   <section class="band" aria-labelledby="film-h">
@@ -338,35 +353,21 @@ function ceramicBody(lang) {
   const localItems = c.local.items.filter((it) => !it.until || today <= it.until)
   return `
   <section class="band" id="surfaces" aria-labelledby="ch-h">
-    <div class="wrap two">
-      <div>
-        <h2 id="ch-h">${esc(c.choose.title)}</h2>
-        <p class="lead">${esc(c.choose.lead)}</p>
-        <div class="tbl-wrap" role="region" tabindex="0" aria-label="${esc(TBL_LABEL[lang])}"><table class="tbl">
-          <thead><tr>${c.choose.head.map((h) => `<th scope="col">${esc(h)}</th>`).join('')}</tr></thead>
-          <tbody>${c.choose.rows.map((r) => `<tr><th scope="row">${esc(r.name)}</th><td>${esc(r.does)}</td><td>${esc(r.send)}</td></tr>`).join('')}</tbody>
-        </table></div>
-      </div>
-      <div class="visuals">${figure('ceramic-layers', lang, c.choose.title)}</div>
+    <div class="wrap">
+      <h2 id="ch-h">${esc(c.choose.title)}</h2>
+      <p class="lead">${esc(c.choose.lead)}</p>
+      <div class="tiles tiles-5">${c.choose.rows.map((r) => `<article class="tile" id="${r.id}">${ico(r.i)}<h3>${esc(r.name)}</h3><p>${esc(r.does)}</p></article>`).join('')}</div>
     </div>
   </section>
   <section class="band alt" aria-label="${esc(c.choose.title)}">
     <div class="wrap">
       ${photo('/img/protection/ceramic-beading', [800, 1400], 1400, 764, i18nText(lang, 'photoBeadingAlt'), { caption: i18nText(lang, 'photoBeadingCaption') })}
-      <div class="modules">${c.modules.map((m) => `<article class="module" id="${m.id}"><h3>${esc(m.h)}</h3><p>${esc(m.p)}${sourceLink(m.source)}</p></article>`).join('')}</div>
     </div>
   </section>
   <section class="band" aria-labelledby="prep-h">
     <div class="wrap two">
-      <div>
-        ${photo('/img/protection/ceramic-sponge', [640, 960], 960, 640, i18nText(lang, 'photoSpongeAlt'))}
-        <h2 id="prep-h">${esc(c.prep.title)}</h2>
-        <p>${esc(c.prep.p)}</p>
-      </div>
-      <div>
-        <h2>${esc(c.doesnt.title)}</h2>
-        <p>${esc(c.doesnt.p)}</p>
-      </div>
+      <article class="tile">${ico('prep')}<h2 id="prep-h" class="h3">${esc(c.prep.title)}</h2><p>${esc(c.prep.p)}</p></article>
+      <article class="tile">${ico('shield')}<h2 class="h3">${esc(c.doesnt.title)}</h2><p>${esc(c.doesnt.p)}</p></article>
     </div>
   </section>
   ${localItems.length ? `<section class="band alt" aria-labelledby="loc-h">

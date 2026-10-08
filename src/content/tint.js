@@ -24,19 +24,19 @@ export const tint = {
     windows: {
       title: `Which windows we tint`,
       items: [
-        { h: `Side windows`, p: `Front and rear. Florida lets the rear ones go darker than the front ones.` },
-        { h: `Back window`, p: `Done the same way as the sides. If your car already has dark factory glass back there, there may be little room to add tint, and we tell you before we start.` },
-        { h: `Windshield top strip`, p: `On the windshield, Florida only allows the transparent strip above the AS-1 line printed on the glass. The rest stays as it is.` },
-        { h: `Sunroof`, p: `Send us a photo of it with the rest of the car and we’ll tell you if it can be tinted.` },
+        { i: `side`, h: `Side windows`, p: `Front and rear. The rear ones can go darker.` },
+        { i: `back`, h: `Back window`, p: `Same as the sides. If it’s already dark from the factory, we tell you before we start.` },
+        { i: `strip`, h: `Windshield top strip`, p: `Only the transparent strip above the AS-1 line. The rest stays as it is.` },
+        { i: `roof`, h: `Sunroof`, p: `Send a photo and we tell you if it can be tinted.` },
       ],
     },
 
     why: {
       title: `Why people tint their cars here`,
       items: [
-        { h: `The car is an oven when you get back.`, p: `Heat-rejecting tint helps keep a car from getting so hot after an afternoon in a Florida parking lot, and it reduces glare. How much depends on the tint; the maker’s spec sheet has the numbers.` },
-        { h: `The sun goes after the dash and the seats.`, p: `If the car sleeps outside, the dash and the seats are the first things to fade. Tint that filters UV helps slow that down; the maker’s spec sheet says how much.` },
-        { h: `A little privacy.`, p: `Behind the driver the law lets you go darker than up front, and that is where most of the privacy comes from.` },
+        { i: `heat`, h: `A cooler cabin`, p: `Heat-rejecting tint helps keep the car from heating up so much and reduces glare. The maker’s spec sheet has the numbers.` },
+        { i: `sun`, h: `Kinder to the dash and seats`, p: `Tint that filters UV helps slow fading. The spec sheet says how much.` },
+        { i: `lock`, h: `A little privacy`, p: `Behind the driver the law lets you go darker than up front.` },
       ],
     },
 
@@ -65,7 +65,6 @@ export const tint = {
       { q: `Carbon tint or ceramic tint: which one should I get?`, a: `Carbon tint is the everyday choice and looks a little matte. Ceramic tint usually turns away more heat and looks clearer from the inside, which matters most on a car that sits in the sun. Send photos, tell us how you use the car, and we’ll point you to one.` },
       { q: `How dark can I go?`, a: `It depends on the window: the rear ones can go darker than the front ones. We tell you the limit for each one before we cut. If you drive an SUV or a truck, tell us which, because the rule changes with how the vehicle is classified.` },
       { q: `Can you tint the whole windshield?`, a: `Not the whole thing. Florida only allows a transparent strip across the top, above the AS-1 line printed on the glass, and that strip we can do.` },
-      { q: `What about the sunroof and the back window?`, a: `The back window, yes. For the sunroof, send us a photo and we’ll tell you.` },
       { q: `Is there a warranty?`, a: `Tint makers write their own warranties, and the terms differ from brand to brand. Before you decide, read the terms for the exact tint we quote you.` },
       { q: `How much does it cost?`, a: `There isn’t one price. It depends on how many windows, the tint, and whether old tint has to come off. Send photos and you’ll get a range; the final price is set once we see the car.` },
     ],
@@ -94,19 +93,19 @@ export const tint = {
     windows: {
       title: `Qué vidrios polarizamos`,
       items: [
-        { h: `Ventanas de los lados`, p: `Las de adelante y las de atrás. En Florida las de atrás pueden ir más oscuras que las de adelante.` },
-        { h: `Vidrio trasero`, p: `Se hace igual que los lados. Si tu carro ya trae ese vidrio oscuro de fábrica, puede que quede poco margen para agregar más; te lo decimos antes de empezar.` },
-        { h: `Franja del parabrisas`, p: `Del parabrisas, Florida solo permite la franja transparente de arriba, sobre la línea AS-1 que trae el vidrio. El resto se queda como está.` },
-        { h: `Sunroof (quemacocos)`, p: `Mándanos una foto junto con las del resto del carro y te decimos si se le puede poner.` },
+        { i: `side`, h: `Ventanas de los lados`, p: `Adelante y atrás. Las de atrás pueden ir más oscuras.` },
+        { i: `back`, h: `Vidrio trasero`, p: `Igual que los lados. Si ya viene oscuro de fábrica, te lo decimos antes de empezar.` },
+        { i: `strip`, h: `Franja del parabrisas`, p: `Solo la franja transparente sobre la línea AS-1. El resto se queda como está.` },
+        { i: `roof`, h: `Sunroof (quemacocos)`, p: `Mándanos una foto y te decimos si se le puede poner.` },
       ],
     },
 
     why: {
       title: `Por qué la gente polariza aquí`,
       items: [
-        { h: `Vuelves al carro y es un horno.`, p: `Un polarizado hecho para el calor ayuda a que el carro no se caliente tanto después de una tarde estacionado al sol en Florida, y reduce el resplandor. Cuánto depende del polarizado; la ficha del fabricante trae los números.` },
-        { h: `El sol se ensaña con el tablero y los asientos.`, p: `Si el carro duerme afuera, el tablero y los asientos son lo primero que se descolora. Un polarizado que filtra rayos UV ayuda a frenarlo; la ficha del fabricante dice cuánto.` },
-        { h: `Un poco de privacidad.`, p: `Atrás la ley deja ir más oscuro que adelante, y de ahí sale casi toda la privacidad.` },
+        { i: `heat`, h: `Un carro más fresco por dentro`, p: `Un polarizado hecho para el calor ayuda a que el carro no se caliente tanto y reduce el resplandor. La ficha del fabricante trae los números.` },
+        { i: `sun`, h: `Más amable con el tablero y los asientos`, p: `Un polarizado que filtra rayos UV ayuda a frenar el descoloramiento. La ficha dice cuánto.` },
+        { i: `lock`, h: `Un poco de privacidad`, p: `Atrás la ley deja ir más oscuro que adelante.` },
       ],
     },
 

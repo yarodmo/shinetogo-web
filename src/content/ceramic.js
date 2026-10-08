@@ -22,33 +22,24 @@ export const ceramic = {
 
     choose: {
       title: `What do you want covered?`,
-      lead: `A coating isn’t only for the paint. Pick the parts you want, and send one photo of each.`,
-      head: [`Surface`, `What it does`, `What to send`],
+      lead: `Pick the parts you want and send one photo of each.`,
       rows: [
-        { id: `paint`, name: `Paint`, does: `Helps dirt, bird droppings and water spots come off more easily when you wash`, send: `Hood, roof and sides in daylight, plus the color` },
-        { id: `glass`, name: `Glass`, does: `Helps rain bead up and run off`, send: `A photo of the windshield from outside` },
-        { id: `wheels`, name: `Wheels and calipers`, does: `A coating for wheels and calipers, put on after cleaning and decontamination`, send: `A photo of the wheels and the calipers` },
-        { id: `trim`, name: `Exterior trim and plastics`, does: `Black plastic and rubber trim that is still dark. A coating can’t bring back color that has already faded.`, send: `A photo of the trim` },
-        { id: `interior`, name: `Interior`, does: `Seats, leather, fabric and plastics. We confirm the product for each material before we start.`, send: `A photo of the seats and the dash` },
+        { id: `paint`, i: `paint`, name: `Paint`, does: `Helps dirt, bird droppings and water spots come off more easily when you wash.` },
+        { id: `glass`, i: `glass`, name: `Glass`, does: `Helps rain bead up and run off. It doesn’t replace your wipers.` },
+        { id: `wheels`, i: `wheels`, name: `Wheels and calipers`, does: `Helps brake dust stick less and come off more easily when you wash. Tell us if they’re painted, polished or chrome.` },
+        { id: `trim`, i: `trim`, name: `Exterior trim`, does: `For black plastic and rubber that is still dark. A coating can’t bring back color that has already faded.` },
+        { id: `interior`, i: `interior`, name: `Interior`, does: `Seats, leather, fabric and plastics. We confirm the product for each material before we start.` },
       ],
     },
 
-    modules: [
-      { id: `paint`, h: `Paint`, p: `The coating goes on the clear coat after a wash, decontamination and a polish to whatever level the paint needs. It helps dirt, bird droppings and water spots come off more easily when you wash.` },
-      { id: `glass`, h: `Glass`, p: `A coating for the windshield and windows that helps rain bead up and run off. It doesn’t replace your wipers. Rainy season here runs from about mid-to-late May to mid-October.`, source: { label: `National Weather Service`, url: `https://www.weather.gov/tbw/rainyseason` } },
-      { id: `wheels`, h: `Wheels and calipers`, p: `Wheels take the brake dust and the road grime. A coating made for wheels and calipers helps brake dust stick less and come off more easily when you wash. Tell us if the wheels are painted, polished or chrome.` },
-      { id: `trim`, h: `Exterior trim and plastics`, p: `The sun turns black plastic and rubber gray. This coating goes on trim that is still dark; it can’t bring back color that has already faded. If yours has faded, send a photo and we tell you what to expect before we start.` },
-      { id: `interior`, h: `Interior`, p: `The interior takes its share of the sun and the beach. Tell us what you want covered (seats, leather, fabric, plastics) and send a photo; we tell you which product fits each one.` },
-    ],
-
     prep: {
       title: `The prep comes first`,
-      p: `A coating seals in whatever is under it, scratches included. That is why the paint is washed, decontaminated and, almost always, polished to the level it needs before anything goes on, and why the other surfaces get cleaned first too.`,
+      p: `A coating seals in whatever is under it, scratches included. So the paint is washed, decontaminated and, almost always, polished first.`,
     },
 
     doesnt: {
       title: `What a coating doesn’t do`,
-      p: `A coating isn’t armor. Scratches and rock chips can still happen; paint protection film is a different product for that. The car still needs washing. How long a coating lasts depends on the product, the prep and how you wash, so we don’t put a number on it.`,
+      p: `It isn’t armor: scratches and rock chips can still happen, and the car still needs washing. We don’t put a number on how long it lasts; that depends on the product, the prep and how you wash.`,
     },
 
     local: {
@@ -56,12 +47,12 @@ export const ceramic = {
       items: [
         {
           h: `Lovebugs.`,
-          p: `They fly for about four weeks in April–May and again in August–September. Their remains are slightly acidic, and if they stay on the paint for several days they can etch it, so wash them off as soon as you can. A coating gives them a slicker surface, which helps that wash; it does not stop them.`,
+          p: `They fly about four weeks in April–May and again in August–September. Their remains are slightly acidic and can etch the paint if left for several days, so wash them off soon. A coating gives them a slicker surface, which helps the wash; it doesn’t stop them.`,
           source: { label: `UF/IFAS`, url: `https://ask.ifas.ufl.edu/publication/IN204` },
         },
         {
-          h: `If you wash it yourself at home.`,
-          p: `Under the Southwest Florida Water Management District’s water-shortage order (news release of September 22, 2026), washing a car at home (non-commercial) is allowed only on your lawn watering day and with a hose that has a shutoff nozzle. The order runs through March 31, 2027, and covers Manatee, Sarasota, Hillsborough and Pinellas counties, among others. Rules can change; check the District’s page for the current ones.`,
+          h: `If you wash it yourself.`,
+          p: `Under the Southwest Florida Water Management District’s water-shortage order (news release of September 22, 2026, in effect through March 31, 2027), washing a car at home (non-commercial) is allowed only on your lawn watering day, with a hose that has a shutoff nozzle. It covers Manatee, Sarasota, Hillsborough and Pinellas counties, among others. Rules can change; check the District’s page.`,
           source: { label: `SWFWMD`, url: `https://www.swfwmd.state.fl.us/the-newsroom/2026/district-extends-modified-phase-iii-water-shortage-0` },
           until: `2027-03-31`,
         },
@@ -109,33 +100,24 @@ export const ceramic = {
 
     choose: {
       title: `¿Qué quieres cubrir?`,
-      lead: `El recubrimiento no es solo para la pintura. Escoge las partes que quieres y manda una foto de cada una.`,
-      head: [`Superficie`, `Para qué sirve`, `Qué mandar`],
+      lead: `Escoge las partes que quieres y manda una foto de cada una.`,
       rows: [
-        { id: `paint`, name: `Pintura`, does: `Ayuda a que la tierra, lo que dejan los pájaros y las manchas de agua se quiten más fácil al lavar`, send: `Capó, techo y laterales con luz de día, y el color` },
-        { id: `glass`, name: `Vidrios`, does: `Ayuda a que el agua de lluvia forme gotas y corra`, send: `Foto del parabrisas por fuera` },
-        { id: `wheels`, name: `Rines (aros) y calipers`, does: `Un recubrimiento para rines y calipers, aplicado después de limpiarlos y descontaminarlos`, send: `Foto de los rines y de los calipers` },
-        { id: `trim`, name: `Molduras y plásticos de afuera`, does: `Plástico y goma negros que todavía están oscuros. Un recubrimiento no devuelve el color que ya se perdió.`, send: `Foto de las molduras` },
-        { id: `interior`, name: `Interior`, does: `Asientos, cuero, tela y plásticos. Antes de empezar confirmamos el producto para cada material.`, send: `Foto de los asientos y del tablero` },
+        { id: `paint`, i: `paint`, name: `Pintura`, does: `Ayuda a que la tierra, lo que dejan los pájaros y las manchas de agua se quiten más fácil al lavar.` },
+        { id: `glass`, i: `glass`, name: `Vidrios`, does: `Ayuda a que el agua de lluvia forme gotas y corra. No sustituye los limpiaparabrisas.` },
+        { id: `wheels`, i: `wheels`, name: `Rines (aros) y calipers`, does: `Ayuda a que el polvo de los frenos se pegue menos y salga más fácil al lavar. Dinos si son pintados, pulidos o cromados.` },
+        { id: `trim`, i: `trim`, name: `Molduras de afuera`, does: `Para plástico y goma negros que todavía están oscuros. Un recubrimiento no devuelve el color que ya se perdió.` },
+        { id: `interior`, i: `interior`, name: `Interior`, does: `Asientos, cuero, tela y plásticos. Antes de empezar confirmamos el producto para cada material.` },
       ],
     },
 
-    modules: [
-      { id: `pintura`, h: `Pintura`, p: `El recubrimiento va sobre la capa transparente (clear coat) después de lavar, descontaminar y pulir hasta el nivel que pida la pintura. Ayuda a que la tierra, lo que dejan los pájaros y las manchas de agua se quiten más fácil al lavar.` },
-      { id: `vidrios`, h: `Vidrios`, p: `Un recubrimiento para el parabrisas y las ventanas que ayuda a que el agua de lluvia forme gotas y corra. No sustituye los limpiaparabrisas. La temporada de lluvias de aquí va más o menos de mediados o finales de mayo a mediados de octubre.`, source: { label: `National Weather Service`, url: `https://www.weather.gov/tbw/rainyseason` } },
-      { id: `rines`, h: `Rines (aros) y calipers`, p: `Los rines reciben el polvo de los frenos y la mugre de la calle. Un recubrimiento hecho para rines y calipers ayuda a que el polvo de los frenos se pegue menos y salga más fácil al lavar. Dinos si los rines son pintados, pulidos o cromados.` },
-      { id: `molduras`, h: `Molduras y plásticos de afuera`, p: `El sol pone grises el plástico y la goma negros. Este recubrimiento se aplica en molduras que todavía están oscuras; no devuelve el color que ya se perdió. Si las tuyas ya se destiñeron, mándanos una foto y te decimos qué esperar antes de empezar.` },
-      { id: `interior`, h: `Interior`, p: `El interior se lleva su parte del sol y de la playa. Dinos qué quieres cubrir (asientos, cuero, tela, plásticos) y manda una foto; te decimos qué producto va en cada material.` },
-    ],
-
     prep: {
       title: `Primero la preparación`,
-      p: `El recubrimiento sella lo que haya debajo, rayones incluidos. Por eso la pintura se lava, se descontamina y, casi siempre, se pule hasta el nivel que necesita antes de ponerle nada, y las demás superficies también se limpian primero.`,
+      p: `El recubrimiento sella lo que haya debajo, rayones incluidos. Por eso la pintura se lava, se descontamina y, casi siempre, se pule primero.`,
     },
 
     doesnt: {
       title: `Lo que un recubrimiento no hace`,
-      p: `El recubrimiento no es una armadura. Los rayones y las piedritas de la carretera todavía pueden dejar su marca; para eso existe otro producto, la película de protección de pintura. El carro se sigue lavando. Cuánto dura depende del producto, de la preparación y de cómo lo laves, así que no te ponemos una cifra.`,
+      p: `No es una armadura: los rayones y las piedritas de la carretera todavía pueden pasar, y el carro se sigue lavando. No ponemos una cifra de cuánto dura; depende del producto, de la preparación y de cómo lo laves.`,
     },
 
     local: {
@@ -143,12 +125,12 @@ export const ceramic = {
       items: [
         {
           h: `Lovebugs.`,
-          p: `Vuelan unas cuatro semanas en abril–mayo y otra vez en agosto–septiembre. Sus restos son un poco ácidos y, si se quedan varios días sobre la pintura, pueden dañarla; por eso conviene lavarlos cuanto antes. El recubrimiento les da una superficie más lisa y eso ayuda a ese lavado; no los frena.`,
+          p: `Vuelan unas cuatro semanas en abril–mayo y otra vez en agosto–septiembre. Sus restos son un poco ácidos y pueden dañar la pintura si se quedan varios días, así que conviene lavarlos pronto. El recubrimiento les da una superficie más lisa y eso ayuda al lavado; no los frena.`,
           source: { label: `UF/IFAS`, url: `https://ask.ifas.ufl.edu/publication/IN204` },
         },
         {
-          h: `Si lo lavas tú en casa.`,
-          p: `Según la orden de escasez de agua del Distrito de Manejo de Aguas del Suroeste de Florida (SWFWMD), publicada el 22 de septiembre de 2026, lavar un carro en casa (sin fines comerciales) solo se permite en tu día de riego y con una manguera con boquilla de cierre. La orden llega hasta el 31 de marzo de 2027 y cubre, entre otros, los condados de Manatee, Sarasota, Hillsborough y Pinellas. Las reglas pueden cambiar: revisa la página del Distrito para ver las vigentes.`,
+          h: `Si lo lavas tú.`,
+          p: `Según la orden de escasez de agua del Distrito de Manejo de Aguas del Suroeste de Florida (comunicado del 22 de septiembre de 2026, vigente hasta el 31 de marzo de 2027), lavar un carro en casa (sin fines comerciales) solo se permite en tu día de riego y con una manguera con boquilla de cierre. Cubre, entre otros, los condados de Manatee, Sarasota, Hillsborough y Pinellas. Las reglas pueden cambiar: revisa la página del Distrito.`,
           source: { label: `SWFWMD`, url: `https://www.swfwmd.state.fl.us/the-newsroom/2026/district-extends-modified-phase-iii-water-shortage-0` },
           until: `2027-03-31`,
         },
