@@ -18,6 +18,14 @@ import { openConsent } from './lib/track'
 function Navbar() {
   const { t, lang, toggle } = useI18n()
   const [scrolled, setScrolled] = useState(false)
+  const [open, setOpen] = useState(false)
+
+  useEffect(() => {
+    if (!open) return undefined
+    const onKey = (e) => { if (e.key === 'Escape') setOpen(false) }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [open])
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 80)
@@ -41,7 +49,7 @@ function Navbar() {
         <img src="/img/brand/logo-120.webp" srcSet="/img/brand/logo-120.webp 1x, /img/brand/logo-240.webp 2x" width="60" height="60" alt={BRAND_NAME} style={{ height: '60px', width: 'auto', borderRadius: '6px' }} />
       </a>
 
-      <div className="nav-links">
+      <div id="nav-menu" className={`nav-links${open ? ' is-open' : ''}`} style={open ? { background: navBg, borderBottom: `1px solid ${borderColor}` } : undefined}>
         {[
           ['#services', 'navServices'],
           [lang === 'es' ? '/es/polarizado-de-vidrios/' : '/window-tint/', 'navTint'],
@@ -50,7 +58,7 @@ function Navbar() {
           ['#gallery', 'navGallery'],
           ['#contact', 'navContact'],
         ].map(([href, key]) => (
-          <a key={key} href={href} style={{ color: linkColor }}>{t(key)}</a>
+          <a key={key} href={href} style={{ color: linkColor }} onClick={() => setOpen(false)}>{t(key)}</a>
         ))}
       </div>
 
@@ -67,6 +75,12 @@ function Navbar() {
         }}>
           {t('navBook')}
         </a>
+        <button type="button" className={`menu-btn${open ? ' is-open' : ''}`} aria-label={open ? t('menuClose') : t('menuOpen')}
+          aria-expanded={open} aria-controls="nav-menu" onClick={() => setOpen((o) => !o)}
+          style={{ color: linkColor, borderColor }}>
+          <svg className="i-menu" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" /></svg>
+          <svg className="i-close" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18" /></svg>
+        </button>
       </div>
     </nav>
   )

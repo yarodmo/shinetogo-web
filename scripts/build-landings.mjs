@@ -73,14 +73,14 @@ const other = { tint: 'ceramic', ceramic: 'tint' }
 /* ───────────────────────── textos de la interfaz de las páginas estáticas ───────────────────────── */
 const UI = {
   en: {
-    skip: 'Skip to content', home: 'Home', services: 'Services',
+    skip: 'Skip to content', menuOpen: 'Open menu', menuClose: 'Close menu', home: 'Home', services: 'Services',
     call: 'Call', orCall: 'Or call',
     quoteCardLead: 'Quotes are requested in the form on our main page, with {service} already selected. You can also send photos on WhatsApp.',
     areasTitle: 'Where we work', faqTitle: 'Questions', otherServices: 'Other services',
     privacy: 'Privacy policy', lang: 'Español', langLabel: 'Ver en español', breadcrumbHome: 'Home',
   },
   es: {
-    skip: 'Saltar al contenido', home: 'Inicio', services: 'Servicios',
+    skip: 'Saltar al contenido', menuOpen: 'Abrir menú', menuClose: 'Cerrar menú', home: 'Inicio', services: 'Servicios',
     call: 'Llamar', orCall: 'O llama al',
     quoteCardLead: 'La cotización se pide en el formulario de nuestra página principal, con {service} ya seleccionado. También puedes mandar fotos por WhatsApp.',
     areasTitle: 'Dónde trabajamos', faqTitle: 'Preguntas', otherServices: 'Otros servicios',
@@ -212,7 +212,7 @@ function header(lang, key) {
     <a class="brand" href="${home}" aria-label="${esc(BRAND)}: ${u.home}">
       <img src="/img/brand/logo-120.webp" srcset="${LOGO_SRCSET}" width="60" height="60" alt="" />
     </a>
-    <nav class="nav-links" aria-label="Primary">
+    <nav class="nav-links" id="nav-menu" aria-label="Primary">
       <a href="${home}#services">${esc(t('navServices'))}</a>
       <a href="${URLS.tint[lang]}"${key === 'tint' ? ' aria-current="page"' : ''}>${esc(t('navTint'))}</a>
       <a href="${URLS.ceramic[lang]}"${key === 'ceramic' ? ' aria-current="page"' : ''}>${esc(t('navCeramic'))}</a>
@@ -223,6 +223,10 @@ function header(lang, key) {
     <div class="nav-end">
       <a class="lang-btn" href="${URLS[key][alt]}" hreflang="${alt}" lang="${alt}" title="${esc(u.langLabel)}">${alt.toUpperCase()}</a>
       <a class="btn btn-primary" href="${quote}" data-track="cta_click" data-location="landing_header">${esc(t('navBook'))}</a>
+      <button type="button" class="menu-btn" aria-controls="nav-menu" aria-expanded="false" aria-label="${esc(u.menuOpen)}" data-open="${esc(u.menuOpen)}" data-close="${esc(u.menuClose)}">
+        <svg class="i-menu" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        <svg class="i-close" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
+      </button>
     </div>
   </div>
 </header>`

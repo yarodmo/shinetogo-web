@@ -15,6 +15,21 @@ if (siteHeader) {
   window.addEventListener('scroll', sync, { passive: true })
 }
 
+/* ───────── menú de hamburguesa en celular ───────── */
+const menuBtn = document.querySelector('.menu-btn')
+const menuNav = document.getElementById('nav-menu')
+if (menuBtn && menuNav) {
+  const setMenu = (open) => {
+    menuNav.classList.toggle('is-open', open)
+    menuBtn.classList.toggle('is-open', open)
+    menuBtn.setAttribute('aria-expanded', String(open))
+    menuBtn.setAttribute('aria-label', open ? menuBtn.dataset.close : menuBtn.dataset.open)
+  }
+  menuBtn.addEventListener('click', () => setMenu(!menuNav.classList.contains('is-open')))
+  menuNav.addEventListener('click', (e) => { if (e.target.closest('a')) setMenu(false) })
+  window.addEventListener('keydown', (e) => { if (e.key === 'Escape') setMenu(false) })
+}
+
 /* ───────── barra fija móvil: aparece al bajar 500 px, igual que en la home ───────── */
 const stickyBar = document.querySelector('.sticky-cta')
 if (stickyBar) {

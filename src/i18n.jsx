@@ -9,6 +9,8 @@ const base = {
     navAbout: 'About',
     navContact: 'Contact',
     navBook: 'Get a quote',
+    menuOpen: 'Open menu',
+    menuClose: 'Close menu',
 
 
     // Hero
@@ -161,6 +163,8 @@ const base = {
     navAbout: 'Nosotros',
     navContact: 'Contacto',
     navBook: 'Cotizar',
+    menuOpen: 'Abrir menú',
+    menuClose: 'Cerrar menú',
 
 
     // Hero
