@@ -281,9 +281,11 @@ const photo = (base, sizes, w, h, alt, { eager = false, caption = '' } = {}) => 
   const img = `<img src="${base}-${small}.webp" srcset="${base}-${small}.webp ${small}w, ${base}-${large}.webp ${large}w" sizes="(max-width: 900px) 100vw, 560px" width="${w}" height="${h}" alt="${esc(alt)}" ${eager ? 'fetchpriority="high"' : 'loading="lazy" decoding="async"'} />`
   return `<figure class="photo">${img}${caption ? `<figcaption>${esc(caption)}</figcaption>` : ''}</figure>`
 }
+// Las dos imágenes del hero son ilustraciones, no fotos de trabajos: llevan la etiqueta visible (misma clase .ai-tag que la home).
+const aiTag = (lang) => `<span class="ai-tag">${esc(i18nText(lang, 'illustrationTag'))}</span>`
 const HERO_BG = {
-  tint: (lang) => `<img src="/img/protection/tint-van-wide-1376.webp" srcset="/img/protection/tint-van-wide-800.webp 800w, /img/protection/tint-van-wide-1376.webp 1376w" sizes="100vw" width="1376" height="768" alt="${esc(i18nText(lang, 'svc4Alt'))}" fetchpriority="high" />`,
-  ceramic: (lang) => `<img class="hero-bg--square" src="/img/protection/ceramic-bottle-1024.webp" srcset="/img/protection/ceramic-bottle-640.webp 640w, /img/protection/ceramic-bottle-1024.webp 1024w" sizes="100vw" width="1024" height="1024" alt="${esc(i18nText(lang, 'svc5Alt'))}" fetchpriority="high" />`,
+  tint: (lang) => `<img src="/img/protection/tint-van-wide-1376.webp" srcset="/img/protection/tint-van-wide-800.webp 800w, /img/protection/tint-van-wide-1376.webp 1376w" sizes="100vw" width="1376" height="768" alt="${esc(i18nText(lang, 'svc4Alt'))}" fetchpriority="high" />${aiTag(lang)}`,
+  ceramic: (lang) => `<img class="hero-bg--square" src="/img/protection/ceramic-bottle-1024.webp" srcset="/img/protection/ceramic-bottle-640.webp 640w, /img/protection/ceramic-bottle-1024.webp 1024w" sizes="100vw" width="1024" height="1024" alt="${esc(i18nText(lang, 'svc5Alt'))}" fetchpriority="high" />${aiTag(lang)}`,
 }
 const HERO_PHOTO = {
   tint: (lang) => photo('/img/protection/tint-van', [640, 1080], 1080, 810, i18nText(lang, 'svc4Alt'), { eager: true }),

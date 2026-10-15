@@ -9,9 +9,10 @@ const SERVICES = [
   { key: 'svc2', img: '/img/services/boat-800.webp', color: 'var(--brand-blue)', href: '#contact', prefill: { service: 'boat', vehicle_type: 'boat' } },
 ]
 
+// Las dos imágenes son ilustraciones (assets-src/protection), no fotos de trabajos: llevan etiqueta visible.
 const PROTECTION = [
-  { key: 'svc4', img: '/img/protection/tint-van', pos: '70% 50%', service: 'tint', href: { en: '/window-tint/', es: '/es/polarizado-de-vidrios/' } },
-  { key: 'svc5', img: '/img/protection/ceramic-bottle', pos: '50% 40%', service: 'ceramic', href: { en: '/ceramic-coating/', es: '/es/recubrimiento-ceramico/' } },
+  { key: 'svc4', img: '/img/protection/tint-van', illustration: true, pos: '70% 50%', service: 'tint', href: { en: '/window-tint/', es: '/es/polarizado-de-vidrios/' } },
+  { key: 'svc5', img: '/img/protection/ceramic-bottle', illustration: true, pos: '50% 40%', service: 'ceramic', href: { en: '/ceramic-coating/', es: '/es/recubrimiento-ceramico/' } },
 ]
 
 export default function Services() {
@@ -97,6 +98,7 @@ export default function Services() {
                 <div className="svc-diagram-wrap">
                   <img className="prot-img" src={`${p.img}-640.webp`} alt={t(`${p.key}Alt`)} width="640" height={p.key === 'svc4' ? 480 : 640}
                     loading="lazy" decoding="async" style={{ objectPosition: p.pos }} />
+                  {p.illustration && <span className="ai-tag">{t('illustrationTag')}</span>}
                 </div>
                 <div style={{ padding: '24px 26px', display: 'flex', flexDirection: 'column', gap: '10px' }}>
                   <h4 style={{ fontSize: '20px', fontWeight: 800, color: 'var(--text-dark)' }}>{t(`${p.key}Title`)}</h4>

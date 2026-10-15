@@ -58,6 +58,10 @@
 .hero-checks li { position: relative; padding-left: 28px; font-size: 15px; font-weight: 600; color: #fff; }
 .hero-checks li::before { content: '✓'; position: absolute; left: 0; color: #34d399; font-weight: 800; }
 .hero-dots { position: absolute; right: 24px; bottom: 20px; z-index: 3; display: flex; gap: 8px; }
+/* Etiqueta visible sobre imágenes generadas (no son fotos de trabajos reales): home, galería y páginas de servicio */
+.ai-tag { position: absolute; top: 12px; left: 12px; z-index: 3; padding: 5px 10px; border-radius: 99px; background: rgba(10, 14, 26, .78); color: #fff; font: 700 11px/1.2 var(--font-main, inherit); letter-spacing: .04em; pointer-events: none; }
+/* .hero-media tiene z-index 0: la capa oscura del hero (::before) queda encima. Arriba a la derecha esa capa es transparente. */
+.hero-media .ai-tag { top: 16px; left: auto; right: 24px; }
 .hero-dots button { width: 24px; height: 24px; padding: 8px; border: 0; border-radius: 99px; cursor: pointer; background: rgba(255, 255, 255, .4); background-clip: content-box; transition: all .3s ease; }
 .hero-dots button[aria-current="true"] { width: 40px; background-color: #fff; }
 
@@ -79,6 +83,7 @@
   .hero-dark .btn { padding-inline: 20px; }
   .hero-dark .btn.btn-icon { padding: 16px 22px; }
   .hero-dots { right: 16px; bottom: 12px; }
+  .hero-media .ai-tag { top: auto; right: auto; bottom: 12px; left: 16px; }
 }
 
 /* ─── Preguntas frecuentes: la misma fila en la home (botón) y en las páginas de servicio (details) ─── */

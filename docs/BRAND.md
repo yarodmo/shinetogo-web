@@ -69,7 +69,7 @@ La home (React, `src/index.css`) es la referencia porque es la identidad que el 
 | Pie | Fondo `#0a0e1a`, cuatro columnas (marca + Instagram · Servicios · Zonas · Contacto), línea de derechos igual |
 | Formulario | Uno solo, el de la home. Las páginas estáticas no tienen `<form>`: su botón lleva a `/?service=tint#contact` (o `ceramic`). `check-dist` falla si aparece un formulario fuera de la home |
 | Cuatro tarjetas | 4 columnas en pantalla ancha, 2×2 en media, 1 en móvil. Nunca una sola en la segunda fila |
-| Ilustraciones | Dibujos propios del mismo trazo, no fotos de stock presentadas como trabajos |
+| Ilustraciones | Dibujos propios del mismo trazo, no fotos de stock presentadas como trabajos. **Toda imagen generada (IA) lleva la etiqueta visible «Illustration» / «Imagen ilustrativa»** (clase `.ai-tag`, texto `illustrationTag` de `src/content/services.js`, o un pie que lo diga) y un alt que empieza por «Illustration:» / «Imagen ilustrativa:». Nunca un título que la presente como foto del equipo o de un trabajo. Hoy: hero de la home (furgoneta y espuma), galería «Así es un lavado móvil con espuma», tarjetas de polarizado y cerámico, heroes de sus páginas y el agua perlando. `check-dist` lo exige |
 
 ## 4. Voz
 

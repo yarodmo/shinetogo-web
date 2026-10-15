@@ -3,6 +3,8 @@ import { useI18n } from '../i18n'
 
 // Miniaturas y versiones grandes generadas por scripts/optimize-assets.cjs.
 // Los videos no se descargan hasta que alguien los reproduce (preload="none" + póster).
+// illustration: true = imagen generada, no foto de un trabajo real: lleva la etiqueta visible «Illustration» / «Imagen ilustrativa»
+// y un alt que lo dice. Las fotos de la troca F-150 y del Tesla son trabajos reales del cliente: sin etiqueta.
 const ITEMS = [
   { type: 'image', thumb: '/img/gallery/mobile-car-detailing-florida-exterior-wash-640.webp', src: '/img/gallery/mobile-car-detailing-florida-exterior-wash-1400.webp',
     label: { en: 'Exterior wash', es: 'Lavado exterior' }, tag: { en: 'Exterior', es: 'Exterior' } },
@@ -12,8 +14,10 @@ const ITEMS = [
   // El video «snow-foam-wash» salió: mostraba el interior de un Cadillac (no espuma) y repetía al de arriba.
   { type: 'image', thumb: '/img/gallery/interior-car-cleaning-deep-shampoo-640.webp', src: '/img/gallery/interior-car-cleaning-deep-shampoo-1400.webp',
     label: { en: 'Gloss and reflections', es: 'Brillo y reflejos' }, tag: { en: 'Exterior', es: 'Exterior' } },
-  { type: 'image', thumb: '/img/gallery/team-at-work-640.webp', src: '/img/gallery/team-at-work-1195.webp',
-    label: { en: 'Our team at work', es: 'Nuestro equipo trabajando' }, tag: { en: 'Mobile', es: 'Móvil' } },
+  // Sale de una ilustración (assets-src/protection/service-van-foam-wash-action.jpg): no es una foto del equipo.
+  { type: 'image', thumb: '/img/gallery/team-at-work-640.webp', src: '/img/gallery/team-at-work-1195.webp', illustration: true,
+    label: { en: 'How a mobile foam wash works', es: 'Así es un lavado móvil con espuma' }, tag: { en: 'Mobile', es: 'Móvil' },
+    alt: { en: 'Illustration: a technician foam-washing a car next to a mobile detailing van in a parking lot', es: 'Imagen ilustrativa: un técnico lava con espuma un carro junto a una furgoneta de detallado móvil en un estacionamiento' } },
   { type: 'image', thumb: '/img/gallery/boat-detailing-gelcoat-polishing-640.webp', src: '/img/gallery/boat-detailing-gelcoat-polishing-1400.webp',
     label: { en: 'Boat gelcoat polish', es: 'Pulido de gelcoat' }, tag: { en: 'Boats', es: 'Botes' } },
 ]
@@ -72,7 +76,7 @@ export default function Gallery() {
             {ITEMS.map((item, i) => (
               <div key={item.src} className="light-card animated-fade-in" style={{ overflow: 'hidden' }}>
                 <button type="button" onClick={() => setActive(i)}
-                  aria-label={`${item.type === 'video' ? 'Video: ' : ''}${item.label[lang]}`}
+                  aria-label={`${item.type === 'video' ? 'Video: ' : ''}${item.label[lang]}${item.illustration ? ` (${t('illustrationTag')})` : ''}`}
                   style={{ display: 'block', width: '100%', padding: 0, border: 0, background: 'none', cursor: 'pointer', textAlign: 'left' }}>
                   <div style={{ position: 'relative', paddingTop: '70%', background: '#f1f5f9' }}>
                     {item.type === 'video' ? (
@@ -84,9 +88,10 @@ export default function Gallery() {
                         <span aria-hidden="true" style={{ position: 'absolute', right: 12, bottom: 12, background: 'rgba(0,0,0,.6)', color: '#fff', borderRadius: 99, padding: '4px 10px', fontSize: 12, fontWeight: 700 }}>▶ Video</span>
                       </>
                     ) : (
-                      <img src={item.thumb} alt={item.label[lang]} width="640" height="448" loading="lazy" decoding="async"
+                      <img src={item.thumb} alt={(item.alt || item.label)[lang]} width="640" height="448" loading="lazy" decoding="async"
                         style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
                     )}
+                    {item.illustration && <span className="ai-tag">{t('illustrationTag')}</span>}
                   </div>
                 </button>
                 <div style={{ padding: '20px' }}>
@@ -110,14 +115,15 @@ export default function Gallery() {
           style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.95)', zIndex: 9999, display: 'flex', alignItems: 'center', justifyContent: 'center', backdropFilter: 'blur(12px)' }}>
           <button type="button" onClick={() => setActive(null)} aria-label={lang === 'es' ? 'Cerrar' : 'Close'}
             style={{ position: 'absolute', top: '24px', right: '24px', background: 'none', border: 'none', color: '#fff', fontSize: '28px', cursor: 'pointer', minWidth: '44px', minHeight: '44px' }}>✕</button>
-          <div onClick={(e) => e.stopPropagation()} style={{ maxWidth: '900px', width: '90%' }}>
+          <div onClick={(e) => e.stopPropagation()} style={{ maxWidth: '900px', width: '90%', position: 'relative' }}>
             {current.type === 'video' ? (
               <video src={current.src} poster={current.poster} controls autoPlay playsInline
                 style={{ width: '100%', maxHeight: '75vh', borderRadius: '16px' }} />
             ) : (
-              <img src={current.src} alt={current.label[lang]}
+              <img src={current.src} alt={(current.alt || current.label)[lang]}
                 style={{ width: '100%', maxHeight: '75vh', borderRadius: '16px', objectFit: 'contain' }} />
             )}
+            {current.illustration && <span className="ai-tag">{t('illustrationTag')}</span>}
           </div>
         </div>
       )}
