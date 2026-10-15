@@ -337,7 +337,8 @@ export default function Contact() {
               <div className="light-card animated-fade-in" style={{ padding: '28px', textAlign: 'center' }}>
                 <div aria-hidden="true" style={{ fontSize: '32px', marginBottom: '12px' }}>💬</div>
                 <h3 style={{ fontSize: '16px', fontWeight: 800, color: 'var(--text-dark)', marginBottom: '6px' }}>{t('formWhatsapp')}</h3>
-                <p style={{ fontSize: '13px', color: 'var(--text-body)', marginBottom: '16px', lineHeight: 1.5 }}>{t('formWhatsappSub')}</p>
+                <p style={{ fontSize: '13px', color: 'var(--text-body)', marginBottom: '8px', lineHeight: 1.5 }}>{t('formWhatsappSub')}</p>
+                <p style={{ fontSize: '13px', color: 'var(--text-dark)', fontWeight: 700, marginBottom: '16px', lineHeight: 1.5 }}>{t('langsServed')}</p>
                 <a href={waLink(t('whatsappText'))} target="_blank" rel="noopener noreferrer" className="btn btn-green btn-icon" style={{ width: '100%' }}
                   aria-label={t('formWhatsappCta')} title={t('formWhatsappCta')}
                   data-track="whatsapp_click" data-location="contact_card">

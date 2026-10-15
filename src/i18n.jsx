@@ -121,6 +121,8 @@ const base = {
     faq5A: 'We choose the product for your paint and surfaces and tell you which one before we start.',
     faq6Q: 'Do you do window tint and ceramic coating?',
     faq6A: 'Yes, for cars. Boats aren’t included. Pick it in the form and we reply with a price range. To read more first, open the Window Tint and Ceramic pages from the menu.',
+    faq7Q: 'Do you speak Spanish?',
+    faq7A: 'Yes. We speak English and Spanish, on WhatsApp and in person. Write or talk to us in whichever you prefer.',
 
     // Contact
     contactTitle: 'Ask for your quote',
@@ -148,6 +150,8 @@ const base = {
     footerServices: 'Services',
     footerAreas: 'Where we work',
     footerContact: 'Contact',
+    // Idiomas de atención (confirmado por el cliente el 14-oct-2026): pie de todas las páginas, tarjeta de WhatsApp y FAQ.
+    langsServed: 'We speak English and Spanish.',
 
 
     // Sticky
@@ -275,6 +279,8 @@ const base = {
     faq5A: 'Elegimos el producto según tu pintura y tus superficies, y te decimos cuál antes de empezar.',
     faq6Q: '¿Hacen polarizado y cerámico?',
     faq6A: 'Sí, para carros; en botes no los hacemos. Elígelo en el formulario y te respondemos con un rango de precio. Si quieres leer más antes, abre las páginas de Polarizado y Cerámico desde el menú.',
+    faq7Q: '¿Me atienden en español?',
+    faq7A: 'Sí. Te atendemos en inglés y en español, por WhatsApp y en persona. Escríbenos o háblanos en el idioma que prefieras.',
 
     // Contact
     contactTitle: 'Pide tu cotización',
@@ -302,6 +308,7 @@ const base = {
     footerServices: 'Servicios',
     footerAreas: 'Zonas',
     footerContact: 'Contacto',
+    langsServed: 'Te atendemos en inglés y en español.',
 
 
     // Sticky

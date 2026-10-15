@@ -150,6 +150,7 @@ p + p { margin-top: 12px; }
 .site-footer p { font-size: 14px; color: var(--text-muted); line-height: 1.6; max-width: 280px; }
 .site-footer .col { display: flex; flex-direction: column; gap: 10px; }
 .site-footer .col span { font-size: 14px; color: var(--text-muted); }
+.site-footer .col span.langs { color: var(--text-light); font-weight: 600; }
 .site-footer a, .linklike { font-size: 14px; color: var(--text-muted); text-decoration: none; }
 .site-footer a:hover, .linklike:hover { color: #fff; }
 .site-footer .wa { color: var(--brand-green); }

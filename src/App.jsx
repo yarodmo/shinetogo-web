@@ -193,6 +193,7 @@ export default function App() {
             <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
               <a href={`tel:${PHONE_TEL}`} data-track="call_click" data-location="footer" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', fontSize: '14px', color: 'var(--text-muted)' }}><Icon name="phone" size={16} /> {PHONE_DISPLAY}</a>
               <a href={waLink('')} target="_blank" rel="noopener noreferrer" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', fontSize: '14px', color: 'var(--brand-green)' }} data-track="whatsapp_click" data-location="footer"><Icon name="whatsapp" size={16} /> WhatsApp</a>
+              <span style={{ fontSize: '14px', color: 'var(--text-light)', fontWeight: 600 }}>{t('langsServed')}</span>
               <a href={es ? '/es/privacidad/' : '/privacy/'} style={{ fontSize: '14px', color: 'var(--text-muted)' }}>{t('footerPrivacy')}</a>
               {HAS_TRACKING && (
                 <button type="button" onClick={openConsent} style={{ fontSize: '14px', color: 'var(--text-muted)', background: 'none', border: 0, padding: 0, cursor: 'pointer', textAlign: 'left', font: 'inherit' }}>

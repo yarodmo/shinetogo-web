@@ -262,6 +262,7 @@ function footer(lang, key) {
       <h3>${esc(t('footerContact'))}</h3>
       <a href="tel:${PHONE_TEL}" data-track="call_click" data-location="landing_footer">${ICON_PHONE} ${PHONE_DISPLAY}</a>
       <a class="wa" href="${waLink('')}" rel="noopener noreferrer" target="_blank" data-track="whatsapp_click" data-location="landing_footer">${ICON_WA} WhatsApp</a>
+      <span class="langs">${esc(t('langsServed'))}</span>
       <a href="${URLS.privacy[lang]}">${esc(t('footerPrivacy'))}</a>${HAS_TRACKING ? `\n      <button type="button" class="linklike" data-open-consent>${esc(t('footerPrivacyChoices'))}</button>` : ''}
     </div>
   </div>
@@ -608,7 +609,7 @@ const i18nText = (lang, key) => {
 }
 
 // Las preguntas de la home salen del mismo i18n que pinta React (src/sections/Faq.jsx): una sola fuente.
-const HOME_FAQ = ['faq1', 'faq2', 'faq3', 'faq4', 'faq5', 'faq6']
+const HOME_FAQ = ['faq1', 'faq2', 'faq3', 'faq4', 'faq5', 'faq6', 'faq7']
 
 function spaShell(lang) {
   const h = HOME[lang]
@@ -658,7 +659,7 @@ function spaShell(lang) {
       <p>${esc(AREA_COPY[lang])}</p>
       <h2>${esc(i18nText(lang, 'faqTitle'))}</h2>
       ${HOME_FAQ.map((k) => `<details class="faq"><summary>${esc(i18nText(lang, `${k}Q`))}</summary><p>${esc(i18nText(lang, `${k}A`))}</p></details>`).join('\n      ')}
-      <p>${h.contact} <a href="tel:${PHONE_TEL}">${PHONE_DISPLAY}</a> ${h.quote}</p>
+      <p>${h.contact} <a href="tel:${PHONE_TEL}">${PHONE_DISPLAY}</a> ${h.quote} ${esc(i18nText(lang, 'langsServed'))}</p>
       <p><a href="${URLS.privacy[lang]}">${u.privacy}</a> · <a href="${URLS.home[lang === 'es' ? 'en' : 'es']}" hreflang="${lang === 'es' ? 'en' : 'es'}">${u.lang}</a></p>
     </main>
   </div>
