@@ -165,6 +165,53 @@ for (const [where, text] of copyBlobs) {
   }
 }
 
+// Compromisos de contenido confirmados por el cliente el 14-oct-2026. Cada uno en EN y en ES (paridad).
+{
+  const LANGS_SERVED = { en: 'We speak English and Spanish.', es: 'Te atendemos en inglés y en español.' }
+  const AT_HOME = { en: /your home or (at|to) the place we agree on/g, es: /tu casa o (en|al) (el )?lugar que acordemos/g }
+  // Imágenes generadas (assets-src/protection, ver scripts/optimize-assets.cjs): nunca sin etiqueta visible.
+  const ILLUSTRATIONS = /\/img\/(hero\/(van|action)|gallery\/team-at-work|protection\/(tint-van|ceramic-bottle|ceramic-beading))-/
+  const TAG = { en: /class="ai-tag">Illustration<|<figcaption>Illustration\b/, es: /class="ai-tag">Imagen ilustrativa<|<figcaption>Ilustración\b/ }
+  for (const { url, html } of pages) {
+    const lang = url.startsWith('/es/') ? 'es' : 'en'
+    const isHome = url === '/' || url === '/es/'
+    const visible = html.replace(/<script[\s\S]*?<\/script>/g, '')
+    // 1. Bilingüe: pie de cada página estática y cascarón de la home (el pie de la home lo pinta React: se mira en src, abajo).
+    if (!visible.includes(LANGS_SERVED[lang])) fail(url, `falta «${LANGS_SERVED[lang]}»`)
+    // 2. Polarizado y cerámico también a domicilio: FAQ de la home, y pasos + FAQ de cada página de servicio.
+    if (isHome || /window-tint|ceramic-coating|polarizado-de-vidrios|recubrimiento-ceramico/.test(url)) {
+      const n = (visible.match(AT_HOME[lang]) || []).length
+      if (n < 2) fail(url, `dice ${n} vez/veces que también vamos a tu casa o al lugar acordado (se esperan al menos 2)`)
+    }
+    // 3. Toda ilustración publicada lleva su etiqueta visible en el mismo contenedor y un alt (o pie) que lo dice.
+    for (const m of html.matchAll(/<img\b[^>]*>/g)) {
+      if (!ILLUSTRATIONS.test(attr(m[0], 'src') || '')) continue
+      const after = html.slice(m.index, m.index + m[0].length + 400)
+      if (!TAG[lang].test(after)) fail(url, `ilustración sin etiqueta visible: ${attr(m[0], 'src')}`)
+      if (!/^(Illustration|Imagen ilustrativa)\b/.test(attr(m[0], 'alt') || '') && !/<figcaption>/.test(after)) fail(url, `alt de ilustración que no lo dice: ${attr(m[0], 'src')}`)
+    }
+    // 4. Privacidad: asistente de WhatsApp, CRM y listas de Meta, sin perder la sección de mensajes ni la frase de no compartir.
+    if (/^\/(es\/)?(privacy|privacidad)\//.test(url)) {
+      for (const id of ['messaging', 'whatsapp-assistant', 'crm', 'meta-audiences']) if (!html.includes(`id="${id}"`)) fail(url, `falta la sección #${id}`)
+      const keep = lang === 'es' ? 'No compartimos tu teléfono con terceros para su publicidad.' : 'We do not share your phone number with third parties for their marketing.'
+      if (!html.includes(keep)) fail(url, `falta «${keep}»`)
+    }
+  }
+  // La home se pinta con React: el pie, la tarjeta de WhatsApp, la FAQ y las etiquetas del hero, la galería y las tarjetas se miran en el código.
+  const src = (f) => fs.readFileSync(f, 'utf8')
+  if (!/t\('langsServed'\)/.test(src('src/App.jsx'))) fail('src/App.jsx', 'el pie de la home no muestra langsServed')
+  if (!/t\('langsServed'\)/.test(src('src/sections/Contact.jsx'))) fail('src/sections/Contact.jsx', 'la tarjeta de WhatsApp no muestra langsServed')
+  if (!/'faq7'/.test(src('src/sections/Faq.jsx'))) fail('src/sections/Faq.jsx', 'falta la pregunta de idiomas (faq7)')
+  for (const f of ['src/sections/Hero.jsx', 'src/sections/Gallery.jsx', 'src/sections/Services.jsx']) {
+    const code = src(f)
+    for (const line of code.split('\n')) {
+      const img = line.match(/'(\/img\/[^']+)'/)?.[1]
+      if (img && ILLUSTRATIONS.test(`${img}-`) && !/illustration: true/.test(line)) fail(f, `ilustración sin «illustration: true»: ${line.trim().slice(0, 90)}`)
+    }
+    if (!/className="ai-tag"/.test(code)) fail(f, 'no pinta la etiqueta .ai-tag')
+  }
+}
+
 const totalMb = files.reduce((n, f) => n + fs.statSync(f).size, 0) / 1024 / 1024
 if (totalMb > BUDGET_MB) fail('dist', `pesa ${totalMb.toFixed(1)} MB (presupuesto ${BUDGET_MB} MB)`)
 

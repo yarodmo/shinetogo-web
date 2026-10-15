@@ -57,7 +57,7 @@ export const tint = {
       steps: [
         { h: `You send photos`, p: `Both sides and the back of the car, one of the sunroof if it has one, and one of any tint you have now. In the message: year, make, model and your ZIP code.` },
         { h: `We reply with a range`, p: `A price range, the tint we’d use and the limit for each window. The final price is set once we see the car. If it falls outside the range, we tell you before we begin and you decide.` },
-        { h: `Then we set the day`, p: `If it works for you, we pick a day and confirm it with you.` },
+        { h: `Then we set the day`, p: `If it works for you, we pick a day and confirm it with you. We can come to your home or to the place we agree on; when we set the day, we tell you what we need.` },
       ],
     },
 
@@ -67,6 +67,7 @@ export const tint = {
       { q: `Can you tint the whole windshield?`, a: `Not the whole thing. Florida only allows a transparent strip across the top, above the AS-1 line printed on the glass, and that strip we can do.` },
       { q: `Is there a warranty?`, a: `Tint makers write their own warranties, and the terms differ from brand to brand. Before you decide, read the terms for the exact tint we quote you.` },
       { q: `How much does it cost?`, a: `There isn’t one price. It depends on how many windows, the tint, and whether old tint has to come off. Send photos and you’ll get a range; the final price is set once we see the car.` },
+      { q: `Can you do it at my home?`, a: `Yes. We can tint your car at your home or at the place we agree on with you. When we set the day, we tell you what we need.` },
     ],
 
     cta: { whatsapp: `Send photos`, form: `Request a quote` },
@@ -126,7 +127,7 @@ export const tint = {
       steps: [
         { h: `Tú mandas fotos`, p: `Del carro por los dos lados y por atrás, una del sunroof si tiene, y una del polarizado que tengas ahora. En el mensaje: año, marca, modelo y tu ZIP code.` },
         { h: `Te respondemos con un rango`, p: `Un rango de precio, el polarizado que te pondríamos y el límite de cada ventana. El precio final se fija cuando vemos el carro. Si queda fuera del rango, te avisamos antes de empezar y tú decides.` },
-        { h: `Después fijamos el día`, p: `Si te funciona, escogemos el día y te lo confirmamos.` },
+        { h: `Después fijamos el día`, p: `Si te funciona, escogemos el día y te lo confirmamos. Podemos ir a tu casa o al lugar que acordemos; al fijar el día te decimos qué necesitamos.` },
       ],
     },
 
@@ -137,6 +138,7 @@ export const tint = {
       { q: `¿Se puede polarizar todo el parabrisas? ¿Y el sunroof?`, a: `El parabrisas completo no: Florida solo deja la franja transparente de arriba, sobre la línea AS-1, y esa sí la hacemos. El vidrio de atrás también. Del sunroof (quemacocos), mándanos una foto y te decimos.` },
       { q: `¿Tiene garantía?`, a: `Cada marca de polarizado escribe la suya y los términos cambian. Antes de decidir, lee los del polarizado exacto que te cotizamos.` },
       { q: `¿Cuánto cuesta?`, a: `No hay un precio único: depende de cuántos vidrios, del tipo de polarizado y de si hay que quitar uno viejo. Manda fotos y te damos un rango; el precio final se fija cuando vemos el carro.` },
+      { q: `¿Lo pueden hacer en mi casa?`, a: `Sí. Polarizamos tu carro en tu casa o en el lugar que acordemos contigo. Al fijar el día te decimos qué necesitamos.` },
     ],
 
     cta: { whatsapp: `Manda fotos`, form: `Pedir cotización` },

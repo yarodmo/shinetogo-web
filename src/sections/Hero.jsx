@@ -4,11 +4,14 @@ import { waLink } from '../lib/site'
 import Icon from '../components/Icon'
 
 // Versiones 640/1080 (4:3) generadas por scripts/optimize-assets.cjs.
+// illustration: true = imagen generada (assets-src/protection), no foto de un trabajo real: etiqueta visible y alt que lo dice.
 const SLIDES = [
-  { base: '/img/hero/van', wide: 1080, label: { en: 'Mobile detailing', es: 'Detallado móvil' } },
+  { base: '/img/hero/van', wide: 1080, illustration: true, label: { en: 'Mobile detailing', es: 'Detallado móvil' },
+    alt: { en: 'Illustration: a technician drying a black SUV next to a mobile detailing van', es: 'Imagen ilustrativa: un técnico seca una SUV negra junto a una furgoneta de detallado móvil' } },
   { base: '/img/hero/finish', wide: 1080, label: { en: 'Exterior Finish', es: 'Acabado Exterior' } },
   // La foto del pulido (polish-*) se retiró: matrícula británica legible y logo que no es el real (docs/OPEN-QUESTIONS #43).
-  { base: '/img/hero/action', wide: 1080, label: { en: 'Snow Foam Wash', es: 'Lavado con Espuma' } },
+  { base: '/img/hero/action', wide: 1080, illustration: true, label: { en: 'Snow Foam Wash', es: 'Lavado con Espuma' },
+    alt: { en: 'Illustration: a technician foam-washing a car next to a mobile detailing van', es: 'Imagen ilustrativa: un técnico lava con espuma un carro junto a una furgoneta de detallado móvil' } },
 ]
 
 const CHECKS = ['heroCheck1', 'heroCheck2', 'heroCheck3']
@@ -38,7 +41,7 @@ export default function Hero() {
             srcSet={`${slide.base}-640.webp 640w, ${slide.base}-${slide.wide}.webp ${slide.wide}w`}
             sizes="100vw"
             width="1080" height="810"
-            alt={slide.label[lang]}
+            alt={(slide.alt || slide.label)[lang]}
             fetchPriority={i === 0 ? 'high' : 'low'}
             loading={i === 0 ? 'eager' : 'lazy'}
             decoding="async"
@@ -46,6 +49,7 @@ export default function Hero() {
             aria-hidden={current === i ? undefined : 'true'}
           />
         ))}
+        {SLIDES[current].illustration && <span className="ai-tag">{t('illustrationTag')}</span>}
         <div className="hero-dots">
           {SLIDES.map((s, i) => (
             <button key={s.base} type="button" onClick={() => setCurrent(i)} aria-label={s.label[lang]} aria-current={current === i} />

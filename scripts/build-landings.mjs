@@ -35,7 +35,7 @@ for (const name of ['.env', '.env.local', '.env.production', '.env.production.lo
 }
 const SITE = (process.env.VITE_SITE_URL || 'https://shinetogomobiledetailing.com').replace(/\/+$/, '')
 const BRAND = process.env.VITE_BRAND_NAME || BRAND_FULL
-const PRIVACY_UPDATED = '2026-10-05'
+const PRIVACY_UPDATED = '2026-10-14'
 const HAS_TRACKING = Boolean(process.env.VITE_GTM_ID || process.env.VITE_GA4_ID || process.env.VITE_META_PIXEL_ID)
 const LOGO = `${SITE}/img/brand/logo-512.jpg`
 // Las fuentes cargan sin bloquear el primer render (display=swap muestra texto de inmediato).
@@ -262,6 +262,7 @@ function footer(lang, key) {
       <h3>${esc(t('footerContact'))}</h3>
       <a href="tel:${PHONE_TEL}" data-track="call_click" data-location="landing_footer">${ICON_PHONE} ${PHONE_DISPLAY}</a>
       <a class="wa" href="${waLink('')}" rel="noopener noreferrer" target="_blank" data-track="whatsapp_click" data-location="landing_footer">${ICON_WA} WhatsApp</a>
+      <span class="langs">${esc(t('langsServed'))}</span>
       <a href="${URLS.privacy[lang]}">${esc(t('footerPrivacy'))}</a>${HAS_TRACKING ? `\n      <button type="button" class="linklike" data-open-consent>${esc(t('footerPrivacyChoices'))}</button>` : ''}
     </div>
   </div>
@@ -280,9 +281,11 @@ const photo = (base, sizes, w, h, alt, { eager = false, caption = '' } = {}) => 
   const img = `<img src="${base}-${small}.webp" srcset="${base}-${small}.webp ${small}w, ${base}-${large}.webp ${large}w" sizes="(max-width: 900px) 100vw, 560px" width="${w}" height="${h}" alt="${esc(alt)}" ${eager ? 'fetchpriority="high"' : 'loading="lazy" decoding="async"'} />`
   return `<figure class="photo">${img}${caption ? `<figcaption>${esc(caption)}</figcaption>` : ''}</figure>`
 }
+// Las dos imágenes del hero son ilustraciones, no fotos de trabajos: llevan la etiqueta visible (misma clase .ai-tag que la home).
+const aiTag = (lang) => `<span class="ai-tag">${esc(i18nText(lang, 'illustrationTag'))}</span>`
 const HERO_BG = {
-  tint: (lang) => `<img src="/img/protection/tint-van-wide-1376.webp" srcset="/img/protection/tint-van-wide-800.webp 800w, /img/protection/tint-van-wide-1376.webp 1376w" sizes="100vw" width="1376" height="768" alt="${esc(i18nText(lang, 'svc4Alt'))}" fetchpriority="high" />`,
-  ceramic: (lang) => `<img class="hero-bg--square" src="/img/protection/ceramic-bottle-1024.webp" srcset="/img/protection/ceramic-bottle-640.webp 640w, /img/protection/ceramic-bottle-1024.webp 1024w" sizes="100vw" width="1024" height="1024" alt="${esc(i18nText(lang, 'svc5Alt'))}" fetchpriority="high" />`,
+  tint: (lang) => `<img src="/img/protection/tint-van-wide-1376.webp" srcset="/img/protection/tint-van-wide-800.webp 800w, /img/protection/tint-van-wide-1376.webp 1376w" sizes="100vw" width="1376" height="768" alt="${esc(i18nText(lang, 'svc4Alt'))}" fetchpriority="high" />${aiTag(lang)}`,
+  ceramic: (lang) => `<img class="hero-bg--square" src="/img/protection/ceramic-bottle-1024.webp" srcset="/img/protection/ceramic-bottle-640.webp 640w, /img/protection/ceramic-bottle-1024.webp 1024w" sizes="100vw" width="1024" height="1024" alt="${esc(i18nText(lang, 'svc5Alt'))}" fetchpriority="high" />${aiTag(lang)}`,
 }
 const HERO_PHOTO = {
   tint: (lang) => photo('/img/protection/tint-van', [640, 1080], 1080, 810, i18nText(lang, 'svc4Alt'), { eager: true }),
@@ -506,18 +509,30 @@ const PRIVACY = {
       ['Text and WhatsApp messages', [
         `If you check the consent box on our form, you agree that ${BRAND} may text you, message you on WhatsApp and call you at the number you gave about your quote and appointment, including with an automated system. Consent is not required to get a quote or to buy anything. Message frequency varies. Message and data rates may apply. Reply STOP to opt out (you can also tell us in any reasonable way, for example “don’t text me anymore”) and HELP for help. We stop messaging you as soon as we receive your request. Messages sent over WhatsApp are also governed by WhatsApp’s own terms and privacy policy. We do not share your phone number with third parties for their marketing.`,
       ], 'messaging'],
+      // Añadido el 14-oct-2026: asistente de WhatsApp, CRM y listas de Meta. Proveedores sin nombre hasta que el dueño los confirme.
+      ['Our automated WhatsApp assistant', [
+        'When you message us on WhatsApp, the messages and photos you send are processed by an automated assistant that uses an artificial intelligence provider acting on our behalf. The assistant uses them to answer you, give you a price range and schedule your appointment. You can ask to talk to a person at any time: just say so in the chat.',
+      ], 'whatsapp-assistant'],
+      ['Customer management system (CRM)', [
+        'We keep your contact details, your vehicle information, the photos you send and your appointments in a customer management system (CRM) run by a provider on our behalf. The retention periods in “How long we keep it” apply to that system too.',
+      ], 'crm'],
+      ['Advertising on Meta (Facebook and Instagram)', [
+        'To measure our ads and to avoid showing ads to people who are already our customers, we may send Meta a list of customer contact details (phone number or email). The list is encrypted (hashed) before we send it, and we send it under Meta’s Custom Audiences terms. Under those terms, Meta does not use the list for any other purpose.',
+        `If you do not want to be on these lists, tell us at ${PHONE_DISPLAY} (call, text or WhatsApp) and we will leave your contact details out of every list we send from then on.`,
+      ], 'meta-audiences'],
       ['Cookies, analytics and advertising', [
         'Before you choose, this site loads fonts from Google Fonts (Google receives your IP address and browser details to serve them) and keeps in your browser’s storage a small record of how you arrived (campaign tags and the page you entered on, kept up to 90 days) and of your choice (stg_consent_v1). Nothing else is loaded.',
         'Analytics and advertising tools (Google Tag Manager, Google Analytics, Google Ads and the Meta Pixel) load only after you press Accept in our privacy banner. If you press Reject they are not loaded. If you accept, Google and Meta receive data about your visit under their own policies. You can change your choice with the “Privacy choices” link in the footer, and manage ad personalization in Google Ads Settings (adssettings.google.com), Meta Ad Preferences (facebook.com/adpreferences) or the Digital Advertising Alliance (optout.aboutads.info).',
       ]],
       ['Who sees your information', [
         'Our own team and the service providers that help us run the site and contact you: web hosting, email delivery, and WhatsApp (Meta) when you message us there. If you accept analytics, the providers listed above also receive usage data. We do not sell your personal information for money.',
+        'We also use the artificial intelligence provider behind our WhatsApp assistant, the provider that runs our CRM, and Meta for the encrypted contact lists described above. These providers act on our behalf, to provide their service to us, and not for their own marketing. We do not share your phone number with third parties for their marketing.',
       ]],
       ['How long we keep it', [
-        'Quote requests that do not turn into a job: 24 months. Customer records: as long as accounting and tax rules require (up to 7 years). Records of your messaging consent: 5 years from the date you gave it. We keep copies in our lead file, in the notification emails we receive, and in backups. Ask us and we will delete your request sooner, except what the law requires us to keep.',
+        'Quote requests that do not turn into a job: 24 months. Customer records: as long as accounting and tax rules require (up to 7 years). Records of your messaging consent: 5 years from the date you gave it. We keep copies in our lead file, in our CRM, in the notification emails we receive, and in backups. Ask us and we will delete your request sooner, except what the law requires us to keep.',
       ]],
       ['Your choices', [
-        `Contact us at ${PHONE_DISPLAY} or by WhatsApp to see, correct or delete the information we hold about you, or to stop messages. We answer within 30 days. To protect your information we verify the request comes from the phone number or email you gave us. Reply STOP to any text to stop texts.`,
+        `Contact us at ${PHONE_DISPLAY} or by WhatsApp to see, correct or delete the information we hold about you, or to stop messages. We answer within 30 days. To protect your information we verify the request comes from the phone number or email you gave us. Reply STOP to any text to stop texts. You can also ask us to leave you out of the contact lists we send to Meta, or to talk to a person instead of our WhatsApp assistant.`,
       ]],
       ['Children', ['This site is for adults. We do not knowingly collect information from children.']],
       ['Changes', ['If we change this policy we update the date at the top of this page.']],
@@ -540,18 +555,29 @@ const PRIVACY = {
       ['Mensajes de texto y WhatsApp', [
         `Si marcas la casilla de consentimiento del formulario, aceptas que ${BRAND} te envíe mensajes de texto, te escriba por WhatsApp y te llame al número que diste sobre tu cotización y tu cita, incluso con un sistema automatizado. El consentimiento no es necesario para recibir una cotización ni para comprar nada. La frecuencia de los mensajes varía. Pueden aplicar tarifas de mensajes y datos. Responde STOP para dejar de recibirlos (también puedes decírnoslo de cualquier forma razonable, por ejemplo “ya no me escriban”) y HELP para ayuda. Dejamos de escribirte en cuanto recibimos tu solicitud. Los mensajes por WhatsApp se rigen además por los términos y la política de privacidad de WhatsApp. No compartimos tu teléfono con terceros para su publicidad.`,
       ], 'messaging'],
+      ['Nuestro asistente automático de WhatsApp', [
+        'Cuando nos escribes por WhatsApp, los mensajes y las fotos que nos mandas los procesa un asistente automático que usa un proveedor de inteligencia artificial, que actúa por cuenta nuestra. El asistente los usa para responderte, darte un rango de precio y agendar tu cita. Puedes pedir hablar con una persona en cualquier momento: solo dilo en el chat.',
+      ], 'whatsapp-assistant'],
+      ['Sistema de gestión de clientes (CRM)', [
+        'Guardamos tus datos de contacto, los datos de tu vehículo, las fotos que nos mandas y tus citas en un sistema de gestión de clientes (CRM) que opera un proveedor por cuenta nuestra. Los plazos de “Cuánto tiempo la guardamos” se aplican también a ese sistema.',
+      ], 'crm'],
+      ['Publicidad en Meta (Facebook e Instagram)', [
+        'Para medir nuestros anuncios y no mostrarle anuncios a quien ya es cliente, podemos enviar a Meta una lista con datos de contacto de clientes (teléfono o email). La lista va cifrada (hash) antes de enviarla, y la enviamos conforme a las condiciones de Custom Audiences (públicos personalizados) de Meta. Según esas condiciones, Meta no usa la lista para ningún otro fin.',
+        `Si no quieres estar en esas listas, dínoslo al ${PHONE_DISPLAY} (llamada, texto o WhatsApp) y dejaremos tus datos fuera de todas las listas que enviemos desde ese momento.`,
+      ], 'meta-audiences'],
       ['Cookies, analítica y publicidad', [
         'Antes de que elijas, este sitio carga fuentes de Google Fonts (Google recibe tu dirección IP y datos del navegador para entregarlas) y guarda en el almacenamiento de tu navegador un pequeño registro de cómo llegaste (etiquetas de campaña y la página de entrada, hasta 90 días) y de tu decisión (stg_consent_v1). No se carga nada más.',
         'Las herramientas de analítica y publicidad (Google Tag Manager, Google Analytics, Google Ads y el píxel de Meta) se cargan solo después de que presionas Aceptar en nuestro aviso de privacidad. Si presionas Rechazar no se cargan. Si aceptas, Google y Meta reciben datos de tu visita bajo sus propias políticas. Puedes cambiar tu decisión con el enlace “Opciones de privacidad” del pie de página, y administrar la personalización de anuncios en la Configuración de anuncios de Google (adssettings.google.com), las Preferencias de anuncios de Meta (facebook.com/adpreferences) o la Digital Advertising Alliance (optout.aboutads.info).',
       ]],
       ['Quién ve tu información', [
         'Nuestro equipo y los proveedores que nos ayudan a operar el sitio y contactarte: alojamiento web, envío de correo y WhatsApp (Meta) cuando nos escribes allí. Si aceptas la analítica, los proveedores indicados arriba también reciben datos de uso. No vendemos tu información personal por dinero.',
+        'También usamos el proveedor de inteligencia artificial de nuestro asistente de WhatsApp, el proveedor que opera nuestro CRM y Meta para las listas cifradas de contactos descritas arriba. Estos proveedores actúan por cuenta nuestra, para prestarnos su servicio, y no para su propia publicidad. No compartimos tu teléfono con terceros para su publicidad.',
       ]],
       ['Cuánto tiempo la guardamos', [
-        'Solicitudes de cotización que no se convierten en trabajo: 24 meses. Registros de clientes: el tiempo que exijan las reglas contables y fiscales (hasta 7 años). Registros de tu consentimiento de mensajes: 5 años desde la fecha en que lo diste. Conservamos copias en nuestro archivo de solicitudes, en los correos de aviso que recibimos y en respaldos. Si lo pides, borramos tu solicitud antes, salvo lo que la ley nos obligue a conservar.',
+        'Solicitudes de cotización que no se convierten en trabajo: 24 meses. Registros de clientes: el tiempo que exijan las reglas contables y fiscales (hasta 7 años). Registros de tu consentimiento de mensajes: 5 años desde la fecha en que lo diste. Conservamos copias en nuestro archivo de solicitudes, en nuestro CRM, en los correos de aviso que recibimos y en respaldos. Si lo pides, borramos tu solicitud antes, salvo lo que la ley nos obligue a conservar.',
       ]],
       ['Tus opciones', [
-        `Contáctanos al ${PHONE_DISPLAY} o por WhatsApp para ver, corregir o borrar la información que tenemos de ti, o para dejar de recibir mensajes. Respondemos en un máximo de 30 días. Para proteger tu información verificamos que la solicitud venga del teléfono o el correo que nos diste. Responde STOP a cualquier texto para detener los textos.`,
+        `Contáctanos al ${PHONE_DISPLAY} o por WhatsApp para ver, corregir o borrar la información que tenemos de ti, o para dejar de recibir mensajes. Respondemos en un máximo de 30 días. Para proteger tu información verificamos que la solicitud venga del teléfono o el correo que nos diste. Responde STOP a cualquier texto para detener los textos. También puedes pedirnos que te dejemos fuera de las listas de contactos que enviamos a Meta, o hablar con una persona en lugar de nuestro asistente de WhatsApp.`,
       ]],
       ['Menores', ['Este sitio es para adultos. No recopilamos información de menores a sabiendas.']],
       ['Cambios', ['Si cambiamos esta política, actualizamos la fecha al inicio de esta página.']],
@@ -608,7 +634,7 @@ const i18nText = (lang, key) => {
 }
 
 // Las preguntas de la home salen del mismo i18n que pinta React (src/sections/Faq.jsx): una sola fuente.
-const HOME_FAQ = ['faq1', 'faq2', 'faq3', 'faq4', 'faq5', 'faq6']
+const HOME_FAQ = ['faq1', 'faq2', 'faq3', 'faq4', 'faq5', 'faq6', 'faq7']
 
 function spaShell(lang) {
   const h = HOME[lang]
@@ -658,7 +684,7 @@ function spaShell(lang) {
       <p>${esc(AREA_COPY[lang])}</p>
       <h2>${esc(i18nText(lang, 'faqTitle'))}</h2>
       ${HOME_FAQ.map((k) => `<details class="faq"><summary>${esc(i18nText(lang, `${k}Q`))}</summary><p>${esc(i18nText(lang, `${k}A`))}</p></details>`).join('\n      ')}
-      <p>${h.contact} <a href="tel:${PHONE_TEL}">${PHONE_DISPLAY}</a> ${h.quote}</p>
+      <p>${h.contact} <a href="tel:${PHONE_TEL}">${PHONE_DISPLAY}</a> ${h.quote} ${esc(i18nText(lang, 'langsServed'))}</p>
       <p><a href="${URLS.privacy[lang]}">${u.privacy}</a> · <a href="${URLS.home[lang === 'es' ? 'en' : 'es']}" hreflang="${lang === 'es' ? 'en' : 'es'}">${u.lang}</a></p>
     </main>
   </div>

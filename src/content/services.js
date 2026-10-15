@@ -14,15 +14,17 @@ export const services = {
     // Tarjetas de servicio de la home (cada una abre su propia página)
     svc4Title: 'Window Tint',
     svc4Desc: 'Carbon or ceramic tint for your car’s side windows, back window and windshield strip, and the sunroof when the car allows it. Quote by photo.',
-    svc4Alt: 'The Shine to Go van in a driveway, with a technician beside a black SUV and a table of window tint tools',
+    svc4Alt: 'Illustration: a mobile detailing van in a driveway, with a technician beside a black SUV and a table of window tint tools',
     svc4F1: 'Front and rear side windows', svc4F2: 'Back window and windshield strip', svc4F3: 'Sunroof', svc4F4: 'Carbon or ceramic tint',
     svc4Btn: 'See window tint', svc4Badge: 'New',
     svc5Title: 'Ceramic Coating',
     svc5Desc: 'Ceramic coating for paint, glass, wheels, trim and interior. Quote by photo.',
-    svc5Alt: 'Technician in black gloves applying ceramic coating to a car with a foam applicator, with a bottle of ceramic coating in view',
+    svc5Alt: 'Illustration: a technician in black gloves applying ceramic coating to a car with a foam applicator, with a bottle of ceramic coating in view',
     photoBeadingAlt: 'Water beading and running off a dark, glossy surface',
     photoBeadingCaption: 'Illustration of water beading on a coated surface.',
     photoSpongeAlt: 'Gloved hand pressing a foam applicator onto a car hood',
+    // Etiqueta visible sobre toda imagen generada (no es foto de un trabajo real). Ver docs/BRAND.md §3, «Ilustraciones».
+    illustrationTag: 'Illustration',
     svc5F1: 'Paint', svc5F2: 'Glass', svc5F3: 'Wheels and calipers', svc5F4: 'Trim and interior',
     svc5Btn: 'See ceramic coating', svc5Badge: 'New',
 
@@ -59,15 +61,16 @@ export const services = {
 
     svc4Title: 'Polarizado de vidrios',
     svc4Desc: 'Polarizado de carbono o cerámico para las ventanas, el vidrio trasero y la franja del parabrisas de tu carro, y el sunroof cuando el carro lo permite. Cotiza con fotos.',
-    svc4Alt: 'La furgoneta de Shine to Go en una entrada de casa, con un técnico junto a una SUV negra y una mesa con herramientas de polarizado',
+    svc4Alt: 'Imagen ilustrativa: una furgoneta de detallado móvil en una entrada de casa, con un técnico junto a una SUV negra y una mesa con herramientas de polarizado',
     svc4F1: 'Ventanas de adelante y de atrás', svc4F2: 'Vidrio trasero y franja del parabrisas', svc4F3: 'Sunroof (quemacocos)', svc4F4: 'Carbono o cerámica',
     svc4Btn: 'Ver polarizado', svc4Badge: 'Nuevo',
     svc5Title: 'Recubrimiento cerámico',
     svc5Desc: 'Cerámico para pintura, vidrios, rines, molduras e interior. Cotiza con fotos.',
-    svc5Alt: 'Técnico con guantes negros aplicando recubrimiento cerámico a un carro con una esponja, con un frasco de cerámico a la vista',
+    svc5Alt: 'Imagen ilustrativa: un técnico con guantes negros aplica recubrimiento cerámico a un carro con una esponja, con un frasco de cerámico a la vista',
     photoBeadingAlt: 'Agua formando gotas y escurriendo sobre una superficie oscura y brillante',
     photoBeadingCaption: 'Ilustración de agua perlando sobre una superficie con recubrimiento.',
     photoSpongeAlt: 'Mano con guante presionando una esponja aplicadora sobre el capó de un carro',
+    illustrationTag: 'Imagen ilustrativa',
     svc5F1: 'Pintura', svc5F2: 'Vidrios', svc5F3: 'Rines y calipers', svc5F4: 'Molduras e interior',
     svc5Btn: 'Ver recubrimiento cerámico', svc5Badge: 'Nuevo',
 

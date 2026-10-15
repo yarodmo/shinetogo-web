@@ -2,8 +2,9 @@ import { useState } from 'react'
 import { useI18n } from '../i18n'
 import { track } from '../lib/track'
 
-// Mismas preguntas que el JSON-LD FAQPage de index.html (agua y luz, tiempos, marinas, pago, productos, tint y cerámico).
-const FAQ_KEYS = ['faq1', 'faq2', 'faq3', 'faq4', 'faq5', 'faq6']
+// Mismas preguntas que el JSON-LD FAQPage de index.html (agua y luz, tiempos, marinas, pago, productos, tint y cerámico, idiomas).
+// Si cambia esta lista, cambia también HOME_FAQ en scripts/build-landings.mjs.
+const FAQ_KEYS = ['faq1', 'faq2', 'faq3', 'faq4', 'faq5', 'faq6', 'faq7']
 
 export default function Faq() {
   const { t } = useI18n()

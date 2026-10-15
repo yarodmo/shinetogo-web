@@ -43,7 +43,7 @@ const base = {
     aboutCard1: 'Cars and boats',
     aboutCard1d: 'Wash, polish and interior work for cars, and hull, deck and gelcoat care for boats.',
     aboutCard2: 'We come to you',
-    aboutCard2d: 'For car and boat detailing, we come to your home, office or marina and confirm the time with you.',
+    aboutCard2d: 'For car and boat detailing, we come to your home, office or marina. For window tint and ceramic coating, we also come to your home or to the place we agree on. We confirm the time with you.',
     aboutCard3: 'Clear from the start',
     aboutCard3d: 'You know what the job includes before we start, and we confirm the final price with you before we begin.',
     aboutCard4: 'A product chosen for each surface',
@@ -110,17 +110,19 @@ const base = {
     // FAQ
     faqTitle: 'Before you ask for a quote',
     faq1Q: 'Do I need to give you water or power?',
-    faq1A: 'For detailing, no: we bring our own water tanks and generators. For tint and ceramic coating, we tell you what we need when we set the day and place.',
+    faq1A: 'For detailing, no: we bring our own water tanks and generators. Window tint and ceramic coating can also be done at your home or at the place we agree on; when we set the day, we tell you what we need.',
     faq2Q: 'How long does it take?',
     faq2A: 'Car detailing packages run from 45 minutes (Express) to 3–4 hours (Premium) for an average-size car. For boats, tint and ceramic coating, ask when you request the quote.',
     faq3Q: 'Can you come to a marina or condo?',
-    faq3A: 'For detailing, yes: we coordinate access with marina and condo management, so tell us the location when you request the quote. For tint and ceramic coating, we agree on the place with you.',
+    faq3A: 'For detailing, yes: we coordinate access with marina and condo management, so tell us the location when you request the quote. For window tint and ceramic coating, we also come to you: to your home or to the place we agree on.',
     faq4Q: 'How do I pay?',
     faq4A: 'Ask us how you can pay when you request the quote.',
     faq5Q: 'What do you use on my paint?',
     faq5A: 'We choose the product for your paint and surfaces and tell you which one before we start.',
     faq6Q: 'Do you do window tint and ceramic coating?',
     faq6A: 'Yes, for cars. Boats aren’t included. Pick it in the form and we reply with a price range. To read more first, open the Window Tint and Ceramic pages from the menu.',
+    faq7Q: 'Do you speak Spanish?',
+    faq7A: 'Yes. We speak English and Spanish, on WhatsApp and in person. Write or talk to us in whichever you prefer.',
 
     // Contact
     contactTitle: 'Ask for your quote',
@@ -148,6 +150,8 @@ const base = {
     footerServices: 'Services',
     footerAreas: 'Where we work',
     footerContact: 'Contact',
+    // Idiomas de atención (confirmado por el cliente el 14-oct-2026): pie de todas las páginas, tarjeta de WhatsApp y FAQ.
+    langsServed: 'We speak English and Spanish.',
 
 
     // Sticky
@@ -197,7 +201,7 @@ const base = {
     aboutCard1: 'Carros y botes',
     aboutCard1d: 'Lavado, pulido e interior para carros, y cuidado de casco, cubierta y gelcoat para botes.',
     aboutCard2: 'Vamos a ti',
-    aboutCard2d: 'El detallado de carros y botes lo hacemos en tu casa, oficina o marina, y confirmamos la hora contigo.',
+    aboutCard2d: 'El detallado de carros y botes lo hacemos en tu casa, oficina o marina. El polarizado y el cerámico también los hacemos en tu casa o en el lugar que acordemos. Confirmamos la hora contigo.',
     aboutCard3: 'Claro desde el inicio',
     aboutCard3d: 'Sabes qué incluye el trabajo antes de empezar, y confirmamos contigo el precio final antes de empezar.',
     aboutCard4: 'Un producto elegido para cada superficie',
@@ -264,17 +268,19 @@ const base = {
     // FAQ
     faqTitle: 'Antes de pedir tu cotización',
     faq1Q: '¿Tengo que darles agua o luz?',
-    faq1A: 'En el detallado, no: traemos nuestros tanques de agua y generadores. Para polarizado y cerámico, te decimos qué necesitamos al fijar el día y el lugar.',
+    faq1A: 'En el detallado, no: traemos nuestros tanques de agua y generadores. El polarizado y el cerámico también los hacemos en tu casa o en el lugar que acordemos; al fijar el día te decimos qué necesitamos.',
     faq2Q: '¿Cuánto tardan?',
     faq2A: 'Los paquetes de carros van de 45 minutos (Express) a 3–4 horas (Premium) para un carro de tamaño normal. En botes, polarizado y cerámico, pregúntanos al cotizar.',
     faq3Q: '¿Pueden ir a una marina o a un condominio?',
-    faq3A: 'En el detallado, sí: coordinamos el acceso con la administración de la marina o del condominio; dinos el lugar al pedir la cotización. Para polarizado y cerámico, quedamos contigo en el lugar.',
+    faq3A: 'En el detallado, sí: coordinamos el acceso con la administración de la marina o del condominio; dinos el lugar al pedir la cotización. Para polarizado y cerámico también vamos a ti: a tu casa o al lugar que acordemos.',
     faq4Q: '¿Cómo se paga?',
     faq4A: 'Pregúntanos cómo puedes pagar al pedir la cotización.',
     faq5Q: '¿Qué le ponen a mi pintura?',
     faq5A: 'Elegimos el producto según tu pintura y tus superficies, y te decimos cuál antes de empezar.',
     faq6Q: '¿Hacen polarizado y cerámico?',
     faq6A: 'Sí, para carros; en botes no los hacemos. Elígelo en el formulario y te respondemos con un rango de precio. Si quieres leer más antes, abre las páginas de Polarizado y Cerámico desde el menú.',
+    faq7Q: '¿Me atienden en español?',
+    faq7A: 'Sí. Te atendemos en inglés y en español, por WhatsApp y en persona. Escríbenos o háblanos en el idioma que prefieras.',
 
     // Contact
     contactTitle: 'Pide tu cotización',
@@ -302,6 +308,7 @@ const base = {
     footerServices: 'Servicios',
     footerAreas: 'Zonas',
     footerContact: 'Contacto',
+    langsServed: 'Te atendemos en inglés y en español.',
 
 
     // Sticky

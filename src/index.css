@@ -342,6 +342,8 @@ ul { list-style: none; }
 /* ─── PREGUNTAS FRECUENTES: estilo compartido en shared.css ─── */
 #hero.hero-dark { padding-top: 110px; min-height: 640px; }
 @media (max-width: 768px) { #hero.hero-dark { padding-top: 76px; min-height: 0; } }
+/* El hero de la home empieza bajo la cabecera fija (80 px): la etiqueta «Illustration» baja para no quedar tapada */
+@media (min-width: 769px) { #hero .hero-media .ai-tag { top: 96px; } }
 
 /* ─── RESPONSIVE ─── */
 @media (max-width: 900px) {
