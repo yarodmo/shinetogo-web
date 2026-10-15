@@ -64,7 +64,7 @@ export const ceramic = {
       steps: [
         { h: `You send photos`, p: `Hood, roof and sides in daylight, and the paint color. If you want glass, wheels, trim or the interior, one photo of each, and tell us which.` },
         { h: `We reply with a range`, p: `A price range, the product we’d use and how to care for it. The final price is set once we see the paint. If it falls outside the range, we tell you before we begin and you decide.` },
-        { h: `Then we set the day`, p: `We pick a day and confirm it with you.` },
+        { h: `Then we set the day`, p: `We pick a day and confirm it with you. We can come to your home or to the place we agree on; when we set the day, we tell you what we need.` },
       ],
     },
 
@@ -74,6 +74,7 @@ export const ceramic = {
       { q: `How long does a coating last?`, a: `We don’t put a number on it here. It depends on the product, how the paint was prepared and how the car is washed. The warranty belongs to the product, so ask for its exact terms with your quote.` },
       { q: `Salt, lovebugs, sprinkler water: does the coating stop them?`, a: `No coating stops them, and we don’t promise anything about salt or sprinkler water. With lovebugs, a slicker surface helps when you wash; still, try not to leave them on the paint for days.` },
       { q: `How much does it cost?`, a: `There isn’t one price. It depends on how many parts you cover, the size of the car and the state of the paint. Send photos and you’ll get a range; the final price is set once we see the car.` },
+      { q: `Can you do it at my home?`, a: `Yes. We can apply the coating at your home or at the place we agree on with you. When we set the day, we tell you what we need.` },
     ],
 
     cta: { whatsapp: `Send photos`, form: `Request a quote` },
@@ -141,7 +142,7 @@ export const ceramic = {
       steps: [
         { h: `Tú mandas fotos`, p: `Capó, techo y laterales con luz de día, y el color de la pintura. Si quieres vidrios, rines, molduras o interior, una foto de cada uno y dinos cuáles.` },
         { h: `Te respondemos con un rango`, p: `Un rango de precio, el producto que usaríamos y cómo cuidarlo. El precio final se fija cuando vemos la pintura. Si queda fuera del rango, te avisamos antes de empezar y tú decides.` },
-        { h: `Después fijamos el día`, p: `Escogemos el día y te lo confirmamos.` },
+        { h: `Después fijamos el día`, p: `Escogemos el día y te lo confirmamos. Podemos ir a tu casa o al lugar que acordemos; al fijar el día te decimos qué necesitamos.` },
       ],
     },
 
@@ -151,6 +152,7 @@ export const ceramic = {
       { q: `¿Cuánto dura?`, a: `No ponemos una cifra aquí. Depende del producto, de cómo se preparó la pintura y de cómo lavas el carro. La garantía es la del producto, así que pide sus términos exactos con tu cotización.` },
       { q: `Sal, lovebugs, agua de aspersor: ¿el recubrimiento los frena?`, a: `Ningún recubrimiento los frena, y no prometemos nada sobre la sal ni el agua de aspersor. Con los lovebugs, una superficie más lisa ayuda al lavar; aun así, intenta no dejarlos varios días sobre la pintura.` },
       { q: `¿Cuánto cuesta?`, a: `No hay un precio único. Depende de cuántas partes cubras, del tamaño del carro y del estado de la pintura. Manda fotos y te damos un rango; el precio final se fija cuando vemos el carro.` },
+      { q: `¿Lo pueden hacer en mi casa?`, a: `Sí. Aplicamos el recubrimiento en tu casa o en el lugar que acordemos contigo. Al fijar el día te decimos qué necesitamos.` },
     ],
 
     cta: { whatsapp: `Manda fotos`, form: `Pedir cotización` },
