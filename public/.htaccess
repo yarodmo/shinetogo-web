@@ -16,6 +16,12 @@
   RewriteCond %{HTTPS} !=on
   RewriteCond %{HTTP:X-Forwarded-Proto} !https [NC]
   RewriteRule ^ https://shinetogomobiledetailing.com%{REQUEST_URI} [R=301,L]
+
+  # Ninguna carpeta sin index.html se lista: antes /assets/ mostraba todo su contenido. Sin "Options -Indexes" (en
+  # LiteSpeed puede dar 500). Las carpetas con su index.html (/es/, /ceramic-coating/...) se siguen sirviendo.
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteCond %{REQUEST_FILENAME}/index.html !-f
+  RewriteRule ^ - [R=404,L]
 </IfModule>
 
 <IfModule mod_headers.c>
