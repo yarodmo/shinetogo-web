@@ -187,7 +187,10 @@ jobs:
           ssh -p ${{ secrets.VPS_PORT }} -o ConnectTimeout=15 -o ServerAliveInterval=15 -o ServerAliveCountMax=4 ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} << 'ENDSSH'
             PASS=false
             for i in 1 2 3 4 5; do
-              HTTP=$(curl -s -o /dev/null -w "%{http_code}" --max-time 10 "http://localhost:${{ vars.API_PORT }}/api/health" 2>/dev/null || echo "000")
+              # Exigir el nombre del servicio: un 200 a secas puede venir de OTRA API en el mismo puerto (bliss-one es
+              # compartido; hasta 2026-10-31 varios deploys salian verdes contra la API de otro cliente).
+              BODY=$(curl -s --max-time 10 "http://localhost:${{ vars.API_PORT }}/api/health" 2>/dev/null || true)
+              if echo "$BODY" | grep -q '"service":"shinetogo-api"'; then HTTP=200; else HTTP="otro servicio o sin respuesta: ${BODY:0:80}"; fi
               if [ "$HTTP" = "200" ]; then
                 echo "✅ Health Check PASS — HTTP $HTTP (intento $i)"
                 PASS=true
