@@ -63,7 +63,10 @@ transporter.verify()
   .then(() => console.log(`✅ SMTP connected → ${SMTP_HOST}:${SMTP_PORT} as ${SMTP_USER}`))
   .catch((err) => console.error('❌ SMTP connection failed:', err.message))
 
-const server = app.listen(PORT, '0.0.0.0', () => {
+// Solo loopback: el trafico entra por el proxy del servidor web (.htaccess -> 127.0.0.1:PORT). En todas las interfaces el
+// puerto respondia directo desde internet, por HTTP sin cifrar y saltandose el proxy.
+const HOST = process.env.HOST || '127.0.0.1'
+const server = app.listen(PORT, HOST, () => {
   console.log(`\n🚀 Lead API running on port ${PORT}`)
   console.log(`   Health:  http://localhost:${PORT}/api/health`)
   console.log(`   Leads:   ${LEADS_FILE}`)
